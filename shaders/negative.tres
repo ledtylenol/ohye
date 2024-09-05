@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://skv487libhfo"]
+
+[ext_resource type="Shader" path="res://shaders/negative.gdshader" id="1_p7rqm"]
+
+[resource]
+shader = ExtResource("1_p7rqm")
+shader_parameter/alpha = null

@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c0dhb5go7w83i"]
+
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="1_ohmts"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ohmts")
+shader_parameter/color = Color(1, 1, 1, 0.423529)
+shader_parameter/size = 1.05
+shader_parameter/alpha = 0.0
+shader_parameter/active = true

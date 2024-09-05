@@ -1,0 +1,44 @@
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://cr6eqw6ih0ldv"]
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_huevn"]
+resource_name = "Distortion"
+mode = 3
+pre_gain = 15.48
+post_gain = -15.45
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_ytopk"]
+resource_name = "Compressor"
+ratio = 21.3
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_cp4oy"]
+resource_name = "Reverb"
+room_size = 0.18
+damping = 0.14
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_gxsxa"]
+resource_name = "Distortion"
+mode = 3
+pre_gain = 13.68
+post_gain = -14.55
+
+[resource]
+bus/1/name = &"SFX"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectDistortion_huevn")
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource("AudioEffectCompressor_ytopk")
+bus/1/effect/1/enabled = true
+bus/1/effect/2/effect = SubResource("AudioEffectReverb_cp4oy")
+bus/1/effect/2/enabled = true
+bus/2/name = &"Music"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectDistortion_gxsxa")
+bus/2/effect/0/enabled = true

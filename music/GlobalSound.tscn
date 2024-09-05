@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfvc5vohwdybp"]
+
+[ext_resource type="Script" path="res://music/global_sound.gd" id="1_4vqtq"]
+[ext_resource type="AudioStream" uid="uid://c7yk6oi6dp24c" path="res://music/pattern2.wav" id="2_b7ncm"]
+[ext_resource type="AudioStream" uid="uid://bdag8bumur7uw" path="res://music/pattern1.wav" id="3_wbrlu"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_fgtqo"]
+stream_count = 2
+stream_0/stream = ExtResource("2_b7ncm")
+stream_0/volume = -60.0
+stream_1/stream = ExtResource("3_wbrlu")
+stream_1/volume = -60.0
+
+[node name="GlobalSound" type="Node"]
+script = ExtResource("1_4vqtq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamSynchronized_fgtqo")
+volume_db = -13.225
+bus = &"Music"

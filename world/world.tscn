@@ -1,0 +1,130 @@
+[gd_scene load_steps=20 format=3 uid="uid://btuqli4mgp82h"]
+
+[ext_resource type="PackedScene" uid="uid://c4jqyhvc7h1i" path="res://entities/player/player.tscn" id="1_3pikw"]
+[ext_resource type="Script" path="res://world/world.gd" id="1_abyl7"]
+[ext_resource type="CompositorEffect" uid="uid://c84wg0tlxmyha" path="res://compositor_effects/datamosh/datamosh_compositor_effect.tres" id="2_5jr0t"]
+[ext_resource type="PackedScene" uid="uid://camem64xsobb8" path="res://test/outline_test.tscn" id="3_3n3in"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yqiek"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+energy_multiplier = 0.0
+
+[sub_resource type="Sky" id="Sky_kx436"]
+sky_material = SubResource("ProceduralSkyMaterial_yqiek")
+
+[sub_resource type="Environment" id="Environment_ygi88"]
+background_mode = 2
+sky = SubResource("Sky_kx436")
+ambient_light_energy = 0.0
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.04
+volumetric_fog_length = 165.89
+volumetric_fog_detail_spread = 1.93187
+volumetric_fog_temporal_reprojection_enabled = false
+
+[sub_resource type="Compositor" id="Compositor_7xt3a"]
+compositor_effects = Array[CompositorEffect]([ExtResource("2_5jr0t")])
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w68mv"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l2w5p"]
+seamless = true
+noise = SubResource("FastNoiseLite_w68mv")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7obwg"]
+seed = 75
+frequency = 0.0232
+offset = Vector3(0, 714.29, 0)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2kgp6"]
+in_3d_space = true
+seamless = true
+noise = SubResource("FastNoiseLite_7obwg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o0367"]
+albedo_texture = SubResource("NoiseTexture2D_l2w5p")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_2kgp6")
+uv1_scale = Vector3(2.145, 2.145, 2.145)
+uv1_triplanar_sharpness = 1.51572
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jhjgd"]
+material = SubResource("StandardMaterial3D_o0367")
+size = Vector2(20000, 20000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xr0aa"]
+size = Vector3(20000, 1, 20000)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rbeh0"]
+size = Vector3(15, 30, 15)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pjrfm"]
+frequency = 0.0022
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_uoc2s"]
+seamless = true
+noise = SubResource("FastNoiseLite_pjrfm")
+
+[sub_resource type="FogMaterial" id="FogMaterial_qrtcj"]
+density = 0.2
+height_falloff = 0.0620839
+edge_fade = 0.649801
+density_texture = SubResource("NoiseTexture3D_uoc2s")
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_abyl7")
+
+[node name="Player" parent="." instance=ExtResource("1_3pikw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.7173, 1.28485, 0.44397)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ygi88")
+compositor = SubResource("Compositor_7xt3a")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 0.0
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_jhjgd")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_xr0aa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -92.7047)
+mesh = SubResource("BoxMesh_rbeh0")
+
+[node name="OutlineTest" parent="." instance=ExtResource("3_3n3in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 394.995, 8.85602, -37.4432)
+
+[node name="OutlineTest2" parent="." instance=ExtResource("3_3n3in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9862, 8.85602, 832.35)
+
+[node name="OutlineTest3" parent="." instance=ExtResource("3_3n3in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 138.747, 8.85602, 1203.91)
+
+[node name="OutlineTest4" parent="." instance=ExtResource("3_3n3in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -125.139, 8.85602, 1611.98)
+
+[node name="OutlineTest5" parent="." instance=ExtResource("3_3n3in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 109.947, 8.85602, 3199.62)
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+size = Vector3(229.28, 87.27, 20)
+shape = 0
+material = SubResource("FogMaterial_qrtcj")
+
+[editable path="Player"]
