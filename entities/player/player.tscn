@@ -1,13 +1,11 @@
-[gd_scene load_steps=50 format=3 uid="uid://c4jqyhvc7h1i"]
+[gd_scene load_steps=48 format=3 uid="uid://c4jqyhvc7h1i"]
 
 [ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="1_nvq1j"]
 [ext_resource type="Script" path="res://entities/player/scripts/player.gd" id="1_o6h1d"]
 [ext_resource type="Script" path="res://entities/player/scripts/stats.gd" id="2_34ih3"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="2_iax84"]
 [ext_resource type="Script" path="res://entities/player/scripts/player_camera.gd" id="3_kcw1u"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="4_hrb2t"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="6_3sldg"]
 [ext_resource type="Script" path="res://addons/shaker/src/Vector3/ShakerReceiver3D.gd" id="6_l8am5"]
+[ext_resource type="Resource" uid="uid://dse4au3onquif" path="res://shakes/weak_shake.tres" id="6_wgnfw"]
 [ext_resource type="Script" path="res://entities/player/scripts/interact_ray.gd" id="8_rhn0u"]
 [ext_resource type="AudioStream" uid="uid://c657v8e2oa02t" path="res://entities/player/sounds/boom.wav" id="9_gufxx"]
 [ext_resource type="Script" path="res://entities/player/scripts/UI.gd" id="10_rqt05"]
@@ -15,6 +13,7 @@
 [ext_resource type="Script" path="res://entities/player/scripts/cursor.gd" id="11_y8mn5"]
 [ext_resource type="Material" uid="uid://skv487libhfo" path="res://shaders/negative.tres" id="12_8323r"]
 [ext_resource type="Shader" path="res://shaders/negative.gdshader" id="12_s0l7a"]
+[ext_resource type="Script" path="res://utils/second_order_dynamics.gd" id="13_bgr5k"]
 [ext_resource type="AudioStream" uid="uid://dqhpa1q7fpt7x" path="res://world/windstorm_loop.wav" id="15_0wsn8"]
 [ext_resource type="Script" path="res://components/scaled_audio_player.gd" id="16_x8mkt"]
 [ext_resource type="AudioStream" uid="uid://cgtj4doh2hxgx" path="res://entities/player/sounds/walk/dirt1.mp3" id="18_sp8wt"]
@@ -40,34 +39,15 @@ script = ExtResource("2_34ih3")
 jump_count = 1
 speed = 30
 speed_mul = 1.0
-jump_height = 2.1
-jump_peak_time = 0.42
-jump_descend_time = 0.4
+jump_height = 15.0
+jump_peak_time = 1.0
+jump_descend_time = 1.0
 max_ground_pounds = 3
 ground_acceleration = 5.0
-minimum_jump_duration = 0.05
+minimum_jump_duration = 0.0
 
-[sub_resource type="Resource" id="Resource_con22"]
-script = ExtResource("6_3sldg")
-frequency = Vector3(1.335, 1.14, 1)
-phase = Vector3(1, 1, 1)
-amplitude = Vector3(0, 0, 0)
-offset = Vector3(0, 0, 0)
-BlendingMode = 0
-fade_in = 0.0
-fade_out = 0.0
-start_percent = 0.0
-end_percent = 1.0
-_temp_graph = false
-bake_internal = 64
-
-[sub_resource type="Resource" id="Resource_catu2"]
-script = ExtResource("4_hrb2t")
-PositionShake = Array[ExtResource("2_iax84")]([])
-RotationShake = Array[ExtResource("2_iax84")]([SubResource("Resource_con22")])
-ScaleShake = Array[ExtResource("2_iax84")]([])
-bake_internal = 64
-__follow_timeline = false
+[sub_resource type="BoxShape3D" id="BoxShape3D_gum8l"]
+size = Vector3(0.7, 1.5, 0.345)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_165qn"]
 radius = 1.07827
@@ -126,11 +106,16 @@ stream_0/stream = ExtResource("31_j3yna")
 stream_1/stream = ExtResource("32_lacb7")
 stream_2/stream = ExtResource("33_p0s8x")
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_camera")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "shaker", "winds")]
 collision_layer = 8
+floor_constant_speed = true
+floor_snap_length = 0.37
 script = ExtResource("1_o6h1d")
 stats = SubResource("Resource_gvtwj")
-player_camera = NodePath("PanNode/PlayerCamera")
+camera = NodePath("PanNode/PlayerCamera")
+shaker = NodePath("NoFadeShaker")
+winds = NodePath("Sounds/AudioStreamPlayer")
+auto_jump = true
 
 [node name="PanNode" type="Node3D" parent="."]
 
@@ -141,26 +126,30 @@ script = ExtResource("3_kcw1u")
 player = NodePath("../..")
 shaker = NodePath("../../ShakerComponent3D")
 pan_node = NodePath("..")
-movement_tilt = 0.085
+movement_tilt = 0.321
 sensitivity = 23.916
 
-[node name="InteractRay" type="RayCast3D" parent="PanNode/PlayerCamera" node_paths=PackedStringArray("shaker_component")]
-target_position = Vector3(0, 0, -30)
-collide_with_areas = true
-collide_with_bodies = false
+[node name="InteractRay" type="Area3D" parent="PanNode/PlayerCamera" node_paths=PackedStringArray("shaker_component", "center_marker", "camera")]
 script = ExtResource("8_rhn0u")
 shaker_component = NodePath("../../../ShakerComponent3D")
+center_marker = NodePath("../../../CanvasLayer/Control/CenterMarker")
+camera = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PanNode/PlayerCamera/InteractRay"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1.5275)
+shape = SubResource("BoxShape3D_gum8l")
 
 [node name="SpotLight3D" type="OmniLight3D" parent="PanNode/PlayerCamera"]
 
 [node name="ShakerComponent3D" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
+visible = false
 script = ExtResource("1_nvq1j")
 custom_target = true
 Targets = [NodePath("../PanNode/PlayerCamera")]
 AutoPlay = true
 intensity = 0.319
 fade_out = 0.34151
-shakerPreset = SubResource("Resource_catu2")
+shakerPreset = ExtResource("6_wgnfw")
 
 [node name="ShakerReceiver3D" type="Node3D" parent="ShakerComponent3D"]
 script = ExtResource("6_l8am5")
@@ -172,6 +161,12 @@ collision_mask = 512
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ShakerComponent3D/ShakerReceiver3D/Area3D"]
 shape = SubResource("SphereShape3D_165qn")
+
+[node name="NoFadeShaker" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
+script = ExtResource("1_nvq1j")
+custom_target = true
+Targets = [NodePath("../PanNode/PlayerCamera")]
+fade_in = 1e-05
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_lohhf")
@@ -196,7 +191,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="CanvasLayer/Control"]
+[node name="Control" type="Control" parent="CanvasLayer/Control" node_paths=PackedStringArray("camera", "ray", "sod", "center")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -210,6 +205,10 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_4blbx")
+camera = NodePath("../../../PanNode/PlayerCamera")
+ray = NodePath("../../../PanNode/PlayerCamera/InteractRay")
+sod = NodePath("SecondOrderDynamics")
+center = NodePath("../CenterMarker")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/Control"]
 material = ExtResource("12_8323r")
@@ -275,6 +274,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_y8mn5")
 
+[node name="SecondOrderDynamics" type="Node" parent="CanvasLayer/Control/Control"]
+script = ExtResource("13_bgr5k")
+_f = 3.0
+
+[node name="CenterMarker" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="DetectionRange" type="Area3D" parent="."]
 collision_mask = 64
 script = ExtResource("22_4xvka")
@@ -311,6 +328,7 @@ bus = &"SFX"
 
 [node name="LandSounds" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = SubResource("AudioStreamSynchronized_d6d7n")
+bus = &"SFX"
 script = ExtResource("20_i2nv4")
 
 [node name="SignalConnector" type="Node" parent="Sounds/LandSounds" node_paths=PackedStringArray("from", "to")]
@@ -322,6 +340,7 @@ method = "play"
 
 [node name="JumpSounds" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = SubResource("AudioStreamRandomizer_x1hvq")
+bus = &"SFX"
 script = ExtResource("20_i2nv4")
 
 [node name="SignalConnector" type="Node" parent="Sounds/JumpSounds" node_paths=PackedStringArray("from", "to")]
@@ -330,3 +349,10 @@ from = NodePath("../../..")
 what = "jump_ground"
 to = NodePath("..")
 method = "play"
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+visible = false
+target_position = Vector3(0, -1.5, 0)
+
+[node name="Feet" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

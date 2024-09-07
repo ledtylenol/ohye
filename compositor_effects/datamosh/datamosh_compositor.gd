@@ -4,7 +4,7 @@ class_name CompositorEffectDatamosh
 
 var context : StringName = "PreviousFrame"
 var texture : StringName = "texture"
-
+var sampler: RID
 # This is a very simple effects demo that takes our color values and writes
 # back gray scale values. 
 
@@ -72,9 +72,12 @@ func get_image_sampler_uniform( binding : int = 0) -> RDUniform:
 	uniform.binding = binding
 	var s = RDSamplerState.new()
 	s.unnormalized_uvw = true
-	var image = RenderingServer.get_rendering_device().sampler_create(s)
-	
-	uniform.add_id(image)
+	if not sampler:
+		sampler = RenderingServer.get_rendering_device().sampler_create(s)
+	else:
+		RenderingServer.get_rendering_device().free_rid(sampler)
+		sampler = RenderingServer.get_rendering_device().sampler_create(s)
+	uniform.add_id(sampler)
 
 	return uniform
 
@@ -129,6 +132,9 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				push_constant.push_back(size.y)
 				push_constant.push_back(Time.get_ticks_msec())
 				push_constant.push_back(int(Global.get_datamosh_amount()*100.0))
+				push_constant.push_back(int(Global.influence * 100.0))
+				for x in range(8 % push_constant.size()):
+					push_constant.push_back(0)
 				
 				if not Global.refresh_frame:
 					# Create a uniform set, this will be cached, the cache will be cleared if our viewports configuration is changed

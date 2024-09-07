@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0vabvcwplf8i"]
-
-[ext_resource type="Script" path="res://entities/funky_area/funky_area.gd" id="1_sfqww"]
-
-[node name="FunkyArea" type="Area3D"]
-collision_mask = 8
-script = ExtResource("1_sfqww")

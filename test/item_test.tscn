@@ -1,0 +1,100 @@
+[gd_scene load_steps=15 format=3 uid="uid://kvq341cthj3k"]
+
+[ext_resource type="Script" path="res://test/item_test.gd" id="1_6drlb"]
+[ext_resource type="CompositorEffect" uid="uid://c84wg0tlxmyha" path="res://compositor_effects/datamosh/datamosh_compositor_effect.tres" id="1_70sap"]
+[ext_resource type="PackedScene" uid="uid://c4jqyhvc7h1i" path="res://entities/player/player.tscn" id="2_nqd0j"]
+[ext_resource type="PackedScene" uid="uid://7gpkd3eqrq4t" path="res://entities/lighter/lighter.tscn" id="3_o4ehs"]
+[ext_resource type="Shader" path="res://shaders/invert.gdshader" id="5_q72pv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_th0dh"]
+sky_top_color = Color(1, 1, 1, 1)
+sky_horizon_color = Color(0.637843, 0.637843, 0.637843, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+energy_multiplier = 0.0
+
+[sub_resource type="Sky" id="Sky_kx436"]
+sky_material = SubResource("ProceduralSkyMaterial_th0dh")
+
+[sub_resource type="Environment" id="Environment_ufn3p"]
+background_mode = 2
+sky = SubResource("Sky_kx436")
+ambient_light_energy = 0.0
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
+volumetric_fog_density = 0.04
+volumetric_fog_length = 165.89
+volumetric_fog_detail_spread = 1.93187
+volumetric_fog_temporal_reprojection_enabled = false
+
+[sub_resource type="Compositor" id="Compositor_21r40"]
+compositor_effects = Array[CompositorEffect]([ExtResource("1_70sap")])
+
+[sub_resource type="BoxMesh" id="BoxMesh_wmcrq"]
+size = Vector3(300, 2, 300)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qbl11"]
+data = PackedVector3Array(-150, 1, 150, 150, 1, 150, -150, -1, 150, 150, 1, 150, 150, -1, 150, -150, -1, 150, 150, 1, -150, -150, 1, -150, 150, -1, -150, -150, 1, -150, -150, -1, -150, 150, -1, -150, 150, 1, 150, 150, 1, -150, 150, -1, 150, 150, 1, -150, 150, -1, -150, 150, -1, 150, -150, 1, -150, -150, 1, 150, -150, -1, -150, -150, 1, 150, -150, -1, 150, -150, -1, -150, 150, 1, 150, -150, 1, 150, 150, 1, -150, -150, 1, 150, -150, 1, -150, 150, 1, -150, -150, -1, 150, 150, -1, 150, -150, -1, -150, 150, -1, 150, 150, -1, -150, -150, -1, -150)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1c88g"]
+size = Vector3(20, 20, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3r3yh"]
+data = PackedVector3Array(-10, 10, 0.5, 10, 10, 0.5, -10, -10, 0.5, 10, 10, 0.5, 10, -10, 0.5, -10, -10, 0.5, 10, 10, -0.5, -10, 10, -0.5, 10, -10, -0.5, -10, 10, -0.5, -10, -10, -0.5, 10, -10, -0.5, 10, 10, 0.5, 10, 10, -0.5, 10, -10, 0.5, 10, 10, -0.5, 10, -10, -0.5, 10, -10, 0.5, -10, 10, -0.5, -10, 10, 0.5, -10, -10, -0.5, -10, 10, 0.5, -10, -10, 0.5, -10, -10, -0.5, 10, 10, 0.5, -10, 10, 0.5, 10, 10, -0.5, -10, 10, 0.5, -10, 10, -0.5, 10, 10, -0.5, -10, -10, 0.5, 10, -10, 0.5, -10, -10, -0.5, 10, -10, 0.5, 10, -10, -0.5, -10, -10, -0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8gfum"]
+shader = ExtResource("5_q72pv")
+
+[node name="ItemTest" type="Node3D" node_paths=PackedStringArray("lighter")]
+script = ExtResource("1_6drlb")
+lighter = NodePath("Lighter")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ufn3p")
+compositor = SubResource("Compositor_21r40")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_wmcrq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_qbl11")
+
+[node name="Player" parent="." instance=ExtResource("2_nqd0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.33358, 0)
+
+[node name="Lighter" parent="." instance=ExtResource("3_o4ehs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 5.99972, -40)
+
+[node name="Lighter2" parent="." node_paths=PackedStringArray("thing_to_toggle") instance=ExtResource("3_o4ehs")]
+transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 36.3306, 7.40552, -38.778)
+thing_to_toggle = NodePath("../OmniLight3D")
+param = "visible"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.6778, 11.2589, 0)
+light_energy = 3.299
+omni_range = 32.058
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.455545, 0.890213, 0, -0.890213, 0.455545, 8.1517, 4.464, 11.7921)
+mesh = SubResource("BoxMesh_1c88g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3r3yh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_8gfum")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

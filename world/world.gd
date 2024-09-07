@@ -5,11 +5,10 @@ var enemy_count: int:
 	get: return Global.active_enemy_count
 var music_triggered := false
 
-
 func _ready() -> void:
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		enemy.hit.connect(trigger_music)
-
+	$Area3D/OmniLight3D.light_energy = 0
 func trigger_music() -> void:
 	if music_triggered:
 		return
@@ -18,4 +17,6 @@ func trigger_music() -> void:
 	GlobalSound.play(3)
 func _process(delta: float) -> void:
 	if enemy_count == 0 and not GlobalSound.song_parts == 0:
+		
 		GlobalSound.change_song_parts(0)
+		$Area3D/OmniLight3D.light_energy = 5

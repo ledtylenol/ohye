@@ -13,7 +13,8 @@ layout(set=3, binding=1) uniform sampler my_sampler;
 layout(push_constant, std430) uniform Params {
 	ivec2 size;
 	int time;
-        int amount;
+    int amount;
+	int influence;
 } params;
 
 float nrand(float x, float y) {
@@ -35,6 +36,7 @@ void main() {
 
 		//float n = nrand(time,uvr.y + uvr.x / size.y);
 		float n = nrand(time,uvr.y *  size.x / uvr.x);
+		float influence = params.influence / 100.0;
 
 		vec4 color_vel = imageLoad(velocity_image, ivec2(uvr));
 		color_vel.rgb *= amount;
@@ -43,6 +45,7 @@ void main() {
 		color_vel=max(abs(color_vel)-round(n/1.4),0)*sign(color_vel);
 		//imageStore(color_image, uv, depth);
 		if (depth.r < 0.001 || depth.r > 0.9) depth.r = 1.0;
+		depth.r = depth.r * influence;
 
 		ivec2 uv2 = ivec2(gl_GlobalInvocationID.xy + (color_vel.rg*size * (1.0 - depth.r)));
 		uv2 = min(uv2, size-10);

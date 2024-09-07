@@ -26,7 +26,9 @@ enum STATES {
 			ground_pound_count = 3
 		state = value
 @export_category("")
-@export var player_camera: PlayerCamera
+@export var camera: PlayerCamera
+@export var shaker: ShakerComponent3D
+@export var winds: AudioStreamPlayer
 var heat: float = 0.0
 var pounding := false
 var combo:int = 0
@@ -38,18 +40,20 @@ var times := {
 	"jump": 0.0,
 	"air": 0.0
 }
+var current_frame := 0
 var current_air_coefficient: float = 0.1
 var jumps_left: int = 0
 var direction: Vector3 = Vector3.ZERO
 var touched_ground: bool = false
 var former_velocity: Vector3 = Vector3.ZERO
+var former_gp := Vector3.ZERO
 var let_go_of_space: bool = false
 var normal: Vector3 = Vector3.ZERO
 var dead: bool = false
 @export var auto_jump: bool = false
+
 func _ready() -> void:
 	Global.player = self
-
 func _physics_process(delta: float) -> void:
 	if dead:
 		return
@@ -69,7 +73,8 @@ func _physics_process(delta: float) -> void:
 		let_go_of_space = false
 	elif do_air_jump():
 		jump_air.emit()
-	
+	else:
+		if touched_ground and state != STATES.GROUNDED: apply_floor_snap()
 	pounding = do_ground_pound()
 	apply_gravity(delta)
 	
@@ -78,12 +83,18 @@ func _physics_process(delta: float) -> void:
 		normal = get_wall_normal()
 		velocity = velocity.slide(normal)
 	former_velocity = velocity
+	former_gp = global_position
 	move_and_slide()
+	current_frame += 1
 func process_inputs():
 	var dir = Input.get_vector("left", "right", "front", "back")
+	var temp_dir:Vector3 = (dir.x * global_basis.x + dir.y * global_basis.z)
+	var old_dir := direction
 	direction = (dir.x * global_basis.x + dir.y * global_basis.z)
-	if normal.length() > 0:
-		direction = direction.slide(normal)
+	#if normal.length() > 0:
+		#var slid_dir := direction.slide(normal)
+		#if Input.is_action_pressed("crouch"):
+			#direction = slid_dir
 
 func check_ground(delta: float) -> void:
 	if is_on_floor():
@@ -111,8 +122,9 @@ func move_ground(delta: float) -> void:
 	if Input.is_action_pressed("jump") and auto_jump:
 		return
 	if Input.is_action_pressed("crouch"):
-
+		velocity = velocity.slide(normal)
 		velocity += (global_basis.y * stats.fall_gravity * delta).slide(normal)
+
 		if is_equal_approx(normal.dot(Vector3.UP), 1.0):
 			if velocity.length() < 0.2:
 				velocity = velocity.move_toward(Vector3(0, velocity.y, 0), delta)
@@ -150,6 +162,7 @@ func move_ground(delta: float) -> void:
 	if stats.ground_acceleration < 1.0 and not Input.is_action_pressed("sprint"):
 		accel *= maxf(0.4, stats.ground_acceleration)
 	velocity += accel * direction
+	Global.influence = 1.0 - clampf(velocity.length() / 24.0, 0.0, 1.0)
 func move_air(delta: float) -> void:
 	var new_vel := velocity
 	var dot := new_vel.dot(direction)
@@ -242,14 +255,10 @@ func do_ground_pound() -> bool:
 	velocity.y = -100.0
 	state = STATES.POUNDING
 	return true
-#func on_external_inventory(inv: InventoryData, entity: Node3D) -> void:
-	#if inv:
-		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		#external_inventory.inventory = inv
-		#external_inventory.populate_grid(external_inventory.inventory)
-		#external_inventory.show_inv()
-	#else:
-		#external_inventory.inventory = null
-		#external_inventory.hide_inv()
-		#await external_inventory.tween.finished
-		#external_inventory.clear_slots()
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			Global.datamosh_amount = 0.0
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			Global.datamosh_amount = 1.0

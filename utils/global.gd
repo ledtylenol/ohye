@@ -3,14 +3,17 @@ extends Node
 var allow_mosh := true
 var datamosh_amount := 0.0
 var force_datamosh:float = 0.0
+var influence: float = 1.0:
+	set(value):
+		influence = clampf(value, 0.0, 1.0)
 var refresh_frame: bool
 var tween: Tween
+var mosh_tween: Tween
 var v: Vector2 = Vector2.ZERO
 var player: Player:
 	set(value):
 		player = value
 		if value != null:
-			print("PLYA")
 			player_set.emit()
 var window_size: Vector2i:
 	get: return DisplayServer.window_get_size()
@@ -18,6 +21,8 @@ var window_pos: Vector2i:
 	get: return DisplayServer.window_get_position()
 	set(value):
 		DisplayServer.window_set_position(value)
+var window_size_decors:
+	get: return DisplayServer.window_get_size_with_decorations()
 var center: Vector2i:
 	get: return window_pos + window_size / 2
 	set(value):
@@ -31,7 +36,9 @@ var bounces := 0.0:
 var is_windowed: bool:
 	get: return DisplayServer.window_get_mode() == 0
 var former_window_pos = Vector2i.ZERO
-var active_enemy_count := 0
+var active_enemies: Array[Node3D] = []
+var active_enemy_count := 0:
+	get: return active_enemies.filter(func(x): return x != null).size()
 signal window_bounced
 signal player_set
 func _ready() -> void:
@@ -51,7 +58,6 @@ func _physics_process(delta: float) -> void:
 	AudioServer.get_bus_effect(1, 1).mix = minf(1.0, bounces / 15.0)
 	bounces -= delta
 	bounces *= 0.995
-	force_datamosh = minf(1.0, bounces / 3.0)
 	handle_window(delta)
 	former_window_pos = window_pos
 
@@ -97,3 +103,9 @@ func boing() -> bool:
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_R:
 		get_tree().reload_current_scene()
+
+func tween_force_mosh(from: float, duration: float, delay: float) -> void:
+	force_datamosh = from
+	if mosh_tween: mosh_tween.stop()
+	mosh_tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+	mosh_tween.tween_property(self, "force_datamosh", float(0.0), duration).set_delay(delay)

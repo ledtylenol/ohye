@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://btuqli4mgp82h"]
+[gd_scene load_steps=22 format=3 uid="uid://btuqli4mgp82h"]
 
 [ext_resource type="PackedScene" uid="uid://c4jqyhvc7h1i" path="res://entities/player/player.tscn" id="1_3pikw"]
 [ext_resource type="Script" path="res://world/world.gd" id="1_abyl7"]
 [ext_resource type="CompositorEffect" uid="uid://c84wg0tlxmyha" path="res://compositor_effects/datamosh/datamosh_compositor_effect.tres" id="2_5jr0t"]
 [ext_resource type="PackedScene" uid="uid://camem64xsobb8" path="res://test/outline_test.tscn" id="3_3n3in"]
+[ext_resource type="Script" path="res://components/transition_area.gd" id="5_d3dct"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yqiek"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -12,12 +13,12 @@ ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0, 0, 0, 1)
 energy_multiplier = 0.0
 
-[sub_resource type="Sky" id="Sky_kx436"]
+[sub_resource type="Sky" id="Sky_qnc1y"]
 sky_material = SubResource("ProceduralSkyMaterial_yqiek")
 
 [sub_resource type="Environment" id="Environment_ygi88"]
 background_mode = 2
-sky = SubResource("Sky_kx436")
+sky = SubResource("Sky_qnc1y")
 ambient_light_energy = 0.0
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
@@ -78,6 +79,9 @@ height_falloff = 0.0620839
 edge_fade = 0.649801
 density_texture = SubResource("NoiseTexture3D_uoc2s")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_hfwd0"]
+radius = 9.378
+
 [node name="World" type="Node3D"]
 script = ExtResource("1_abyl7")
 
@@ -110,21 +114,34 @@ mesh = SubResource("BoxMesh_rbeh0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 394.995, 8.85602, -37.4432)
 
 [node name="OutlineTest2" parent="." instance=ExtResource("3_3n3in")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9862, 8.85602, 832.35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -170.588, 8.85602, -1279.98)
 
 [node name="OutlineTest3" parent="." instance=ExtResource("3_3n3in")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 138.747, 8.85602, 1203.91)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1656.79, 8.85602, -463.917)
 
 [node name="OutlineTest4" parent="." instance=ExtResource("3_3n3in")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -125.139, 8.85602, 1611.98)
-
-[node name="OutlineTest5" parent="." instance=ExtResource("3_3n3in")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 109.947, 8.85602, 3199.62)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1656.79, 8.85602, 1946.83)
 
 [node name="FogVolume" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 size = Vector3(229.28, 87.27, 20)
 shape = 0
 material = SubResource("FogMaterial_qrtcj")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("5_d3dct")
+scene = "res://world/world.tscn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.0714)
+shape = SubResource("SphereShape3D_hfwd0")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Area3D"]
+light_energy = 5.117
+light_indirect_energy = 5.427
+light_volumetric_fog_energy = 16.0
+light_cull_mask = 4294967294
+omni_range = 21.352
+omni_attenuation = 1.377
 
 [editable path="Player"]

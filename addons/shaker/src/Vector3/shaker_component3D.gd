@@ -28,6 +28,8 @@ enum ShakeAddMode {
 
 @export var AutoPlay:bool = false
 
+var has_external_shakes: bool:
+	get: return _external_shakes.size() != 0
 # Private variables
 var _last_position_shake: Array[Vector3] = [Vector3.ZERO]
 var _last_scale_shake: Array[Vector3] = [Vector3.ZERO]

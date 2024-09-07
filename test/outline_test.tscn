@@ -9,10 +9,11 @@
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="6_voje0"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeBrownianShake3D.gd" id="7_5jps3"]
 [ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="8_cqklu"]
-[ext_resource type="Script" path="res://entities/funky_area/funky_area.gd" id="10_h7i5c"]
 [ext_resource type="AudioStream" uid="uid://bqpbfu01veb7d" path="res://test/tler.wav" id="10_qpbn7"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="11_5u15i"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="13_bbnim"]
+[ext_resource type="Script" path="res://components/enemy_marker.gd" id="14_xhn7x"]
+[ext_resource type="Script" path="res://components/signal_connector.gd" id="15_mjpux"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dsd4s"]
 radius = 2.947
@@ -50,9 +51,6 @@ __follow_timeline = false
 [sub_resource type="SphereShape3D" id="SphereShape3D_bljxg"]
 radius = 13.757
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_fs2fm"]
-radius = 15.844
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_vmx31"]
 viewport_path = NodePath("SubViewport")
 
@@ -65,11 +63,12 @@ ProgressBar/styles/fill = SubResource("StyleBoxFlat_hfi2l")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3f873"]
 bg_color = Color(1, 0, 0, 1)
 
-[node name="StaticBody3D" type="CharacterBody3D" node_paths=PackedStringArray("health_c", "healthbar") groups=["enemy"]]
+[node name="StaticBody3D" type="CharacterBody3D" node_paths=PackedStringArray("health_c", "healthbar", "enemy_marker") groups=["enemy"]]
 collision_layer = 64
 script = ExtResource("1_3d1rk")
 health_c = NodePath("HealthComponent")
 healthbar = NodePath("SubViewport/ProgressBar")
+enemy_marker = NodePath("EnemyMarker")
 
 [node name="InteractComponent" type="Area3D" parent="."]
 script = ExtResource("1_ikgyl")
@@ -81,6 +80,9 @@ shape = SubResource("CapsuleShape3D_dsd4s")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamSynchronized_2g8np")
+max_distance = 74.3
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 19845.0
 script = ExtResource("6_vjlef")
 
 [node name="ShakerEmitter3D" type="Node3D" parent="."]
@@ -105,13 +107,6 @@ attenuation_filter_cutoff_hz = 8395.0
 attenuation_filter_db = -15.6
 doppler_tracking = 2
 script = ExtResource("6_vjlef")
-
-[node name="FunkyArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.69468, 0)
-script = ExtResource("10_h7i5c")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FunkyArea"]
-shape = SubResource("SphereShape3D_fs2fm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_dsd4s")
@@ -157,5 +152,15 @@ shape = SubResource("CapsuleShape3D_dsd4s")
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 light_color = Color(0.466667, 0, 1, 1)
 omni_range = 7.448
+
+[node name="EnemyMarker" type="Node" parent="."]
+script = ExtResource("14_xhn7x")
+
+[node name="SignalConnector" type="Node" parent="." node_paths=PackedStringArray("from", "to")]
+script = ExtResource("15_mjpux")
+from = NodePath("../HealthComponent")
+what = "health_changed"
+to = NodePath("..")
+method = "tween_force_mosh"
 
 [connection signal="interact" from="InteractComponent" to="." method="_on_interact_component_interact"]

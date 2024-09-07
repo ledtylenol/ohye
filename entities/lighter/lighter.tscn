@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=3 uid="uid://7gpkd3eqrq4t"]
+
+[ext_resource type="Script" path="res://entities/lighter/lighter.gd" id="1_s583j"]
+[ext_resource type="Script" path="res://world/interact_component.gd" id="2_k0i2t"]
+[ext_resource type="Material" uid="uid://ttnrhl4yyq3t" path="res://test/outline_test.tres" id="3_p05df"]
+[ext_resource type="AudioStream" uid="uid://dgxtxcanwyd1u" path="res://entities/lighter/in.wav" id="4_npe5m"]
+[ext_resource type="AudioStream" uid="uid://dt330yk8vjs14" path="res://entities/lighter/in2.wav" id="5_pwokv"]
+[ext_resource type="AudioStream" uid="uid://dmkdrada7linh" path="res://entities/lighter/out1.wav" id="6_2bt0u"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xlmlt"]
+material = ExtResource("3_p05df")
+size = Vector3(0.39, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cikca"]
+size = Vector3(0.34, 1, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7gvbf"]
+playback_mode = 1
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("4_npe5m")
+stream_1/stream = ExtResource("5_pwokv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_snjbn"]
+playback_mode = 1
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("6_2bt0u")
+
+[node name="Toggler" type="Node3D" node_paths=PackedStringArray("interact")]
+script = ExtResource("1_s583j")
+interact = NodePath("InteractComponent")
+
+[node name="InteractComponent" type="Area3D" parent="." node_paths=PackedStringArray("mesh", "body")]
+script = ExtResource("2_k0i2t")
+show_text = true
+what_text = "Pick Up"
+mesh = NodePath("../MeshInstance3D")
+body = NodePath("../StaticBody3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_xlmlt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_cikca")
+
+[node name="On" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_7gvbf")
+bus = &"SFX"
+
+[node name="Off" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_snjbn")
+bus = &"SFX"

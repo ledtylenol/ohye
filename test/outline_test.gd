@@ -1,5 +1,8 @@
 extends CharacterBody3D
 class_name OutlineTest
+
+const HIT = preload("res://shakes/hit.tres")
+
 @onready var initial_pos = global_position
 var player: Player
 var active := false
@@ -9,21 +12,23 @@ var speed := 0.0
 @export var health_c: HealthComponent
 @export var healthbar: ProgressBar
 @export var threshold := 5.0
-
+@export var enemy_marker: EnemyMarker
 signal hit
 func _ready() -> void:
 	if not Global.player:
 		await Global.player_set
 	player = Global.player
-	Global.active_enemy_count += 1
 	active = true
 	if not health_c: return
 	health_c.died.connect(die)
 	health_c.health_changed.connect(change_color)
 	health_c.health_changed.connect(hit.emit.unbind(1))
 	health_c.health_changed.connect(set_healthbar)
+	health_c.health_changed.connect(shake)
 	healthbar.max_value = health_c.max_health
 	healthbar.value = health_c.current_health
+	if not enemy_marker: return
+	health_c.died.connect(enemy_marker.erase_enemy)
 func _physics_process(delta: float) -> void:
 	if not active:
 		return
@@ -79,10 +84,21 @@ func change_color(new_health: int) -> void:
 	$SubViewport/ProgressBar.add_theme_stylebox_override("fill", theme)
 
 func die() -> void:
-	Global.active_enemy_count -= 1
+	$InteractComponent/CollisionShape3D.set_deferred("disabled", true)
 	active = false
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	tween.tween_property($ShakerEmitter3D/Area3D/AudioStreamPlayer3D, "pitch_scale", 0.05, 2.0)
-	tween.tween_callback(queue_free)
+	tween.tween_property($ShakerEmitter3D/Area3D/AudioStreamPlayer3D, "pitch_scale", 0.2, 2.0)
+	tween.tween_callback(deactivate)
 func set_healthbar(value: int) -> void:
 	healthbar.value = value
+
+func deactivate() -> void:
+	set_process(false)
+	set_physics_process(false)
+	global_position = Vector3(0, -123123123123123, 0)
+
+func tween_force_mosh(_h) -> void:
+	Global.tween_force_mosh(1.0, 2.0, 1.0)
+
+func shake(h: int) -> void:
+	Global.player.shaker.shake(HIT, ShakerComponent3D.ShakeAddMode.add, 3.0, 1.0, 2.0 + 1.0 - h / 5.0)

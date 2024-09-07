@@ -3,11 +3,15 @@ class_name PlayerCamera
 @export var player: Player
 @export var shaker: ShakerComponent3D
 @onready var former_gp := global_position
-var shaker_preset:
+var first_preset:
 	get: return shaker.get_shaker_preset().RotationShake[0]
+var second_preset:
+	get: return shaker.get_shaker_preset().RotationShake[1]
 @export var pan_node: Node3D
 @export_range(0.0, 1.0) var movement_tilt: float = 0.0
 @export_range(0.0, 1.0) var camera_tilt: float = 1.0
+var mins := Vector3.ZERO
+var maxs := Vector3.ZERO
 var target_rotation_z := 0.0
 var stats:
 	get:
@@ -22,11 +26,12 @@ func _ready() -> void:
 	if player:
 		player.just_landed.connect(_on_player_just_landed)
 func _process(delta: float) -> void:
-
 	handle_fov(delta)
 	do_shaker(delta)
 	var x = -Input.get_axis("left", "right") * movement_tilt
 	pan_node.rotation.z = lerp_angle(pan_node.rotation.z, x * PI/16.0, delta * 3)
+	if Input.is_action_just_pressed("ui_accept"):
+		Global.influence = 1.0 - Global.influence
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		player.rotate_y(-event.relative.x * sensitivity / 4000.0) 
@@ -57,15 +62,16 @@ func handle_fov(delta: float):
 
 func do_shaker(delta: float) -> void:
 	var v := global_position.distance_to(former_gp)
-	if player.direction and player.state == player.STATES.GROUNDED:
-		var coeff = 1.0
-		if Input.is_action_pressed("sprint"):
-			shaker_preset.frequency = Vector3(0.8, 0.5, 0.3)
+	if player.direction and player.state == player.STATES.GROUNDED and not Input.is_action_pressed("crouch"):
+		if not Input.is_action_pressed("sprint"):
+			first_preset.amplitude = M.smooth_nudgev(first_preset.amplitude, Vector3(0.03, 0.01, 0.03), 1.0, delta)
+			second_preset.amplitude = M.smooth_nudgev(second_preset.amplitude,  Vector3.ZERO, 10.0, delta)
 		else:
-			shaker_preset.frequency = Vector3(1.335, 1.14, 1)
-		shaker_preset.amplitude = M.smooth_nudgev(shaker_preset.amplitude, Vector3(0.03, 0.01, 0.03), 1.0, delta)
+			second_preset.amplitude = M.smooth_nudgev(second_preset.amplitude,  Vector3(0.03, 0.01, 0.03), 10.0, delta)
+			first_preset.amplitude = M.smooth_nudgev(first_preset.amplitude, Vector3.ZERO, 1.0, delta)
 	else:
-		shaker_preset.amplitude = M.smooth_nudgev(shaker_preset.amplitude, Vector3.ZERO, 10.0, delta)
+		first_preset.amplitude = M.smooth_nudgev(first_preset.amplitude, Vector3.ZERO, 10.0, delta)
+		second_preset.amplitude = M.smooth_nudgev(second_preset.amplitude, Vector3.ZERO, 10.0, delta)
 	if shaker._external_shakes.is_empty():
 		rotation.y = lerp_angle(rotation.y, 0.0, 1.0 - exp(-10 * delta))
 		rotation.z = lerp_angle(rotation.z, 0.0, 1.0 - exp(-10 * delta))

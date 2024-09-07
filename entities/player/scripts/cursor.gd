@@ -22,14 +22,15 @@ func tween_in() -> void:
 	tween.tween_property(self, "alpha", 1.0, 1.0)
 	tween.tween_property(self, "scale", -abs(dir) * 0.3 + Vector2.ONE, 0.6)
 func tween_out() -> void:
+	print("YE")
 	if tween: tween.stop()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel()
 	tween.tween_property(self, "position", initial_pos + dir * 5.0, 0.6)
-	tween.tween_property(self, "alpha", 1.0, 1.0)
+	tween.set_trans(Tween.TRANS_EXPO).tween_property(self, "alpha", 1.0, 1.0)
 	tween.tween_property(self, "scale", abs(dir) * 1.5 + Vector2.ONE, 0.6)
 func tween_default() -> void:
 	if tween: tween.stop()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel()
 	tween.tween_property(self, "position", initial_pos, 1.0)
-	tween.tween_property(self, "alpha", 0.3, 1.0)
+	tween.tween_property(self, "alpha", 1.0, 1.0)
 	tween.tween_property(self, "scale", Vector2.ONE, 1.0)
