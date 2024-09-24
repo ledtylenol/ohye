@@ -1,20 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfvc5vohwdybp"]
+[gd_scene load_steps=8 format=3 uid="uid://dfvc5vohwdybp"]
 
 [ext_resource type="Script" path="res://music/global_sound.gd" id="1_4vqtq"]
-[ext_resource type="AudioStream" uid="uid://c7yk6oi6dp24c" path="res://music/pattern2.wav" id="2_b7ncm"]
-[ext_resource type="AudioStream" uid="uid://bdag8bumur7uw" path="res://music/pattern1.wav" id="3_wbrlu"]
+[ext_resource type="AudioStream" uid="uid://cygqcq31ipyp7" path="res://music/amen/1.wav" id="2_m0pc3"]
+[ext_resource type="AudioStream" uid="uid://dq6fuiahr0xk8" path="res://music/amen/2.wav" id="3_0hnyg"]
+[ext_resource type="AudioStream" uid="uid://b23auxuo1ohdp" path="res://music/amen/3.wav" id="4_pxsug"]
+[ext_resource type="AudioStream" uid="uid://c0xyxbrhwtydy" path="res://music/amen/5.wav" id="5_00f11"]
 
-[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_fgtqo"]
-stream_count = 2
-stream_0/stream = ExtResource("2_b7ncm")
-stream_0/volume = -60.0
-stream_1/stream = ExtResource("3_wbrlu")
-stream_1/volume = -60.0
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_3au0n"]
+shuffle = true
+fade_time = 0.0
+stream_count = 4
+stream_0 = ExtResource("2_m0pc3")
+stream_1 = ExtResource("3_0hnyg")
+stream_2 = ExtResource("4_pxsug")
+stream_3 = ExtResource("5_00f11")
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_mo62s"]
+stream_count = 1
+stream_0/stream = SubResource("AudioStreamPlaylist_3au0n")
+stream_0/volume = 0.0
 
 [node name="GlobalSound" type="Node"]
 script = ExtResource("1_4vqtq")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamSynchronized_fgtqo")
+stream = SubResource("AudioStreamSynchronized_mo62s")
 volume_db = -13.225
+stream_paused = true
 bus = &"Music"

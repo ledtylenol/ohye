@@ -1,6 +1,6 @@
 extends Node
 
-var allow_mosh := true
+var allow_mosh := false
 var datamosh_amount := 0.0
 var force_datamosh:float = 0.0
 var influence: float = 1.0:
@@ -53,6 +53,8 @@ func add_mosh(amount: float) -> void:
 	print(datamosh_amount)
 func _physics_process(delta: float) -> void:
 	if not allow_mosh:
+		AudioServer.get_bus_effect(1, 1).mix = 0.0
+
 		return
 	AudioServer.get_bus_effect(1, 0).drive = minf(1.0, bounces / 15.0)
 	AudioServer.get_bus_effect(1, 1).mix = minf(1.0, bounces / 15.0)
@@ -101,7 +103,7 @@ func boing() -> bool:
 	return true
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_R:
+	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_R and get_tree().current_scene:
 		get_tree().reload_current_scene()
 
 func tween_force_mosh(from: float, duration: float, delay: float) -> void:

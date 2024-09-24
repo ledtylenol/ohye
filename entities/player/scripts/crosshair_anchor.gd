@@ -10,6 +10,7 @@ var do_r := 0.0
 var t := randf_range(-40.0, 40.0)
 var tween: Tween
 var target_pos: Vector2
+var time_since_interact_enter := 0.0
 @export var camera: PlayerCamera
 @export var ray: InteractRay
 @export var sod: SecondOrderDynamics
@@ -24,13 +25,15 @@ func _physics_process(delta: float) -> void:
 	if camera and ray and lerp_enabled:
 		if ray.interactable:
 			target_pos = camera.unproject_position(ray.interactable.global_position) * 0.5 + center.position * 0.5
+			time_since_interact_enter = 0.0
 		elif center:
 			target_pos = center.position
-
+			time_since_interact_enter += delta
 	elif center:
 		target_pos = center.position
-
 	position = sod.update(position, target_pos, delta)[0]
+
+
 func tween_out() -> void:
 	t = randf_range(-1, 1)
 	mode = MODES.Out

@@ -5,5 +5,5 @@ class_name ScaledStreamPlayer
 	get:
 		return clampf(influence, 0.0, 1.0)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pitch_scale = maxf(0.001, Engine.time_scale * influence + 1.0 - influence)

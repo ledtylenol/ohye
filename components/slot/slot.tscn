@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://drh8rg1eeqcto"]
+
+[ext_resource type="Script" path="res://components/slot/slot.gd" id="1_d3xjp"]
+
+[node name="Slot" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_d3xjp")

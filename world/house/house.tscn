@@ -1,0 +1,114 @@
+[gd_scene load_steps=19 format=3 uid="uid://c03uxh56c1b0i"]
+
+[ext_resource type="PackedScene" uid="uid://coqwi0jqnpm4k" path="res://world/house/house.blend" id="1_2yh5e"]
+[ext_resource type="Script" path="res://world/house/house.gd" id="1_edbcp"]
+[ext_resource type="PackedScene" uid="uid://c4jqyhvc7h1i" path="res://entities/player/player.tscn" id="2_vyvv8"]
+[ext_resource type="Texture2D" uid="uid://2k78mny3k2p2" path="res://world/house/skybox.jpg" id="3_31s3v"]
+[ext_resource type="PackedScene" uid="uid://4wrmfwney2do" path="res://world/house/actualhouse.blend" id="3_kmkm5"]
+[ext_resource type="Environment" uid="uid://dgxo2x8jehw34" path="res://world/house/house.tres" id="4_6rfjt"]
+[ext_resource type="Script" path="res://music/global_sound.gd" id="5_8fyk6"]
+[ext_resource type="AudioStream" uid="uid://d3to1me5yailx" path="res://world/house/housedrums.ogg" id="6_oqbha"]
+[ext_resource type="PackedScene" uid="uid://drglydk1ctqc" path="res://components/portal/portal.tscn" id="6_trfe7"]
+[ext_resource type="AudioStream" uid="uid://bxjf4giub4jwn" path="res://world/house/weirdhouse.ogg" id="7_7qnuc"]
+[ext_resource type="AudioStream" uid="uid://c0g6kh2vnsgu" path="res://world/house/house.ogg" id="8_njo1v"]
+[ext_resource type="AudioStream" uid="uid://ffwpmca1sqij" path="res://world/house/groovyhouse.ogg" id="9_4gkdo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8exjv"]
+size = Vector3(500, 500, 500)
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_4evhf"]
+stream_count = 4
+stream_0/stream = ExtResource("6_oqbha")
+stream_0/volume = -60.0
+stream_1/stream = ExtResource("7_7qnuc")
+stream_1/volume = -60.0
+stream_2/stream = ExtResource("8_njo1v")
+stream_2/volume = -60.0
+stream_3/stream = ExtResource("9_4gkdo")
+stream_3/volume = -60.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f1ho1"]
+size = Vector3(100, 100, 100)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_y2hi1"]
+panorama = ExtResource("3_31s3v")
+filter = false
+
+[sub_resource type="Sky" id="Sky_gpt2a"]
+sky_material = SubResource("PanoramaSkyMaterial_y2hi1")
+
+[sub_resource type="Environment" id="Environment_ydh3a"]
+background_mode = 2
+sky = SubResource("Sky_gpt2a")
+sky_custom_fov = 42.9
+sky_rotation = Vector3(-3.10843, -4.32318, 0)
+volumetric_fog_enabled = true
+
+[node name="House" type="Node3D" node_paths=PackedStringArray("music", "house_area", "down_area")]
+script = ExtResource("1_edbcp")
+music = NodePath("GlobalSound")
+house_area = NodePath("actualhouse2/HouseArea")
+down_area = NodePath("actualhouse/HouseArea")
+
+[node name="house" parent="." instance=ExtResource("1_2yh5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -18.275, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_vyvv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2003.77, -98.9805, 28.5476)
+
+[node name="actualhouse" parent="." instance=ExtResource("3_kmkm5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.141842, -0.245512, 9.15564)
+
+[node name="HouseArea" type="Area3D" parent="actualhouse"]
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="actualhouse/HouseArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0214844, 4.26282, 0.337357)
+shape = SubResource("BoxShape3D_8exjv")
+
+[node name="Portal" parent="actualhouse" node_paths=PackedStringArray("exit_portal", "exit_portal_area") instance=ExtResource("6_trfe7")]
+exit_environment = ExtResource("4_6rfjt")
+exit_portal = NodePath("../../actualhouse2/Portal")
+exit_portal_area = NodePath("../../actualhouse2/Portal/PortalTeleport")
+
+[node name="CollisionShape3D" parent="actualhouse/Portal/PortalTeleport" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2345, 6.3445, -19.8985)
+light_negative = true
+shadow_enabled = true
+
+[node name="GlobalSound" type="Node" parent="."]
+script = ExtResource("5_8fyk6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GlobalSound"]
+stream = SubResource("AudioStreamSynchronized_4evhf")
+volume_db = -13.225
+bus = &"Music"
+
+[node name="house2" parent="." instance=ExtResource("1_2yh5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, -124.6, 0)
+
+[node name="actualhouse2" parent="." instance=ExtResource("3_kmkm5")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2000.14, -106.57, 9.15564)
+
+[node name="HouseArea" type="Area3D" parent="actualhouse2"]
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="actualhouse2/HouseArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0214844, 4.26282, 0.337357)
+shape = SubResource("BoxShape3D_f1ho1")
+
+[node name="Portal" parent="actualhouse2" node_paths=PackedStringArray("exit_portal", "exit_portal_area") instance=ExtResource("6_trfe7")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -1.93715e-07, 3.16, 1.86788)
+exit_environment = SubResource("Environment_ydh3a")
+exit_portal = NodePath("../../actualhouse/Portal")
+exit_portal_area = NodePath("../../actualhouse/Portal/PortalTeleport")
+
+[node name="CollisionShape3D" parent="actualhouse2/Portal/PortalTeleport" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[editable path="Player"]
+[editable path="actualhouse/Portal"]
+[editable path="actualhouse2/Portal"]

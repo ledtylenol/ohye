@@ -8,13 +8,13 @@ var do_stuff := false:
 func _ready() -> void:
 	if lighter:
 		lighter.interact.interact_end.connect(play)
-	
+		
 
 func play() -> void:
 	counter += 1
 	if counter == 10:
 		do_stuff = true
-		
+		$TransitionArea.active = true
 
 func invert_visibility() -> void:
 	$CanvasLayer.visible = not $CanvasLayer.visible

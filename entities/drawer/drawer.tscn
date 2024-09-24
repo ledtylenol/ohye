@@ -1,0 +1,185 @@
+[gd_scene load_steps=18 format=4 uid="uid://bpea1f84dmwxl"]
+
+[ext_resource type="PackedScene" uid="uid://ba5p42wr7wt4v" path="res://entities/drawer/drawer.blend" id="1_yw8hp"]
+[ext_resource type="Script" path="res://entities/drawer/drawer_door.gd" id="2_i4t5y"]
+[ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_ohfkk"]
+[ext_resource type="Script" path="res://components/interact_component/interact_component.gd" id="3_ngym4"]
+[ext_resource type="AudioStream" uid="uid://c657v8e2oa02t" path="res://entities/player/sounds/boom.wav" id="4_tplwl"]
+[ext_resource type="Script" path="res://components/spawn_location.gd" id="6_pcpn3"]
+[ext_resource type="Script" path="res://components/random_spawn.gd" id="7_on1ac"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bx28w"]
+render_priority = 0
+shader = ExtResource("2_ohfkk")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/size = 1.05
+shader_parameter/alpha = 0.0
+shader_parameter/active = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x66c7"]
+next_pass = SubResource("ShaderMaterial_bx28w")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7yl7m"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 60,
+"index_data": PackedByteArray("AAAJAAgAAAACAAkAAgAKAAkAAgAGAAoABgALAAoABgAEAAsABAAIAAsABAAAAAgAAgAEAAYAAgAAAAQABwABAAMABwAFAAEAAQAJAAMAAQAIAAkAAwAKAAcAAwAJAAoABwALAAUABwAKAAsABQAIAAEABQALAAgA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAAAAP//AAAMCrMfqfwAAAAAAAAAAAAADAqzH1UDAAD//wAA//8AAPL1sx+p/AAA//8AAAAAAADy9bMfVQMAAAAA/////wAAAAD//wAAAAD/////AAAAAP///////wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mwo5s"]
+resource_name = "drawer_Cube_003"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("/1////8f/z//XwAA6NQWS+jUFkvo1BZL/1//v/8f/3//X/+/6NTpdOjU6XTo1Ol0/1//P/9f/z//X/8/FasWSxWrFksVqxZL/1//f/9f/3//X/9/FavpdBWr6XQVq+l0/5////+fAAD/3/8//9//P/+f/7//n/+//9//f//f/3//n/9//5//f/+f/3//n/9//5//P/+f/z//n/8//5//Pw=="),
+"format": 34896613399,
+"index_count": 60,
+"index_data": PackedByteArray("AAAcABgAAAAGABwACAAhAB0ACAATACEAFAAnACMAFAAOACcADQAZACUADQACABkABwAMABIABwABAAwAFwAEAAoAFwARAAQABQAfAAsABQAbAB8ACQAiABYACQAeACIAFQAkAA8AFQAgACQAEAAaAAMAEAAmABoA"),
+"material": SubResource("StandardMaterial3D_x66c7"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAAAA////vwAAAAD///+/DAqzH6n8//8MCrMfqfz//wwKsx+p/DDQAAAAAAAAVNUAAAAAAAD/vwAAAAAAAP//DAqzH1UD//8MCrMfVQP//wwKsx9VA8HV//8AAP///7///wAA////v///AAD//1TV8vWzH6n8MNDy9bMfqfz///L1sx+p/P////8AAAAA/7///wAAAAD/////AAAAAFTV8vWzH1UDwdXy9bMfVQP///L1sx9VA///AAD/////VNUAAP//////vwAA////////AAD/////8dQAAP//AABU1QAA//8AAP//AAD//wAA//8AAP//AADR2v////8AANHa/////wAA////////AAD///////8AAFTV////////8dT/////////v///////////////////VNVU1VTVAAD/f///////fwz//3//v1szMCVU1VTVAAD/f/+//7//f/GA/3//vwwsAikAAP9//////6oqqirPWluz/38M//9//78AAP9//7//v6oqqir9Vgys/3/xgP9//79U1VTV//////9/DP8ILX4oVNVU1f+//7//f/GAXyb5KwVUXqb/v/+//3/xgKoqqiqAVwet//////9/DP+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7yl7m")
+
+[sub_resource type="Resource" id="Resource_2231u"]
+script = ExtResource("7_on1ac")
+thing = "res://entities/lighter/lighter.tscn"
+weight = 20
+
+[sub_resource type="Resource" id="Resource_4ffqr"]
+script = ExtResource("7_on1ac")
+thing = ""
+weight = 20
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7eig"]
+render_priority = 0
+shader = ExtResource("2_ohfkk")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/size = 1.05
+shader_parameter/alpha = 0.0
+shader_parameter/active = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cxvt8"]
+next_pass = SubResource("ShaderMaterial_u7eig")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_uy546"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 60,
+"index_data": PackedByteArray("AAAJAAgAAAACAAkAAgAKAAkAAgAGAAoABgALAAoABgAEAAsABAAIAAsABAAAAAgAAgAEAAYAAgAAAAQABwABAAMABwAFAAEAAQAJAAMAAQAIAAkAAwAKAAcAAwAJAAoABwALAAUABwAKAAsABQAIAAEABQALAAgA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAAAAP//AAAMCrMfqfwAAAAAAAAAAAAADAqzH1UDAAD//wAA//8AAPL1sx+p/AAA//8AAAAAAADy9bMfVQMAAAAA/////wAAAAD//wAAAAD/////AAAAAP///////wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_sgeuo"]
+resource_name = "drawer_Cube_004"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("/1////8f/z//XwAA6NQWS+jUFkvo1BZL/1//v/8f/3//X/+/6NTpdOjU6XTo1Ol0/1//P/9f/z//X/8/FasWSxWrFksVqxZL/1//f/9f/3//X/9/FavpdBWr6XQVq+l0/5////+fAAD/3/8//9//P/+f/7//n/+//9//f//f/3//n/9//5//f/+f/3//n/9//5//P/+f/z//n/8//5//Pw=="),
+"format": 34896613399,
+"index_count": 60,
+"index_data": PackedByteArray("AAAcABgAAAAGABwACAAhAB0ACAATACEAFAAnACMAFAAOACcADQAZACUADQACABkABwAMABIABwABAAwAFwAEAAoAFwARAAQABQAfAAsABQAbAB8ACQAiABYACQAeACIAFQAkAA8AFQAgACQAEAAaAAMAEAAmABoA"),
+"material": SubResource("StandardMaterial3D_cxvt8"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAAAA////vwAAAAD///+/DAqzH6n8//8MCrMfqfz//wwKsx+p/DDQAAAAAAAAVNUAAAAAAAD/vwAAAAAAAP//DAqzH1UD//8MCrMfVQP//wwKsx9VA8HV//8AAP///7///wAA////v///AAD//1TV8vWzH6n8MNDy9bMfqfz///L1sx+p/P////8AAAAA/7///wAAAAD/////AAAAAFTV8vWzH1UDwdXy9bMfVQP///L1sx9VA///AAD/////VNUAAP//////vwAA////////AAD/////8dQAAP//AABU1QAA//8AAP//AAD//wAA//8AAP//AADR2v////8AANHa/////wAA////////AAD///////8AAFTV////////8dT/////////v///////////////////VNVU1VTVAAD/f///////fwz//3//v1szMCVU1VTVAAD/f/+//7//f/GA/3//vwwsAikAAP9//////6oqqirPWluz/38M//9//78AAP9//7//v6oqqir9Vgys/3/xgP9//79U1VTV//////9/DP8ILX4oVNVU1f+//7//f/GAXyb5KwVUXqb/v/+//3/xgKoqqiqAVwet//////9/DP+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_uy546")
+
+[node name="Drawer" type="Node3D"]
+
+[node name="drawer" parent="." instance=ExtResource("1_yw8hp")]
+
+[node name="StaticBody3D" parent="drawer/Cube" index="0"]
+collision_mask = 0
+
+[node name="Top Shelf" parent="drawer" index="1" node_paths=PackedStringArray("interact", "open_audio", "close_audio")]
+mesh = SubResource("ArrayMesh_mwo5s")
+script = ExtResource("2_i4t5y")
+interact = NodePath("InteractComponent")
+open_audio = NodePath("OpenAudio")
+close_audio = NodePath("CloseAudio")
+
+[node name="OpenAudio" type="AudioStreamPlayer3D" parent="drawer/Top Shelf" index="0"]
+stream = ExtResource("4_tplwl")
+volume_db = -14.907
+bus = &"SFX"
+
+[node name="CloseAudio" type="AudioStreamPlayer3D" parent="drawer/Top Shelf" index="1"]
+stream = ExtResource("4_tplwl")
+volume_db = -13.913
+pitch_scale = 0.33
+bus = &"SFX"
+
+[node name="InteractComponent" type="Area3D" parent="drawer/Top Shelf" index="2" node_paths=PackedStringArray("mesh", "body")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.418044)
+script = ExtResource("3_ngym4")
+show_text = true
+what_text = "E"
+mesh = NodePath("..")
+body = NodePath("../StaticBody3D")
+
+[node name="SpawnLocation" type="Marker3D" parent="drawer/Top Shelf" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59528, 0, -0.517617)
+script = ExtResource("6_pcpn3")
+rotation_random = Vector3(0, -2, 0)
+pool = Array[ExtResource("7_on1ac")]([SubResource("Resource_2231u"), SubResource("Resource_4ffqr")])
+
+[node name="SpawnLocation2" type="Marker3D" parent="drawer/Top Shelf" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.629657, 0, -0.517617)
+script = ExtResource("6_pcpn3")
+rotation_random = Vector3(0, -2, 0)
+pool = Array[ExtResource("7_on1ac")]([SubResource("Resource_2231u"), SubResource("Resource_4ffqr")])
+
+[node name="SpawnLocation3" type="Marker3D" parent="drawer/Top Shelf" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.629657, 0, 0.618044)
+script = ExtResource("6_pcpn3")
+rotation_random = Vector3(0, -2, 0)
+pool = Array[ExtResource("7_on1ac")]([SubResource("Resource_2231u"), SubResource("Resource_4ffqr")])
+
+[node name="StaticBody3D" parent="drawer/Top Shelf" index="6"]
+collision_mask = 0
+
+[node name="Bottom Shelf" parent="drawer" index="2" node_paths=PackedStringArray("interact", "open_audio", "close_audio")]
+mesh = SubResource("ArrayMesh_sgeuo")
+script = ExtResource("2_i4t5y")
+interact = NodePath("InteractComponent")
+open_audio = NodePath("OpenAudio")
+close_audio = NodePath("CloseAudio")
+
+[node name="InteractComponent" type="Area3D" parent="drawer/Bottom Shelf" index="0" node_paths=PackedStringArray("mesh", "body")]
+script = ExtResource("3_ngym4")
+show_text = true
+what_text = "E"
+mesh = NodePath("..")
+body = NodePath("../StaticBody3D")
+
+[node name="OpenAudio" type="AudioStreamPlayer3D" parent="drawer/Bottom Shelf" index="1"]
+stream = ExtResource("4_tplwl")
+volume_db = -18.882
+bus = &"SFX"
+
+[node name="CloseAudio" type="AudioStreamPlayer3D" parent="drawer/Bottom Shelf" index="2"]
+stream = ExtResource("4_tplwl")
+volume_db = -21.863
+pitch_scale = 0.33
+bus = &"SFX"
+
+[node name="StaticBody3D" parent="drawer/Bottom Shelf" index="3"]
+collision_mask = 0
+
+[editable path="drawer"]

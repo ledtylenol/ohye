@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://cr6eqw6ih0ldv"]
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://cr6eqw6ih0ldv"]
 
 [sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_huevn"]
 resource_name = "Distortion"
@@ -21,6 +21,10 @@ mode = 3
 pre_gain = 13.68
 post_gain = -14.55
 
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_vq7fk"]
+resource_name = "Delay"
+feedback_delay_ms = 1000.0
+
 [resource]
 bus/1/name = &"SFX"
 bus/1/solo = false
@@ -29,9 +33,9 @@ bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
 bus/1/effect/0/effect = SubResource("AudioEffectDistortion_huevn")
-bus/1/effect/0/enabled = true
+bus/1/effect/0/enabled = false
 bus/1/effect/1/effect = SubResource("AudioEffectCompressor_ytopk")
-bus/1/effect/1/enabled = true
+bus/1/effect/1/enabled = false
 bus/1/effect/2/effect = SubResource("AudioEffectReverb_cp4oy")
 bus/1/effect/2/enabled = true
 bus/2/name = &"Music"
@@ -42,3 +46,11 @@ bus/2/volume_db = 0.0
 bus/2/send = &"Master"
 bus/2/effect/0/effect = SubResource("AudioEffectDistortion_gxsxa")
 bus/2/effect/0/enabled = true
+bus/3/name = &"DelaySfx"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"SFX"
+bus/3/effect/0/effect = SubResource("AudioEffectDelay_vq7fk")
+bus/3/effect/0/enabled = true

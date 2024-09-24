@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://btuqli4mgp82h"]
+[gd_scene load_steps=23 format=3 uid="uid://btuqli4mgp82h"]
 
 [ext_resource type="PackedScene" uid="uid://c4jqyhvc7h1i" path="res://entities/player/player.tscn" id="1_3pikw"]
 [ext_resource type="Script" path="res://world/world.gd" id="1_abyl7"]
 [ext_resource type="CompositorEffect" uid="uid://c84wg0tlxmyha" path="res://compositor_effects/datamosh/datamosh_compositor_effect.tres" id="2_5jr0t"]
 [ext_resource type="PackedScene" uid="uid://camem64xsobb8" path="res://test/outline_test.tscn" id="3_3n3in"]
 [ext_resource type="Script" path="res://components/transition_area.gd" id="5_d3dct"]
+[ext_resource type="PackedScene" uid="uid://dfvc5vohwdybp" path="res://music/GlobalSound.tscn" id="6_t8o4a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yqiek"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -130,7 +131,7 @@ material = SubResource("FogMaterial_qrtcj")
 
 [node name="Area3D" type="Area3D" parent="."]
 script = ExtResource("5_d3dct")
-scene = "res://world/world.tscn"
+scene = "res://test/item_test.tscn"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.0714)
@@ -144,4 +145,10 @@ light_cull_mask = 4294967294
 omni_range = 21.352
 omni_attenuation = 1.377
 
+[node name="GlobalSound" parent="." instance=ExtResource("6_t8o4a")]
+
+[node name="AudioStreamPlayer" parent="GlobalSound" index="0"]
+stream_paused = false
+
 [editable path="Player"]
+[editable path="GlobalSound"]

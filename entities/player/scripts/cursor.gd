@@ -9,8 +9,6 @@ var alpha := 0.0
 @onready var initial_pos: Vector2 = position
 @onready var dir: Vector2 = (initial_pos - Vector2(18, 18)).normalized()
 
-func _ready() -> void:
-	modulate.a = 0.2
 var tween: Tween
 func _process(delta: float) -> void:
 	pivot_offset = size/2
@@ -22,7 +20,6 @@ func tween_in() -> void:
 	tween.tween_property(self, "alpha", 1.0, 1.0)
 	tween.tween_property(self, "scale", -abs(dir) * 0.3 + Vector2.ONE, 0.6)
 func tween_out() -> void:
-	print("YE")
 	if tween: tween.stop()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel()
 	tween.tween_property(self, "position", initial_pos + dir * 5.0, 0.6)
@@ -32,5 +29,5 @@ func tween_default() -> void:
 	if tween: tween.stop()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC).set_parallel()
 	tween.tween_property(self, "position", initial_pos, 1.0)
-	tween.tween_property(self, "alpha", 1.0, 1.0)
 	tween.tween_property(self, "scale", Vector2.ONE, 1.0)
+	tween.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT).tween_property(self, "alpha", 0.0, 4.0).set_delay(2.0)

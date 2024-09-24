@@ -1,10 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://kvq341cthj3k"]
+[gd_scene load_steps=28 format=3 uid="uid://kvq341cthj3k"]
 
 [ext_resource type="Script" path="res://test/item_test.gd" id="1_6drlb"]
 [ext_resource type="CompositorEffect" uid="uid://c84wg0tlxmyha" path="res://compositor_effects/datamosh/datamosh_compositor_effect.tres" id="1_70sap"]
 [ext_resource type="PackedScene" uid="uid://c4jqyhvc7h1i" path="res://entities/player/player.tscn" id="2_nqd0j"]
 [ext_resource type="PackedScene" uid="uid://7gpkd3eqrq4t" path="res://entities/lighter/lighter.tscn" id="3_o4ehs"]
+[ext_resource type="Script" path="res://components/timed_interact_component.gd" id="5_pqeg1"]
 [ext_resource type="Shader" path="res://shaders/invert.gdshader" id="5_q72pv"]
+[ext_resource type="Script" path="res://components/transition_area.gd" id="6_5vubx"]
+[ext_resource type="Script" path="res://components/timed_load_component.gd" id="6_tnnvk"]
+[ext_resource type="Script" path="res://components/load_on_interval_finish.gd" id="7_ci5sa"]
+[ext_resource type="Script" path="res://world/mosh_area.gd" id="7_d025o"]
+[ext_resource type="AudioStream" uid="uid://dgxtxcanwyd1u" path="res://entities/lighter/in.wav" id="7_ddyj1"]
+[ext_resource type="Script" path="res://components/signal_connector.gd" id="7_vki5w"]
+[ext_resource type="PackedScene" uid="uid://bpea1f84dmwxl" path="res://entities/drawer/drawer.tscn" id="8_ivncu"]
+[ext_resource type="AudioStream" uid="uid://dt330yk8vjs14" path="res://entities/lighter/in2.wav" id="8_ixn8k"]
+[ext_resource type="Script" path="res://components/clock/clock.gd" id="9_u857a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_th0dh"]
 sky_top_color = Color(1, 1, 1, 1)
@@ -37,6 +47,13 @@ size = Vector3(300, 2, 300)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qbl11"]
 data = PackedVector3Array(-150, 1, 150, 150, 1, 150, -150, -1, 150, 150, 1, 150, 150, -1, 150, -150, -1, 150, 150, 1, -150, -150, 1, -150, 150, -1, -150, -150, 1, -150, -150, -1, -150, 150, -1, -150, 150, 1, 150, 150, 1, -150, 150, -1, 150, 150, 1, -150, 150, -1, -150, 150, -1, 150, -150, 1, -150, -150, 1, 150, -150, -1, -150, -150, 1, 150, -150, -1, 150, -150, -1, -150, 150, 1, 150, -150, 1, 150, 150, 1, -150, -150, 1, 150, -150, 1, -150, 150, 1, -150, -150, -1, 150, 150, -1, 150, -150, -1, -150, 150, -1, 150, 150, -1, -150, -150, -1, -150)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ikqvj"]
+playback_mode = 2
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("7_ddyj1")
+stream_1/stream = ExtResource("8_ixn8k")
+
 [sub_resource type="BoxMesh" id="BoxMesh_1c88g"]
 size = Vector3(20, 20, 1)
 
@@ -45,6 +62,12 @@ data = PackedVector3Array(-10, 10, 0.5, 10, 10, 0.5, -10, -10, 0.5, 10, 10, 0.5,
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8gfum"]
 shader = ExtResource("5_q72pv")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_acvmr"]
+radius = 2.214
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uw733"]
+radius = 30.0
 
 [node name="ItemTest" type="Node3D" node_paths=PackedStringArray("lighter")]
 script = ExtResource("1_6drlb")
@@ -63,7 +86,7 @@ mesh = SubResource("BoxMesh_wmcrq")
 shape = SubResource("ConcavePolygonShape3D_qbl11")
 
 [node name="Player" parent="." instance=ExtResource("2_nqd0j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.33358, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.03239, 0)
 
 [node name="Lighter" parent="." instance=ExtResource("3_o4ehs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 5.99972, -40)
@@ -72,6 +95,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 5.99972, -40)
 transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 36.3306, 7.40552, -38.778)
 thing_to_toggle = NodePath("../OmniLight3D")
 param = "visible"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lighter2"]
+transform = Transform3D(2.66667, 0, 0, 0, -0.0418863, 2.66634, 0, -2.66634, -0.0418863, 0, 6.48341, 0)
+spot_range = 12.129
+spot_angle = 96.33
+spot_angle_attenuation = 0.933035
+
+[node name="Timed Interact Component" type="Node" parent="Lighter2" node_paths=PackedStringArray("interact_component")]
+script = ExtResource("5_pqeg1")
+duration_min = 5.0
+duration_max = 5.0
+interval = 1.0
+interact_component = NodePath("../InteractComponent")
+call_immediately = true
+
+[node name="SceneLoader" type="Node" parent="Lighter2"]
+script = ExtResource("6_tnnvk")
+scene = "res://world/house/house.tscn"
+delay = 0.0
+
+[node name="AllowLoadOnInterval" type="Node" parent="Lighter2/SceneLoader" node_paths=PackedStringArray("timed_interact")]
+script = ExtResource("7_ci5sa")
+timed_interact = NodePath("../../Timed Interact Component")
+
+[node name="SignalConnector" type="Node" parent="Lighter2/SceneLoader" node_paths=PackedStringArray("from", "to")]
+script = ExtResource("7_vki5w")
+from = NodePath("../../InteractComponent")
+what = "interact_end"
+to = NodePath("..")
+method = "try_load"
+
+[node name="Clock" type="AudioStreamPlayer3D" parent="Lighter2" node_paths=PackedStringArray("timed_comp")]
+stream = SubResource("AudioStreamRandomizer_ikqvj")
+max_distance = 50.88
+max_polyphony = 2
+bus = &"DelaySfx"
+script = ExtResource("9_u857a")
+timed_comp = NodePath("../Timed Interact Component")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.6778, 11.2589, 0)
@@ -98,3 +159,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="TransitionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.786, 5.26343, -12.5796)
+script = ExtResource("6_5vubx")
+scene = "res://world/world.tscn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TransitionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.73033, 10.5299)
+shape = SubResource("SphereShape3D_acvmr")
+
+[node name="MoshArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.3667, 0, -1.17068)
+script = ExtResource("7_d025o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MoshArea"]
+shape = SubResource("SphereShape3D_uw733")
+
+[node name="Drawer" parent="." instance=ExtResource("8_ivncu")]
+transform = Transform3D(-0.711953, 0, 0.702228, 0, 1, 0, -0.702228, 0, -0.711953, -4.5111, 2.58216, -1.10556)
+
+[editable path="Lighter2"]

@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamSynchronized" load_steps=3 format=3 uid="uid://b6rwhjsoewomh"]
+
+[ext_resource type="AudioStream" uid="uid://c7yk6oi6dp24c" path="res://music/pattern2.wav" id="1_3ywhc"]
+[ext_resource type="AudioStream" uid="uid://bdag8bumur7uw" path="res://music/pattern1.wav" id="2_7nftd"]
+
+[resource]
+stream_count = 2
+stream_0/stream = ExtResource("1_3ywhc")
+stream_0/volume = -60.0
+stream_1/stream = ExtResource("2_7nftd")
+stream_1/volume = -60.0

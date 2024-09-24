@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://7gpkd3eqrq4t"]
 
 [ext_resource type="Script" path="res://entities/lighter/lighter.gd" id="1_s583j"]
-[ext_resource type="Script" path="res://world/interact_component.gd" id="2_k0i2t"]
+[ext_resource type="Script" path="res://components/interact_component/interact_component.gd" id="2_k0i2t"]
 [ext_resource type="Material" uid="uid://ttnrhl4yyq3t" path="res://test/outline_test.tres" id="3_p05df"]
 [ext_resource type="AudioStream" uid="uid://dgxtxcanwyd1u" path="res://entities/lighter/in.wav" id="4_npe5m"]
 [ext_resource type="AudioStream" uid="uid://dt330yk8vjs14" path="res://entities/lighter/in2.wav" id="5_pwokv"]

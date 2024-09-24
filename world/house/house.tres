@@ -1,0 +1,20 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://dgxo2x8jehw34"]
+
+[ext_resource type="Texture2D" uid="uid://2k78mny3k2p2" path="res://world/house/skybox.jpg" id="1_1pfhp"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_y2hi1"]
+panorama = ExtResource("1_1pfhp")
+filter = false
+
+[sub_resource type="Sky" id="Sky_gpt2a"]
+sky_material = SubResource("PanoramaSkyMaterial_y2hi1")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_gpt2a")
+fog_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_sky_affect = 0.0
+volumetric_fog_density = 0.0951
+volumetric_fog_sky_affect = 0.0

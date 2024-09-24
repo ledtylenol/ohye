@@ -2,11 +2,12 @@ extends CharacterBody3D
 class_name Player
 
 
-const FRICTION: float = 6.0;
-const STOP_SPEED: float = 1.0 * SCALE_FACTOR;
+const FRICTION: float = 9.0;
+const STOP_SPEED: float = 5.0 * SCALE_FACTOR;
 const SCALE_FACTOR: float = 0.03125;
 const AIR_SPEED: float = 1.0;
 const COYOTE_TIME: float = 0.1
+const HIT_ME = preload("res://shakes/hit_me.tres")
 signal just_left_ground()
 signal just_landed()
 signal just_pounded()
@@ -17,6 +18,8 @@ enum STATES {
 	AIR,
 	GROUNDED,
 	POUNDING,
+	WALKING,
+	CROUCHING,
 	STUNNED
 }
 @export var stats: PlayerStats
@@ -29,6 +32,11 @@ enum STATES {
 @export var camera: PlayerCamera
 @export var shaker: ShakerComponent3D
 @export var winds: AudioStreamPlayer
+@export var health_component: HealthComponent
+@export var hurtbox: Hurtbox
+@export var hit_shaker: ShakerComponent3D
+@export var hit_sound: AudioStreamPlayer3D
+@export var circle_progress: CircleProg
 var heat: float = 0.0
 var pounding := false
 var combo:int = 0
@@ -54,19 +62,22 @@ var dead: bool = false
 
 func _ready() -> void:
 	Global.player = self
+	if hurtbox:
+		if hit_shaker: hurtbox.hit.connect(hit)
+		if hit_sound: hurtbox.hit.connect(func(a, b) -> void: hit_sound.play())
 func _physics_process(delta: float) -> void:
 	if dead:
 		return
-	
+	$CanvasLayer/Control/VelocityLabel.text = str(velocity.length())
+	$CanvasLayer/Control/VelocityLabel.text += "\n%.2f" % M.xz(velocity.normalized()).angle_to(-M.xz(camera.global_basis.z))
+	$CanvasLayer/Control/VelocityLabel.text += "%.2f" % (PI/2)
 	times["jump"] += delta
 	process_inputs()
 	check_ground(delta)
-
-	match state:
-		STATES.GROUNDED:
-			move_ground(delta)
-		STATES.AIR:
-			move_air(delta)
+	if [STATES.GROUNDED, STATES.WALKING, STATES.CROUCHING].has(state): 
+		move_ground(delta)
+	elif state == STATES.AIR:
+		move_air(delta)
 	if do_ground_jump():
 		jump_ground.emit()
 		times["air"] = COYOTE_TIME + 0.001
@@ -74,7 +85,7 @@ func _physics_process(delta: float) -> void:
 	elif do_air_jump():
 		jump_air.emit()
 	else:
-		if touched_ground and state != STATES.GROUNDED: apply_floor_snap()
+		if touched_ground and not [STATES.GROUNDED, STATES.WALKING, STATES.CROUCHING].has(state): apply_floor_snap()
 	pounding = do_ground_pound()
 	apply_gravity(delta)
 	
@@ -91,10 +102,6 @@ func process_inputs():
 	var temp_dir:Vector3 = (dir.x * global_basis.x + dir.y * global_basis.z)
 	var old_dir := direction
 	direction = (dir.x * global_basis.x + dir.y * global_basis.z)
-	#if normal.length() > 0:
-		#var slid_dir := direction.slide(normal)
-		#if Input.is_action_pressed("crouch"):
-			#direction = slid_dir
 
 func check_ground(delta: float) -> void:
 	if is_on_floor():
@@ -104,24 +111,29 @@ func check_ground(delta: float) -> void:
 			just_landed.emit()
 			if not Input.is_action_pressed("jump"):
 				state = STATES.GROUNDED
+				check_ground_state()
 			if state == STATES.POUNDING:
 				just_pounded.emit()
+		elif state == STATES.POUNDING:
+			state = STATES.GROUNDED
+			check_ground_state()
 		times["air"] = 0.0
 		jumps_left = stats.jump_count
 		if state == STATES.AIR:
 			state = STATES.GROUNDED
+			check_ground_state()
 	else:
 		normal = Vector3.ZERO
 		if touched_ground and times["air"] > 0.1:
 			touched_ground = false
 			just_left_ground.emit()
 		times["air"] += delta
-		if state ==  STATES.GROUNDED:
+		if [STATES.GROUNDED, STATES.WALKING, STATES.CROUCHING].has(state):
 			state = STATES.AIR
 func move_ground(delta: float) -> void:
 	if Input.is_action_pressed("jump") and auto_jump:
 		return
-	if Input.is_action_pressed("crouch"):
+	if Input.is_action_pressed("slide"):
 		velocity = velocity.slide(normal)
 		velocity += (global_basis.y * stats.fall_gravity * delta).slide(normal)
 
@@ -145,7 +157,7 @@ func move_ground(delta: float) -> void:
 	var dot := new_vel.dot(direction)
 	var add_speed: float
 	if Input.is_action_pressed("sprint"):
-		add_speed = 5.0 - dot
+		add_speed = 3.0 - dot
 	else:
 		add_speed = speed - dot
 	if add_speed <= 0.0:
@@ -201,7 +213,7 @@ func apply_friction(delta: float) -> void:
 func do_ground_jump() -> bool:
 	var can_jump := jumps_left > 0 and Input.is_action_just_pressed("jump") or (Input.is_action_pressed("jump") and \
 			(auto_jump or state == STATES.POUNDING))
-	if not (state == STATES.GROUNDED or state == STATES.POUNDING) or \
+	if not ([STATES.GROUNDED, STATES.WALKING, STATES.CROUCHING].has(state) or state == STATES.POUNDING) or \
 			times["air"] > COYOTE_TIME or not can_jump:
 		return false
 	times["jump"] = 0.0
@@ -214,7 +226,6 @@ func do_ground_jump() -> bool:
 				 (normal + Vector3.UP * max(0.0, -1 + sqrt(absf(former_velocity.y) / 100.0))) * normal.dot(Vector3.UP) * \
 				stats.jump_velocity * \
 				(1 + stats.max_ground_pounds - ground_pound_count)
-		print("%s %s" % [max(1.0, abs(former_velocity.y) - 100.0), abs(former_velocity.y) - 100.0])
 		velocity = new_vel
 		ground_pound_count -= 1
 		return true
@@ -262,3 +273,13 @@ func _input(event: InputEvent) -> void:
 			Global.datamosh_amount = 0.0
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			Global.datamosh_amount = 1.0
+
+func hit(_a, _b) -> void:
+	hit_shaker.shake(HIT_ME, ShakerComponent3D.ShakeAddMode.add, 0.2, 1.0, 1.0, 0.0, 0.2)
+
+
+func check_ground_state() -> void:
+	if Input.is_action_pressed("crouch"):
+		state = STATES.CROUCHING
+	elif Input.is_action_pressed("sprint"):
+		state = STATES.WALKING

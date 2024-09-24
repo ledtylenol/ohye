@@ -4,7 +4,8 @@ var interactable: InteractComponent:
 	set(value):
 		if interactable and value != interactable:
 			interactable.end_tween_alpha()
-			if interactable.interacting: interactable.do_end_interact()
+			if interactable.interacting: interactable.do_end_interact(); interact_end.emit(interactable)
+			interactable.interact_exited.emit()
 			if not value: interact_exited.emit(); interactable = value; return
 			value.start_tween_alpha()
 			interactable = value
@@ -12,7 +13,7 @@ var interactable: InteractComponent:
 			interactable = value
 			value.start_tween_alpha()
 			interact_entered.emit()
-
+			interactable.interact_entered.emit()
 var former_size := 0
 @export var shaker_component: ShakerComponent3D
 @export var center_marker: Control
@@ -31,26 +32,27 @@ func _physics_process(delta: float) -> void:
 	if not areas.is_empty():
 		var nr := 0
 		var new_list = []
-		for area in get_overlapping_areas():
-			if area is InteractComponent:
-				var space_state = get_world_3d().direct_space_state
-				var query = PhysicsRayQueryParameters3D.create(camera.global_position,  camera.global_position + -camera.global_basis.z * 3.0)
-				query.collide_with_areas = true
-				query.collide_with_bodies = false
-				var new_exc = query.exclude
-				new_exc.push_back(self.get_rid())
-				query.exclude = new_exc
-				var res := space_state.intersect_ray(query)
-				if not res or res and (res["collider"] == area) or (res["position"].distance_to(camera.global_position) > area.global_position.distance_to(camera.global_position)):
-					nr += 1
-					new_list.push_back(area)
+		var ars := get_overlapping_areas()
+		ars = ars.filter(func(a: Area3D) -> bool: return a is InteractComponent)
+		new_list = ars
+		var highest_prior := -INF
+		for col in new_list:
+			highest_prior = maxi(col.prior, highest_prior)
 		for collider in interactables:
 			if not new_list.has(collider):
 				interactables.erase(collider)
 		for collider in new_list:
 			if not interactables.has(collider):
 				interactables.push_back(collider)
-		interactables.sort_custom(distance_from_middle)
+		interactables.sort_custom(sort_prior)
+		var params := PhysicsRayQueryParameters3D.create(camera.global_position, camera.global_position - camera.global_basis.z * 4)
+		params.collide_with_areas = true
+		var exclude = params.exclude
+		exclude.push_back(get_rid())
+		params.exclude = exclude
+		var res := get_world_3d().direct_space_state.intersect_ray(params)
+		if res and interactables.size() > 1:
+			interactables = interactables.filter(func(i: InteractComponent) -> bool: return i == res["collider"] or i.body and res["collider"] == i.body)
 		if not interactables.is_empty():
 			interactable = interactables.back()
 		else: interactable = null
@@ -58,6 +60,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("interact"): 
 			interact_start.emit(interactable)
 			interactable.do_interact()
+			interactable.interact_entered.emit()
 		elif Input.is_action_just_released("interact") and interactable.interacting:
 			interact_end.emit(interactable)
 			interactable.do_end_interact()
@@ -80,4 +83,9 @@ func shake() -> void:
 func distance_from_middle(a: InteractComponent, b: InteractComponent) -> bool:
 	var d_a = camera.unproject_position(a.global_position)
 	var d_b = camera.unproject_position(b.global_position)
-	return d_a.distance_to(center_marker.position) > d_b.distance_to(center_marker.position)
+	var dist_a := a.global_position.distance_to(global_position)
+	var dist_b := b.global_position.distance_to(global_position)
+	return d_a.distance_to(center_marker.position) < d_b.distance_to(center_marker.position) and dist_a < dist_b
+
+func sort_prior(a: Area3D, b: Area3D) -> bool:
+	return a.prior > b.prior

@@ -28,7 +28,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	handle_fov(delta)
 	do_shaker(delta)
-	var x = -Input.get_axis("left", "right") * movement_tilt
+	var x = -Input.get_axis("left", "right") * movement_tilt * int(not Input.is_action_pressed("slide"))
 	pan_node.rotation.z = lerp_angle(pan_node.rotation.z, x * PI/16.0, delta * 3)
 	if Input.is_action_just_pressed("ui_accept"):
 		Global.influence = 1.0 - Global.influence
@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 		player.rotate_y(-event.relative.x * sensitivity / 4000.0) 
 		rotation.x -= event.relative.y * sensitivity / 4000.0
 		rotation.x = clamp(rotation.x, -PI/2, PI/2)
-		pan_node.rotate_z((-event.relative.x * camera_tilt)/4000.0)
+		#pan_node.rotate_z((global_basis.z.dot(player.basis.z) ** 2.01)*(-event.relative.x * camera_tilt)/4000.0)
 		pan_node.rotation.z = clampf(pan_node.rotation.z, -PI/16, PI/16)
 	if event.is_action_pressed("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -62,13 +62,14 @@ func handle_fov(delta: float):
 
 func do_shaker(delta: float) -> void:
 	var v := global_position.distance_to(former_gp)
-	if player.direction and player.state == player.STATES.GROUNDED and not Input.is_action_pressed("crouch"):
+	if player.direction and [player.STATES.GROUNDED, player.STATES.WALKING, player.STATES.CROUCHING].has(player.state) and not Input.is_action_pressed("slide"):
 		if not Input.is_action_pressed("sprint"):
-			first_preset.amplitude = M.smooth_nudgev(first_preset.amplitude, Vector3(0.03, 0.01, 0.03), 1.0, delta)
+			prints(first_preset.amplitude, second_preset.amplitude)
+			first_preset.amplitude = M.smooth_nudgev(first_preset.amplitude, Vector3(0.03, 0.01, 0.03), 10.0, delta)
 			second_preset.amplitude = M.smooth_nudgev(second_preset.amplitude,  Vector3.ZERO, 10.0, delta)
 		else:
 			second_preset.amplitude = M.smooth_nudgev(second_preset.amplitude,  Vector3(0.03, 0.01, 0.03), 10.0, delta)
-			first_preset.amplitude = M.smooth_nudgev(first_preset.amplitude, Vector3.ZERO, 1.0, delta)
+			first_preset.amplitude = M.smooth_nudgev(first_preset.amplitude, Vector3.ZERO, 10.0, delta)
 	else:
 		first_preset.amplitude = M.smooth_nudgev(first_preset.amplitude, Vector3.ZERO, 10.0, delta)
 		second_preset.amplitude = M.smooth_nudgev(second_preset.amplitude, Vector3.ZERO, 10.0, delta)

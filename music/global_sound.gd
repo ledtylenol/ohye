@@ -1,11 +1,14 @@
 extends Node
-var song_parts := 0
+@export var song_parts := 0
 var timer := 0.0
-var tweens: Array[Tween] = [null, null, null, null]
+var tweens: Array[Tween] = []
 var playing := false:
 	get: return $AudioStreamPlayer.playing
 var stream_count: int:
 	get: return $AudioStreamPlayer.stream.stream_count
+func _ready() -> void:
+	for i in stream_count + 1:
+		tweens.push_back(null)
 func _process(delta: float) -> void:
 	timer += delta / Engine.time_scale
 	if timer > 1.0:
@@ -22,7 +25,7 @@ func play(parts: int, repeat: bool = false) -> void:
 func change_song_parts(new_parts: int) -> void:
 	song_parts = new_parts
 	var x := get_biggest_1_bit(new_parts)
-	for i: int in range(0, 2):
+	for i: int in range(0, x):
 		
 		if (new_parts >> i)& 1:
 			fade_in(i)
@@ -30,14 +33,12 @@ func change_song_parts(new_parts: int) -> void:
 			fade_out(i)
 
 func get_biggest_1_bit(number: int) -> int:
-	var arr:Array[int] = []
 	var i := 0
 	while number:
-		var x := number & 1
-		if x:
-			arr.push_back(x)
 		number >>= 1
 		i += 1
+	if i > 0:
+		return i + 1
 	return i
 
 func fade_in(i: int) -> void:
@@ -68,7 +69,7 @@ func get_stream_volume(which: int) -> float:
 
 func fix_song_parts() -> void:
 	var x := get_biggest_1_bit(song_parts)
-	for i: int in range(0, 2):
+	for i: int in range(0, x):
 		
 		if (song_parts >> i)& 1:
 			fade_in(i)

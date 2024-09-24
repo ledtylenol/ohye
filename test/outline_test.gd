@@ -13,6 +13,9 @@ var speed := 0.0
 @export var healthbar: ProgressBar
 @export var threshold := 5.0
 @export var enemy_marker: EnemyMarker
+@export var audio: AudioStreamPlayer3D
+@onready var interact_component: InteractComponent = $InteractComponent
+
 signal hit
 func _ready() -> void:
 	if not Global.player:
@@ -28,6 +31,7 @@ func _ready() -> void:
 	healthbar.max_value = health_c.max_health
 	healthbar.value = health_c.current_health
 	if not enemy_marker: return
+	interact_component.interact_entered.connect(_on_interact_component_interact)
 	health_c.died.connect(enemy_marker.erase_enemy)
 func _physics_process(delta: float) -> void:
 	if not active:
@@ -46,8 +50,8 @@ func _physics_process(delta: float) -> void:
 	if not velocity.length():
 		velocity = dir
 	var angle = velocity.signed_angle_to(dir, Vector3.UP)
-	dir = velocity.rotated(Vector3.UP, angle * delta * 3).normalized()
-	speed = M.smooth_nudgef(speed, 50.0, 1.0, delta)
+	dir = velocity.rotated(Vector3.UP, angle * delta * 10).normalized()
+	speed = M.smooth_nudgef(speed, 100.0, 1.0, delta)
 	$InteractComponent/CollisionShape3D.set_deferred("disabled", interacted)
 	dir *= speed
 	if not interacted:
@@ -58,6 +62,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _on_interact_component_interact() -> void:
+	print("YES")
 	do_interact()
 	interacted = true
 	$ShakerEmitter3D.max_distance = 20
@@ -87,7 +92,7 @@ func die() -> void:
 	$InteractComponent/CollisionShape3D.set_deferred("disabled", true)
 	active = false
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	tween.tween_property($ShakerEmitter3D/Area3D/AudioStreamPlayer3D, "pitch_scale", 0.2, 2.0)
+	tween.tween_property(audio, "pitch_scale", 0.2, 2.0)
 	tween.tween_callback(deactivate)
 func set_healthbar(value: int) -> void:
 	healthbar.value = value

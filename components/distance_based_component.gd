@@ -28,12 +28,15 @@ func _ready() -> void:
 		distance_reached.connect(callee.call.bind(what_to_call))
 	if not "is_on_floor" in target and grounded_only:
 		queue_free()
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	gp = target.global_position
+	if gp.distance_to(former_gp) > 100.0:
+		former_gp = gp
 	if grounded_only and target.is_on_floor():
 		distance += gp.distance_to(former_gp)
 	elif not grounded_only:
 		distance += gp.distance_to(former_gp)
+
 	former_gp = gp
 	if distance >= desired_distance:
 		distance_reached.emit()
