@@ -23,6 +23,7 @@ signal interact_exited
 func _ready() -> void:
 	if mesh:
 		mesh.mesh = mesh.mesh.duplicate(true)
+		mesh.mesh.surface_get_material(0).next_pass = preload("res://shaders/outline.tres")
 	if body:
 		for collider: CollisionShape3D in body.get_children().filter(func(child) -> bool: return child is CollisionShape3D):
 			var col = collider.duplicate()

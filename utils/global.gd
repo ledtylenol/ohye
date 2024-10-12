@@ -50,19 +50,29 @@ func get_datamosh_amount() -> float:
 
 func add_mosh(amount: float) -> void:
 	datamosh_amount = clampf(datamosh_amount + amount, 0.0, 1)
-	print(datamosh_amount)
 func _physics_process(delta: float) -> void:
-	if not allow_mosh:
-		AudioServer.get_bus_effect(1, 1).mix = 0.0
-
-		return
-	AudioServer.get_bus_effect(1, 0).drive = minf(1.0, bounces / 15.0)
-	AudioServer.get_bus_effect(1, 1).mix = minf(1.0, bounces / 15.0)
+	if Input.is_action_just_pressed("crouch"):
+		bounces += 1
 	bounces -= delta
 	bounces *= 0.995
+	set_bus("fdgsdfbxv", minf(1.0, bounces / 15.0))
+	set_bus("hgdfghxcvvb", minf(1.0, bounces / 15.0))
+	#AudioServer.get_bus_effect(1, 0).drive = minf(1.0, bounces / 15.0)
+	#AudioServer.get_bus_effect(1, 1).mix = minf(1.0, bounces / 15.0)
+	if not allow_mosh:
+		#AudioServer.get_bus_effect(1, 1).mix = 0.0
+
+		return
+
+
 	handle_window(delta)
 	former_window_pos = window_pos
-
+func set_bus(st: String, v: float) -> void:
+	
+	if st == "fdgsdfbxv":
+		AudioServer.get_bus_effect(1, 0).drive = v
+	elif st == "hgdfghxcvvb":
+		AudioServer.get_bus_effect(1, 1).mix = v
 func handle_window(delta: float) -> void:
 	if not allow_mosh:
 		return

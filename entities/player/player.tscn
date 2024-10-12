@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c4jqyhvc7h1i"]
+[gd_scene load_steps=58 format=3 uid="uid://c4jqyhvc7h1i"]
 
 [ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="1_nvq1j"]
 [ext_resource type="Script" path="res://entities/player/scripts/player.gd" id="1_o6h1d"]
@@ -20,9 +20,9 @@
 [ext_resource type="AudioStream" uid="uid://dqhpa1q7fpt7x" path="res://world/windstorm_loop.wav" id="15_0wsn8"]
 [ext_resource type="AudioStream" uid="uid://ckvarqkr20c72" path="res://entities/player/sounds/walk/stone.tres" id="15_3k5ka"]
 [ext_resource type="Script" path="res://components/scaled_audio_player.gd" id="16_x8mkt"]
+[ext_resource type="Script" path="res://entities/player/distance_based_component_footsteps.gd" id="19_xu8rn"]
 [ext_resource type="Script" path="res://components/scaled_audio_player_3d.gd" id="20_i2nv4"]
 [ext_resource type="Script" path="res://entities/player/scripts/detection_range.gd" id="22_4xvka"]
-[ext_resource type="Script" path="res://components/distance_based_component.gd" id="23_h5psl"]
 [ext_resource type="AudioStream" uid="uid://bd0ygh0000ljl" path="res://entities/player/sounds/land/land_dirt_1.wav" id="25_100aw"]
 [ext_resource type="AudioStream" uid="uid://b256mnd5wx563" path="res://entities/player/sounds/land/land_dirt_2.wav" id="26_njdml"]
 [ext_resource type="AudioStream" uid="uid://lfa41c1qvki7" path="res://entities/player/sounds/land/land_dirt_3.wav" id="27_itu1c"]
@@ -60,14 +60,17 @@ size = Vector3(0.7, 1.5, 0.345)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w0fuc"]
 shader = ExtResource("12_s0l7a")
 shader_parameter/alpha = null
+shader_parameter/use_alpha = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j0dca"]
 shader = ExtResource("12_s0l7a")
 shader_parameter/alpha = null
+shader_parameter/use_alpha = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kq3p6"]
 shader = ExtResource("12_s0l7a")
 shader_parameter/alpha = null
+shader_parameter/use_alpha = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5liy4"]
 bg_color = Color(0, 0.652667, 0.89, 0)
@@ -86,6 +89,11 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 anti_aliasing = false
 anti_aliasing_size = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkoyg"]
+shader = ExtResource("12_s0l7a")
+shader_parameter/alpha = null
+shader_parameter/use_alpha = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g5dec"]
 radius = 51.387
@@ -130,11 +138,13 @@ radius = 1.07827
 radius = 0.4
 height = 1.9
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "shaker", "winds", "health_component", "hurtbox", "hit_shaker", "hit_sound", "circle_progress")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("grav_cast", "other_cast", "camera", "shaker", "winds", "health_component", "hurtbox", "hit_shaker", "hit_sound", "circle_progress")]
 collision_layer = 8
 floor_constant_speed = true
 floor_snap_length = 0.37
 script = ExtResource("1_o6h1d")
+grav_cast = NodePath("GravCast")
+other_cast = NodePath("GravCast2")
 stats = SubResource("Resource_gvtwj")
 state = 1
 camera = NodePath("PanNode/PlayerCamera")
@@ -169,8 +179,6 @@ camera = NodePath("..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PanNode/PlayerCamera/InteractRay"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1.5275)
 shape = SubResource("BoxShape3D_gum8l")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="PanNode/PlayerCamera/InteractRay/CollisionShape3D"]
 
 [node name="SpotLight3D" type="OmniLight3D" parent="PanNode/PlayerCamera"]
 
@@ -377,6 +385,7 @@ pos_control = NodePath("../Control")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/Control/CircleProgress"]
 modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_vkoyg")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -391,6 +400,8 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.3, 0.3)
 pivot_offset = Vector2(150, 150)
+max_value = 1.0
+step = 0.001
 fill_mode = 4
 texture_under = ExtResource("13_o7vmv")
 texture_progress = ExtResource("13_o7vmv")
@@ -425,11 +436,11 @@ script = ExtResource("20_i2nv4")
 influence = 0.31
 
 [node name="DistanceBasedComponent" type="Node" parent="Sounds/Footsteps" node_paths=PackedStringArray("target", "callee")]
-script = ExtResource("23_h5psl")
+script = ExtResource("19_xu8rn")
 target = NodePath("../../..")
 callee = NodePath("..")
 what_to_call = "play"
-desired_axes = 5
+desired_axes = 7
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource("9_gufxx")
@@ -509,3 +520,10 @@ metadata/teleportable_root = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PortalArea"]
 shape = SubResource("CapsuleShape3D_lohhf")
+
+[node name="GravCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, -90, 0)
+hit_from_inside = true
+
+[node name="GravCast2" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.05, 0)

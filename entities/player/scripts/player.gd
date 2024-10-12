@@ -22,6 +22,8 @@ enum STATES {
 	CROUCHING,
 	STUNNED
 }
+@export var grav_cast: RayCast3D
+@export var other_cast: RayCast3D
 @export var stats: PlayerStats
 @export var state: STATES:
 	set(value):
@@ -38,7 +40,9 @@ enum STATES {
 @export var hit_sound: AudioStreamPlayer3D
 @export var circle_progress: CircleProg
 var heat: float = 0.0
+var grav_dir := Vector3.DOWN
 var pounding := false
+var grounded := false
 var combo:int = 0
 var can_glide := false
 var ground_pound_count := 3:
@@ -58,6 +62,7 @@ var former_gp := Vector3.ZERO
 var let_go_of_space: bool = false
 var normal: Vector3 = Vector3.ZERO
 var dead: bool = false
+var grav_areas: Array[GravArea]
 @export var auto_jump: bool = false
 
 func _ready() -> void:
@@ -69,7 +74,6 @@ func _physics_process(delta: float) -> void:
 	if dead:
 		return
 	$CanvasLayer/Control/VelocityLabel.text = str(velocity.length())
-	$CanvasLayer/Control/VelocityLabel.text += "\n%.2f" % M.xz(velocity.normalized()).angle_to(-M.xz(camera.global_basis.z))
 	$CanvasLayer/Control/VelocityLabel.text += "%.2f" % (PI/2)
 	times["jump"] += delta
 	process_inputs()
@@ -104,8 +108,33 @@ func process_inputs():
 	direction = (dir.x * global_basis.x + dir.y * global_basis.z)
 
 func check_ground(delta: float) -> void:
-	if is_on_floor():
-		normal = get_floor_normal()
+	basis = basis.orthonormalized()
+
+	if grav_cast.is_colliding():
+		grav_cast.basis = grav_cast.basis.orthonormalized()
+		normal = normal.slerp(grav_cast.get_collision_normal().normalized(), 1.0 - exp(-delta *5)).normalized()
+				#grav_dir = global_position.direction_to(grav_cast.get_collider().global_position)
+		grav_dir = -normal
+		up_direction = normal
+		var q = Quaternion(basis.y.normalized(), normal)
+		quaternion = quaternion.slerp(q * quaternion, 1.0 - exp(-delta * 5.0))
+	else:
+		if not grav_areas.is_empty():
+			var dir := Vector3.ZERO
+			var i := 0
+			for area in grav_areas:
+				i += 1
+				dir += area.global_position.direction_to(global_position)
+			dir = dir / i
+			normal = normal.slerp(dir, 1.0 - exp(-delta * 1)).normalized()
+			print(normal)
+		else:
+			normal = Vector3.UP
+		grav_dir = -normal
+		var q = Quaternion(basis.y, normal)
+		quaternion = quaternion.slerp(q * quaternion, 1.0 - exp(-delta * 10.0))
+	grounded = other_cast.is_colliding()
+	if other_cast.is_colliding():
 		if not touched_ground:
 			touched_ground = true
 			just_landed.emit()
@@ -123,7 +152,6 @@ func check_ground(delta: float) -> void:
 			state = STATES.GROUNDED
 			check_ground_state()
 	else:
-		normal = Vector3.ZERO
 		if touched_ground and times["air"] > 0.1:
 			touched_ground = false
 			just_left_ground.emit()
@@ -135,13 +163,13 @@ func move_ground(delta: float) -> void:
 		return
 	if Input.is_action_pressed("slide"):
 		velocity = velocity.slide(normal)
-		velocity += (global_basis.y * stats.fall_gravity * delta).slide(normal)
+		velocity += (grav_dir * stats.fall_gravity * delta).slide(normal)
 
 		if is_equal_approx(normal.dot(Vector3.UP), 1.0):
 			if velocity.length() < 0.2:
 				velocity = velocity.move_toward(Vector3(0, velocity.y, 0), delta)
 			else:
-				velocity -= M.xz(velocity).normalized() *0.2
+				velocity -= velocity.slide(normal) *0.2
 		#if not(Input.is_action_pressed("jump") and auto_jump):
 			#apply_floor_snap()
 		
@@ -211,6 +239,7 @@ func apply_friction(delta: float) -> void:
 	velocity = new_velocity * new_speed
 
 func do_ground_jump() -> bool:
+
 	var can_jump := jumps_left > 0 and Input.is_action_just_pressed("jump") or (Input.is_action_pressed("jump") and \
 			(auto_jump or state == STATES.POUNDING))
 	if not ([STATES.GROUNDED, STATES.WALKING, STATES.CROUCHING].has(state) or state == STATES.POUNDING) or \
@@ -218,18 +247,22 @@ func do_ground_jump() -> bool:
 		return false
 	times["jump"] = 0.0
 	jumps_left -= 1
+	#global_position  += Vector3(0, -0.238041, 0.971255)
 	if state == STATES.POUNDING and not is_zero_approx(normal.length()):
 		state = STATES.AIR
 
 
-		var new_vel: Vector3= M.xz(former_velocity) + \
-				 (normal + Vector3.UP * max(0.0, -1 + sqrt(absf(former_velocity.y) / 100.0))) * normal.dot(Vector3.UP) * \
-				stats.jump_velocity * \
-				(1 + stats.max_ground_pounds - ground_pound_count)
+		#var new_vel: Vector3= M.xz(former_velocity) + \
+				 #(normal + Vector3.UP * max(0.0, -1 + sqrt(absf(former_velocity.y) / 100.0))) * normal.dot(Vector3.UP) * \
+				#stats.jump_velocity * \
+				#(1 + stats.max_ground_pounds - ground_pound_count)
+		var new_vel = former_velocity.bounce(-normal)
+		new_vel = new_vel.slide(normal) + new_vel.project(normal).limit_length(10 * (4 - ground_pound_count))
 		velocity = new_vel
 		ground_pound_count -= 1
 		return true
-	velocity.y = stats.jump_velocity
+	print(normal, camera.global_basis.y, normal * stats.jump_velocity + velocity.slide(normal))
+	velocity = normal * stats.jump_velocity + velocity.slide(normal)
 	return true
 	
 
@@ -244,26 +277,27 @@ func do_air_jump() -> bool:
 
 
 func apply_gravity(delta: float) -> bool:
-	if is_on_floor() or velocity.y < -265:
+	var down_vel := velocity.project(-grav_dir)
+	if grounded or down_vel.length() > 265:
 		return false
 	if not Input.is_action_pressed("jump"):
 		let_go_of_space = true
 	
-	if velocity.y < 0.0:
-		velocity += global_basis.y * stats.fall_gravity * delta
+	if down_vel.length() < 0.0:
+		velocity -= grav_dir * stats.fall_gravity * delta
 		return true
 	else:
 		if let_go_of_space and times["jump"] > stats.minimum_jump_duration:
-			velocity += 2.0 * global_basis.y * stats.fall_gravity * delta
+			velocity -= 2.0 * grav_dir * stats.fall_gravity * delta
 			return true
-		velocity += global_basis.y * stats.jump_gravity * delta
+		velocity -= grav_dir * stats.jump_gravity * delta
 		return true
 
 
 func do_ground_pound() -> bool:
 	if not state == STATES.AIR or not Input.is_action_just_pressed("crouch") or ground_pound_count <= 0:
 		return false
-	velocity.y = -100.0
+	velocity = -normal * 100.0 + velocity.slide(normal)
 	state = STATES.POUNDING
 	return true
 

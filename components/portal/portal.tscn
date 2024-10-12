@@ -3,16 +3,16 @@
 [ext_resource type="Script" path="res://components/portal/portal.gd" id="1_nlopc"]
 [ext_resource type="Script" path="res://components/portal/portal_teleport.gd" id="3_ck0nw"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_682il"]
-size = Vector2(10, 4.255)
+[sub_resource type="PlaneMesh" id="PlaneMesh_i0en5"]
+size = Vector2(10, 4)
 orientation = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_imsqs"]
-size = Vector3(9.987, 4.32, 0.41)
+size = Vector3(10, 4, 0.41)
 
 [node name="Portal" type="MeshInstance3D"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.93715e-07, 3.16, 1.86788)
-mesh = SubResource("PlaneMesh_682il")
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -1.93715e-07, 3.16, 1.86788)
+mesh = SubResource("PlaneMesh_i0en5")
 script = ExtResource("1_nlopc")
 vertical_viewport_resolution = 0
 disable_viewport_distance = 51.0
