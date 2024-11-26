@@ -1,0 +1,165 @@
+[gd_scene load_steps=11 format=3 uid="uid://c7x3t1ecaovdi"]
+
+[ext_resource type="Script" path="res://2d/entities/player/player.gd" id="1_kngrt"]
+[ext_resource type="Script" path="res://2d/entities/player/weapon.gd" id="2_30n24"]
+[ext_resource type="Script" path="res://2d/entities/player/player_stats_2d.gd" id="2_7336h"]
+[ext_resource type="Script" path="res://2d/entities/player/camera_controller.gd" id="3_rj6tv"]
+[ext_resource type="Script" path="res://2d/entities/player/sounds.gd" id="4_lbtxm"]
+[ext_resource type="Script" path="res://2d/entities/player/weapon_marker.gd" id="5_t706r"]
+[ext_resource type="Script" path="res://2d/components/ghost_spawner.gd" id="6_g86yq"]
+[ext_resource type="Script" path="res://2d/entities/player/ui.gd" id="6_rbmu7"]
+
+[sub_resource type="Resource" id="Resource_clb5c"]
+script = ExtResource("2_7336h")
+attack_speed = 1.0
+move_speed = 200.0
+acceleration = 30.0
+dash_distance = 400.0
+dash_speed = 2000.0
+aiming_speed = 100.0
+spread = 1.5708
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogygl"]
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dash_ghosts")]
+motion_mode = 1
+script = ExtResource("1_kngrt")
+attack_speed = 0.5
+stats = SubResource("Resource_clb5c")
+dash_ghosts = [NodePath("Weapon/Weapon1/GhostSpawner"), NodePath("Weapon/Weapon2/GhostSpawner")]
+
+[node name="CameraController" type="Area2D" parent="." node_paths=PackedStringArray("player", "camera", "collider")]
+script = ExtResource("3_rj6tv")
+player = NodePath("..")
+camera = NodePath("../PlayerCamera")
+collider = NodePath("../CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ogygl")
+
+[node name="FmodListener2D" type="FmodListener2D" parent="."]
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+top_level = true
+
+[node name="Weapon" type="Node2D" parent="." node_paths=PackedStringArray("weapons", "player")]
+script = ExtResource("2_30n24")
+weapons = [NodePath("Weapon1"), NodePath("Weapon2")]
+player = NodePath("..")
+
+[node name="TargetRot" type="Marker2D" parent="Weapon"]
+
+[node name="Weapon1" type="Area2D" parent="Weapon"]
+script = ExtResource("5_t706r")
+
+[node name="Polygon2D" type="Polygon2D" parent="Weapon/Weapon1"]
+position = Vector2(70, 0)
+polygon = PackedVector2Array(-1, -23, 8.52171, -17.3846, 15.0946, -13.5083, 25.3012, -7.48903, 31.175, -4.025, 38, 0, 26.9074, 5.82362, 18.7643, 10.0987, 10.4645, 14.4561, 2.75257, 18.5049, -2, 21, -1.8126, 12.7543, -1.60816, 3.7589, -1.46064, -2.73206, -1.24445, -12.2442)
+
+[node name="GhostSpawner" type="Node" parent="Weapon/Weapon1" node_paths=PackedStringArray("target_node")]
+script = ExtResource("6_g86yq")
+delay = 0.01
+target_node = NodePath("../Polygon2D")
+
+[node name="Weapon2" type="Area2D" parent="Weapon"]
+script = ExtResource("5_t706r")
+
+[node name="Polygon2D" type="Polygon2D" parent="Weapon/Weapon2"]
+position = Vector2(70, 0)
+polygon = PackedVector2Array(-1, -23, 8.34573, -17.4884, 15.8699, -13.0511, 28.2833, -5.73037, 38, 0, 26.9809, 5.78503, 16.9074, 11.0736, 9.27879, 15.0786, -2, 21, -1.74419, 9.74445, -1.54517, 0.98761, -1.30666, -9.50697, -1.20457, -13.999)
+
+[node name="GhostSpawner" type="Node" parent="Weapon/Weapon2" node_paths=PackedStringArray("target_node")]
+script = ExtResource("6_g86yq")
+delay = 0.002
+target_node = NodePath("../Polygon2D")
+
+[node name="Sounds" type="Node2D" parent="." node_paths=PackedStringArray("hit_event", "charge_event", "dash_event", "player")]
+script = ExtResource("4_lbtxm")
+hit_event = NodePath("HitSound")
+charge_event = NodePath("ChargeSound")
+dash_event = NodePath("DashSound")
+player = NodePath("..")
+
+[node name="HitSound" type="FmodEventEmitter2D" parent="Sounds"]
+event_name = "event:/Sfx/Hit"
+event_guid = "{91a299a1-4157-4858-a4f7-bffc0f3bddcc}"
+event_parameter/State/id = -673660996351992240
+event_parameter/State/value = 0
+event_parameter/State/min_value = 0
+event_parameter/State/max_value = 2
+event_parameter/State/default_value = 0
+event_parameter/State/variant_type = 2
+
+[node name="ChargeSound" type="FmodEventEmitter2D" parent="Sounds"]
+event_name = "event:/Sfx/Charge"
+event_guid = "{9f971afd-4dd1-4d96-af66-239e65886bb2}"
+autoplay = true
+event_parameter/Charge/id = 7949038504800399202
+event_parameter/Charge/value = 0.0
+event_parameter/Charge/min_value = 0.0
+event_parameter/Charge/max_value = 1.0
+event_parameter/Charge/default_value = 0.0
+event_parameter/Charge/variant_type = 3
+
+[node name="DashSound" type="FmodEventEmitter2D" parent="Sounds"]
+event_name = "event:/Sfx/Slap"
+event_guid = "{1b4b7569-04ad-42b5-89a6-ff8176ea80c0}"
+
+[node name="Ui" type="CanvasLayer" parent="." node_paths=PackedStringArray("music_slider", "sfx_slider")]
+script = ExtResource("6_rbmu7")
+music_slider = NodePath("MainMenu/HBoxContainer/PanelContainer/HSlider")
+sfx_slider = NodePath("MainMenu/HBoxContainer/PanelContainer2/HSlider")
+
+[node name="MainMenu" type="Control" parent="Ui"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Ui/MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -238.0
+offset_top = -20.0
+offset_right = 238.0
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Ui/MainMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Ui/MainMenu/HBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "Music
+"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Ui/MainMenu/HBoxContainer/PanelContainer"]
+layout_mode = 2
+max_value = 1.5
+step = 0.001
+scrollable = false
+
+[node name="PanelContainer2" type="PanelContainer" parent="Ui/MainMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Ui/MainMenu/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+text = "Sfx
+"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Ui/MainMenu/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+max_value = 1.5
+step = 0.001
+scrollable = false

@@ -1,0 +1,32 @@
+[gd_resource type="AudioStreamInteractive" load_steps=4 format=3 uid="uid://cboih0b3f1mdi"]
+
+[ext_resource type="AudioStream" uid="uid://b32a8myofmttk" path="res://world/room/midnightstart.ogg" id="1_w2r2b"]
+[ext_resource type="AudioStream" uid="uid://bq51awcb03sk1" path="res://world/room/midnight.ogg" id="2_6qntm"]
+[ext_resource type="AudioStream" uid="uid://cb1etll4udl5f" path="res://world/room/midnightloop.ogg" id="3_iwf5a"]
+
+[resource]
+clip_count = 3
+clip_0/name = &"Midnightstart"
+clip_0/stream = ExtResource("1_w2r2b")
+clip_0/auto_advance = 0
+clip_1/name = &"Midnight"
+clip_1/stream = ExtResource("2_6qntm")
+clip_1/auto_advance = 1
+clip_1/next_clip = 2
+clip_2/name = &"Midnightloop"
+clip_2/stream = ExtResource("3_iwf5a")
+clip_2/auto_advance = 0
+_transitions = {
+Vector2i(0, 1): {
+"fade_beats": 0,
+"fade_mode": 0,
+"from_time": 3,
+"to_time": 0
+},
+Vector2i(1, 2): {
+"fade_beats": 0,
+"fade_mode": 4,
+"from_time": 3,
+"to_time": 1
+}
+}

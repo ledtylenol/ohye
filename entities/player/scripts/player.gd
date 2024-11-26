@@ -22,15 +22,13 @@ enum STATES {
 	CROUCHING,
 	STUNNED
 }
-@export var grav_cast: RayCast3D
-@export var other_cast: RayCast3D
-@export var stats: PlayerStats
+
 @export var state: STATES:
 	set(value):
 		if value == STATES.GROUNDED:
 			ground_pound_count = 3
 		state = value
-@export_category("")
+@export_category("Components")
 @export var camera: PlayerCamera
 @export var shaker: ShakerComponent3D
 @export var winds: AudioStreamPlayer
@@ -39,6 +37,12 @@ enum STATES {
 @export var hit_shaker: ShakerComponent3D
 @export var hit_sound: AudioStreamPlayer3D
 @export var circle_progress: CircleProg
+@export var grav_cast: RayCast3D
+@export var other_cast: RayCast3D
+@export var stats: PlayerStats
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+
+
 var heat: float = 0.0
 var grav_dir := Vector3.DOWN
 var pounding := false
@@ -63,16 +67,33 @@ var let_go_of_space: bool = false
 var normal: Vector3 = Vector3.ZERO
 var dead: bool = false
 var grav_areas: Array[GravArea]
+var renorm_t := 0.0
+var ingame_mode := false:
+	set(value):
+		camera.current = not value
+		canvas_layer.visible = not value
+		ingame_mode = value
+var inventory := {}
 @export var auto_jump: bool = false
 
 func _ready() -> void:
 	Global.player = self
 	if hurtbox:
 		if hit_shaker: hurtbox.hit.connect(hit)
-		if hit_sound: hurtbox.hit.connect(func(a, b) -> void: hit_sound.play())
+		if hit_sound: hurtbox.hit.connect(func(a, b) -> void: if not dead:hit_sound.play())
+	if health_component:
+		health_component.died.connect(die)
 func _physics_process(delta: float) -> void:
-	if dead:
+	if Input.is_action_just_pressed("escape"):
+		ingame_mode = not ingame_mode
+	if ingame_mode:
 		return
+	
+	if dead:
+		if Input.is_action_pressed("interact"):
+			get_tree().call_deferred("change_scene_to_file", "res://test/item_test.tscn")
+		return
+	renorm_t += delta
 	$CanvasLayer/Control/VelocityLabel.text = str(velocity.length())
 	$CanvasLayer/Control/VelocityLabel.text += "%.2f" % (PI/2)
 	times["jump"] += delta
@@ -109,15 +130,14 @@ func process_inputs():
 
 func check_ground(delta: float) -> void:
 	basis = basis.orthonormalized()
-
-	if grav_cast.is_colliding():
-		grav_cast.basis = grav_cast.basis.orthonormalized()
-		normal = normal.slerp(grav_cast.get_collision_normal().normalized(), 1.0 - exp(-delta *5)).normalized()
+	if grav_cast.is_colliding() and grav_cast.get_collision_normal().angle_to(normal) <= PI/4:
+		normal = M.slerp_normal(normal, grav_cast.get_collision_normal().normalized(), delta, 10)
 				#grav_dir = global_position.direction_to(grav_cast.get_collider().global_position)
 		grav_dir = -normal
 		up_direction = normal
 		var q = Quaternion(basis.y.normalized(), normal)
-		quaternion = quaternion.slerp(q * quaternion, 1.0 - exp(-delta * 5.0))
+		quaternion = M.slerpq_normal(quaternion, q * quaternion, delta, 5)
+		#quaternion = quaternion.slerp(q * quaternion, 1.0 - exp(-delta * 5.0))
 	else:
 		if not grav_areas.is_empty():
 			var dir := Vector3.ZERO
@@ -126,13 +146,13 @@ func check_ground(delta: float) -> void:
 				i += 1
 				dir += area.global_position.direction_to(global_position)
 			dir = dir / i
-			normal = normal.slerp(dir, 1.0 - exp(-delta * 1)).normalized()
+			normal = M.slerp_normal(normal, dir, delta, 2).normalized()
 			print(normal)
 		else:
 			normal = Vector3.UP
 		grav_dir = -normal
 		var q = Quaternion(basis.y, normal)
-		quaternion = quaternion.slerp(q * quaternion, 1.0 - exp(-delta * 10.0))
+		quaternion = M.slerpq_normal(quaternion, q * quaternion, delta, 10)
 	grounded = other_cast.is_colliding()
 	if other_cast.is_colliding():
 		if not touched_ground:
@@ -257,11 +277,12 @@ func do_ground_jump() -> bool:
 				#stats.jump_velocity * \
 				#(1 + stats.max_ground_pounds - ground_pound_count)
 		var new_vel = former_velocity.bounce(-normal)
-		new_vel = new_vel.slide(normal) + new_vel.project(normal).limit_length(10 * (4 - ground_pound_count))
+		print( 5 * (stats.max_ground_pounds - ground_pound_count))
+		#new_vel = new_vel.slide(normal) + new_vel.project(normal).limit_length(10 * (4 - ground_pound_count))
+		new_vel = new_vel.slide(normal) + (new_vel.project(normal) / 100) + normal * stats.ground_pound_base_height * sqrt(1 + stats.max_ground_pounds - ground_pound_count)
 		velocity = new_vel
 		ground_pound_count -= 1
 		return true
-	print(normal, camera.global_basis.y, normal * stats.jump_velocity + velocity.slide(normal))
 	velocity = normal * stats.jump_velocity + velocity.slide(normal)
 	return true
 	
@@ -309,11 +330,25 @@ func _input(event: InputEvent) -> void:
 			Global.datamosh_amount = 1.0
 
 func hit(_a, _b) -> void:
-	hit_shaker.shake(HIT_ME, ShakerComponent3D.ShakeAddMode.add, 0.2, 1.0, 1.0, 0.0, 0.2)
-
-
+	if dead:
+		return
+	HIT_ME.get_rotation_shake()[0].noise_texture.noise.seed = randi()
+	hit_shaker.force_stop_shake()
+	hit_shaker.shake(HIT_ME, ShakerComponent3D.ShakeAddMode.add, 0.4, 1.0, 1.0, 0.0, 0.3)
+	#hit_shaker.play_shake()
 func check_ground_state() -> void:
 	if Input.is_action_pressed("crouch"):
 		state = STATES.CROUCHING
 	elif Input.is_action_pressed("sprint"):
 		state = STATES.WALKING
+
+func has_item(item: ItemData) -> bool:
+	return inventory.has(item)
+
+
+func disable_collision() -> void:
+	$CollisionShape3D.set_deferred("disabled", true)
+
+func die() -> void:
+	dead = true
+	$CanvasLayer/Control/Dead.show()

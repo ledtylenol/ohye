@@ -16,10 +16,10 @@ var show := true:
 func _ready() -> void:
 	if health_component:
 		health_component.health_changed.connect(tween_hp)
-		value = health_component.capped_ratio * 100
+		value = health_component.uncapped_ratio * 100
 func tween_hp(how_much: int) -> void:
 	time_since_set = 0.0
-	var relative := health_component.capped_ratio
+	var relative := health_component.uncapped_ratio
 	if relative != 1.0:
 		show = true
 	if tween: tween.stop()

@@ -64,6 +64,9 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_just_released("interact") and interactable.interacting:
 			interact_end.emit(interactable)
 			interactable.do_end_interact()
+	elif Input.is_action_just_pressed("interact"):
+		$"../../../Sounds/Light".play()
+		$"../SpotLight3D2".visible = not $"../SpotLight3D2".visible
 func spawn_text() -> void:
 	var text := Label3D.new()
 	text.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y

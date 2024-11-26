@@ -1,7 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://kvq341cthj3k"]
+[gd_scene load_steps=30 format=3 uid="uid://kvq341cthj3k"]
 
 [ext_resource type="Script" path="res://test/item_test.gd" id="1_6drlb"]
-[ext_resource type="CompositorEffect" uid="uid://c84wg0tlxmyha" path="res://compositor_effects/datamosh/datamosh_compositor_effect.tres" id="1_70sap"]
 [ext_resource type="PackedScene" uid="uid://c4jqyhvc7h1i" path="res://entities/player/player.tscn" id="2_nqd0j"]
 [ext_resource type="PackedScene" uid="uid://7gpkd3eqrq4t" path="res://entities/lighter/lighter.tscn" id="3_o4ehs"]
 [ext_resource type="Script" path="res://components/timed_interact_component.gd" id="5_pqeg1"]
@@ -15,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://bpea1f84dmwxl" path="res://entities/drawer/drawer.tscn" id="8_ivncu"]
 [ext_resource type="AudioStream" uid="uid://dt330yk8vjs14" path="res://entities/lighter/in2.wav" id="8_ixn8k"]
 [ext_resource type="Script" path="res://components/clock/clock.gd" id="9_u857a"]
+[ext_resource type="Script" path="res://test/test.gd" id="16_kq7io"]
+[ext_resource type="Script" path="res://utils/second_order_dynamics.gd" id="17_unew4"]
+[ext_resource type="PackedScene" uid="uid://b3t67ci700ubp" path="res://world/house/curve.blend" id="18_4uks8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_th0dh"]
 sky_top_color = Color(1, 1, 1, 1)
@@ -37,9 +39,6 @@ volumetric_fog_density = 0.04
 volumetric_fog_length = 165.89
 volumetric_fog_detail_spread = 1.93187
 volumetric_fog_temporal_reprojection_enabled = false
-
-[sub_resource type="Compositor" id="Compositor_21r40"]
-compositor_effects = Array[CompositorEffect]([ExtResource("1_70sap")])
 
 [sub_resource type="BoxMesh" id="BoxMesh_wmcrq"]
 size = Vector3(300, 2, 300)
@@ -69,13 +68,14 @@ radius = 2.214
 [sub_resource type="SphereShape3D" id="SphereShape3D_uw733"]
 radius = 30.0
 
+[sub_resource type="BoxMesh" id="BoxMesh_fjohw"]
+
 [node name="ItemTest" type="Node3D" node_paths=PackedStringArray("lighter")]
 script = ExtResource("1_6drlb")
 lighter = NodePath("Lighter")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ufn3p")
-compositor = SubResource("Compositor_21r40")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_wmcrq")
@@ -89,10 +89,10 @@ shape = SubResource("ConcavePolygonShape3D_qbl11")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.03239, 0)
 
 [node name="Lighter" parent="." instance=ExtResource("3_o4ehs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 5.99972, -40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 2.06736, -40)
 
 [node name="Lighter2" parent="." node_paths=PackedStringArray("thing_to_toggle") instance=ExtResource("3_o4ehs")]
-transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 36.3306, 7.40552, -38.778)
+transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 36.3306, 1.7422, -38.778)
 thing_to_toggle = NodePath("../OmniLight3D")
 param = "visible"
 
@@ -250,4 +250,25 @@ shape = SubResource("SphereShape3D_uw733")
 [node name="Drawer" parent="." instance=ExtResource("8_ivncu")]
 transform = Transform3D(-0.711953, 0, 0.702228, 0, 1, 0, -0.702228, 0, -0.711953, -4.5111, 2.58216, -1.10556)
 
+[node name="curve" parent="." instance=ExtResource("18_4uks8")]
+transform = Transform3D(3.38455, 0, 0, 0, 3.38455, 0, 0, 0, 3.38455, -42.4866, 4.40486, -33.1875)
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0844, 2.0342, 0)
+mesh = SubResource("BoxMesh_fjohw")
+script = ExtResource("16_kq7io")
+
+[node name="SecondOrderDynamics" type="Node" parent="MeshInstance3D11"]
+script = ExtResource("17_unew4")
+_f = 1.4
+_z = 0.0
+_r = 5.0
+
+[node name="Marker3D" type="Marker3D" parent="MeshInstance3D11"]
+transform = Transform3D(-8.26515e-08, -0.809018, 0.587785, 5.13858e-08, 0.587785, 0.809017, -1, 9.70703e-08, -7.00927e-09, 32.0844, 2.0342, 0)
+top_level = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [editable path="Lighter2"]
+[editable path="curve"]

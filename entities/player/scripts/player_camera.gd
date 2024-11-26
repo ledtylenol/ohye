@@ -26,6 +26,7 @@ func _ready() -> void:
 	if player:
 		player.just_landed.connect(_on_player_just_landed)
 func _process(delta: float) -> void:
+	if player.dead: return
 	handle_fov(delta)
 	do_shaker(delta)
 	var x = -Input.get_axis("left", "right") * movement_tilt * int(not Input.is_action_pressed("slide"))
@@ -33,13 +34,15 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		Global.influence = 1.0 - Global.influence
 func _input(event: InputEvent) -> void:
+	if player.dead: return
+
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		player.global_rotate(player.normal, -event.relative.x * sensitivity / 4000.0) 
 		rotation.x -= event.relative.y * sensitivity / 4000.0
 		rotation.x = clamp(rotation.x, -PI/2, PI/2)
-		#pan_node.rotate_z((global_basis.z.dot(player.basis.z) ** 2.01)*(-event.relative.x * camera_tilt)/4000.0)
+		pan_node.rotate_z((global_basis.z.dot(player.basis.z) ** 2)*(-event.relative.x * camera_tilt * pan_node.basis.z.dot(player.basis.z) ** 4)/4000.0)
 		#pan_node.rotate_objec = clampf(pan_node.rotation.z, -PI/16, PI/16)
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") and not player.ingame_mode:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
@@ -54,10 +57,12 @@ func _on_player_just_landed() -> void:
 
 
 func handle_fov(delta: float):
+	if player.normal == Vector3.ZERO:
+		return
 	var vel_length = player.velocity.slide(player.normal).length()
 	var vel_horizontal = player.velocity.slide(player.normal).normalized()
 	var basis_horizontal = Vector3(player.basis.z.x, 0, player.basis.z.z).normalized()
-	target_fov = clampf(90 + 15 * vel_length * max((-basis_horizontal).dot(vel_horizontal), 0) / (player.stats.speed) * (player.stats.speed/30), 75, 110)
+	target_fov = clampf(90 + 15 * vel_length * max((-basis_horizontal).dot(vel_horizontal) * vel_horizontal.dot(player.direction), 0) / (player.stats.speed) * (player.stats.speed/30), 75, 110)
 	fov = lerpf(fov, target_fov, 1.0-exp(-(delta*2)))
 
 func do_shaker(delta: float) -> void:

@@ -12,7 +12,7 @@ var active := false:
 				if node != null: await node.delete()
 			text_nodes.clear()
 		active = value
-var current := 0
+var current := -1
 var t := 0.0
 var timer := 0.0:
 	set(value):
@@ -24,10 +24,12 @@ var timer := 0.0:
 func _ready() -> void:
 	interact_c.interact_end.connect(play_line)
 func play_line() -> void:
+	if texts.is_empty():
+		return
 	current += 1
 	current = current % texts.size()
-	var locked_current = current
-
+	play_specific(current)
+func play_specific(line: int) -> void:
 	timer = 0
 	for node in text_nodes:
 		if node != null: await node.delete()
@@ -35,25 +37,25 @@ func play_line() -> void:
 	var j := 0
 	var i := 0
 	var sep_count := 0
-	
-	for lx in texts[current].length():
-		if locked_current != current:
-			return
+	var text: String = texts.pop_front() if texts[line][0] == "_" else texts[line]
+	if text[0] == "_":
+		current -= 1
+	text = text.trim_prefix("_")
+	for lx in text.length():
 		i += 1
-		if lx >= texts[current].length() - 1:
+		if lx >= text.length() - 1:
 			break
-		if ['.', ',', '?'].has(texts[current][lx]) and not ['.', ',', '?'].has(texts[current][lx + 1]):
+		if ['.', ',', '?'].has(text[lx]) and not ['.', ',', '?'].has(text[lx + 1]):
 			sep_count += 1
 			i = 0
-		if texts[current][lx] == ' ' and i > 10:
+		if text[lx] == ' ' and i > 10:
 			sep_count += 1
 	i = 0
-	var offset = -texts[current].length() / sep_count
-	for lx in texts[current].length():
-		if locked_current != current:
-			return
-		var l := texts[current][lx]
+	var offset = -text.length() / sep_count
+	for lx in text.length():
+		var l := text[lx]
 		var t := PosLabel3D.new()
+		t.scale.x = 1.333
 		t.alpha_cut = Label3D.ALPHA_CUT_OPAQUE_PREPASS
 		t.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		t.text = l
@@ -65,7 +67,7 @@ func play_line() -> void:
 		text_nodes.push_back(t)
 		play()
 		i += 1
-		if ['.', ',', '?'].has(texts[current][lx]) and lx < texts[current].length() - 1 and not ['.', ',', '?'].has(texts[current][lx + 1]):
+		if ['.', ',', '?'].has(text[lx]) and lx < text.length() - 1 and not ['.', ',', '?'].has(text[lx + 1]):
 			j += 1
 			i = 0
 		elif l == ' ' and i > 10:
@@ -73,7 +75,7 @@ func play_line() -> void:
 			i = 0
 		await t.start()
 	timer = 5.0
-	
+
 func _process(delta: float) -> void:
 	t += delta
 	timer -= delta

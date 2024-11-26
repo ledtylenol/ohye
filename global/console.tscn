@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3sdctag0vsq5"]
+
+[ext_resource type="Script" path="res://components/console.gd" id="1_4fe6b"]
+[ext_resource type="Script" path="res://global/text_edit.gd" id="2_n5jj1"]
+[ext_resource type="Script" path="res://utils/second_order_dynamics.gd" id="3_nia0m"]
+
+[node name="Console" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4fe6b")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 398.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VSplitContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 8.39
+autowrap_mode = 0
+text_direction = 2
+
+[node name="TextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Write Some Code"
+script = ExtResource("2_n5jj1")
+
+[node name="SecondOrderDynamics" type="Node" parent="."]
+script = ExtResource("3_nia0m")
+_f = 2.0
+_z = 1.0
+_r = 0.5

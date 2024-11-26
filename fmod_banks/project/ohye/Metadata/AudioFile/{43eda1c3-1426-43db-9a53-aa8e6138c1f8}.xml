@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{43eda1c3-1426-43db-9a53-aa8e6138c1f8}">
+		<property name="assetPath">
+			<value>body_medium_impact_hard3.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.4131972789115646</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{c25c119b-5497-4b73-83a4-de8fa889e617}</destination>
+		</relationship>
+	</object>
+</objects>

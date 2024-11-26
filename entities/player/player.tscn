@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://c4jqyhvc7h1i"]
+[gd_scene load_steps=60 format=3 uid="uid://c4jqyhvc7h1i"]
 
 [ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="1_nvq1j"]
 [ext_resource type="Script" path="res://entities/player/scripts/player.gd" id="1_o6h1d"]
@@ -17,9 +17,8 @@
 [ext_resource type="Script" path="res://utils/second_order_dynamics.gd" id="13_bgr5k"]
 [ext_resource type="Texture2D" uid="uid://s0dx16cittpc" path="res://components/circle_progress/CircularProgressBar.png" id="13_o7vmv"]
 [ext_resource type="Script" path="res://entities/player/health_bar.gd" id="14_64o0c"]
-[ext_resource type="AudioStream" uid="uid://dqhpa1q7fpt7x" path="res://world/windstorm_loop.wav" id="15_0wsn8"]
 [ext_resource type="AudioStream" uid="uid://ckvarqkr20c72" path="res://entities/player/sounds/walk/stone.tres" id="15_3k5ka"]
-[ext_resource type="Script" path="res://components/scaled_audio_player.gd" id="16_x8mkt"]
+[ext_resource type="Script" path="res://entities/player/sounds.gd" id="15_g6rjs"]
 [ext_resource type="Script" path="res://entities/player/distance_based_component_footsteps.gd" id="19_xu8rn"]
 [ext_resource type="Script" path="res://components/scaled_audio_player_3d.gd" id="20_i2nv4"]
 [ext_resource type="Script" path="res://entities/player/scripts/detection_range.gd" id="22_4xvka"]
@@ -32,23 +31,26 @@
 [ext_resource type="AudioStream" uid="uid://cr2aydij0x7xb" path="res://entities/player/sounds/jump/jump_1.wav" id="31_j3yna"]
 [ext_resource type="Script" path="res://components/signal_connector.gd" id="31_ry2uw"]
 [ext_resource type="AudioStream" uid="uid://cwd4pk848atft" path="res://entities/player/sounds/ouch.wav" id="32_7xddh"]
+[ext_resource type="AudioStream" uid="uid://dgxtxcanwyd1u" path="res://entities/lighter/in.wav" id="32_gi2hr"]
 [ext_resource type="AudioStream" uid="uid://dtbbtfoic6hj4" path="res://entities/player/sounds/jump/jump_2.wav" id="32_lacb7"]
 [ext_resource type="Resource" uid="uid://yi0a6jwp8ub7" path="res://shakes/hit_me.tres" id="33_5hssx"]
 [ext_resource type="AudioStream" uid="uid://bpybs6sfyob8t" path="res://entities/player/sounds/jump/jump_3.wav" id="33_p0s8x"]
+[ext_resource type="AudioStream" uid="uid://dt330yk8vjs14" path="res://entities/lighter/in2.wav" id="33_srsp2"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="35_bclfc"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="37_fxsxk"]
 
 [sub_resource type="Resource" id="Resource_gvtwj"]
 script = ExtResource("2_34ih3")
-jump_count = 1
 speed = 30
 speed_mul = 1.0
-jump_height = 10.0
-jump_peak_time = 1.0
-jump_descend_time = 1.0
-max_ground_pounds = 3
 ground_acceleration = 5.0
+jump_height = 4.0
+jump_peak_time = 0.4
+jump_descend_time = 0.44
+jump_count = 1
 minimum_jump_duration = 0.0
+max_ground_pounds = 3
+ground_pound_base_height = 20.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gum8l"]
 size = Vector3(0.7, 1.5, 0.345)
@@ -131,6 +133,13 @@ random_pitch = 1.3
 streams_count = 1
 stream_0/stream = ExtResource("32_7xddh")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_daeav"]
+playback_mode = 1
+random_pitch = 1.4
+streams_count = 2
+stream_0/stream = ExtResource("32_gi2hr")
+stream_1/stream = ExtResource("33_srsp2")
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_165qn"]
 radius = 1.07827
 
@@ -138,36 +147,36 @@ radius = 1.07827
 radius = 0.4
 height = 1.9
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("grav_cast", "other_cast", "camera", "shaker", "winds", "health_component", "hurtbox", "hit_shaker", "hit_sound", "circle_progress")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "shaker", "health_component", "hurtbox", "hit_shaker", "hit_sound", "circle_progress", "grav_cast", "other_cast")]
 collision_layer = 8
 floor_constant_speed = true
 floor_snap_length = 0.37
 script = ExtResource("1_o6h1d")
-grav_cast = NodePath("GravCast")
-other_cast = NodePath("GravCast2")
-stats = SubResource("Resource_gvtwj")
 state = 1
 camera = NodePath("PanNode/PlayerCamera")
 shaker = NodePath("Components/NoFadeShaker")
-winds = NodePath("Sounds/AudioStreamPlayer")
 health_component = NodePath("Components/HealthComponent")
 hurtbox = NodePath("Components/Hurtbox")
 hit_shaker = NodePath("Components/NoFadeShaker")
 hit_sound = NodePath("Sounds/Hit")
 circle_progress = NodePath("CanvasLayer/Control/CircleProgress")
+grav_cast = NodePath("GravCast")
+other_cast = NodePath("GravCast2")
+stats = SubResource("Resource_gvtwj")
 
 [node name="PanNode" type="Node3D" parent="."]
 
 [node name="PlayerCamera" type="Camera3D" parent="PanNode" node_paths=PackedStringArray("player", "shaker", "pan_node")]
 physics_interpolation_mode = 1
 transform = Transform3D(1, 2.32859e-10, 7.4607e-14, -2.32859e-10, 1, 4.60496e-10, -7.46069e-14, -4.60496e-10, 1, 0.00826702, 0.583182, 0.0110376)
+current = true
 fov = 90.0
 script = ExtResource("3_kcw1u")
 player = NodePath("../..")
 shaker = NodePath("../../Components/ShakerComponent3D")
 pan_node = NodePath("..")
 movement_tilt = 0.321
-sensitivity = 23.916
+sensitivity = 10.388
 y_offset = 0.583
 
 [node name="InteractRay" type="Area3D" parent="PanNode/PlayerCamera" node_paths=PackedStringArray("shaker_component", "center_marker", "camera")]
@@ -177,12 +186,21 @@ center_marker = NodePath("../../../CanvasLayer/Control/CenterMarker")
 camera = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PanNode/PlayerCamera/InteractRay"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1.5275)
+transform = Transform3D(1, 0, 3.29553e-21, 3.43562e-23, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1.09696)
 shape = SubResource("BoxShape3D_gum8l")
 
 [node name="SpotLight3D" type="OmniLight3D" parent="PanNode/PlayerCamera"]
+light_color = Color(0, 0, 0, 1)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="PanNode/PlayerCamera"]
+light_size = 1.0
+light_bake_mode = 0
+shadow_reverse_cull_face = true
+spot_range = 108.583
+spot_angle = 56.8326
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape3D_lohhf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -412,6 +430,24 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="Dead" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.52, 1.419)
+text = "dead
+press lmb to reload"
+
 [node name="DetectionRange" type="Area3D" parent="."]
 collision_mask = 64
 script = ExtResource("22_4xvka")
@@ -419,14 +455,10 @@ script = ExtResource("22_4xvka")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionRange"]
 shape = SubResource("SphereShape3D_g5dec")
 
-[node name="Sounds" type="Node3D" parent="."]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("15_0wsn8")
-volume_db = -10.777
-autoplay = true
-bus = &"Music"
-script = ExtResource("16_x8mkt")
+[node name="Sounds" type="Node3D" parent="." node_paths=PackedStringArray("player", "land_sounds")]
+script = ExtResource("15_g6rjs")
+player = NodePath("..")
+land_sounds = NodePath("LandSounds")
 
 [node name="Footsteps" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource("15_3k5ka")
@@ -450,14 +482,6 @@ bus = &"SFX"
 [node name="LandSounds" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = SubResource("AudioStreamSynchronized_d6d7n")
 bus = &"SFX"
-script = ExtResource("20_i2nv4")
-
-[node name="SignalConnector" type="Node" parent="Sounds/LandSounds" node_paths=PackedStringArray("from", "to")]
-script = ExtResource("31_ry2uw")
-from = NodePath("../../..")
-what = "just_landed"
-to = NodePath("..")
-method = "play"
 
 [node name="JumpSounds" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = SubResource("AudioStreamRandomizer_x1hvq")
@@ -473,6 +497,9 @@ method = "play"
 
 [node name="Hit" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = SubResource("AudioStreamRandomizer_d57vy")
+
+[node name="Light" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = SubResource("AudioStreamRandomizer_daeav")
 
 [node name="Components" type="Node3D" parent="."]
 
@@ -501,20 +528,24 @@ shape = SubResource("SphereShape3D_165qn")
 script = ExtResource("1_nvq1j")
 custom_target = true
 Targets = [NodePath("../../PanNode/PlayerCamera")]
+duration = 0.4
 fade_in = 1e-05
-fade_out = 1.23115
+fade_out = 0.435277
 shakerPreset = ExtResource("33_5hssx")
 
-[node name="HealthComponent" type="Node" parent="Components"]
+[node name="HealthComponent" type="Node" parent="Components" node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("35_bclfc")
+hurtbox = NodePath("../Hurtbox")
 
 [node name="Hurtbox" type="Area3D" parent="Components"]
+visible = false
 script = ExtResource("37_fxsxk")
 
 [node name="@CollisionShape3D@22579" type="CollisionShape3D" parent="Components/Hurtbox"]
 shape = SubResource("CapsuleShape3D_vksda")
 
 [node name="PortalArea" type="Area3D" parent="."]
+visible = false
 monitoring = false
 metadata/teleportable_root = NodePath("..")
 
@@ -526,4 +557,5 @@ target_position = Vector3(0, -90, 0)
 hit_from_inside = true
 
 [node name="GravCast2" type="RayCast3D" parent="."]
+visible = false
 target_position = Vector3(0, -1.05, 0)

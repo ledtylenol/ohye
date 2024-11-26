@@ -1,0 +1,10 @@
+{c0d87ca0-8a52-4d70-a55d-f8fd2a2aa91e} bank:/Master
+{58c55c74-fb29-0132-2314-7203dbd9af86} bank:/Master.strings
+{a2b90cbd-823e-4b4c-81bb-699b8cb68f9e} bank:/Music
+{215f6cde-325a-43a9-91ea-068f42aa1480} bank:/Sfx
+{66f99aa0-661c-4b1e-aaba-34ab61935f7b} bus:/
+{dd585d9e-5cd6-4d07-a4b6-e4141d255dda} event:/Music/Song1
+{91a299a1-4157-4858-a4f7-bffc0f3bddcc} event:/Sfx/Hit
+{7693cca4-cdfc-49c8-bb6b-7e2123b818dd} parameter:/Heat
+{6d7c4510-2505-4cdf-b4ac-83ff851cccd4} parameter:/RealState
+{d336376f-192c-40fe-84cf-ccf21641d31f} parameter:/State

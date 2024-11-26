@@ -1,17 +1,21 @@
 extends Resource
 class_name PlayerStats
 
-@export var jump_count := 1
+@export_category("movement")
 @export var speed := 5
 @export var speed_mul: float = 1.0
+@export var ground_acceleration: float = 5.0
+
+@export_category("jump")
 @export var jump_height: float: set = set_jump_height
 @export var jump_peak_time: float: set = set_jump_peak_time
 @export var jump_descend_time: float: set = set_jump_descend_time
-
-@export var max_ground_pounds := 3
-
-@export var ground_acceleration: float
+@export var jump_count := 1
 @export var minimum_jump_duration: float
+@export_category("ground pound")
+@export var max_ground_pounds := 3
+@export var ground_pound_base_height := 10.0
+
 
 var jump_gravity: float
 var jump_velocity: float

@@ -2,6 +2,7 @@ extends Node
 class_name SceneLoader
 @export_file("*.tscn") var scene: String
 @export var delay := 0.2
+@export var load_immediately := true
 var next_scene: PackedScene
 var status:
 	get:
@@ -16,7 +17,8 @@ func _ready() -> void:
 		push_warning("file does not exist at path: %s" % scene)
 		queue_free()
 		return
-	ResourceLoader.load_threaded_request(scene)
+	if load_immediately:
+		ResourceLoader.load_threaded_request(scene)
 
 func _process(delta: float) -> void:
 	if status == ResourceLoader.THREAD_LOAD_LOADED and not next_scene:
@@ -27,3 +29,5 @@ func try_load() -> void:
 		return
 	await get_tree().create_timer(delay).timeout
 	get_tree().call_deferred("change_scene_to_packed",next_scene)
+func request_load() -> void:
+	ResourceLoader.load_threaded_request(scene)

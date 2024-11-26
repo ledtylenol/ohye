@@ -1,0 +1,585 @@
+[gd_scene load_steps=22 format=4 uid="uid://3pwbsl3kri1l"]
+
+[ext_resource type="Script" path="res://world/room/room.gd" id="1_1ytwj"]
+[ext_resource type="PackedScene" uid="uid://dq5h54nq6ehx3" path="res://world/house/room.blend" id="1_vovf3"]
+[ext_resource type="PackedScene" uid="uid://c4jqyhvc7h1i" path="res://entities/player/player.tscn" id="2_m8v22"]
+[ext_resource type="AudioStream" uid="uid://cboih0b3f1mdi" path="res://world/room/midnight.tres" id="4_8sody"]
+[ext_resource type="AudioStream" uid="uid://mgfn7fmkq3gx" path="res://world/room/slappy3comp.mp3" id="5_4rd0l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3lve"]
+resource_name = "Material"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
+normal_enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_afy60"]
+_surfaces = [{
+"aabb": AABB(-100, -100, -100, 200, 200, 200),
+"format": 34896613377,
+"index_count": 54,
+"index_data": PackedByteArray("AAAGAAIAAAAEAAYAAwAGAAcAAwACAAYABgAJAAcABgALAAkABQAGAAQACgAFAAgABgAKAAsACgAGAAUAAQAIAAUACQADAAcAAQAJAAgACQABAAMAAQACAAMAAQAAAAIABQAAAAEABQAEAAAA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("/////wAAAAD//wAAAAAAAP///////wAA//8AAP//AAAAAP//AAAAAAAAAAAAAAAAAAD/////AAAAAAAA//8AAAAAAAC+fgAAAAAAAEyBAAAAAI4CuH4AAAAAiwJSgQAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wk6ep"]
+resource_name = "room_Cube"
+_surfaces = [{
+"aabb": AABB(-100, -100, -100, 200, 200, 200),
+"attribute_data": PackedByteArray("/5//f/+f/3//n/9//1//f/9f/3//X/9//5//P/+f/z//n/8//1//P/9f/z//X/8//9//f/+f/7//n/+//1//v/8f/3//X/+//9//P/+fAAD/n////18AAP8f/z//X////x9PYP9frt//H6xf/19S4KNgrd+iYFPg"),
+"format": 34896613399,
+"index_count": 54,
+"index_data": PackedByteArray("AQASAAcAAQAMABIACgATABUACgAIABMAFAAbABcAFAAdABsAEQAUAA4AHAARABkAFAAcAB0AHAAUABEABQAYABAAGgALABYABQAaABgAGgAFAAsAAwAGAAkAAwAAAAYADwACAAQADwANAAIA"),
+"material": SubResource("StandardMaterial3D_m3lve"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 30,
+"vertex_data": PackedByteArray("/////wAAqir/////AAAAAP////8AAP8///8AAAAAqir//wAAAAD/P///AAAAAP8/////////qir///////8AAP///////wAA//8AAP//qir//wAA//8AAP//AAD///8/AAD//wAAAAAAAP//AAD/PwAA//8AAKoqAAAAAAAA/z8AAAAAAAD/PwAAAAAAAKoqAAD/////AAAAAP////8AAAAA/////6oqAAAAAP//AAAAAAAA////PwAAAAD//6oqAAAAAL5+/z8AAAAAvn6qKgAAAABMgf8/AAAAAEyBqioAAI4CuH6qKgAAiwJSgaoqVNVU1f9//z//////VNVU1f////////9/VNVU1f9//z//v/+/VNVU1f+//7/+//9//3//P/////+qKqoq/////////3+qKqoq/3//P/+//7+qKqoq/7//v////3+qKqoq/v//f6oqqir+//9/qiqqKqoqqiqqKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_afy60")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mh4t4"]
+size = Vector3(3.81, 1, 4.23)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_235ln"]
+size = Vector3(3.81, 1, 4.23)
+
+[sub_resource type="Curve" id="Curve_vnnsd"]
+max_value = 113.44
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.12749, 27.2711), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wmryj"]
+curve = SubResource("Curve_vnnsd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qltxx"]
+emission_shape = 3
+emission_box_extents = Vector3(100, 40, 100)
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_wmryj")
+color = Color(10, 10, 10, 1)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+sub_emitter_mode = 1
+sub_emitter_frequency = 45.38
+sub_emitter_keep_velocity = true
+
+[sub_resource type="Gradient" id="Gradient_1xuop"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8fjp7"]
+gradient = SubResource("Gradient_1xuop")
+width = 1028
+height = 1028
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.524194, 0.556452)
+fill_to = Vector2(0.643777, 0.467811)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhxda"]
+render_priority = 1
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_8fjp7")
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+distance_fade_max_distance = 5.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_mph58"]
+material = SubResource("StandardMaterial3D_hhxda")
+flip_faces = true
+
+[sub_resource type="Environment" id="Environment_5frq1"]
+glow_enabled = true
+glow_normalized = true
+glow_strength = 1.3
+glow_bloom = 0.24
+glow_blend_mode = 1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1098
+volumetric_fog_emission = Color(0.47, 0.1598, 0.1598, 1)
+volumetric_fog_anisotropy = 0.9
+volumetric_fog_temporal_reprojection_enabled = false
+
+[sub_resource type="Animation" id="Animation_jjhdb"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("room2/OmniLight3D:light_color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("room2/OmniLight3D:light_color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("room2/OmniLight3D:light_color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("room2/OmniLight3D:light_color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("room2/GPUParticles3D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("room2/OmniLight3D:omni_range")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(13.344, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("room2/OmniLight3D:light_negative")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("room2/GPUParticles3D2:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("room2/OmniLight3D:omni_attenuation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("room2/GPUParticles3D3:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("room2/OmniLight3D2:light_energy")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("room2/OmniLight3D2/Area3D/CollisionShape3D:disabled")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("room2/OmniLight3D2:light_volumetric_fog_energy")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("CanvasLayer/Label:text")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+
+[sub_resource type="Animation" id="Animation_4nlel"]
+resource_name = "woah"
+length = 220.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"swap_to_midnight"
+}]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("room2/OmniLight3D:light_color:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 16)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("room2/OmniLight3D:light_color:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 16)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("room2/OmniLight3D:light_color:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 16)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("room2/OmniLight3D:light_color:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 16)
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("room2/GPUParticles3D:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.966667, 1, 21),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("room2/OmniLight3D:omni_range")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(11, -0.25, 0, 23.0333, 6, 152, -10.0996, -1, 13.0337, 0, 159, -40.2333, -3, 19.8453, 19, 187, -33.2553, -0.559006, 0.25, 0),
+"times": PackedFloat32Array(0.833333, 40.9667, 106.233, 202.7)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("room2/OmniLight3D:light_negative")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("room2/GPUParticles3D2:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(21, 203.067),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("room2/OmniLight3D:omni_attenuation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 3.78824, -4, 0, -49.6975, 0, 0.25, 0, -0.3, -2.41349, 0.0108477, 0.25, 0),
+"times": PackedFloat32Array(41, 108, 203.067)
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("room2/GPUParticles3D3:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(203.067),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "bezier"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("room2/OmniLight3D2:light_energy")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 24.036, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(203.1, 204.067)
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("room2/OmniLight3D2/Area3D/CollisionShape3D:disabled")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(204.067),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("room2/OmniLight3D2:light_volumetric_fog_energy")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(203.1, 220),
+"transitions": PackedFloat32Array(0.133972, 1.07177),
+"update": 0,
+"values": [0.0, 14.236]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("CanvasLayer/Label:text")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(106.667, 125.167, 145.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["there is nothing left", "", "she took the kids, tails..."]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ljl5o"]
+_data = {
+"RESET": SubResource("Animation_jjhdb"),
+"woah": SubResource("Animation_4nlel")
+}
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("area_3d", "music2", "music3", "area_3d2", "light1", "light2")]
+script = ExtResource("1_1ytwj")
+area_3d = NodePath("room2/OmniLight3D/Area3D")
+music2 = NodePath("room2_song")
+music3 = NodePath("room3_song")
+area_3d2 = NodePath("room2/OmniLight3D2/Area3D")
+light1 = NodePath("room2/OmniLight3D")
+light2 = NodePath("room2/OmniLight3D2")
+
+[node name="room2" parent="." instance=ExtResource("1_vovf3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 0)
+
+[node name="room" parent="room2" index="0"]
+mesh = SubResource("ArrayMesh_wk6ep")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="room2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -98.8465, 11.1606)
+light_energy = 9.155
+omni_range = 13.344
+
+[node name="Area3D" type="Area3D" parent="room2/OmniLight3D"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="room2/OmniLight3D/Area3D"]
+shape = SubResource("BoxShape3D_mh4t4")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="room2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -98.8465, 11.1606)
+light_energy = 0.0
+light_volumetric_fog_energy = 0.0
+omni_range = 13.344
+
+[node name="Area3D" type="Area3D" parent="room2/OmniLight3D2"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="room2/OmniLight3D2/Area3D"]
+shape = SubResource("BoxShape3D_235ln")
+disabled = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="room2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -54.0751, 0)
+emitting = false
+amount = 500
+lifetime = 5.0
+visibility_aabb = AABB(-117.839, -2098.84, -137.957, 307.414, 2103.34, 197.61)
+process_material = SubResource("ParticleProcessMaterial_qltxx")
+draw_pass_1 = SubResource("QuadMesh_mph58")
+
+[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="room2/GPUParticles3D"]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, -45.0112, 0)
+strength = 44.34
+attenuation = 4.92458
+directionality = 1.0
+radius = 184.95
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="room2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -54.0751, 0)
+emitting = false
+amount = 1000
+lifetime = 2.5
+visibility_aabb = AABB(-117.839, -2098.84, -137.957, 307.414, 2103.34, 197.61)
+process_material = SubResource("ParticleProcessMaterial_qltxx")
+draw_pass_1 = SubResource("QuadMesh_mph58")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="room2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -54.0751, 0)
+emitting = false
+amount = 2000
+visibility_aabb = AABB(-117.839, -2098.84, -137.957, 307.414, 2103.34, 197.61)
+process_material = SubResource("ParticleProcessMaterial_qltxx")
+draw_pass_1 = SubResource("QuadMesh_mph58")
+
+[node name="room3" parent="." instance=ExtResource("1_vovf3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 2000)
+
+[node name="room" parent="room3" index="0"]
+mesh = SubResource("ArrayMesh_wk6ep")
+
+[node name="Player" parent="." instance=ExtResource("2_m8v22")]
+transform = Transform3D(0.0271365, 0, -0.999632, 0, 1, 0, 0.999632, 0, 0.0271365, -97.811, 0.459158, 0.635674)
+
+[node name="room2_song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_8sody")
+autoplay = true
+bus = &"Music"
+
+[node name="room3_song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_4rd0l")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5frq1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ljl5o")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.325, 1)
+
+[editable path="room2"]
+[editable path="room3"]
+[editable path="Player"]

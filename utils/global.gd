@@ -112,7 +112,7 @@ func boing() -> bool:
 	v += Vector2(x, y).normalized() * randf_range(15, 50)
 	return true
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_R and get_tree().current_scene:
 		get_tree().reload_current_scene()
 

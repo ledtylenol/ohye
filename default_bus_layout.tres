@@ -10,8 +10,9 @@ ratio = 21.3
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_cp4oy"]
 resource_name = "Reverb"
-room_size = 0.18
-damping = 0.14
+room_size = 0.65
+damping = 0.0
+hipass = 0.4
 
 [sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_gxsxa"]
 resource_name = "Distortion"

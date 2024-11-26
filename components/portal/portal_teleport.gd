@@ -25,13 +25,14 @@ func _on_area_entered(area:Area3D):
 
 
 		var root: Player = area.get_node(area.get_meta("teleportable_root"))
+
+
+		if root.velocity.normalized().dot(-global_basis.z) < 0.0 or M.xz(root.velocity.normalized()).angle_to(-M.xz(root.camera.global_basis.z)) > PI/2 + 0.05: 
+			return
 		if _parent_portal.exit_environment:
 			root.camera.environment = _parent_portal.exit_environment
 		await get_tree().physics_frame
 		await get_tree().physics_frame
-
-		if root.velocity.normalized().dot(-global_basis.z) < 0.0 or M.xz(root.velocity.normalized()).angle_to(-M.xz(root.camera.global_basis.z)) > PI/2 + 0.05: 
-			return
 		var real_tf = _parent_portal.real_to_exit_transform(root.global_transform)
 		root.velocity = _parent_portal.real_to_exit_direction(root.velocity )
 		root.global_transform = real_tf
