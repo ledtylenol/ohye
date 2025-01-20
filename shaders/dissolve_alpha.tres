@@ -1,0 +1,29 @@
+[gd_resource type="VisualShader" load_steps=2 format=3 uid="uid://bxoo6indw56hr"]
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_bjerq"]
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, depth_prepass_alpha, vertex_lighting, alpha_to_coverage;
+
+
+
+
+void vertex() {
+// FloatConstant:2
+	float n_out2p0 = 0.000000;
+
+
+// Output:0
+	COLOR.a = n_out2p0;
+
+
+}
+"
+flags/depth_prepass_alpha = true
+flags/vertex_lighting = true
+flags/alpha_to_coverage = true
+nodes/vertex/2/node = SubResource("VisualShaderNodeFloatConstant_bjerq")
+nodes/vertex/2/position = Vector2(-156.706, 318.074)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 7)
+nodes/fragment/0/position = Vector2(0, -60)

@@ -26,5 +26,3 @@ script = ExtResource("1_4vqtq")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_mo62s")
 volume_db = -13.225
-stream_paused = true
-bus = &"Music"

@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=4]
+
+[ext_resource type="Script" path="res://entities/player/scripts/land_particles.gd" id="1"]
+
+[sub_resource type="Curve" id="Curve_l821s"]
+_data = [Vector2(0.3555560111999512, 1), 0.0, -10.6318998336792, 0, 0, Vector2(0.6311110258102417, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ptjt7"]
+curve = SubResource("Curve_l821s")
+
+[sub_resource type="Curve" id="Curve_euom6"]
+max_value = 200.0
+_data = [Vector2(0.4622220098972321, 0), 0.0, 0.0, 0, 0, Vector2(0.9866669774055481, 39.56039810180664), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q2twp"]
+curve = SubResource("Curve_euom6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1ga1p"]
+resource_local_to_scene = true
+particle_flag_align_y = true
+angle_min = 1.072879967978224e-05
+angle_max = 1.072879967978224e-05
+direction = Vector3(0, 1, 0)
+flatness = 0.3330000042915344
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, -25.0049991607666, 0)
+tangential_accel_min = -12.96000003814697
+tangential_accel_max = 16.51000022888184
+tangential_accel_curve = SubResource("CurveTexture_q2twp")
+alpha_curve = SubResource("CurveTexture_ptjt7")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[sub_resource type="Curve" id="Curve_4v22n"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_j4w7f"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8kuvg"]
+gradient = SubResource("Gradient_j4w7f")
+fill_from = Vector2(0.5042740106582642, 1)
+fill_to = Vector2(0.5683760046958923, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vecgi"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_8kuvg")
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_1lpnv"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vecgi")
+size = 0.300000011920929
+section_length = 0.1000000014901161
+curve = SubResource("Curve_4v22n")
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+emitting = false
+amount = 5
+lifetime = 1.72
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 15
+interpolate = false
+visibility_aabb = AABB(-1600.5, -1576.5, -1576.5, 1659.97998046875, 3161, 3145)
+trail_enabled = true
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_1ga1p")
+draw_pass_1 = SubResource("RibbonTrailMesh_1lpnv")
+script = ExtResource("1")

@@ -1,0 +1,268 @@
+[gd_scene load_steps=28 format=3 uid="uid://kvq341cthj3k"]
+
+[ext_resource type="Script" path="res://test/item_test.gd" id="1_6drlb"]
+[ext_resource type="PackedScene" uid="uid://c4jqyhvc7h1i" path="res://entities/player/player.tscn" id="2_nqd0j"]
+[ext_resource type="PackedScene" uid="uid://7gpkd3eqrq4t" path="res://entities/lighter/lighter.tscn" id="3_o4ehs"]
+[ext_resource type="Script" path="res://components/timed_interact_component.gd" id="5_pqeg1"]
+[ext_resource type="Shader" path="res://shaders/invert.gdshader" id="5_q72pv"]
+[ext_resource type="Script" path="res://components/transition_area.gd" id="6_5vubx"]
+[ext_resource type="Script" path="res://components/timed_load_component.gd" id="6_tnnvk"]
+[ext_resource type="Script" path="res://components/load_on_interval_finish.gd" id="7_ci5sa"]
+[ext_resource type="AudioStream" uid="uid://dgxtxcanwyd1u" path="res://entities/lighter/in.wav" id="7_ddyj1"]
+[ext_resource type="Script" path="res://components/signal_connector.gd" id="7_vki5w"]
+[ext_resource type="PackedScene" uid="uid://bpea1f84dmwxl" path="res://entities/drawer/drawer.tscn" id="8_ivncu"]
+[ext_resource type="AudioStream" uid="uid://dt330yk8vjs14" path="res://entities/lighter/in2.wav" id="8_ixn8k"]
+[ext_resource type="Script" path="res://components/clock/clock.gd" id="9_u857a"]
+[ext_resource type="Script" path="res://test/test.gd" id="16_kq7io"]
+[ext_resource type="Script" path="res://utils/second_order_dynamics.gd" id="17_unew4"]
+[ext_resource type="PackedScene" uid="uid://b3t67ci700ubp" path="res://world/house/curve.blend" id="18_4uks8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_th0dh"]
+sky_top_color = Color(1, 1, 1, 1)
+sky_horizon_color = Color(0.637843, 0.637843, 0.637843, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+energy_multiplier = 0.0
+
+[sub_resource type="Sky" id="Sky_kx436"]
+sky_material = SubResource("ProceduralSkyMaterial_th0dh")
+
+[sub_resource type="Environment" id="Environment_ufn3p"]
+background_mode = 2
+sky = SubResource("Sky_kx436")
+ambient_light_energy = 0.0
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
+volumetric_fog_density = 0.04
+volumetric_fog_length = 165.89
+volumetric_fog_detail_spread = 1.93187
+volumetric_fog_temporal_reprojection_enabled = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_wmcrq"]
+size = Vector3(300, 2, 300)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qbl11"]
+data = PackedVector3Array(-150, 1, 150, 150, 1, 150, -150, -1, 150, 150, 1, 150, 150, -1, 150, -150, -1, 150, 150, 1, -150, -150, 1, -150, 150, -1, -150, -150, 1, -150, -150, -1, -150, 150, -1, -150, 150, 1, 150, 150, 1, -150, 150, -1, 150, 150, 1, -150, 150, -1, -150, 150, -1, 150, -150, 1, -150, -150, 1, 150, -150, -1, -150, -150, 1, 150, -150, -1, 150, -150, -1, -150, 150, 1, 150, -150, 1, 150, 150, 1, -150, -150, 1, 150, -150, 1, -150, 150, 1, -150, -150, -1, 150, 150, -1, 150, -150, -1, -150, 150, -1, 150, 150, -1, -150, -150, -1, -150)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ikqvj"]
+playback_mode = 2
+random_pitch = 1.1
+streams_count = 2
+stream_0/stream = ExtResource("7_ddyj1")
+stream_1/stream = ExtResource("8_ixn8k")
+
+[sub_resource type="BoxMesh" id="BoxMesh_1c88g"]
+size = Vector3(20, 20, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3r3yh"]
+data = PackedVector3Array(-10, 10, 0.5, 10, 10, 0.5, -10, -10, 0.5, 10, 10, 0.5, 10, -10, 0.5, -10, -10, 0.5, 10, 10, -0.5, -10, 10, -0.5, 10, -10, -0.5, -10, 10, -0.5, -10, -10, -0.5, 10, -10, -0.5, 10, 10, 0.5, 10, 10, -0.5, 10, -10, 0.5, 10, 10, -0.5, 10, -10, -0.5, 10, -10, 0.5, -10, 10, -0.5, -10, 10, 0.5, -10, -10, -0.5, -10, 10, 0.5, -10, -10, 0.5, -10, -10, -0.5, 10, 10, 0.5, -10, 10, 0.5, 10, 10, -0.5, -10, 10, 0.5, -10, 10, -0.5, 10, 10, -0.5, -10, -10, 0.5, 10, -10, 0.5, -10, -10, -0.5, 10, -10, 0.5, 10, -10, -0.5, -10, -10, -0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8gfum"]
+shader = ExtResource("5_q72pv")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_acvmr"]
+radius = 2.214
+
+[sub_resource type="BoxMesh" id="BoxMesh_fjohw"]
+
+[node name="ItemTest" type="Node3D" node_paths=PackedStringArray("lighter")]
+script = ExtResource("1_6drlb")
+lighter = NodePath("Lighter")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ufn3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_wmcrq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_qbl11")
+
+[node name="Player" parent="." instance=ExtResource("2_nqd0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.03239, 0)
+
+[node name="Lighter" parent="." instance=ExtResource("3_o4ehs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 2.06736, -40)
+
+[node name="Lighter2" parent="." node_paths=PackedStringArray("thing_to_toggle") instance=ExtResource("3_o4ehs")]
+transform = Transform3D(0.375, 0, 0, 0, 0.375, 0, 0, 0, 0.375, 36.3306, 1.7422, -38.778)
+thing_to_toggle = NodePath("../OmniLight3D")
+param = "visible"
+
+[node name="On" parent="Lighter2" index="3"]
+bus = &"Master"
+
+[node name="Off" parent="Lighter2" index="4"]
+bus = &"Master"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lighter2"]
+transform = Transform3D(2.66667, 0, 0, 0, -0.0418863, 2.66634, 0, -2.66634, -0.0418863, 0, 6.48341, 0)
+spot_range = 12.129
+spot_angle = 96.33
+spot_angle_attenuation = 0.933035
+
+[node name="Timed Interact Component" type="Node" parent="Lighter2" node_paths=PackedStringArray("interact_component")]
+script = ExtResource("5_pqeg1")
+duration_min = 5.0
+duration_max = 5.0
+interval = 1.0
+interact_component = NodePath("../InteractComponent")
+
+[node name="SceneLoader" type="Node" parent="Lighter2"]
+script = ExtResource("6_tnnvk")
+scene = "res://world/house/house.tscn"
+delay = 0.0
+
+[node name="AllowLoadOnInterval" type="Node" parent="Lighter2/SceneLoader" node_paths=PackedStringArray("timed_interact")]
+script = ExtResource("7_ci5sa")
+timed_interact = NodePath("../../Timed Interact Component")
+
+[node name="SignalConnector" type="Node" parent="Lighter2/SceneLoader" node_paths=PackedStringArray("from", "to")]
+script = ExtResource("7_vki5w")
+from = NodePath("../../InteractComponent")
+what = "interact_end"
+to = NodePath("..")
+method = "try_load"
+
+[node name="Clock" type="AudioStreamPlayer3D" parent="Lighter2" node_paths=PackedStringArray("timed_comp")]
+stream = SubResource("AudioStreamRandomizer_ikqvj")
+max_distance = 50.88
+max_polyphony = 2
+script = ExtResource("9_u857a")
+timed_comp = NodePath("../Timed Interact Component")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.6778, 11.2589, 0)
+light_energy = 3.299
+omni_range = 32.058
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.455545, 0.890213, 0, -0.890213, 0.455545, 8.1517, 4.464, 11.7921)
+mesh = SubResource("BoxMesh_1c88g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3r3yh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.02741, 0, 0, 0, 0.643711, 0.800759, 0, -0.800759, 0.643711, 7.65517, 11.9123, 1.0699)
+mesh = SubResource("BoxMesh_1c88g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3r3yh")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.02741, 0, 0, 0, 0.865952, 0.552906, 0, -0.552906, 0.865952, 7.65517, 18.1446, -6.40525)
+mesh = SubResource("BoxMesh_1c88g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3r3yh")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.02741, 0, 0, 0, 0.935701, 0.424315, 0, -0.424315, 0.935701, 7.66651, 28.8166, -12.7415)
+mesh = SubResource("BoxMesh_1c88g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D5/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3r3yh")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.02741, 0, 0, 0, 1.01939, 0.128111, 0, -0.128111, 1.01939, 7.66651, 41.1648, -17.11)
+mesh = SubResource("BoxMesh_1c88g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D6/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3r3yh")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.02741, 0, 0, 0, 0.997881, -0.244567, 0, 0.244567, 0.997881, 7.65517, 59.0147, -16.2758)
+mesh = SubResource("BoxMesh_1c88g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D7/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3r3yh")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.02741, 0, 0, 0, 0.867301, -0.550788, 0, 0.550788, 0.867301, 7.65517, 68.4244, -13.7905)
+mesh = SubResource("BoxMesh_1c88g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D8/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3r3yh")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.02741, 0, 0, 0, 0.780284, -0.668383, 0, 0.668383, 0.780284, 7.66651, 78.6801, -6.8005)
+mesh = SubResource("BoxMesh_1c88g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D9"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D9/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3r3yh")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.02741, 0, 0, 0, 0.547287, -0.869514, 0, 0.869514, 0.547287, 7.66651, 87.8618, 2.54071)
+mesh = SubResource("BoxMesh_1c88g")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D10"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D10/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3r3yh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_8gfum")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TransitionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.786, 5.26343, -12.5796)
+script = ExtResource("6_5vubx")
+scene = "res://world/world.tscn"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TransitionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.73033, 10.5299)
+shape = SubResource("SphereShape3D_acvmr")
+
+[node name="Drawer" parent="." instance=ExtResource("8_ivncu")]
+transform = Transform3D(-0.711953, 0, 0.702228, 0, 1, 0, -0.702228, 0, -0.711953, -4.5111, 2.58216, -1.10556)
+
+[node name="curve" parent="." instance=ExtResource("18_4uks8")]
+transform = Transform3D(3.38455, 0, 0, 0, 3.38455, 0, 0, 0, 3.38455, -42.4866, 4.40486, -33.1875)
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0844, 2.0342, 0)
+mesh = SubResource("BoxMesh_fjohw")
+script = ExtResource("16_kq7io")
+
+[node name="SecondOrderDynamics" type="Node" parent="MeshInstance3D11"]
+script = ExtResource("17_unew4")
+_f = 1.4
+_z = 0.0
+_r = 5.0
+
+[node name="Marker3D" type="Marker3D" parent="MeshInstance3D11"]
+transform = Transform3D(-8.26515e-08, -0.809018, 0.587785, 5.13858e-08, 0.587785, 0.809017, -1, 9.70703e-08, -7.00927e-09, 32.0844, 2.0342, 0)
+top_level = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[editable path="Lighter2"]
+[editable path="curve"]

@@ -45,7 +45,7 @@ func fade_in(i: int) -> void:
 	var tween := tweens[i]
 	var stream = $AudioStreamPlayer.stream
 	if tween:
-		tween.stop()
+		tween.kill()
 	if stream.get_sync_stream_volume(i) < -1.0:
 		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		tweens[i] = tween
@@ -54,7 +54,7 @@ func fade_out(i: int) -> void:
 	var tween := tweens[i]
 	var stream = $AudioStreamPlayer.stream
 	if tween:
-		tween.stop()
+		tween.kill()
 	if stream.get_sync_stream_volume(i) > -12.0:
 
 		tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)

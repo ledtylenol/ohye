@@ -24,14 +24,16 @@ func on_player(body: Node3D) -> void:
 	var player := body as Player
 	if player and not transed:
 		transed = true
+		
 		$AnimationPlayer.play("woah")
 		return
-		
 		var tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_EXPO).set_parallel()
 		tween.tween_property(light1, "light_color", Color.BLACK, 1.0)
-		tween.tween_callback(enable_emitter.bind(1))
+		
 		tween.chain().tween_callback(func() -> void: light1.light_negative = true)
-		tween.chain().tween_property(light1, "light_color", Color.WHITE_SMOKE, 15.0)
+		tween.tween_property(light1, "light_color", Color.WHITE_SMOKE, 15.0)
+		tween.chain().tween_callback(swap_to_midnight)
+		tween.chain().tween_callback(enable_emitter.bind(1)).set_delay(16.0)
 		tween.tween_property(light1, "omni_range", 150.0, 20.0)
 		tween.chain().tween_callback(enable_emitter.bind(2))
 		tween.chain().tween_property(self, "min", 1.0, 20.0)
@@ -43,7 +45,7 @@ func on_player(body: Node3D) -> void:
 		tween.chain().tween_callback(enable_emitter.bind(4))
 		tween.chain().tween_property(light2, "light_energy", 5.0, 1.0)
 		tween.tween_property(light1, "omni_range", 2.0, 1.0)
-		tween.chain().tween_callback($room2/OmniLight3D2/Area3D/CollisionShape3D.set_deferred.bind("disabled", false))
+		#tween.chain().tween_callback($room2/OmniLight3D2/Area3D/CollisionShape3D.set_deferred.bind("disabled", false))
 		#tween.tween_callback(music3.play)
 
 func kill_player() ->  void:

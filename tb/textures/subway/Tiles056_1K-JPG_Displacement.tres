@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cr5mv2rs5rrp5"]
+
+[ext_resource type="Texture2D" uid="uid://bu1x6f2vjf1n4" path="res://tb/textures/subway/Tiles056_1K-JPG_Displacement.jpg" id="1_htrfn"]
+[ext_resource type="Texture2D" uid="uid://06scygxuvtps" path="res://tb/textures/subway/Tiles056_1K-JPG_NormalDX.jpg" id="2_fokk1"]
+
+[resource]
+albedo_texture = ExtResource("1_htrfn")
+metallic_specular = 0.0
+normal_enabled = true
+normal_scale = 7.98
+normal_texture = ExtResource("2_fokk1")
+texture_filter = 2

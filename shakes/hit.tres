@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ShakerPreset3D" load_steps=7 format=3 uid="uid://dl3jyoeu83n2b"]
 
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="1_75efs"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeNoiseShake3D.gd" id="2_0e273"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="2_00iur"]
+[ext_resource type="Script" uid="uid://c063bnknmhi3d" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="1_75efs"]
+[ext_resource type="Script" uid="uid://3ugm1s2yymb4" path="res://addons/shaker/data/Vector3/ShakerTypeNoiseShake3D.gd" id="2_0e273"]
+[ext_resource type="Script" uid="uid://c6flakn4dg8yy" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="2_00iur"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4tynx"]
 seed = 110

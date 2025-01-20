@@ -6,7 +6,7 @@ var starting_audio := 0.0
 func _ready() -> void:
 	starting_audio = audio_to_stop.volume_db
 	max_distance = distance
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if player.global_position.distance_to(global_position) > distance:
 		audio_to_stop.volume_db = starting_audio
 		return

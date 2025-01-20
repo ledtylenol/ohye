@@ -1,24 +1,26 @@
 extends Area3D
 class_name InteractComponent
-@export var show_text := false
+@export var toggle_on_lose_focus := false
 @export_multiline var what_text: String:
 	set(value):
+		if text: text.text = value
 		what_text = value
-		if show_text and text:
-			text.text = value
+		
 @export var mesh: MeshInstance3D
 @export var body: PhysicsBody3D
 @export var prior := 1
 const OUTLINE = preload("res://shaders/outline.tres")
 var alpha := 0.0
 var tween: Tween
-var text: Label3D
+@export var text: Label3D
 var player: Node3D
 var interacting := false
 signal interact
 signal interact_start
 signal interact_end
+@warning_ignore("unused_signal")
 signal interact_entered
+@warning_ignore("unused_signal")
 signal interact_exited
 func _ready() -> void:
 	if mesh:
@@ -29,26 +31,26 @@ func _ready() -> void:
 			var col = collider.duplicate()
 			col.scale *= 1.1
 			add_child(col)
-		var pos = body.global_position
-		if show_text:
-			text = Label3D.new()
-			text.no_depth_test = true
-			text.text = what_text
-			text.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-			add_child(text)
-			text.global_position = pos
-			text.modulate.a = 0
-			text.outline_modulate.a = 0
+	if text:
+		text.modulate.a = 0
+		text.outline_modulate.a = 0
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	do_mesh()
-	if player and text:
-		text.global_position = body.global_position * 0.1 + player.global_position * 0.9
+	if not text: return
+	if player:
+		if body:
+			text.global_position = body.global_position * 0.1 + player.global_position * 0.9
+		else:
+			text.global_position =get_parent().global_position * 0.1 + player.global_position * 0.9
 		text.modulate.a = alpha
 		text.outline_modulate.a = alpha
-	elif text: 
-		text.global_position = body.global_position
+	else:
+		if body:
+			text.global_position = body.global_position
+		else:
+			text.global_position = get_parent().global_position
 		text.modulate.a = 0.0
 		text.outline_modulate.a = 0.0
 func do_interact() -> void:
@@ -60,11 +62,11 @@ func do_end_interact() -> void:
 	interact_end.emit()
 func start_tween_alpha() -> void:
 
-	if tween: tween.stop()
+	if tween: tween.kill()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(self, "alpha", 1.0, 0.4)
 func end_tween_alpha() -> void:
-	if tween: tween.stop()
+	if tween: tween.kill()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(self, "alpha", 0.0, 0.4)
 

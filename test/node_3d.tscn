@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://uxl8vres7451"]
+
+[ext_resource type="Script" path="res://test/testt.gd" id="1_2ym54"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_2ym54")
+amount = 17
+th = 0.262
+north = Vector3(5.83, 4.35, 10.16)
+spread = 1.14
+ring_total = 287

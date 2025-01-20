@@ -5,4 +5,5 @@
 [resource]
 albedo_texture = ExtResource("1_ncj77")
 metallic_specular = 0.0
+normal_enabled = true
 texture_filter = 2

@@ -1,0 +1,28 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://bod4dp6pggdk7"]
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_kafuu"]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_4kp8b"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_p26ep"]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_243a7"]
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+
+
+"
+nodes/fragment/2/node = SubResource("VisualShaderNodeVectorCompose_kafuu")
+nodes/fragment/2/position = Vector2(180, 360)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_4kp8b")
+nodes/fragment/3/position = Vector2(-540, 380)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVectorFunc_p26ep")
+nodes/fragment/4/position = Vector2(-178, 431)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVectorOp_243a7")
+nodes/fragment/5/position = Vector2(-40, 520)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0)

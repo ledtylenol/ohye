@@ -51,9 +51,11 @@ func play_specific(line: int) -> void:
 		if text[lx] == ' ' and i > 10:
 			sep_count += 1
 	i = 0
+	@warning_ignore("integer_division")
 	var offset = -text.length() / sep_count
 	for lx in text.length():
 		var l := text[lx]
+		@warning_ignore("shadowed_variable")
 		var t := PosLabel3D.new()
 		t.scale.x = 1.333
 		t.alpha_cut = Label3D.ALPHA_CUT_OPAQUE_PREPASS

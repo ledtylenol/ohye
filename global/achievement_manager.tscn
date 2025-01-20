@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://e1p1wyrv66tv"]
+
+[ext_resource type="Script" path="res://global/achievement_manager.gd" id="1_ej30o"]
+
+[node name="AchievementManager" type="CanvasLayer"]
+script = ExtResource("1_ej30o")

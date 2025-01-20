@@ -15,7 +15,7 @@ func trigger_music() -> void:
 		return
 	music_triggered = true
 	global_sound.play(1)
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if enemy_count == 0 and not global_sound.song_parts == 0:
 		
 		global_sound.change_song_parts(0)

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=7 format=3 uid="uid://bpq2h0lon5bsr"]
+
+[ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_inohj"]
+[ext_resource type="Script" uid="uid://cyaqm57lguqio" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_wiasy"]
+[ext_resource type="Resource" uid="uid://b3q16tbylah8x" path="res://tb/entities/bhop_tile.tres" id="2_ue6rr"]
+[ext_resource type="Resource" uid="uid://wk3u88lv7j42" path="res://tb/entities/sound_tile.tres" id="3_yvrsu"]
+[ext_resource type="Resource" uid="uid://c17fh4ehg4qgn" path="res://tb/entities/tp_location.tres" id="4_p5lij"]
+[ext_resource type="Resource" uid="uid://deg1hn1yeywxw" path="res://tb/entities/teleport_area.tres" id="5_ufda8"]
+
+[resource]
+script = ExtResource("1_wiasy")
+export_file = false
+target_map_editor = 1
+fgd_name = "Ohye"
+base_fgd_files = Array[Resource]([ExtResource("1_inohj")])
+entity_definitions = Array[Resource]([ExtResource("2_ue6rr"), ExtResource("3_yvrsu"), ExtResource("4_p5lij"), ExtResource("5_ufda8")])

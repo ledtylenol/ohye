@@ -45,10 +45,15 @@ const _EXIT_CAMERA_NEAR_MIN:float = 0.01
 
 ## An environment set for the exit camera. Leave unset to use the default environment.
 @export var exit_environment:Environment
+## The cull mask for the exit camera. Use it to hide certain objects in the exit camera.
+@export var exit_cull_mask:int = 0b11111111111111111111
 
 ## The exit portal. Leave unset to use this portal as an exit only.
 @export var exit_portal:Portal
-@export var exit_portal_area: PortalTeleport
+
+## An environment set for the exit camera. Leave unset to use the default environment.
+@export var portal_shader:Shader = preload("res://shaders/portal.gdshader")
+
 # The viewport rendering the portal surface
 var _viewport:SubViewport
 
@@ -89,7 +94,7 @@ func _ready() -> void:
 
 	# The portal shader renders the viewport on-top of the portal mesh in screen-space
 	material_override = ShaderMaterial.new()
-	material_override.shader = preload("res://shaders/portal.gdshader")
+	material_override.shader = portal_shader
 	material_override.set_shader_parameter("fade_out_distance_max", fade_out_distance_max)
 	material_override.set_shader_parameter("fade_out_distance_min", fade_out_distance_min)
 	material_override.set_shader_parameter("fade_out_color", fade_out_color)   
@@ -116,6 +121,7 @@ func _create_viewport() -> void:
 	_exit_camera = Camera3D.new()
 	_exit_camera.name = "Camera"
 	_exit_camera.environment = exit_environment
+	_exit_camera.cull_mask = exit_cull_mask
 	_viewport.add_child(_exit_camera)
 
 	# Resize the viewport on the next _process

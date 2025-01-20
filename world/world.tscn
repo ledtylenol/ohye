@@ -152,6 +152,7 @@ omni_attenuation = 1.377
 
 [node name="AudioStreamPlayer" parent="GlobalSound" index="0"]
 stream_paused = false
+bus = &"Master"
 
 [editable path="Player"]
 [editable path="GlobalSound"]

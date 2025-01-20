@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://do5vjk6uqrp2w"
+path="res://.godot/imported/distort.glsl-0278a767064307c939819fd34df8c711.res"
+
+[deps]
+
+source_file="res://compositor_effects/distort/distort.glsl"
+dest_files=["res://.godot/imported/distort.glsl-0278a767064307c939819fd34df8c711.res"]
+
+[params]
+

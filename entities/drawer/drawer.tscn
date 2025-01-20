@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_ohfkk"]
 [ext_resource type="Script" path="res://components/interact_component/interact_component.gd" id="3_ngym4"]
 [ext_resource type="AudioStream" uid="uid://c657v8e2oa02t" path="res://entities/player/sounds/boom.wav" id="4_tplwl"]
-[ext_resource type="Script" path="res://components/spawn_location.gd" id="6_pcpn3"]
+[ext_resource type="Script" path="res://components/entities/spawn_location.gd" id="6_pcpn3"]
 [ext_resource type="Script" path="res://components/random_spawn.gd" id="7_on1ac"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bx28w"]

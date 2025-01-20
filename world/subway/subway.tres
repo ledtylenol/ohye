@@ -1,0 +1,18 @@
+[gd_resource type="Environment" load_steps=2 format=3 uid="uid://bkxq71qe8mi5u"]
+
+[sub_resource type="Sky" id="Sky_awx77"]
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_awx77")
+reflected_light_source = 2
+ssr_enabled = true
+ssr_fade_in = 0.000951854
+ssr_fade_out = 2.21914
+ssao_enabled = true
+sdfgi_read_sky_light = false
+glow_enabled = true
+glow_bloom = 1.0
+glow_blend_mode = 0
+volumetric_fog_enabled = true
+volumetric_fog_temporal_reprojection_enabled = false

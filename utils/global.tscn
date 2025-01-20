@@ -1,0 +1,68 @@
+[gd_scene load_steps=15 format=3 uid="uid://dbkt5kcfvfwv3"]
+
+[ext_resource type="Script" path="res://utils/global.gd" id="1_slsxq"]
+[ext_resource type="Script" path="res://components/misc/random_value.gd" id="2_03o0v"]
+
+[sub_resource type="Resource" id="Resource_gvy77"]
+script = ExtResource("2_03o0v")
+value = "The quick griddy"
+weight = 1
+
+[sub_resource type="Resource" id="Resource_35cc1"]
+script = ExtResource("2_03o0v")
+value = "The neverending night"
+weight = 5
+
+[sub_resource type="Resource" id="Resource_7i3bb"]
+script = ExtResource("2_03o0v")
+value = "The biggest fool"
+weight = 5
+
+[sub_resource type="Resource" id="Resource_uqlpx"]
+script = ExtResource("2_03o0v")
+value = "The insatiable lavender"
+weight = 2
+
+[sub_resource type="Resource" id="Resource_uyylx"]
+script = ExtResource("2_03o0v")
+value = "Ohye"
+weight = 50
+
+[sub_resource type="Resource" id="Resource_4d3ae"]
+script = ExtResource("2_03o0v")
+value = "That game with the uhhhhh"
+weight = 5
+
+[sub_resource type="Resource" id="Resource_i3o87"]
+script = ExtResource("2_03o0v")
+value = "I don't even know anymore"
+weight = 5
+
+[sub_resource type="Resource" id="Resource_2q7xh"]
+script = ExtResource("2_03o0v")
+value = "What is the point here lmao"
+weight = 10
+
+[sub_resource type="Resource" id="Resource_lo602"]
+script = ExtResource("2_03o0v")
+value = "If you're reading this ney says GO FUCK YOURSELF"
+weight = 1
+
+[sub_resource type="Resource" id="Resource_mn8kj"]
+script = ExtResource("2_03o0v")
+value = "Ohye?"
+weight = 10
+
+[sub_resource type="Resource" id="Resource_ynqrc"]
+script = ExtResource("2_03o0v")
+value = "ohye?"
+weight = 5
+
+[sub_resource type="Resource" id="Resource_rdwqo"]
+script = ExtResource("2_03o0v")
+value = "Every loading screen is ~fake~ personalized"
+weight = 2
+
+[node name="Global" type="Node"]
+script = ExtResource("1_slsxq")
+name_choices = Array[ExtResource("2_03o0v")]([SubResource("Resource_gvy77"), SubResource("Resource_35cc1"), SubResource("Resource_7i3bb"), SubResource("Resource_uqlpx"), SubResource("Resource_uyylx"), SubResource("Resource_4d3ae"), SubResource("Resource_i3o87"), SubResource("Resource_2q7xh"), SubResource("Resource_lo602"), SubResource("Resource_mn8kj"), SubResource("Resource_ynqrc"), SubResource("Resource_rdwqo")])

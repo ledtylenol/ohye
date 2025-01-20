@@ -15,8 +15,11 @@ func _ready() -> void:
 			queue_free()
 			return
 	
-	timed_comp.beep.connect(func() -> void: if can_play: play())
+	timed_comp.beep.connect(func() -> void: if can_play: play_fmod())
 	if disable_on_finish: timed_comp.finished.connect(disable)
 
 func disable() -> void:
 	can_play = false
+
+func play_fmod() -> void:
+	FmodServer.play_one_shot_attached_with_params("event:/Sfx3D/Light", self, {"Active": 1})

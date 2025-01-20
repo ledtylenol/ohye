@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cx7m4ek0v8onl"]
+
+[ext_resource type="Shader" uid="uid://ciipthhxgvr8l" path="res://entities/knife/blade.tres" id="1_yb8v2"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dott5"]
+frequency = 0.0119
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fv2ng"]
+noise = SubResource("FastNoiseLite_dott5")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_yb8v2")
+shader_parameter/Noise = SubResource("NoiseTexture2D_fv2ng")

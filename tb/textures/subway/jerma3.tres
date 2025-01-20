@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bs6fc7m303xag"]
+
+[ext_resource type="Texture2D" uid="uid://df8fdl2ebunhk" path="res://tb/textures/subway/jerma3.jpg" id="1_gxbwg"]
+
+[resource]
+albedo_texture = ExtResource("1_gxbwg")
+metallic_specular = 1.0
+roughness = 0.0
+emission_energy_multiplier = 0.2
+normal_enabled = true
+texture_filter = 2

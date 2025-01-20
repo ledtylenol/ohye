@@ -1,76 +1,75 @@
-[gd_scene load_steps=60 format=3 uid="uid://c4jqyhvc7h1i"]
+[gd_scene load_steps=48 format=3 uid="uid://d2h1tv4ptwblk"]
 
-[ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="1_nvq1j"]
-[ext_resource type="Script" path="res://entities/player/scripts/player.gd" id="1_o6h1d"]
-[ext_resource type="Script" path="res://entities/player/scripts/stats.gd" id="2_34ih3"]
-[ext_resource type="Script" path="res://entities/player/scripts/player_camera.gd" id="3_kcw1u"]
-[ext_resource type="Script" path="res://addons/shaker/src/Vector3/ShakerReceiver3D.gd" id="6_l8am5"]
-[ext_resource type="Resource" uid="uid://dse4au3onquif" path="res://shakes/weak_shake.tres" id="6_wgnfw"]
-[ext_resource type="Script" path="res://entities/player/scripts/interact_ray.gd" id="8_rhn0u"]
-[ext_resource type="AudioStream" uid="uid://c657v8e2oa02t" path="res://entities/player/sounds/boom.wav" id="9_gufxx"]
-[ext_resource type="Script" path="res://entities/player/scripts/UI.gd" id="10_rqt05"]
-[ext_resource type="Script" path="res://entities/player/scripts/crosshair_anchor.gd" id="11_4blbx"]
-[ext_resource type="Script" path="res://entities/player/scripts/cursor.gd" id="11_y8mn5"]
-[ext_resource type="Script" path="res://entities/player/circle_progress.gd" id="12_3moa3"]
-[ext_resource type="Material" uid="uid://skv487libhfo" path="res://shaders/negative.tres" id="12_8323r"]
-[ext_resource type="Shader" path="res://shaders/negative.gdshader" id="12_s0l7a"]
-[ext_resource type="Script" path="res://utils/second_order_dynamics.gd" id="13_bgr5k"]
-[ext_resource type="Texture2D" uid="uid://s0dx16cittpc" path="res://components/circle_progress/CircularProgressBar.png" id="13_o7vmv"]
-[ext_resource type="Script" path="res://entities/player/health_bar.gd" id="14_64o0c"]
-[ext_resource type="AudioStream" uid="uid://ckvarqkr20c72" path="res://entities/player/sounds/walk/stone.tres" id="15_3k5ka"]
-[ext_resource type="Script" path="res://entities/player/sounds.gd" id="15_g6rjs"]
-[ext_resource type="Script" path="res://entities/player/distance_based_component_footsteps.gd" id="19_xu8rn"]
-[ext_resource type="Script" path="res://components/scaled_audio_player_3d.gd" id="20_i2nv4"]
-[ext_resource type="Script" path="res://entities/player/scripts/detection_range.gd" id="22_4xvka"]
-[ext_resource type="AudioStream" uid="uid://bd0ygh0000ljl" path="res://entities/player/sounds/land/land_dirt_1.wav" id="25_100aw"]
-[ext_resource type="AudioStream" uid="uid://b256mnd5wx563" path="res://entities/player/sounds/land/land_dirt_2.wav" id="26_njdml"]
-[ext_resource type="AudioStream" uid="uid://lfa41c1qvki7" path="res://entities/player/sounds/land/land_dirt_3.wav" id="27_itu1c"]
-[ext_resource type="AudioStream" uid="uid://drtawbbg0coat" path="res://entities/player/sounds/land/land_impact_1.wav" id="28_jf3ac"]
-[ext_resource type="AudioStream" uid="uid://b70y3p7mwqk8q" path="res://entities/player/sounds/land/land_impact_2.wav" id="29_rx08t"]
-[ext_resource type="AudioStream" uid="uid://rdbrt2tmfevv" path="res://entities/player/sounds/land/land_impact_3.wav" id="30_vjcbe"]
-[ext_resource type="AudioStream" uid="uid://cr2aydij0x7xb" path="res://entities/player/sounds/jump/jump_1.wav" id="31_j3yna"]
-[ext_resource type="Script" path="res://components/signal_connector.gd" id="31_ry2uw"]
-[ext_resource type="AudioStream" uid="uid://cwd4pk848atft" path="res://entities/player/sounds/ouch.wav" id="32_7xddh"]
-[ext_resource type="AudioStream" uid="uid://dgxtxcanwyd1u" path="res://entities/lighter/in.wav" id="32_gi2hr"]
-[ext_resource type="AudioStream" uid="uid://dtbbtfoic6hj4" path="res://entities/player/sounds/jump/jump_2.wav" id="32_lacb7"]
-[ext_resource type="Resource" uid="uid://yi0a6jwp8ub7" path="res://shakes/hit_me.tres" id="33_5hssx"]
-[ext_resource type="AudioStream" uid="uid://bpybs6sfyob8t" path="res://entities/player/sounds/jump/jump_3.wav" id="33_p0s8x"]
-[ext_resource type="AudioStream" uid="uid://dt330yk8vjs14" path="res://entities/lighter/in2.wav" id="33_srsp2"]
-[ext_resource type="Script" path="res://components/health_component.gd" id="35_bclfc"]
-[ext_resource type="Script" path="res://components/hurtbox.gd" id="37_fxsxk"]
+[ext_resource type="Script" uid="uid://c64yo30lkl8ku" path="res://entities/player/scripts/player.gd" id="1"]
+[ext_resource type="Script" uid="uid://bo7o1la75ggh7" path="res://entities/player/scripts/stats.gd" id="2"]
+[ext_resource type="Compositor" uid="uid://coscdcxtd8sgq" path="res://compositor_effects/compositor.tres" id="3"]
+[ext_resource type="Script" uid="uid://d0a78ivi0kcfk" path="res://entities/player/scripts/player_camera.gd" id="4"]
+[ext_resource type="Script" uid="uid://cbnjce0xamavw" path="res://entities/player/scripts/interact_ray.gd" id="5"]
+[ext_resource type="Shape3D" path="res://entities/player/player_collider.tres" id="6"]
+[ext_resource type="Script" uid="uid://cbnbea4ctdbon" path="res://entities/player/scripts/UI.gd" id="7"]
+[ext_resource type="Script" uid="uid://dfi474ukbjmyk" path="res://entities/player/scripts/crosshair_anchor.gd" id="8"]
+[ext_resource type="Shader" uid="uid://cubrdwkfmj45v" path="res://shaders/ui_bg.gdshader" id="8_p2ttf"]
+[ext_resource type="Material" uid="uid://skv487libhfo" path="res://shaders/negative.tres" id="9"]
+[ext_resource type="Script" uid="uid://5kivyoi231nc" path="res://entities/player/scripts/cursor.gd" id="10"]
+[ext_resource type="Shader" uid="uid://ciakxeyamhkk" path="res://shaders/negative.gdshader" id="11"]
+[ext_resource type="Script" uid="uid://dw2ch5386anik" path="res://utils/second_order_dynamics.gd" id="12"]
+[ext_resource type="Script" uid="uid://dux2hr8yfnhae" path="res://entities/player/health_bar.gd" id="13"]
+[ext_resource type="Script" uid="uid://ds67ypox4r248" path="res://entities/player/circle_progress.gd" id="14"]
+[ext_resource type="Texture2D" uid="uid://s0dx16cittpc" path="res://components/circle_progress/CircularProgressBar.png" id="15"]
+[ext_resource type="Script" uid="uid://ddpxqrlk1n4t2" path="res://entities/player/boss_bar.gd" id="16"]
+[ext_resource type="Script" uid="uid://cbkrx4c8yp1dd" path="res://entities/player/menu.gd" id="17"]
+[ext_resource type="Script" uid="uid://dx106pbr5cs0" path="res://components/misc/magic_button.gd" id="18"]
+[ext_resource type="Script" uid="uid://dbfxhfah24ukj" path="res://entities/player/sounds.gd" id="19"]
+[ext_resource type="Script" uid="uid://ba0xmenpn4rki" path="res://entities/player/footsteps.gd" id="20"]
+[ext_resource type="Script" uid="uid://b3yuribouvqo5" path="res://entities/player/distance_based_component_footsteps.gd" id="21"]
+[ext_resource type="Script" uid="uid://q7he2t7xkjmp" path="res://components/misc/signal_connector.gd" id="22"]
+[ext_resource type="Script" uid="uid://ciaserfcl2gns" path="res://entities/player/sound_monitor.gd" id="23"]
+[ext_resource type="Script" uid="uid://db0qdp2dikw24" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="24"]
+[ext_resource type="Resource" uid="uid://dse4au3onquif" path="res://shakes/weak_shake.tres" id="25"]
+[ext_resource type="Script" uid="uid://dh147ywrfjj7n" path="res://addons/shaker/src/Vector3/ShakerReceiver3D.gd" id="26"]
+[ext_resource type="Resource" uid="uid://yi0a6jwp8ub7" path="res://shakes/hit_me.tres" id="27"]
+[ext_resource type="Script" uid="uid://i6dctga6u33h" path="res://components/entities/health_component.gd" id="28"]
+[ext_resource type="Script" uid="uid://ctm11ks2sjgfq" path="res://components/entities/hurtbox.gd" id="29"]
+[ext_resource type="Script" uid="uid://2wquki7u1yoq" path="res://entities/player/scripts/detection_range.gd" id="30"]
+[ext_resource type="Script" uid="uid://bnv7ag7hch4rl" path="res://components/screenshot_tool.gd" id="31"]
 
 [sub_resource type="Resource" id="Resource_gvtwj"]
-script = ExtResource("2_34ih3")
+resource_local_to_scene = true
+script = ExtResource("2")
 speed = 30
+air_speed = 15
 speed_mul = 1.0
 ground_acceleration = 5.0
+air_accel = 25.0
+max_floor_angle = 0.523599
 jump_height = 4.0
 jump_peak_time = 0.4
 jump_descend_time = 0.44
 jump_count = 1
 minimum_jump_duration = 0.0
-max_ground_pounds = 3
+max_ground_pounds = 0
 ground_pound_base_height = 20.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gum8l"]
 size = Vector3(0.7, 1.5, 0.345)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lohhf"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1mvl7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkxfh"]
+shader = ExtResource("8_p2ttf")
+shader_parameter/time = null
+shader_parameter/magnitude = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w0fuc"]
-shader = ExtResource("12_s0l7a")
+shader = ExtResource("11")
 shader_parameter/alpha = null
 shader_parameter/use_alpha = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j0dca"]
-shader = ExtResource("12_s0l7a")
+shader = ExtResource("11")
 shader_parameter/alpha = null
 shader_parameter/use_alpha = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kq3p6"]
-shader = ExtResource("12_s0l7a")
+shader = ExtResource("11")
 shader_parameter/alpha = null
 shader_parameter/use_alpha = true
 
@@ -93,52 +92,9 @@ anti_aliasing = false
 anti_aliasing_size = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vkoyg"]
-shader = ExtResource("12_s0l7a")
+shader = ExtResource("11")
 shader_parameter/alpha = null
 shader_parameter/use_alpha = false
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_g5dec"]
-radius = 51.387
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xny7w"]
-random_pitch = 1.5
-streams_count = 3
-stream_0/stream = ExtResource("25_100aw")
-stream_1/stream = ExtResource("26_njdml")
-stream_2/stream = ExtResource("27_itu1c")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_reuq3"]
-random_pitch = 1.5
-streams_count = 3
-stream_0/stream = ExtResource("28_jf3ac")
-stream_1/stream = ExtResource("29_rx08t")
-stream_2/stream = ExtResource("30_vjcbe")
-
-[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_d6d7n"]
-stream_count = 2
-stream_0/stream = SubResource("AudioStreamRandomizer_xny7w")
-stream_0/volume = 0.0
-stream_1/stream = SubResource("AudioStreamRandomizer_reuq3")
-stream_1/volume = 0.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_x1hvq"]
-random_pitch = 1.5
-streams_count = 3
-stream_0/stream = ExtResource("31_j3yna")
-stream_1/stream = ExtResource("32_lacb7")
-stream_2/stream = ExtResource("33_p0s8x")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d57vy"]
-random_pitch = 1.3
-streams_count = 1
-stream_0/stream = ExtResource("32_7xddh")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_daeav"]
-playback_mode = 1
-random_pitch = 1.4
-streams_count = 2
-stream_0/stream = ExtResource("32_gi2hr")
-stream_1/stream = ExtResource("33_srsp2")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_165qn"]
 radius = 1.07827
@@ -147,40 +103,49 @@ radius = 1.07827
 radius = 0.4
 height = 1.9
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "shaker", "health_component", "hurtbox", "hit_shaker", "hit_sound", "circle_progress", "grav_cast", "other_cast")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_g5dec"]
+radius = 51.387
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lohhf"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "shaker", "health_component", "hurtbox", "hit_shaker", "circle_progress", "grav_cast", "other_cast", "shape_cast")]
+physics_interpolation_mode = 2
 collision_layer = 8
+collision_mask = 5
 floor_constant_speed = true
 floor_snap_length = 0.37
-script = ExtResource("1_o6h1d")
+script = ExtResource("1")
 state = 1
 camera = NodePath("PanNode/PlayerCamera")
 shaker = NodePath("Components/NoFadeShaker")
 health_component = NodePath("Components/HealthComponent")
 hurtbox = NodePath("Components/Hurtbox")
 hit_shaker = NodePath("Components/NoFadeShaker")
-hit_sound = NodePath("Sounds/Hit")
 circle_progress = NodePath("CanvasLayer/Control/CircleProgress")
 grav_cast = NodePath("GravCast")
 other_cast = NodePath("GravCast2")
+shape_cast = NodePath("ShapeGrav")
 stats = SubResource("Resource_gvtwj")
+
+[node name="FmodListener3D" type="FmodListener3D" parent="."]
 
 [node name="PanNode" type="Node3D" parent="."]
 
 [node name="PlayerCamera" type="Camera3D" parent="PanNode" node_paths=PackedStringArray("player", "shaker", "pan_node")]
 physics_interpolation_mode = 1
-transform = Transform3D(1, 2.32859e-10, 7.4607e-14, -2.32859e-10, 1, 4.60496e-10, -7.46069e-14, -4.60496e-10, 1, 0.00826702, 0.583182, 0.0110376)
+compositor = ExtResource("3")
 current = true
 fov = 90.0
-script = ExtResource("3_kcw1u")
+script = ExtResource("4")
 player = NodePath("../..")
 shaker = NodePath("../../Components/ShakerComponent3D")
 pan_node = NodePath("..")
 movement_tilt = 0.321
 sensitivity = 10.388
-y_offset = 0.583
+y_offset = 0.5
 
 [node name="InteractRay" type="Area3D" parent="PanNode/PlayerCamera" node_paths=PackedStringArray("shaker_component", "center_marker", "camera")]
-script = ExtResource("8_rhn0u")
+script = ExtResource("5")
 shaker_component = NodePath("../../../Components/ShakerComponent3D")
 center_marker = NodePath("../../../CanvasLayer/Control/CenterMarker")
 camera = NodePath("..")
@@ -189,31 +154,35 @@ camera = NodePath("..")
 transform = Transform3D(1, 0, 3.29553e-21, 3.43562e-23, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1.09696)
 shape = SubResource("BoxShape3D_gum8l")
 
-[node name="SpotLight3D" type="OmniLight3D" parent="PanNode/PlayerCamera"]
-light_color = Color(0, 0, 0, 1)
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="PanNode/PlayerCamera"]
-light_size = 1.0
-light_bake_mode = 0
-shadow_reverse_cull_face = true
-spot_range = 108.583
-spot_angle = 56.8326
+[node name="SpotLight3D" type="SpotLight3D" parent="PanNode/PlayerCamera"]
+light_energy = 0.0
+light_volumetric_fog_energy = 0.0
+spot_range = 9.385
+spot_attenuation = 0.05
+spot_angle = 60.45
+spot_angle_attenuation = 1.23115
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-visible = false
-shape = SubResource("CapsuleShape3D_lohhf")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CapsuleMesh_1mvl7")
+shape = ExtResource("6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("left_rect", "right_rect", "up_rect", "down_rect", "interact_ray")]
-script = ExtResource("10_rqt05")
+physics_interpolation_mode = 2
+script = ExtResource("7")
 left_rect = NodePath("Control/Control/ColorRect3")
 right_rect = NodePath("Control/Control/ColorRect4")
 up_rect = NodePath("Control/Control/ColorRect")
 down_rect = NodePath("Control/Control/ColorRect2")
 interact_ray = NodePath("../PanNode/PlayerCamera/InteractRay")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+process_mode = 3
+material = SubResource("ShaderMaterial_fkxfh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -222,6 +191,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Control" type="Control" parent="CanvasLayer/Control" node_paths=PackedStringArray("camera", "ray", "sod", "center")]
 layout_mode = 1
@@ -236,14 +206,14 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("11_4blbx")
+script = ExtResource("8")
 camera = NodePath("../../../PanNode/PlayerCamera")
 ray = NodePath("../../../PanNode/PlayerCamera/InteractRay")
 sod = NodePath("SecondOrderDynamics")
 center = NodePath("../CenterMarker")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/Control"]
-material = ExtResource("12_8323r")
+material = ExtResource("9")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -256,7 +226,7 @@ offset_right = 2.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("11_y8mn5")
+script = ExtResource("10")
 
 [node name="ColorRect3" type="ColorRect" parent="CanvasLayer/Control/Control"]
 material = SubResource("ShaderMaterial_w0fuc")
@@ -272,7 +242,7 @@ offset_right = -5.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("11_y8mn5")
+script = ExtResource("10")
 
 [node name="ColorRect4" type="ColorRect" parent="CanvasLayer/Control/Control"]
 material = SubResource("ShaderMaterial_j0dca")
@@ -288,7 +258,7 @@ offset_right = 9.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("11_y8mn5")
+script = ExtResource("10")
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Control/Control"]
 material = SubResource("ShaderMaterial_kq3p6")
@@ -304,10 +274,10 @@ offset_right = 2.0
 offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("11_y8mn5")
+script = ExtResource("10")
 
 [node name="SecondOrderDynamics" type="Node" parent="CanvasLayer/Control/Control"]
-script = ExtResource("13_bgr5k")
+script = ExtResource("12")
 _f = 3.0
 
 [node name="CenterMarker" type="Control" parent="CanvasLayer/Control"]
@@ -335,7 +305,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_5liy4")
 theme_override_styles/fill = SubResource("StyleBoxFlat_h1amt")
 value = 22.27
 show_percentage = false
-script = ExtResource("14_64o0c")
+script = ExtResource("13")
 health_component = NodePath("../../../Components/HealthComponent")
 duration = 1.5
 metadata/_edit_use_anchors_ = true
@@ -351,7 +321,7 @@ theme_override_styles/background = SubResource("StyleBoxEmpty_r6vkg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ls27t")
 value = 12.87
 show_percentage = false
-script = ExtResource("14_64o0c")
+script = ExtResource("13")
 health_component = NodePath("../../../Components/HealthComponent")
 duration = 0.5
 do_heat = false
@@ -398,7 +368,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("12_3moa3")
+script = ExtResource("14")
 pos_control = NodePath("../Control")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/Control/CircleProgress"]
@@ -421,8 +391,8 @@ pivot_offset = Vector2(150, 150)
 max_value = 1.0
 step = 0.001
 fill_mode = 4
-texture_under = ExtResource("13_o7vmv")
-texture_progress = ExtResource("13_o7vmv")
+texture_under = ExtResource("15")
+texture_progress = ExtResource("15")
 tint_under = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/CircleProgress"]
@@ -446,75 +416,255 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3.52, 1.419)
 text = "dead
-press lmb to reload"
+press e to reload"
 
-[node name="DetectionRange" type="Area3D" parent="."]
-collision_mask = 64
-script = ExtResource("22_4xvka")
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_top = 112.0
+offset_right = 40.0
+offset_bottom = 135.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionRange"]
-shape = SubResource("SphereShape3D_g5dec")
+[node name="FPSLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
 
-[node name="Sounds" type="Node3D" parent="." node_paths=PackedStringArray("player", "land_sounds")]
-script = ExtResource("15_g6rjs")
+[node name="HealthBar3" type="ProgressBar" parent="CanvasLayer/Control" node_paths=PackedStringArray("up_pos", "down_pos")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.434896
+anchor_top = 1.0108
+anchor_right = 0.565104
+anchor_bottom = 1.05247
+grow_horizontal = 2
+grow_vertical = 0
+show_percentage = false
+script = ExtResource("16")
+up_pos = NodePath("../UpPos")
+down_pos = NodePath("../DownPos")
+enforce_show = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/Control/HealthBar3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 21.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[rainbow]BOSS"
+
+[node name="UpPos" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="DownPos" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchor_left = 0.482639
+anchor_top = 1.02315
+anchor_right = 0.517361
+anchor_bottom = 1.08488
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(20, 20)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_top = 388.0
+offset_right = 40.0
+offset_bottom = 411.0
+
+[node name="Menu" type="PanelContainer" parent="CanvasLayer" node_paths=PackedStringArray("player")]
+process_mode = 3
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17")
+player = NodePath("../..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Resume" type="Button" parent="CanvasLayer/Menu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Resume"
+script = ExtResource("18")
+easing_type = 1
+trans_type = 10
+easing_duration = 0.2
+
+[node name="Return Button" type="Button" parent="CanvasLayer/Menu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Return To The Subway"
+script = ExtResource("18")
+easing_type = 1
+trans_type = 10
+easing_duration = 0.2
+
+[node name="SFX Container" type="HBoxContainer" parent="CanvasLayer/Menu/VBoxContainer"]
+layout_mode = 2
+
+[node name="SFX Label" type="Label" parent="CanvasLayer/Menu/VBoxContainer/SFX Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "SFX: "
+
+[node name="SFX Slider" type="HSlider" parent="CanvasLayer/Menu/VBoxContainer/SFX Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+
+[node name="Music Container" type="HBoxContainer" parent="CanvasLayer/Menu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Music Label" type="Label" parent="CanvasLayer/Menu/VBoxContainer/Music Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Music:"
+
+[node name="Music Slider" type="HSlider" parent="CanvasLayer/Menu/VBoxContainer/Music Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+
+[node name="PausedSong" type="FmodEventEmitter3D" parent="CanvasLayer/Menu"]
+event_name = "event:/Music3D/MallAmbiance"
+event_guid = "{d9de1b67-4ea3-42ae-8ef4-386efd3e3506}"
+attached = false
+allow_fadeout = false
+preload_event = false
+volume = 0.0
+
+[node name="Sounds" type="Node3D" parent="." node_paths=PackedStringArray("player", "land_sounds", "hit_sound", "teleport_sound", "light_sound")]
+script = ExtResource("19")
 player = NodePath("..")
 land_sounds = NodePath("LandSounds")
+hit_sound = NodePath("Hit")
+teleport_sound = NodePath("Teleport")
+light_sound = NodePath("Light")
 
-[node name="Footsteps" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("15_3k5ka")
-volume_db = -28.64
-bus = &"SFX"
-script = ExtResource("20_i2nv4")
-influence = 0.31
+[node name="Footsteps" type="FmodEventEmitter3D" parent="Sounds" node_paths=PackedStringArray("player")]
+event_name = "event:/Sfx3D/Footsteps"
+event_guid = "{b2a68716-b463-47e3-a4e3-1dd8d6c56a90}"
+preload_event = false
+fmod_parameters/TerrainType/id = 6173407133367593869
+fmod_parameters/TerrainType = "Dirt"
+fmod_parameters/TerrainType/labels = PackedStringArray("Dirt", "Stone")
+fmod_parameters/TerrainType/variant_type = 4
+script = ExtResource("20")
+player = NodePath("../..")
 
 [node name="DistanceBasedComponent" type="Node" parent="Sounds/Footsteps" node_paths=PackedStringArray("target", "callee")]
-script = ExtResource("19_xu8rn")
+script = ExtResource("21")
 target = NodePath("../../..")
 callee = NodePath("..")
-what_to_call = "play"
+what_to_call = "play_thing"
 desired_axes = 7
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("9_gufxx")
-max_polyphony = 136
-bus = &"SFX"
+[node name="LandSounds" type="FmodEventEmitter3D" parent="Sounds"]
+event_name = "event:/Sfx3D/Land"
+event_guid = "{73fc5c50-c914-4ed8-a273-e1910fa4be09}"
+preload_event = false
+fmod_parameters/ProjectedVelocity/id = -4229119358039503525
+fmod_parameters/ProjectedVelocity = 0.0
+fmod_parameters/ProjectedVelocity/variant_type = 3
 
-[node name="LandSounds" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = SubResource("AudioStreamSynchronized_d6d7n")
-bus = &"SFX"
-
-[node name="JumpSounds" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = SubResource("AudioStreamRandomizer_x1hvq")
-bus = &"SFX"
-script = ExtResource("20_i2nv4")
+[node name="JumpSounds" type="FmodEventEmitter3D" parent="Sounds"]
+event_name = "event:/Sfx3D/Jump"
+event_guid = "{623a028e-e99f-4f2e-b7b2-e0eb9564e270}"
+preload_event = false
 
 [node name="SignalConnector" type="Node" parent="Sounds/JumpSounds" node_paths=PackedStringArray("from", "to")]
-script = ExtResource("31_ry2uw")
+script = ExtResource("22")
 from = NodePath("../../..")
 what = "jump_ground"
 to = NodePath("..")
 method = "play"
 
-[node name="Hit" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = SubResource("AudioStreamRandomizer_d57vy")
+[node name="Hit" type="FmodEventEmitter3D" parent="Sounds"]
+event_name = "event:/Sfx3D/Ouch"
+event_guid = "{830b2ff4-960e-4fb4-99a3-710ccb8a20f2}"
+preload_event = false
+fmod_parameters/Charge/id = 7949038504800399202
+fmod_parameters/Charge = 0.5
+fmod_parameters/Charge/variant_type = 3
 
-[node name="Light" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = SubResource("AudioStreamRandomizer_daeav")
+[node name="SoundMonitor" type="Area3D" parent="Sounds" node_paths=PackedStringArray("emitter")]
+script = ExtResource("23")
+emitter = NodePath("FmodEventEmitter3D")
+
+[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="Sounds/SoundMonitor"]
+event_name = "snapshot:/Outdoors"
+event_guid = "{003ca2d6-a16e-41d7-8558-728dc0b19731}"
+allow_fadeout = false
+preload_event = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sounds/SoundMonitor"]
+shape = ExtResource("6")
+
+[node name="Teleport" type="FmodEventEmitter3D" parent="Sounds"]
+event_name = "event:/Sfx3D/Snap"
+event_guid = "{d540c6b7-8ea9-464e-8236-5d7678830b26}"
+allow_fadeout = false
+preload_event = false
+
+[node name="Light" type="FmodEventEmitter3D" parent="Sounds"]
+event_name = "event:/Sfx3D/Light"
+event_guid = "{888175b4-6540-4756-a21e-c04da036cadd}"
+allow_fadeout = false
+preload_event = false
+fmod_parameters/Active/id = 5591441648638885785
+fmod_parameters/Active = 0
+fmod_parameters/Active/variant_type = 2
 
 [node name="Components" type="Node3D" parent="."]
 
 [node name="ShakerComponent3D" type="Node3D" parent="Components" node_paths=PackedStringArray("Targets")]
 visible = false
-script = ExtResource("1_nvq1j")
+script = ExtResource("24")
 custom_target = true
 Targets = [NodePath("../../PanNode/PlayerCamera")]
 AutoPlay = true
 intensity = 0.319
 fade_out = 0.34151
-shakerPreset = ExtResource("6_wgnfw")
+shakerPreset = ExtResource("25")
 
 [node name="ShakerReceiver3D" type="Node3D" parent="Components/ShakerComponent3D"]
-script = ExtResource("6_l8am5")
+script = ExtResource("26")
 exit_fade_out = 10.7896
 
 [node name="Area3D" type="Area3D" parent="Components/ShakerComponent3D/ShakerReceiver3D"]
@@ -525,37 +675,56 @@ collision_mask = 512
 shape = SubResource("SphereShape3D_165qn")
 
 [node name="NoFadeShaker" type="Node3D" parent="Components" node_paths=PackedStringArray("Targets")]
-script = ExtResource("1_nvq1j")
+script = ExtResource("24")
 custom_target = true
 Targets = [NodePath("../../PanNode/PlayerCamera")]
 duration = 0.4
 fade_in = 1e-05
 fade_out = 0.435277
-shakerPreset = ExtResource("33_5hssx")
+shakerPreset = ExtResource("27")
 
 [node name="HealthComponent" type="Node" parent="Components" node_paths=PackedStringArray("hurtbox")]
-script = ExtResource("35_bclfc")
+script = ExtResource("28")
 hurtbox = NodePath("../Hurtbox")
+max_health = 120
+starting_health = 119
 
 [node name="Hurtbox" type="Area3D" parent="Components"]
 visible = false
-script = ExtResource("37_fxsxk")
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("29")
 
 [node name="@CollisionShape3D@22579" type="CollisionShape3D" parent="Components/Hurtbox"]
 shape = SubResource("CapsuleShape3D_vksda")
 
-[node name="PortalArea" type="Area3D" parent="."]
+[node name="DetectionRange" type="Area3D" parent="Components"]
+collision_mask = 64
+script = ExtResource("30")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/DetectionRange"]
+shape = SubResource("SphereShape3D_g5dec")
+
+[node name="PortalArea" type="Area3D" parent="Components"]
 visible = false
 monitoring = false
-metadata/teleportable_root = NodePath("..")
+metadata/teleportable_root = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/PortalArea"]
 shape = SubResource("CapsuleShape3D_lohhf")
 
+[node name="ScreenshotTool" type="Node" parent="Components"]
+script = ExtResource("31")
+
 [node name="GravCast" type="RayCast3D" parent="."]
+visible = false
 target_position = Vector3(0, -90, 0)
 hit_from_inside = true
 
-[node name="GravCast2" type="RayCast3D" parent="."]
-visible = false
-target_position = Vector3(0, -1.05, 0)
+[node name="GravCast2" type="ShapeCast3D" parent="."]
+shape = ExtResource("6")
+target_position = Vector3(0, -0.015, 0)
+
+[node name="ShapeGrav" type="ShapeCast3D" parent="."]
+shape = ExtResource("6")
+target_position = Vector3(0, -0.02, 0)

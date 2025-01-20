@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" load_steps=5 format=3 uid="uid://b3q16tbylah8x"]
+
+[ext_resource type="Resource" uid="uid://b70vf4t5dc70t" path="res://addons/func_godot/fgd/func_geo.tres" id="1_2xr6n"]
+[ext_resource type="Script" uid="uid://ffxvokfb4ow6" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_d5brl"]
+[ext_resource type="Resource" uid="uid://wk3u88lv7j42" path="res://tb/entities/sound_tile.tres" id="2_phetv"]
+[ext_resource type="Script" uid="uid://2yfdhxrt7bdl" path="res://components/misc/bhop_tile.gd" id="3_muc8c"]
+
+[resource]
+script = ExtResource("1_d5brl")
+spawn_type = 2
+origin_type = 4
+build_visuals = true
+use_in_baked_light = true
+shadow_casting_setting = 1
+build_occlusion = true
+render_layers = 1
+collision_shape_type = 1
+collision_layer = 1
+collision_mask = 1
+collision_priority = 1.0
+collision_shape_margin = 0.04
+add_textures_metadata = false
+add_vertex_metadata = false
+add_face_position_metadata = false
+add_face_normal_metadata = false
+add_collision_shape_face_range_metadata = false
+script_class = ExtResource("3_muc8c")
+classname = "ohye_bhop"
+description = "Bhop tile. teleports player"
+func_godot_internal = false
+base_classes = Array[Resource]([ExtResource("1_2xr6n"), ExtResource("2_phetv")])
+class_properties = {
+"id": 0
+}
+class_property_descriptions = {}
+auto_apply_to_matching_node_properties = false
+meta_properties = {}
+node_class = "StaticBody3D"
+name_property = "Static Body"

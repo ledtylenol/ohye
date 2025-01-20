@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://f61tj5gs7aml"]
+
+[ext_resource type="Shader" path="res://test/march.gdshader" id="1_6cp43"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kaqjr"]
+shader = ExtResource("1_6cp43")
+shader_parameter/ro = Vector3(0, 0, -3)
+shader_parameter/zoom = 0.2
+shader_parameter/thres = 0.001
+shader_parameter/smoothing = 0.985
+
+[node name="ColorRect" type="ColorRect"]
+material = SubResource("ShaderMaterial_kaqjr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

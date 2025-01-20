@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://c0aggqpuri48h"
+path="res://.godot/imported/subway.map-15228a3609bff4ff71de9683dfa7e295.tres"
+
+[deps]
+
+source_file="res://tb/maps/subway.map"
+dest_files=["res://.godot/imported/subway.map-15228a3609bff4ff71de9683dfa7e295.tres"]
+
+[params]
+

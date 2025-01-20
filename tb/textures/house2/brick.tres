@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b0qqvsuplq7lc"]
+
+[ext_resource type="Texture2D" uid="uid://c1x1fxlreof27" path="res://tb/textures/house2/brick.jpg" id="1_bmkyb"]
+[ext_resource type="Texture2D" uid="uid://bmkwop1cjbv73" path="res://tb/textures/house2/brick_normal.jpg" id="2_mflv5"]
+
+[resource]
+albedo_texture = ExtResource("1_bmkyb")
+metallic_specular = 0.0
+normal_enabled = true
+normal_texture = ExtResource("2_mflv5")
+texture_filter = 2

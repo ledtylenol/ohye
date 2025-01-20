@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cynlwf47lm2no"]
+
+[ext_resource type="Script" path="res://special/achievements/achievement_display.gd" id="1_uwq6q"]
+
+[node name="AchievementDisplay" type="Node3D"]
+visible = false
+script = ExtResource("1_uwq6q")
+
+[node name="Sprite" type="Sprite3D" parent="."]
+billboard = 1
+texture_filter = 0
+
+[node name="Time label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+offset = Vector2(0, 127.55)
+billboard = 1

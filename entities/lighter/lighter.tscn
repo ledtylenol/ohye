@@ -31,12 +31,20 @@ stream_0/stream = ExtResource("6_2bt0u")
 script = ExtResource("1_s583j")
 interact = NodePath("InteractComponent")
 
-[node name="InteractComponent" type="Area3D" parent="." node_paths=PackedStringArray("mesh", "body")]
+[node name="InteractComponent" type="Area3D" parent="." node_paths=PackedStringArray("mesh", "body", "text")]
 script = ExtResource("2_k0i2t")
-show_text = true
 what_text = "Pick Up"
 mesh = NodePath("../MeshInstance3D")
 body = NodePath("../StaticBody3D")
+text = NodePath("Label3D")
+
+[node name="Label3D" type="Label3D" parent="InteractComponent"]
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+texture_filter = 0
+text = "Item"
+font_size = 116
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_xlmlt")
@@ -48,8 +56,6 @@ shape = SubResource("BoxShape3D_cikca")
 
 [node name="On" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_7gvbf")
-bus = &"SFX"
 
 [node name="Off" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_snjbn")
-bus = &"SFX"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://uco1arxx028a"]
+
+[ext_resource type="Script" path="res://special/achievement.gd" id="1_63b05"]
+[ext_resource type="Texture2D" uid="uid://cgqjq33nkemnu" path="res://special/achievements/icons/jerma!.jpg" id="2_isavq"]
+
+[resource]
+script = ExtResource("1_63b05")
+name = "Find Jerma"
+description = "[shake]Sparkle on![]
+_It's Fathers Day!_
+Don't forget
+to be yourself!
+(Find the High Quality jerma room)"
+sprite = ExtResource("2_isavq")
+value = 50
+time_unlock = 41.8833

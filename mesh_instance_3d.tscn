@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://brh1twupuisd1"]
+
+[ext_resource type="Script" path="res://mesh_instance_3d.gd" id="1_l10o1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6r2ci"]
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(-0.809017, 0.345491, 0.475528, 0, 0.809017, -0.587785, -0.587785, -0.475528, -0.654509, 0, 0, 0)
+mesh = SubResource("PlaneMesh_6r2ci")
+script = ExtResource("1_l10o1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.675354, -0.612195, 0.411235, -0.0917228, 0.623006, 0.77682, -0.731767, 0.486909, -0.476902, 1.02438, 2.39874, -1.40994)
+top_level = true

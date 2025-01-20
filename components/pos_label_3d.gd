@@ -10,7 +10,7 @@ func delete() -> void:
 		finished.emit()
 		queue_free()
 		return
-	if tween:tween.stop()
+	if tween:tween.kill()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "transparency", 1.0, 0.01)
 	tween.tween_callback(queue_free)
@@ -20,7 +20,7 @@ func start() -> void:
 	if text[0] == ' ':
 		finished.emit()
 		return
-	if tween: tween.stop()
+	if tween: tween.kill()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(self, "transparency", 0.0, 0.1).from(1.0)
 	tween.parallel().tween_property(self, "position", initial_pos, 0.1).from(initial_pos + basis.y * 2)

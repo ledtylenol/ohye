@@ -1,0 +1,661 @@
+[gd_scene load_steps=46 format=3 uid="uid://c4jqyhvc7h1i"]
+
+[ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="1_nvq1j"]
+[ext_resource type="Script" path="res://entities/player/scripts/player.gd" id="1_o6h1d"]
+[ext_resource type="Script" path="res://entities/player/scripts/stats.gd" id="2_34ih3"]
+[ext_resource type="Script" path="res://entities/player/scripts/player_camera.gd" id="3_kcw1u"]
+[ext_resource type="Shape3D" uid="uid://fjxgtxkc8ay8" path="res://entities/player/player_collider.tres" id="5_5tvuo"]
+[ext_resource type="Script" path="res://addons/shaker/src/Vector3/ShakerReceiver3D.gd" id="6_l8am5"]
+[ext_resource type="Resource" uid="uid://dse4au3onquif" path="res://shakes/weak_shake.tres" id="6_wgnfw"]
+[ext_resource type="Script" path="res://entities/player/scripts/interact_ray.gd" id="8_rhn0u"]
+[ext_resource type="Script" path="res://entities/player/scripts/UI.gd" id="10_rqt05"]
+[ext_resource type="Script" path="res://entities/player/scripts/crosshair_anchor.gd" id="11_4blbx"]
+[ext_resource type="Script" path="res://entities/player/scripts/cursor.gd" id="11_y8mn5"]
+[ext_resource type="Script" path="res://entities/player/circle_progress.gd" id="12_3moa3"]
+[ext_resource type="Material" uid="uid://skv487libhfo" path="res://shaders/negative.tres" id="12_8323r"]
+[ext_resource type="Shader" path="res://shaders/negative.gdshader" id="12_s0l7a"]
+[ext_resource type="Script" path="res://utils/second_order_dynamics.gd" id="13_bgr5k"]
+[ext_resource type="Texture2D" uid="uid://s0dx16cittpc" path="res://components/circle_progress/CircularProgressBar.png" id="13_o7vmv"]
+[ext_resource type="Script" path="res://entities/player/health_bar.gd" id="14_64o0c"]
+[ext_resource type="Script" path="res://entities/player/boss_bar.gd" id="15_6n75e"]
+[ext_resource type="Script" path="res://entities/player/sounds.gd" id="15_g6rjs"]
+[ext_resource type="Script" path="res://entities/player/footsteps.gd" id="16_7ebuy"]
+[ext_resource type="Script" path="res://entities/player/sound_monitor.gd" id="19_liog8"]
+[ext_resource type="Script" path="res://entities/player/distance_based_component_footsteps.gd" id="19_xu8rn"]
+[ext_resource type="Script" path="res://entities/player/scripts/detection_range.gd" id="22_4xvka"]
+[ext_resource type="Script" path="res://entities/player/weapons.gd" id="27_6onut"]
+[ext_resource type="Script" path="res://components/screenshot_tool.gd" id="27_r16sk"]
+[ext_resource type="PackedScene" uid="uid://cvubdwe0x7skk" path="res://components/weapon_node.tscn" id="31_c8him"]
+[ext_resource type="Script" path="res://components/misc/signal_connector.gd" id="31_ry2uw"]
+[ext_resource type="Resource" uid="uid://yi0a6jwp8ub7" path="res://shakes/hit_me.tres" id="33_5hssx"]
+[ext_resource type="Script" path="res://components/entities/health_component.gd" id="35_bclfc"]
+[ext_resource type="Script" path="res://components/entities/hurtbox.gd" id="37_fxsxk"]
+
+[sub_resource type="Resource" id="Resource_gvtwj"]
+script = ExtResource("2_34ih3")
+speed = 30
+speed_mul = 1.0
+ground_acceleration = 5.0
+jump_height = 4.0
+jump_peak_time = 0.4
+jump_descend_time = 0.44
+jump_count = 1
+minimum_jump_duration = 0.0
+max_ground_pounds = 3
+ground_pound_base_height = 20.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gum8l"]
+size = Vector3(0.7, 1.5, 0.345)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1mvl7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w0fuc"]
+shader = ExtResource("12_s0l7a")
+shader_parameter/alpha = null
+shader_parameter/use_alpha = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j0dca"]
+shader = ExtResource("12_s0l7a")
+shader_parameter/alpha = null
+shader_parameter/use_alpha = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kq3p6"]
+shader = ExtResource("12_s0l7a")
+shader_parameter/alpha = null
+shader_parameter/use_alpha = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5liy4"]
+bg_color = Color(0, 0.652667, 0.89, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1amt"]
+bg_color = Color(6.35326e-06, 0.652812, 0.880235, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6vkg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ls27t"]
+bg_color = Color(0, 0.693143, 0.638335, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkoyg"]
+shader = ExtResource("12_s0l7a")
+shader_parameter/alpha = null
+shader_parameter/use_alpha = false
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_165qn"]
+radius = 1.07827
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vksda"]
+radius = 0.4
+height = 1.9
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g5dec"]
+radius = 51.387
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lohhf"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "shaker", "health_component", "hurtbox", "hit_shaker", "circle_progress", "grav_cast", "other_cast", "shape_cast")]
+collision_layer = 8
+collision_mask = 5
+floor_constant_speed = true
+floor_snap_length = 0.37
+script = ExtResource("1_o6h1d")
+state = 1
+camera = NodePath("PanNode/PlayerCamera")
+shaker = NodePath("Components/NoFadeShaker")
+health_component = NodePath("Components/HealthComponent")
+hurtbox = NodePath("Components/Hurtbox")
+hit_shaker = NodePath("Components/NoFadeShaker")
+circle_progress = NodePath("CanvasLayer/Control/CircleProgress")
+grav_cast = NodePath("GravCast")
+other_cast = NodePath("GravCast2")
+shape_cast = NodePath("ShapeGrav")
+stats = SubResource("Resource_gvtwj")
+
+[node name="FmodListener3D" type="FmodListener3D" parent="."]
+
+[node name="PanNode" type="Node3D" parent="."]
+
+[node name="Target" type="Marker3D" parent="PanNode"]
+
+[node name="PlayerCamera" type="Camera3D" parent="PanNode" node_paths=PackedStringArray("player", "shaker", "pan_node")]
+physics_interpolation_mode = 1
+current = true
+fov = 90.0
+script = ExtResource("3_kcw1u")
+player = NodePath("../..")
+shaker = NodePath("../../Components/ShakerComponent3D")
+pan_node = NodePath("..")
+movement_tilt = 0.321
+sensitivity = 10.388
+y_offset = 0.5
+
+[node name="InteractRay" type="Area3D" parent="PanNode/PlayerCamera" node_paths=PackedStringArray("shaker_component", "center_marker", "camera")]
+script = ExtResource("8_rhn0u")
+shaker_component = NodePath("../../../Components/ShakerComponent3D")
+center_marker = NodePath("../../../CanvasLayer/Control/CenterMarker")
+camera = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PanNode/PlayerCamera/InteractRay"]
+transform = Transform3D(1, 0, 3.29553e-21, 3.43562e-23, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1.09696)
+shape = SubResource("BoxShape3D_gum8l")
+
+[node name="SpotLight3D" type="OmniLight3D" parent="PanNode/PlayerCamera"]
+light_color = Color(0, 0, 0, 1)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="PanNode/PlayerCamera"]
+light_size = 1.0
+light_bake_mode = 0
+shadow_reverse_cull_face = true
+spot_range = 108.583
+spot_angle = 56.8326
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
+shape = ExtResource("5_5tvuo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_1mvl7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("left_rect", "right_rect", "up_rect", "down_rect", "interact_ray")]
+script = ExtResource("10_rqt05")
+left_rect = NodePath("Control/Control/ColorRect3")
+right_rect = NodePath("Control/Control/ColorRect4")
+up_rect = NodePath("Control/Control/ColorRect")
+down_rect = NodePath("Control/Control/ColorRect2")
+interact_ray = NodePath("../PanNode/PlayerCamera/InteractRay")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/Control" node_paths=PackedStringArray("camera", "ray", "sod", "center")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_4blbx")
+camera = NodePath("../../../PanNode/PlayerCamera")
+ray = NodePath("../../../PanNode/PlayerCamera/InteractRay")
+sod = NodePath("SecondOrderDynamics")
+center = NodePath("../CenterMarker")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/Control"]
+material = ExtResource("12_8323r")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -9.0
+offset_right = 2.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_y8mn5")
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/Control/Control"]
+material = SubResource("ShaderMaterial_w0fuc")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -2.0
+offset_right = -5.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_y8mn5")
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/Control/Control"]
+material = SubResource("ShaderMaterial_j0dca")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -2.0
+offset_right = 9.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_y8mn5")
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Control/Control"]
+material = SubResource("ShaderMaterial_kq3p6")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = 5.0
+offset_right = 2.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_y8mn5")
+
+[node name="SecondOrderDynamics" type="Node" parent="CanvasLayer/Control/Control"]
+script = ExtResource("13_bgr5k")
+_f = 3.0
+
+[node name="CenterMarker" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/Control" node_paths=PackedStringArray("health_component")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.332031
+anchor_right = 0.667969
+anchor_bottom = 0.0416667
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_5liy4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h1amt")
+value = 22.27
+show_percentage = false
+script = ExtResource("14_64o0c")
+health_component = NodePath("../../../Components/HealthComponent")
+duration = 1.5
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthBar2" type="ProgressBar" parent="CanvasLayer/Control" node_paths=PackedStringArray("health_component")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.332465
+anchor_right = 0.667535
+anchor_bottom = 0.0416667
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_r6vkg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ls27t")
+value = 12.87
+show_percentage = false
+script = ExtResource("14_64o0c")
+health_component = NodePath("../../../Components/HealthComponent")
+duration = 0.5
+do_heat = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Hotbar" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.482639
+anchor_top = 0.938272
+anchor_right = 0.517361
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/Hotbar"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control/Hotbar"]
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/Control/Hotbar"]
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/Control/Hotbar"]
+layout_mode = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/Control/Hotbar"]
+layout_mode = 2
+
+[node name="VelocityLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 244.0
+offset_bottom = 122.0
+autowrap_mode = 0
+
+[node name="CircleProgress" type="Control" parent="CanvasLayer/Control" node_paths=PackedStringArray("pos_control")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_3moa3")
+pos_control = NodePath("../Control")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/Control/CircleProgress"]
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_vkoyg")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(150, 150)
+max_value = 1.0
+step = 0.001
+fill_mode = 4
+texture_under = ExtResource("13_o7vmv")
+texture_progress = ExtResource("13_o7vmv")
+tint_under = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/CircleProgress"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Dead" type="Label" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.52, 1.419)
+text = "dead
+press e to reload"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_top = 112.0
+offset_right = 40.0
+offset_bottom = 135.0
+
+[node name="FPSLabel" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+
+[node name="HealthBar3" type="ProgressBar" parent="CanvasLayer/Control" node_paths=PackedStringArray("up_pos", "down_pos")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.434896
+anchor_top = 1.0108
+anchor_right = 0.565104
+anchor_bottom = 1.05247
+grow_horizontal = 2
+grow_vertical = 0
+show_percentage = false
+script = ExtResource("15_6n75e")
+up_pos = NodePath("../UpPos")
+down_pos = NodePath("../DownPos")
+enforce_show = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/Control/HealthBar3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 21.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[rainbow]BOSS"
+
+[node name="UpPos" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="DownPos" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchor_left = 0.482639
+anchor_top = 1.02315
+anchor_right = 0.517361
+anchor_bottom = 1.08488
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Sounds" type="Node3D" parent="." node_paths=PackedStringArray("player", "land_sounds", "hit_sound")]
+script = ExtResource("15_g6rjs")
+player = NodePath("..")
+land_sounds = NodePath("LandSounds")
+hit_sound = NodePath("Hit")
+
+[node name="Footsteps" type="FmodEventEmitter3D" parent="Sounds" node_paths=PackedStringArray("player")]
+event_name = "event:/Sfx3D/Footsteps"
+event_guid = "{b2a68716-b463-47e3-a4e3-1dd8d6c56a90}"
+preload_event = false
+fmod_parameters/TerrainType/id = 6173407133367593869
+fmod_parameters/TerrainType = "Dirt"
+fmod_parameters/TerrainType/labels = PackedStringArray("Dirt", "Stone")
+fmod_parameters/TerrainType/variant_type = 4
+script = ExtResource("16_7ebuy")
+player = NodePath("../..")
+
+[node name="DistanceBasedComponent" type="Node" parent="Sounds/Footsteps" node_paths=PackedStringArray("target", "callee")]
+script = ExtResource("19_xu8rn")
+target = NodePath("../../..")
+callee = NodePath("..")
+what_to_call = "play_thing"
+desired_axes = 7
+
+[node name="LandSounds" type="FmodEventEmitter3D" parent="Sounds"]
+event_name = "event:/Sfx3D/Land"
+event_guid = "{73fc5c50-c914-4ed8-a273-e1910fa4be09}"
+preload_event = false
+fmod_parameters/ProjectedVelocity/id = -4229119358039503525
+fmod_parameters/ProjectedVelocity = 0.0
+fmod_parameters/ProjectedVelocity/variant_type = 3
+
+[node name="JumpSounds" type="FmodEventEmitter3D" parent="Sounds"]
+event_name = "event:/Sfx3D/Jump"
+event_guid = "{623a028e-e99f-4f2e-b7b2-e0eb9564e270}"
+preload_event = false
+
+[node name="SignalConnector" type="Node" parent="Sounds/JumpSounds" node_paths=PackedStringArray("from", "to")]
+script = ExtResource("31_ry2uw")
+from = NodePath("../../..")
+what = "jump_ground"
+to = NodePath("..")
+method = "play"
+
+[node name="Hit" type="FmodEventEmitter3D" parent="Sounds"]
+event_name = "event:/Sfx3D/Ouch"
+event_guid = "{830b2ff4-960e-4fb4-99a3-710ccb8a20f2}"
+preload_event = false
+fmod_parameters/Charge/id = 7949038504800399202
+fmod_parameters/Charge = 0.5
+fmod_parameters/Charge/variant_type = 3
+
+[node name="Light" type="Node" parent="Sounds"]
+
+[node name="SoundMonitor" type="Node3D" parent="Sounds"]
+script = ExtResource("19_liog8")
+
+[node name="Forward" type="RayCast3D" parent="Sounds/SoundMonitor"]
+target_position = Vector3(0, 0, -20)
+
+[node name="FrontLeft" type="RayCast3D" parent="Sounds/SoundMonitor"]
+target_position = Vector3(-14, 0, -14)
+
+[node name="FrontRight" type="RayCast3D" parent="Sounds/SoundMonitor"]
+target_position = Vector3(14, 0, -14)
+
+[node name="BackLeft" type="RayCast3D" parent="Sounds/SoundMonitor"]
+target_position = Vector3(-14, 0, 14)
+
+[node name="BackRight" type="RayCast3D" parent="Sounds/SoundMonitor"]
+target_position = Vector3(14, 0, 14)
+
+[node name="Left" type="RayCast3D" parent="Sounds/SoundMonitor"]
+target_position = Vector3(-20, 0, 0)
+
+[node name="Right" type="RayCast3D" parent="Sounds/SoundMonitor"]
+target_position = Vector3(20, 0, 0)
+
+[node name="Back" type="RayCast3D" parent="Sounds/SoundMonitor"]
+target_position = Vector3(0, 0, 20)
+
+[node name="Up" type="RayCast3D" parent="Sounds/SoundMonitor"]
+target_position = Vector3(0, 20, 0)
+
+[node name="Components" type="Node3D" parent="."]
+
+[node name="ShakerComponent3D" type="Node3D" parent="Components" node_paths=PackedStringArray("Targets")]
+visible = false
+script = ExtResource("1_nvq1j")
+custom_target = true
+Targets = [NodePath("../../PanNode/PlayerCamera")]
+AutoPlay = true
+intensity = 0.319
+fade_out = 0.34151
+shakerPreset = ExtResource("6_wgnfw")
+
+[node name="ShakerReceiver3D" type="Node3D" parent="Components/ShakerComponent3D"]
+script = ExtResource("6_l8am5")
+exit_fade_out = 10.7896
+
+[node name="Area3D" type="Area3D" parent="Components/ShakerComponent3D/ShakerReceiver3D"]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/ShakerComponent3D/ShakerReceiver3D/Area3D"]
+shape = SubResource("SphereShape3D_165qn")
+
+[node name="NoFadeShaker" type="Node3D" parent="Components" node_paths=PackedStringArray("Targets")]
+script = ExtResource("1_nvq1j")
+custom_target = true
+Targets = [NodePath("../../PanNode/PlayerCamera")]
+duration = 0.4
+fade_in = 1e-05
+fade_out = 0.435277
+shakerPreset = ExtResource("33_5hssx")
+
+[node name="HealthComponent" type="Node" parent="Components" node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("35_bclfc")
+hurtbox = NodePath("../Hurtbox")
+max_health = 15
+starting_health = 15
+
+[node name="Hurtbox" type="Area3D" parent="Components"]
+visible = false
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("37_fxsxk")
+
+[node name="@CollisionShape3D@22579" type="CollisionShape3D" parent="Components/Hurtbox"]
+shape = SubResource("CapsuleShape3D_vksda")
+
+[node name="DetectionRange" type="Area3D" parent="Components"]
+collision_mask = 64
+script = ExtResource("22_4xvka")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/DetectionRange"]
+shape = SubResource("SphereShape3D_g5dec")
+
+[node name="PortalArea" type="Area3D" parent="Components"]
+visible = false
+monitoring = false
+metadata/teleportable_root = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/PortalArea"]
+shape = SubResource("CapsuleShape3D_lohhf")
+
+[node name="ScreenshotTool" type="Node" parent="Components"]
+script = ExtResource("27_r16sk")
+
+[node name="GravCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, -90, 0)
+hit_from_inside = true
+
+[node name="GravCast2" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.05, 0)
+
+[node name="ShapeGrav" type="ShapeCast3D" parent="."]
+shape = ExtResource("5_5tvuo")
+target_position = Vector3(0, -0.21, 0)
+
+[node name="Weapons" type="Node3D" parent="."]
+script = ExtResource("27_6onut")
+
+[node name="WeaponNode3" parent="Weapons" node_paths=PackedStringArray("camera_node", "player", "target") instance=ExtResource("31_c8him")]
+camera_node = NodePath("../../PanNode/PlayerCamera")
+player = NodePath("../..")
+target = NodePath("../../PanNode/PlayerCamera")
+offset = Vector3(0.275, -0.33, 0)
+
+[node name="WeaponNode2" parent="Weapons" node_paths=PackedStringArray("camera_node", "player", "target") instance=ExtResource("31_c8him")]
+camera_node = NodePath("../../PanNode/PlayerCamera")
+player = NodePath("../..")
+target = NodePath("../../PanNode/PlayerCamera")
+offset = Vector3(-0.275, -0.335, 0)
+
+[node name="WeaponNode" parent="Weapons" node_paths=PackedStringArray("camera_node", "player", "target") instance=ExtResource("31_c8him")]
+camera_node = NodePath("../../PanNode/PlayerCamera")
+player = NodePath("../..")
+target = NodePath("../../PanNode/PlayerCamera")
+offset = Vector3(-0.5, 0, 0)
+
+[node name="WeaponNode4" parent="Weapons" node_paths=PackedStringArray("camera_node", "player", "target") instance=ExtResource("31_c8him")]
+camera_node = NodePath("../../PanNode/PlayerCamera")
+player = NodePath("../..")
+target = NodePath("../../PanNode/PlayerCamera")
+offset = Vector3(0.5, 0, 0.005)

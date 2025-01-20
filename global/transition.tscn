@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://cphlqiapayg8v"]
+
+[ext_resource type="Script" uid="uid://c6abbawqwui1h" path="res://global/transition.gd" id="1_wyyvm"]
+[ext_resource type="Script" uid="uid://7bf2wfuue7ko" path="res://components/misc/random_scene.gd" id="2_bfkww"]
+[ext_resource type="Script" uid="uid://bka1bqdqyu2dt" path="res://components/misc/scene_loader.gd" id="3_0u5ph"]
+[ext_resource type="Script" uid="uid://pk8b1tej038a" path="res://components/misc/random_scene_picker.gd" id="4_nqqrh"]
+
+[sub_resource type="Resource" id="Resource_jk0th"]
+script = ExtResource("2_bfkww")
+path = "res://world/subway/subwayoff.tscn"
+weight = 5
+
+[sub_resource type="Resource" id="Resource_0w0bs"]
+script = ExtResource("2_bfkww")
+path = "res://world/subway/subwayoff.tscn"
+weight = 50
+
+[sub_resource type="Resource" id="Resource_kmvpl"]
+script = ExtResource("2_bfkww")
+path = "res://world/subway/subwayoffv1.tscn"
+weight = 3
+
+[sub_resource type="Resource" id="Resource_ounia"]
+script = ExtResource("4_nqqrh")
+scenes = Array[ExtResource("2_bfkww")]([SubResource("Resource_0w0bs"), SubResource("Resource_kmvpl")])
+
+[node name="Transition" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_wyyvm")
+alternatives = Array[ExtResource("2_bfkww")]([SubResource("Resource_jk0th")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/Sfx3D/Spotlight"
+event_guid = "{43aa3cb5-4951-43ca-93d5-d19270223494}"
+attached = false
+preload_event = false
+volume = 0.67
+
+[node name="SceneLoader" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("3_0u5ph")
+scene_type = SubResource("Resource_ounia")
+delay = 0.0
+load_immediately = false
+can_change = true

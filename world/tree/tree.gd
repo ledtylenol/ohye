@@ -5,7 +5,7 @@ extends Node3D
 @onready var interact_component: InteractComponent = $Cube/StaticBody3D/InteractComponent
 var player_interacted := 0
 @onready var scene_loader: SceneLoader = $"../SceneLoader"
-@onready var apple: InteractComponent = $MeshInstance3D/InteractComponent
+@onready var apple: InteractComponent = $apfel/InteractComponent
 
 func _ready() -> void:
 	interact_component.interact.connect(p_i)
@@ -23,7 +23,8 @@ func p_i() -> void:
 
 func disable_apple() -> void:
 	apple.alpha = 0.0
-	$MeshInstance3D/StaticBody3D/CollisionShape3D.set_deferred("disabled", true)
-	$MeshInstance3D/InteractComponent.set_deferred("monitorable", false)
-	$MeshInstance3D.hide()
+	$apfel/Icosphere/StaticBody3D/CollisionShape3D.set_deferred("disabled", true)
+	$apfel/InteractComponent.set_deferred("monitorable", false)
+	$apfel/Icosphere.hide()
 	scene_loader.request_load()
+	$apfel/Twiddle.volume = 0

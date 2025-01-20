@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://dtnb7i3pq07t8"
+path="res://.godot/imported/dent.glsl-dc057224287a17f814b56277a8b00d79.res"
+
+[deps]
+
+source_file="res://compositor_effects/woah/dent.glsl"
+dest_files=["res://.godot/imported/dent.glsl-dc057224287a17f814b56277a8b00d79.res"]
+
+[params]
+

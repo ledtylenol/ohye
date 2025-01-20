@@ -1,0 +1,14 @@
+[gd_resource type="CompositorEffect" script_class="DistortEffect" load_steps=2 format=3 uid="uid://coq5g871bmm7u"]
+
+[ext_resource type="Script" path="res://compositor_effects/distort/distort.gd" id="1_0dgkj"]
+
+[resource]
+resource_local_to_scene = false
+resource_name = ""
+enabled = false
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_0dgkj")
+generate = false
+k = 0.0

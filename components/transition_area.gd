@@ -18,11 +18,11 @@ func _ready() -> void:
 	ResourceLoader.load_threaded_request(scene)
 	body_entered.connect(on_body_entered)
 	set_deferred("monitoring", active)
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	collision_mask = 1 << 3
 	if status >= 1.0 and not next_scene:
 		next_scene = ResourceLoader.load_threaded_get(scene)
 func on_body_entered(body: Node3D) -> void:
 	if body is not Player:
 		return
-	get_tree().call_deferred("change_scene_to_packed",next_scene)
+	Transition.change_scene(next_scene)

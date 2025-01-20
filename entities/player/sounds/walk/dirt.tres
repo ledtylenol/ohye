@@ -1,14 +1,14 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://byf3ra5vn7geo"]
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=4]
 
-[ext_resource type="AudioStream" uid="uid://cgtj4doh2hxgx" path="res://entities/player/sounds/walk/dirt1.mp3" id="1_2popw"]
-[ext_resource type="AudioStream" uid="uid://cdrtpt4rai25t" path="res://entities/player/sounds/walk/dirt2.mp3" id="2_ijl1b"]
-[ext_resource type="AudioStream" uid="uid://d0u73qtia80vk" path="res://entities/player/sounds/walk/dirt3.mp3" id="3_5a81a"]
-[ext_resource type="AudioStream" uid="uid://dfc7iinnr4d87" path="res://entities/player/sounds/walk/dirt4.mp3" id="4_toj5f"]
+[ext_resource type="AudioStream" uid="uid://cgtj4doh2hxgx" path="res://entities/player/sounds/walk/dirt1.mp3" id="1"]
+[ext_resource type="AudioStream" uid="uid://cdrtpt4rai25t" path="res://entities/player/sounds/walk/dirt2.mp3" id="2"]
+[ext_resource type="AudioStream" uid="uid://d0u73qtia80vk" path="res://entities/player/sounds/walk/dirt3.mp3" id="3"]
+[ext_resource type="AudioStream" uid="uid://dfc7iinnr4d87" path="res://entities/player/sounds/walk/dirt4.mp3" id="4"]
 
 [resource]
-random_pitch = 1.2
+random_pitch = 1.200000047683716
 streams_count = 4
-stream_0/stream = ExtResource("1_2popw")
-stream_1/stream = ExtResource("2_ijl1b")
-stream_2/stream = ExtResource("3_5a81a")
-stream_3/stream = ExtResource("4_toj5f")
+stream_0/stream = ExtResource("1")
+stream_1/stream = ExtResource("2")
+stream_2/stream = ExtResource("3")
+stream_3/stream = ExtResource("4")

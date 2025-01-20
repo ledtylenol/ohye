@@ -1,0 +1,11 @@
+Model Information:
+* title:	東方 Project - V2 Youmu Konpaku Fumo (3D scan)
+* source:	https://sketchfab.com/3d-models/project-v2-youmu-konpaku-fumo-3d-scan-0031ed6284ac4310952095302aad77c2
+* author:	Renafox (https://sketchfab.com/kryik1023)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "東方 Project - V2 Youmu Konpaku Fumo (3D scan)" (https://sketchfab.com/3d-models/project-v2-youmu-konpaku-fumo-3d-scan-0031ed6284ac4310952095302aad77c2) by Renafox (https://sketchfab.com/kryik1023) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctbx6g6y7u4fv"]
+
+[ext_resource type="PackedScene" uid="uid://cgodyhin3pt31" path="res://entities/strawb/StrawberryPurple.glb" id="1_fe0c8"]
+
+[node name="StrawberryPurple" instance=ExtResource("1_fe0c8")]
+transform = Transform3D(0.325, 0, 0, 0, 0.325, 0, 0, 0, 0.325, 0, 0, 0)

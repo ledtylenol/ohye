@@ -18,4 +18,3 @@ func play() -> void:
 
 func invert_visibility() -> void:
 	$CanvasLayer.visible = not $CanvasLayer.visible
-	Global.player.winds.volume_db = -80 if $CanvasLayer.visible else 0

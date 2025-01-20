@@ -26,14 +26,14 @@ func play_anim() -> void:
 
 func close() -> void:
 	state = STATES.CLOSED
-	if tween: tween.stop()
+	if tween: tween.kill()
 	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_callback(close_audio.play)
 	tween.tween_property(self, "position:z", 0.0, 0.4)
 	interact.prior = 2
 func open() -> void:
 	state = STATES.OPENED
-	if tween: tween.stop()
+	if tween: tween.kill()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_callback(open_audio.play)
 	tween.tween_property(self, "position:z", 1.5, 0.4)

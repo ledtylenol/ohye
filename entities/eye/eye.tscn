@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://gh1fmpm65ery"]
+
+[ext_resource type="Script" path="res://entities/eye/eye.gd" id="1_elp6e"]
+[ext_resource type="Texture2D" uid="uid://crebryy3cpw5c" path="res://entities/eye/eye.png" id="2_apisa"]
+[ext_resource type="Script" path="res://components/schizophrenia/schizophrenia.gd" id="3_vs7wp"]
+[ext_resource type="Script" path="res://components/state_machine.gd" id="4_8kjde"]
+[ext_resource type="Script" path="res://entities/eye/eye_schizo.gd" id="4_ujkif"]
+[ext_resource type="Script" path="res://entities/eye/floating.gd" id="7_klqun"]
+[ext_resource type="Script" path="res://entities/eye/wander.gd" id="8_00eit"]
+[ext_resource type="Script" path="res://utils/second_order_dynamics.gd" id="8_54dso"]
+[ext_resource type="Script" path="res://entities/eye/teleport.gd" id="8_r652n"]
+[ext_resource type="Script" path="res://components/entities/health_component.gd" id="9_amooa"]
+
+[node name="Eye" type="Node3D" node_paths=PackedStringArray("teleport_sound")]
+script = ExtResource("1_elp6e")
+teleport_sound = NodePath("Teleport")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture_filter = 2
+texture = ExtResource("2_apisa")
+
+[node name="Schizophrenia" type="VisibleOnScreenNotifier3D" parent="." node_paths=PackedStringArray("vision_points", "parent")]
+aabb = AABB(-0.5, -0.5, -0.5, 1, 1, 1)
+script = ExtResource("3_vs7wp")
+vision_points = [NodePath("Marker3D")]
+parent = NodePath(".")
+
+[node name="EyeSchizo" type="Node" parent="Schizophrenia" node_paths=PackedStringArray("angle_target")]
+script = ExtResource("4_ujkif")
+angle_target = NodePath("../..")
+_when_to_work = 15
+
+[node name="Marker3D" type="Marker3D" parent="Schizophrenia"]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("4_8kjde")
+current_state = NodePath("Wander")
+
+[node name="Floating" type="Node" parent="StateMachine" node_paths=PackedStringArray("schizo", "health_component", "target")]
+script = ExtResource("7_klqun")
+schizo = NodePath("../../Schizophrenia/EyeSchizo")
+health_component = NodePath("../../HealthComponent")
+target = NodePath("../..")
+
+[node name="Teleport" type="Node" parent="StateMachine" node_paths=PackedStringArray("scale_target", "hp", "target")]
+script = ExtResource("8_r652n")
+scale_target = NodePath("../../Sprite3D")
+hp = NodePath("../../HealthComponent")
+target = NodePath("../..")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("schizo", "target")]
+script = ExtResource("8_00eit")
+schizo = NodePath("../../Schizophrenia/EyeSchizo")
+target = NodePath("../..")
+
+[node name="Sod" type="Node" parent="."]
+script = ExtResource("8_54dso")
+
+[node name="RotSod" type="Node" parent="."]
+script = ExtResource("8_54dso")
+_z = 2.0
+_r = 1.0
+
+[node name="Swoosh" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/Sfx3D/Swing"
+event_guid = "{3593d805-f3fa-4171-a122-0f95681634b1}"
+allow_fadeout = false
+preload_event = false
+fmod_parameters/Charge/id = 7949038504800399202
+fmod_parameters/Charge = 0.0
+fmod_parameters/Charge/variant_type = 3
+
+[node name="Teleport" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/Sfx3D/Snap"
+event_guid = "{d540c6b7-8ea9-464e-8236-5d7678830b26}"
+allow_fadeout = false
+preload_event = false
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("9_amooa")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.246051)
+spot_range = 23.523
+spot_angle = 17.23
+
+[node name="Marker3D" type="Marker3D" parent="."]
+top_level = true

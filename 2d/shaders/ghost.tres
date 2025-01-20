@@ -1,9 +1,0 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cuscdadd4qkpt"]
-
-[ext_resource type="Shader" path="res://2d/shaders/ghost.gdshader" id="1_1h42r"]
-
-[resource]
-shader = ExtResource("1_1h42r")
-shader_parameter/alpha = null
-shader_parameter/time = 1.0
-shader_parameter/deformation_amount = 1.0

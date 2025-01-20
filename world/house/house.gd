@@ -23,7 +23,6 @@ func on_down(body: Node3D) -> void:
 		music.change_song_parts((1 << 1) | 1)
 func change(body: Node3D) -> void:
 	in_area -= 1
-	print(in_area)
 	if not in_area:
 		
 		if body is Player:

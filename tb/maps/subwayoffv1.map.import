@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://c6wfam0t5y6iu"
+path="res://.godot/imported/subwayoffv1.map-0dc8ac40855c8f83b319a98c1127c93e.tres"
+
+[deps]
+
+source_file="res://tb/maps/subwayoffv1.map"
+dest_files=["res://.godot/imported/subwayoffv1.map-0dc8ac40855c8f83b319a98c1127c93e.tres"]
+
+[params]
+

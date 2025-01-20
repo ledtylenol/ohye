@@ -12,5 +12,5 @@ enum Category {
 @export var category: Category
 @export var max_use_count := 0
 var uses_left := max_use_count
-
+@warning_ignore("unused_signal")
 signal expired

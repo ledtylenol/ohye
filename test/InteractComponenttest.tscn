@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bffoxo36ea5nr"]
+
+[ext_resource type="Script" path="res://components/interact_component/interact_component.gd" id="1_yjrra"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cikca"]
+size = Vector3(0.34, 1, 1)
+
+[node name="InteractComponent" type="Area3D"]
+script = ExtResource("1_yjrra")
+what_text = "Pick Up"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_cikca")
+
+[node name="_Label3D_5" type="Label3D" parent="."]
+billboard = 1
+no_depth_test = true
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Pick Up"
