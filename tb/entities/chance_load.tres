@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" format=3 uid="uid://c0gphmvdmnltj"]
+
+[ext_resource type="Resource" uid="uid://br3m0rm2abeb" path="res://tb/entities/chance_interact.tres" id="1_1ykim"]
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_xe55p"]
+[ext_resource type="Script" uid="uid://bu1xoex2vwg25" path="res://components/misc/tb/chance_interact_location.gd" id="3_w5s0o"]
+
+[resource]
+script = ExtResource("1_xe55p")
+origin_type = 4
+script_class = ExtResource("3_w5s0o")
+classname = "ohye_chancescene"
+base_classes = Array[Resource]([ExtResource("1_1ykim")])
+class_properties = Dictionary[String, Variant]({
+"scene": "subway/subwayoff"
+})
+node_class = "StaticBody3D"
+metadata/_custom_type_script = "uid://ffxvokfb4ow6"

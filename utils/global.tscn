@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://dbkt5kcfvfwv3"]
+[gd_scene format=3 uid="uid://dbkt5kcfvfwv3"]
 
-[ext_resource type="Script" path="res://utils/global.gd" id="1_slsxq"]
-[ext_resource type="Script" path="res://components/misc/random_value.gd" id="2_03o0v"]
+[ext_resource type="Script" uid="uid://ceydjlo3j2cna" path="res://utils/global.gd" id="1_slsxq"]
+[ext_resource type="Script" uid="uid://bfrw8wp7upc6m" path="res://components/misc/random_value.gd" id="2_03o0v"]
 
 [sub_resource type="Resource" id="Resource_gvy77"]
 script = ExtResource("2_03o0v")
@@ -11,12 +11,10 @@ weight = 1
 [sub_resource type="Resource" id="Resource_35cc1"]
 script = ExtResource("2_03o0v")
 value = "The neverending night"
-weight = 5
 
 [sub_resource type="Resource" id="Resource_7i3bb"]
 script = ExtResource("2_03o0v")
 value = "The biggest fool"
-weight = 5
 
 [sub_resource type="Resource" id="Resource_uqlpx"]
 script = ExtResource("2_03o0v")
@@ -31,12 +29,10 @@ weight = 50
 [sub_resource type="Resource" id="Resource_4d3ae"]
 script = ExtResource("2_03o0v")
 value = "That game with the uhhhhh"
-weight = 5
 
 [sub_resource type="Resource" id="Resource_i3o87"]
 script = ExtResource("2_03o0v")
 value = "I don't even know anymore"
-weight = 5
 
 [sub_resource type="Resource" id="Resource_2q7xh"]
 script = ExtResource("2_03o0v")
@@ -45,7 +41,7 @@ weight = 10
 
 [sub_resource type="Resource" id="Resource_lo602"]
 script = ExtResource("2_03o0v")
-value = "If you're reading this ney says GO FUCK YOURSELF"
+value = "If you're reading this wow"
 weight = 1
 
 [sub_resource type="Resource" id="Resource_mn8kj"]
@@ -56,13 +52,30 @@ weight = 10
 [sub_resource type="Resource" id="Resource_ynqrc"]
 script = ExtResource("2_03o0v")
 value = "ohye?"
-weight = 5
 
 [sub_resource type="Resource" id="Resource_rdwqo"]
 script = ExtResource("2_03o0v")
-value = "Every loading screen is ~fake~ personalized"
+value = "Every loading screen is fake"
 weight = 2
 
-[node name="Global" type="Node"]
+[sub_resource type="Resource" id="Resource_s7qx4"]
+script = ExtResource("2_03o0v")
+value = "(DEBUG) (DEBUG) (DEBUG) (DEBUG)"
+weight = 3
+metadata/_custom_type_script = ExtResource("2_03o0v")
+
+[sub_resource type="Resource" id="Resource_he4cs"]
+script = ExtResource("2_03o0v")
+value = "THIS IS NOT A DEBUG BUILD!!! or is it"
+weight = 3
+metadata/_custom_type_script = ExtResource("2_03o0v")
+
+[sub_resource type="Resource" id="Resource_gf4gu"]
+script = ExtResource("2_03o0v")
+value = "Wowie ✅🫃"
+weight = 2
+metadata/_custom_type_script = "uid://bfrw8wp7upc6m"
+
+[node name="Global" type="Node" unique_id=211693738]
 script = ExtResource("1_slsxq")
-name_choices = Array[ExtResource("2_03o0v")]([SubResource("Resource_gvy77"), SubResource("Resource_35cc1"), SubResource("Resource_7i3bb"), SubResource("Resource_uqlpx"), SubResource("Resource_uyylx"), SubResource("Resource_4d3ae"), SubResource("Resource_i3o87"), SubResource("Resource_2q7xh"), SubResource("Resource_lo602"), SubResource("Resource_mn8kj"), SubResource("Resource_ynqrc"), SubResource("Resource_rdwqo")])
+name_choices = Array[ExtResource("2_03o0v")]([SubResource("Resource_gvy77"), SubResource("Resource_35cc1"), SubResource("Resource_7i3bb"), SubResource("Resource_uqlpx"), SubResource("Resource_uyylx"), SubResource("Resource_4d3ae"), SubResource("Resource_i3o87"), SubResource("Resource_2q7xh"), SubResource("Resource_lo602"), SubResource("Resource_mn8kj"), SubResource("Resource_ynqrc"), SubResource("Resource_rdwqo"), SubResource("Resource_s7qx4"), SubResource("Resource_he4cs"), SubResource("Resource_gf4gu")])

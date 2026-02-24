@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bti6khuuptmnx"]
+
+[ext_resource type="Script" uid="uid://dwtjsqcfw0n54" path="res://special/music.gd" id="1_vukw4"]
+
+[node name="Music" type="FmodEventEmitter3D" unique_id=1303672332]
+attached = false
+preload_event = false
+process_mode = 3
+script = ExtResource("1_vukw4")

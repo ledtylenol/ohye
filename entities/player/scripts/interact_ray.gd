@@ -18,10 +18,8 @@ var interactable: InteractComponent:
 			interact_entered.emit()
 			interactable.interact_entered.emit()
 var former_size: = 0
-@export var shaker_component: ShakerComponent3D
 @export var center_marker: Control
 @export var camera: PlayerCamera
-const WEAK_SHAKE = preload("res://shakes/weak_shake.tres")
 var interactables: Array[InteractComponent]
 var point: Vector3 = Vector3.ZERO
 
@@ -80,8 +78,6 @@ func spawn_text() -> void :
 	tween.tween_property(text, "modulate:a", 0.0, 1.0).set_delay(1.0)
 	tween.tween_property(text, "outline_modulate:a", 0.0, 1.0).set_delay(1.0)
 	tween.chain().tween_callback(text.queue_free)
-func shake() -> void :
-	shaker_component.shake(WEAK_SHAKE, ShakerComponent3D.ShakeAddMode.add, 1.0, 1.0, 10.0)
 
 func distance_from_middle(a: InteractComponent, b: InteractComponent) -> bool:
 	var d_a = camera.unproject_position(a.global_position)

@@ -1,31 +1,31 @@
-[gd_scene load_steps=47 format=4 uid="uid://c1uykfa8o0d6r"]
+[gd_scene format=4 uid="uid://c1uykfa8o0d6r"]
 
 [ext_resource type="Texture2D" uid="uid://cwavr2n0xm1e3" path="res://entities/the_antichrist/textures/Youmu_low_Material_u1_v1_baseColor.png" id="1_hprr7"]
-[ext_resource type="Script" path="res://entities/the_antichrist/bossfight.gd" id="1_vsk0g"]
+[ext_resource type="Script" uid="uid://8tu1whqbyxgl" path="res://entities/the_antichrist/bossfight.gd" id="1_vsk0g"]
 [ext_resource type="Texture2D" uid="uid://dek3vy5yv630p" path="res://entities/the_antichrist/textures/Youmu_low_Material_u1_v1_metallicRoughness.png" id="2_1p5gp"]
 [ext_resource type="Texture2D" uid="uid://d4nb8jers8kmv" path="res://entities/the_antichrist/textures/Youmu_low_Material_u1_v1_normal.png" id="3_1eo87"]
-[ext_resource type="Script" path="res://components/entities/health_component.gd" id="4_i3ab1"]
-[ext_resource type="Script" path="res://components/schizophrenia/schizophrenia.gd" id="5_qbr3d"]
-[ext_resource type="Script" path="res://components/schizophrenia/boss_schizo.gd" id="6_2bm42"]
-[ext_resource type="Script" path="res://components/entities/hurtbox.gd" id="7_j2hrm"]
-[ext_resource type="Script" path="res://utils/second_order_dynamics.gd" id="9_ai5hb"]
-[ext_resource type="Script" path="res://components/state_machine.gd" id="10_qa7dl"]
-[ext_resource type="Script" path="res://entities/the_antichrist/slow.gd" id="11_yc6ta"]
-[ext_resource type="Script" path="res://entities/the_antichrist/fast.gd" id="12_y8d5b"]
-[ext_resource type="Script" path="res://components/projectile_spawner.gd" id="13_t5uce"]
-[ext_resource type="Script" path="res://entities/the_antichrist/stop.gd" id="13_u867u"]
-[ext_resource type="Script" path="res://entities/the_antichrist/start.gd" id="14_gl8g0"]
-[ext_resource type="Script" path="res://components/projectile/projectile_property.gd" id="14_sxuc6"]
-[ext_resource type="Script" path="res://components/projectile/properties/homing.gd" id="15_cdxsi"]
-[ext_resource type="Script" path="res://entities/the_antichrist/random.gd" id="15_paobl"]
-[ext_resource type="Script" path="res://components/home_in_component.gd" id="16_5e48j"]
-[ext_resource type="Script" path="res://components/projectile/properties/timed.gd" id="16_b23vs"]
-[ext_resource type="Script" path="res://components/projectile/properties/accelerate.gd" id="17_gusxe"]
-[ext_resource type="Script" path="res://components/projectile/properties/delayed_property.gd" id="18_spjci"]
-[ext_resource type="Script" path="res://components/projectile/properties/move.gd" id="19_1umr5"]
+[ext_resource type="Script" uid="uid://i6dctga6u33h" path="res://components/entities/health_component.gd" id="4_i3ab1"]
+[ext_resource type="Script" uid="uid://dbkrufxk6ba0m" path="res://components/schizophrenia/schizophrenia.gd" id="5_qbr3d"]
+[ext_resource type="Script" uid="uid://dc4xlgqgcj0ss" path="res://components/schizophrenia/boss_schizo.gd" id="6_2bm42"]
+[ext_resource type="Script" uid="uid://ctm11ks2sjgfq" path="res://components/entities/hurtbox.gd" id="7_j2hrm"]
+[ext_resource type="Script" uid="uid://dw2ch5386anik" path="res://utils/second_order_dynamics.gd" id="9_ai5hb"]
+[ext_resource type="Script" uid="uid://chs8isnkcumw4" path="res://components/state_machine.gd" id="10_qa7dl"]
+[ext_resource type="Script" uid="uid://bm6v68ho4mopt" path="res://entities/the_antichrist/slow.gd" id="11_yc6ta"]
+[ext_resource type="Script" uid="uid://in6x56h08yt0" path="res://entities/the_antichrist/fast.gd" id="12_y8d5b"]
+[ext_resource type="Script" uid="uid://dusmfrbgd37ui" path="res://components/projectile_spawner.gd" id="13_t5uce"]
+[ext_resource type="Script" uid="uid://by6cfmemsgtyh" path="res://entities/the_antichrist/stop.gd" id="13_u867u"]
+[ext_resource type="Script" uid="uid://8q7u2di8c60x" path="res://entities/the_antichrist/start.gd" id="14_gl8g0"]
+[ext_resource type="Script" uid="uid://nmpnk485x4a" path="res://components/projectile/projectile_property.gd" id="14_sxuc6"]
+[ext_resource type="Script" uid="uid://dsw31hne1hfbg" path="res://components/projectile/properties/homing.gd" id="15_cdxsi"]
+[ext_resource type="Script" uid="uid://bsebn0k42821q" path="res://entities/the_antichrist/random.gd" id="15_paobl"]
+[ext_resource type="Script" uid="uid://boqiw4qa4m4cj" path="res://components/home_in_component.gd" id="16_5e48j"]
+[ext_resource type="Script" uid="uid://bx42sf15xrfsn" path="res://components/projectile/properties/timed.gd" id="16_b23vs"]
+[ext_resource type="Script" uid="uid://oiw7qhpvbn2q" path="res://components/projectile/properties/accelerate.gd" id="17_gusxe"]
+[ext_resource type="Script" uid="uid://nxajgnsk2o7q" path="res://components/projectile/properties/delayed_property.gd" id="18_spjci"]
+[ext_resource type="Script" uid="uid://bsacu3dlxpaie" path="res://components/projectile/properties/move.gd" id="19_1umr5"]
 [ext_resource type="PackedScene" uid="uid://cey8u1qewu6ko" path="res://entities/the_antichrist/small_ball.tscn" id="24_khema"]
-[ext_resource type="Script" path="res://components/projectile/spawner_properties/random_spawner.gd" id="25_7yhqv"]
-[ext_resource type="Script" path="res://components/state_machine/state.gd" id="26_6ritg"]
+[ext_resource type="Script" uid="uid://bjnuonq5rhhdy" path="res://components/projectile/spawner_properties/random_spawner.gd" id="25_7yhqv"]
+[ext_resource type="Script" uid="uid://b3yu5aaaj2d54" path="res://components/state_machine/state.gd" id="26_6ritg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vrpfa"]
 resource_name = "Youmu_low_Material_u1_v1"
@@ -132,7 +132,6 @@ script = ExtResource("15_cdxsi")
 infl = 1.0
 rot_speed = 9.0
 time = 0.7
-use_advanced = false
 
 [sub_resource type="Resource" id="Resource_4myy5"]
 script = ExtResource("18_spjci")
@@ -145,8 +144,6 @@ lifetime = 1.3
 
 [sub_resource type="Resource" id="Resource_3ocp4"]
 script = ExtResource("17_gusxe")
-time = 5.0
-lifetime = 5.0
 starting_speed = 200.0
 diff = 100.0
 
@@ -158,64 +155,63 @@ properties = Array[ExtResource("14_sxuc6")]([SubResource("Resource_3ocp4")])
 [sub_resource type="SphereShape3D" id="SphereShape3D_e38vp"]
 radius = 9.69
 
-[node name="Bossfight" type="CharacterBody3D"]
+[node name="Bossfight" type="CharacterBody3D" unique_id=1411637373]
 collision_layer = 2
 script = ExtResource("1_vsk0g")
 
-[node name="Sketchfab_model" type="Node3D" parent="."]
+[node name="Sketchfab_model" type="Node3D" parent="." unique_id=680718364]
 transform = Transform3D(0.06, 0, 0, 0, -0.06, -5.24537e-09, 0, 5.24537e-09, -0.06, 0, 0, 0)
 
-[node name="Youmu_low_obj_cleaner_materialmerger_gles" type="Node3D" parent="Sketchfab_model"]
+[node name="Youmu_low_obj_cleaner_materialmerger_gles" type="Node3D" parent="Sketchfab_model" unique_id=952848998]
 
-[node name="Object_2" type="MeshInstance3D" parent="Sketchfab_model/Youmu_low_obj_cleaner_materialmerger_gles"]
+[node name="Object_2" type="MeshInstance3D" parent="Sketchfab_model/Youmu_low_obj_cleaner_materialmerger_gles" unique_id=1560031373]
 transform = Transform3D(1, 0, 0, 0, 1, -7.10543e-15, 0, 7.10543e-15, 1, 0, 10.8005, -9.44214e-07)
 mesh = SubResource("ArrayMesh_3tccr")
-skeleton = NodePath("")
 
-[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurtbox")]
+[node name="HealthComponent" type="Node" parent="." unique_id=831005376 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("4_i3ab1")
 hurtbox = NodePath("../Hurtbox")
 max_health = 2000
 starting_health = 2000
 
-[node name="Schizophrenia" type="VisibleOnScreenNotifier3D" parent="." node_paths=PackedStringArray("vision_points", "parent")]
+[node name="Schizophrenia" type="VisibleOnScreenNotifier3D" parent="." unique_id=1239534802 node_paths=PackedStringArray("vision_points", "parent")]
 script = ExtResource("5_qbr3d")
 vision_points = [NodePath("Marker3D"), NodePath("Marker3D2"), NodePath("Marker3D3"), NodePath("Marker3D4"), NodePath("Marker3D5")]
 parent = NodePath("../Sketchfab_model/Youmu_low_obj_cleaner_materialmerger_gles/Object_2")
 
-[node name="BossSchizo" type="Node" parent="Schizophrenia" node_paths=PackedStringArray("angle_target")]
+[node name="BossSchizo" type="Node" parent="Schizophrenia" unique_id=1080336240 node_paths=PackedStringArray("angle_target")]
 script = ExtResource("6_2bm42")
 angle_target = NodePath("../..")
 _when_to_work = 15
 
-[node name="Marker3D" type="Marker3D" parent="Schizophrenia"]
+[node name="Marker3D" type="Marker3D" parent="Schizophrenia" unique_id=1888852672]
 transform = Transform3D(1, 0, 0, 0, 1, 1.42109e-14, 0, -1.42109e-14, 1, 0, -0.49564, -1.55816e-06)
 
-[node name="Marker3D2" type="Marker3D" parent="Schizophrenia"]
+[node name="Marker3D2" type="Marker3D" parent="Schizophrenia" unique_id=606679946]
 transform = Transform3D(1, 0, 0, 0, 1, 2.13163e-14, 0, -2.13163e-14, 1, 0, 10.7008, 9.35492e-07)
 
-[node name="Marker3D3" type="Marker3D" parent="Schizophrenia"]
+[node name="Marker3D3" type="Marker3D" parent="Schizophrenia" unique_id=1745563085]
 transform = Transform3D(1, 0, 0, 0, 1, 3.55271e-14, 0, -3.55271e-14, 1, 0, 1.01024, -0.13611)
 
-[node name="Marker3D4" type="Marker3D" parent="Schizophrenia"]
+[node name="Marker3D4" type="Marker3D" parent="Schizophrenia" unique_id=679295430]
 transform = Transform3D(1, 0, 0, 0, 1, 4.26326e-14, 0, -4.26326e-14, 1, 0, 0.473185, 0.601649)
 
-[node name="Marker3D5" type="Marker3D" parent="Schizophrenia"]
+[node name="Marker3D5" type="Marker3D" parent="Schizophrenia" unique_id=580372137]
 transform = Transform3D(1, 0, 0, 0, 1, 4.9738e-14, 0, -4.9738e-14, 1, 0, 0.25246, -0.322275)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=747287416]
 shape = SubResource("CapsuleShape3D_kndto")
 
-[node name="Hurtbox" type="Area3D" parent="."]
+[node name="Hurtbox" type="Area3D" parent="." unique_id=2113740585]
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("7_j2hrm")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" unique_id=380457188]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_kndto")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=219425928]
 emitting = false
 amount = 100
 lifetime = 2.46
@@ -227,44 +223,44 @@ trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_26eup")
 draw_pass_1 = SubResource("RibbonTrailMesh_luodb")
 
-[node name="Song" type="FmodEventEmitter3D" parent="."]
+[node name="Song" type="FmodEventEmitter3D" parent="." unique_id=1536815401]
 event_name = "event:/Music3D/ThePrincipleOfMusic"
 event_guid = "{600942c1-7211-411c-ae50-e114326b957d}"
 fmod_parameters/Active/id = 5591441648638885785
 fmod_parameters/Active = 0
 fmod_parameters/Active/variant_type = 2
 
-[node name="Shoot" type="FmodEventEmitter3D" parent="."]
+[node name="Shoot" type="FmodEventEmitter3D" parent="." unique_id=845661508]
 event_name = "event:/Sfx3D/Throw"
 event_guid = "{da5182a1-a63b-44d7-a7be-489503ada1a7}"
 allow_fadeout = false
 preload_event = false
 
-[node name="Rot" type="Node" parent="."]
+[node name="Rot" type="Node" parent="." unique_id=44696445]
 script = ExtResource("9_ai5hb")
 
-[node name="Marker3D" type="Marker3D" parent="."]
+[node name="Marker3D" type="Marker3D" parent="." unique_id=1067674487]
 
-[node name="Timers" type="Node" parent="."]
+[node name="Timers" type="Node" parent="." unique_id=1565279747]
 
-[node name="SlowTimer" type="Timer" parent="Timers"]
+[node name="SlowTimer" type="Timer" parent="Timers" unique_id=1761762982]
 wait_time = 3.0
 autostart = true
 
-[node name="FastTimer" type="Timer" parent="Timers"]
+[node name="FastTimer" type="Timer" parent="Timers" unique_id=1813787886]
 wait_time = 0.1
 autostart = true
 
-[node name="VelRot" type="Node" parent="."]
+[node name="VelRot" type="Node" parent="." unique_id=1940664241]
 script = ExtResource("9_ai5hb")
 _f = 0.5
 _r = 1.0
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+[node name="StateMachine" type="Node" parent="." unique_id=1772950104 node_paths=PackedStringArray("current_state")]
 script = ExtResource("10_qa7dl")
 current_state = NodePath("State")
 
-[node name="Slow" type="Node" parent="StateMachine" node_paths=PackedStringArray("vel_rot", "timer", "schizo", "health_component", "song", "target")]
+[node name="Slow" type="Node" parent="StateMachine" unique_id=340508429 node_paths=PackedStringArray("vel_rot", "timer", "schizo", "health_component", "song", "target")]
 script = ExtResource("11_yc6ta")
 vel_rot = NodePath("../../VelRot")
 timer = NodePath("../../Timers/SlowTimer")
@@ -273,7 +269,7 @@ health_component = NodePath("../../HealthComponent")
 song = NodePath("../../Song")
 target = NodePath("../..")
 
-[node name="Fast" type="Node" parent="StateMachine" node_paths=PackedStringArray("vel_rot", "timer", "schizo", "health_component", "target")]
+[node name="Fast" type="Node" parent="StateMachine" unique_id=2119811618 node_paths=PackedStringArray("vel_rot", "timer", "schizo", "health_component", "target")]
 script = ExtResource("12_y8d5b")
 vel_rot = NodePath("../../VelRot")
 timer = NodePath("../../Timers/FastTimer")
@@ -281,16 +277,16 @@ schizo = NodePath("../../Schizophrenia/BossSchizo")
 health_component = NodePath("../../HealthComponent")
 target = NodePath("../..")
 
-[node name="Stop" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "target")]
+[node name="Stop" type="Node" parent="StateMachine" unique_id=1843091210 node_paths=PackedStringArray("timer", "target")]
 script = ExtResource("13_u867u")
 timer = NodePath("../../Timers/SlowTimer")
 target = NodePath("../..")
 
-[node name="Start" type="Node" parent="StateMachine" node_paths=PackedStringArray("target")]
+[node name="Start" type="Node" parent="StateMachine" unique_id=1037460877 node_paths=PackedStringArray("target")]
 script = ExtResource("14_gl8g0")
 target = NodePath("../..")
 
-[node name="Go" type="Node" parent="StateMachine" node_paths=PackedStringArray("vel_rot", "timer", "schizo", "health_component", "target")]
+[node name="Go" type="Node" parent="StateMachine" unique_id=1593443569 node_paths=PackedStringArray("vel_rot", "timer", "schizo", "health_component", "target")]
 script = ExtResource("12_y8d5b")
 vel_rot = NodePath("../../VelRot")
 timer = NodePath("../../Timers/FastTimer")
@@ -298,16 +294,16 @@ schizo = NodePath("../../Schizophrenia/BossSchizo")
 health_component = NodePath("../../HealthComponent")
 target = NodePath("../..")
 
-[node name="Random" type="Node" parent="StateMachine" node_paths=PackedStringArray("tp_sound", "target")]
+[node name="Random" type="Node" parent="StateMachine" unique_id=857479015 node_paths=PackedStringArray("tp_sound", "target")]
 script = ExtResource("15_paobl")
 tp_sound = NodePath("../../Teleport")
 target = NodePath("../..")
 
-[node name="ProjectileSpawner" type="Node3D" parent="StateMachine/Random" node_paths=PackedStringArray("pos_target")]
+[node name="ProjectileSpawner" type="Node3D" parent="StateMachine/Random" unique_id=751632840 node_paths=PackedStringArray("pos_target")]
 script = ExtResource("13_t5uce")
 pos_target = NodePath("../../..")
 
-[node name="RandomSpawner" type="Node3D" parent="StateMachine/Random/ProjectileSpawner" node_paths=PackedStringArray("play_sound")]
+[node name="RandomSpawner" type="Node3D" parent="StateMachine/Random/ProjectileSpawner" unique_id=529198467 node_paths=PackedStringArray("play_sound")]
 script = ExtResource("25_7yhqv")
 properties = Array[ExtResource("14_sxuc6")]([SubResource("Resource_ewe2e"), SubResource("Resource_4myy5"), SubResource("Resource_7jq1l"), SubResource("Resource_nwyxo")])
 amount = 17
@@ -317,24 +313,24 @@ delay = 0.0
 play_sound = NodePath("../../../../Shoot")
 per_bullet = true
 
-[node name="State" type="Node" parent="StateMachine"]
+[node name="State" type="Node" parent="StateMachine" unique_id=1136575168]
 script = ExtResource("26_6ritg")
 
-[node name="Homing" type="Area3D" parent="."]
+[node name="Homing" type="Area3D" parent="." unique_id=478484939]
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("16_5e48j")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Homing"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Homing" unique_id=2037553340]
 shape = SubResource("SphereShape3D_e38vp")
 
-[node name="Teleport" type="FmodEventEmitter3D" parent="."]
+[node name="Teleport" type="FmodEventEmitter3D" parent="." unique_id=1562867061]
 event_name = "event:/Sfx3D/Snap"
 event_guid = "{d540c6b7-8ea9-464e-8236-5d7678830b26}"
 allow_fadeout = false
 preload_event = false
 
-[node name="Hit" type="FmodEventEmitter3D" parent="."]
+[node name="Hit" type="FmodEventEmitter3D" parent="." unique_id=474550731]
 event_name = "event:/Sfx3D/Ouch"
 event_guid = "{830b2ff4-960e-4fb4-99a3-710ccb8a20f2}"
 allow_fadeout = false

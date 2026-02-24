@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://dj3bg728hlqip"
+path="res://.godot/imported/chase1.map-090f05c5ff94eaece1128cd9242a35b4.tres"
+
+[deps]
+
+source_file="res://tb/maps/chase1.map"
+dest_files=["res://.godot/imported/chase1.map-090f05c5ff94eaece1128cd9242a35b4.tres"]
+
+[params]
+

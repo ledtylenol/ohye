@@ -21,7 +21,7 @@ func physics_tick(dt: float) -> void:
 	cooldown -= dt
 	if cooldown <= 0.0:
 		$"../Random".on_enter()
-		cooldown = randf_range(0.1, 0.4)
+		cooldown = Global.randf_range(0.1, 0.4)
 	if time_looked > 0.4:
 		$"../Random".on_enter()
 		time_looked -= 0.4

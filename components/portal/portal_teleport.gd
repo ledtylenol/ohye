@@ -30,6 +30,7 @@ var _parent_portal:Portal
 # Info about the nodes currently crossing the portal
 var _crossing_nodes:Array = []
 
+signal teleported(node: Node3D)
 func _ready() -> void:
 	_parent_portal = get_parent() as Portal
 	if _parent_portal == null:
@@ -38,7 +39,7 @@ func _ready() -> void:
 	connect("area_entered", _on_area_entered)
 	connect("area_exited", _on_area_exited)
 
-func _process(delta:float) -> void:
+func _physics_process(delta:float) -> void:
 	# Update nodes crossing the portal
 	for i in range(_crossing_nodes.size() - 1, -1, -1):
 		var crossing_node:Dictionary = _crossing_nodes[i]
@@ -111,7 +112,8 @@ func _try_teleport(crossing_node:Dictionary) -> bool:
 
 	# Transform the position and orientation
 	node.global_transform = _parent_portal.real_to_exit_transform(node.global_transform)
-	
+	node.reset_physics_interpolation()
+	teleported.emit(node)
 	return true
 
 func _on_area_entered(area:Area3D) -> void:

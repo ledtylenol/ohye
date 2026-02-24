@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://htf8a1q78rfi"]
+[gd_scene format=3 uid="uid://htf8a1q78rfi"]
 
-[ext_resource type="Script" path="res://entities/the_antichrist/big_ball.gd" id="1_76l8s"]
-[ext_resource type="Script" path="res://components/entities/hitbox.gd" id="2_bmmrq"]
+[ext_resource type="Script" uid="uid://fhwri2mbxoo5" path="res://entities/the_antichrist/big_ball.gd" id="1_76l8s"]
+[ext_resource type="Script" uid="uid://cl7tsnjsikfcr" path="res://components/entities/hitbox.gd" id="2_bmmrq"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_6lj1t"]
 noise_type = 5
@@ -10,8 +10,8 @@ frequency = 0.0046
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_on5t8"]
 width = 32
 height = 32
-seamless = true
 noise = SubResource("FastNoiseLite_6lj1t")
+seamless = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghqlm"]
 shading_mode = 0
@@ -23,14 +23,14 @@ material = SubResource("StandardMaterial3D_ghqlm")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2e2uf"]
 
-[node name="BigBall" type="CharacterBody3D"]
+[node name="BigBall" type="CharacterBody3D" unique_id=1140951182]
 script = ExtResource("1_76l8s")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1801686225]
 mesh = SubResource("SphereMesh_jr52l")
 
-[node name="Hitbox" type="Area3D" parent="."]
+[node name="Hitbox" type="Area3D" parent="." unique_id=127302991]
 script = ExtResource("2_bmmrq")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=22918839]
 shape = SubResource("SphereShape3D_2e2uf")

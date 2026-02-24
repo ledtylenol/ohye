@@ -7,8 +7,8 @@ var tween: Tween
 
 var t := 0.0
 func on_enter() -> void:
-	t = randf_range(1, 2)
-	var pos := target.global_position + M.random_sample_point_in_cone(PI, Vector3.UP) * randf_range(10, 20)
+	t = Global.randf_range(1, 2)
+	var pos := target.global_position + M.random_sample_point_in_cone(PI, Vector3.UP) * Global.randf_range(10, 20)
 	target.teleport_to(pos)
 	if tween: tween.kill()
 	scale_target.scale = Vector3.ZERO

@@ -4,6 +4,7 @@ var target_rotation := Quaternion.IDENTITY
 @onready var sod: SecondOrderDynamics = $SecondOrderDynamics
 @onready var schizophrenia_component: Schizophrenia = get_parent()
 @onready var area_3d: Area3D = $Area3D
+@onready var marker: Marker3D = $Marker3D
 
 func _ready() -> void:
 	sod.initq(Quaternion.IDENTITY)
@@ -11,9 +12,10 @@ func _ready() -> void:
 	#schizophrenia_component.player_exited.connect(toggle_visible)
 
 func _physics_process(delta: float) -> void:
-	var dir := global_position.direction_to(Global.player.global_position)
-	var q := Quaternion(-global_basis.z, dir)
-	quaternion = sod.update_q(quaternion, q * Quaternion(global_basis), delta)[0]
+	marker.global_position = global_position
+	marker.look_at(Global.player.global_position)
+	target_rotation = marker.quaternion
+	quaternion = sod.update_q(quaternion, target_rotation, delta)[0]
 
 func toggle_visible() -> void:
 	visible = not visible

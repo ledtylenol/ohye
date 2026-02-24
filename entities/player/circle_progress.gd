@@ -31,7 +31,7 @@ func _ready() -> void :
 	texture_p.scale = Vector2.ZERO
 
 func beep() -> void :
-	f0 = randf_range( - PI, PI)
+	f0 = Global.randf_range( - PI, PI)
 	beeps += 1
 	if tween: tween.kill()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)

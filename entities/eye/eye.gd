@@ -32,7 +32,7 @@ func teleport_to(new: Vector3) -> void:
 	sod.init(new)
 	teleport_sound.play()
 func choose_random_target_from_start(min_b: float, max_b: float) -> void:
-	var f := randf_range(min_b, max_b)
+	var f := Global.randf_range(min_b, max_b)
 	#target_pos = M.random_sample_point_in_cone(2 * PI, Vector3.UP) * f + start_pos
 
 func look_at_player(delta: float) -> void:

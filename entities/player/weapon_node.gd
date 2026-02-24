@@ -12,6 +12,7 @@ var heat: = 0.0
 var cooldown:
 	get:
 		return get_parent().cooldown
+var ammo := 5
 @export var knife: Node3D
 @export var kn_off: Node3D
 @export var target: Node3D
@@ -41,7 +42,7 @@ func _ready() -> void :
 func _process(delta: float) -> void :
 	if Engine.is_editor_hint():
 		return
-	tweened_dissolve = 0.0 if heat == 0 else 1.0
+	tweened_dissolve = 0.0 if heat == 0 && ammo > 0 else 1.0
 	var weight: = 5.0 if tweened_dissolve < dissolve else 15.0
 	dissolve = M.smooth_nudgef(dissolve, tweened_dissolve, weight, delta)
 	heat = maxf(0.0, heat - delta)
@@ -62,7 +63,7 @@ func shoot() -> void :
 	cont.up_dir = player.normal
 	cont.velocity = player.velocity
 	get_tree().current_scene.add_child(cont)
-
+	ammo -= 1
 func reset_sods() -> void :
 	rot_order.initq(target.quaternion * rot_offset)
 	sod.init(target.global_position + target.global_basis * offset)

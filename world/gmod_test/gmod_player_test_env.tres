@@ -1,0 +1,27 @@
+[gd_resource type="Environment" format=3 uid="uid://tsna1jms35qt"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_bcis4"]
+
+[sub_resource type="Sky" id="Sky_x7bpa"]
+sky_material = SubResource("PhysicalSkyMaterial_bcis4")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_x7bpa")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+sdfgi_read_sky_light = false
+sdfgi_bounce_feedback = 0.38
+sdfgi_energy = 13.6
+sdfgi_normal_bias = 7.725
+glow_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_height = 4.5
+fog_depth_curve = 0.707106
+fog_depth_begin = 15.0
+fog_depth_end = 50.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.3584
+volumetric_fog_ambient_inject = 0.05

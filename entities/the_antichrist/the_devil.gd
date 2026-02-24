@@ -34,7 +34,7 @@ func _ready() -> void:
 	$Timer.timeout.connect(hitbox.set_deferred.bind("monitorable", false))
 func do_interact() -> void:
 	if state == State.INACTIVE:
-		if randi() % 3 == 0:
+		if Global.randi() % 3 == 0:
 			state = State.CHARGING
 		do_inactive_tween()
 func do_inactive_tween() -> void:

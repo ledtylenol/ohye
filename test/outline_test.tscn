@@ -1,20 +1,20 @@
-[gd_scene load_steps=26 format=3 uid="uid://camem64xsobb8"]
+[gd_scene format=3 uid="uid://camem64xsobb8"]
 
-[ext_resource type="Script" path="res://test/outline_test.gd" id="1_3d1rk"]
-[ext_resource type="Script" path="res://components/interact_component/interact_component.gd" id="1_ikgyl"]
+[ext_resource type="Script" uid="uid://dqxhptmymkwam" path="res://test/outline_test.gd" id="1_3d1rk"]
+[ext_resource type="Script" uid="uid://byjxjdn662fjs" path="res://components/interact_component/interact_component.gd" id="1_ikgyl"]
 [ext_resource type="AudioStream" uid="uid://c8hxia1f2880m" path="res://test/Magic_Spells_Impact_Air24.wav" id="3_0yjyq"]
 [ext_resource type="AudioStream" uid="uid://xjichg7qw17h" path="res://test/Magic_Spells_CastLong_Air_Charm02.wav" id="4_vp61t"]
-[ext_resource type="Script" path="res://addons/shaker/src/Vector3/ShakerEmitter3D.gd" id="5_y030p"]
-[ext_resource type="Script" path="res://components/misc/scaled_audio_player_3d.gd" id="6_vjlef"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="6_voje0"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeBrownianShake3D.gd" id="7_5jps3"]
-[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="8_cqklu"]
+[ext_resource type="Script" uid="uid://u8yhjrxl4nsl" path="res://addons/shaker/src/Vector3/ShakerEmitter3D.gd" id="5_y030p"]
+[ext_resource type="Script" uid="uid://bg3gcjjiw5lmy" path="res://components/misc/scaled_audio_player_3d.gd" id="6_vjlef"]
+[ext_resource type="Script" uid="uid://c063bnknmhi3d" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="6_voje0"]
+[ext_resource type="Script" uid="uid://j676slykijat" path="res://addons/shaker/data/Vector3/ShakerTypeBrownianShake3D.gd" id="7_5jps3"]
+[ext_resource type="Script" uid="uid://c6flakn4dg8yy" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="8_cqklu"]
 [ext_resource type="AudioStream" uid="uid://bqpbfu01veb7d" path="res://test/tler.wav" id="10_qpbn7"]
-[ext_resource type="Script" path="res://components/entities/health_component.gd" id="11_5u15i"]
-[ext_resource type="Script" path="res://components/entities/hitbox.gd" id="13_bbnim"]
-[ext_resource type="Script" path="res://components/entities/enemy_marker.gd" id="14_xhn7x"]
-[ext_resource type="Script" path="res://components/entities/hurtbox.gd" id="15_6xq2m"]
-[ext_resource type="Script" path="res://components/misc/signal_connector.gd" id="15_mjpux"]
+[ext_resource type="Script" uid="uid://i6dctga6u33h" path="res://components/entities/health_component.gd" id="11_5u15i"]
+[ext_resource type="Script" uid="uid://cl7tsnjsikfcr" path="res://components/entities/hitbox.gd" id="13_bbnim"]
+[ext_resource type="Script" uid="uid://bx7yc6yas0jwi" path="res://components/entities/enemy_marker.gd" id="14_xhn7x"]
+[ext_resource type="Script" uid="uid://ctm11ks2sjgfq" path="res://components/entities/hurtbox.gd" id="15_6xq2m"]
+[ext_resource type="Script" uid="uid://q7he2t7xkjmp" path="res://components/misc/signal_connector.gd" id="15_mjpux"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dsd4s"]
 radius = 2.947
@@ -29,25 +29,13 @@ stream_1/volume = 0.0
 
 [sub_resource type="Resource" id="Resource_asclb"]
 script = ExtResource("7_5jps3")
-roughness = Vector3(1, 1, 1)
-persistence = Vector3(0.5, 0.5, 0.5)
 amplitude = Vector3(0.09, 0.03, 0.08)
-offset = Vector3(0, 0, 0)
-BlendingMode = 0
 fade_in = 1e-05
 fade_out = 1e-05
-start_percent = 0.0
-end_percent = 1.0
-_temp_graph = false
-bake_internal = 64
 
 [sub_resource type="Resource" id="Resource_viiwt"]
 script = ExtResource("8_cqklu")
-PositionShake = Array[ExtResource("6_voje0")]([])
 RotationShake = Array[ExtResource("6_voje0")]([SubResource("Resource_asclb")])
-ScaleShake = Array[ExtResource("6_voje0")]([])
-bake_internal = 64
-__follow_timeline = false
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bljxg"]
 radius = 13.757
@@ -66,7 +54,7 @@ bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iv7px"]
 
-[node name="StaticBody3D" type="CharacterBody3D" node_paths=PackedStringArray("health_c", "healthbar", "enemy_marker", "audio") groups=["enemy"]]
+[node name="StaticBody3D" type="CharacterBody3D" unique_id=181781154 node_paths=PackedStringArray("health_c", "healthbar", "enemy_marker", "audio") groups=["enemy"]]
 collision_layer = 64
 script = ExtResource("1_3d1rk")
 health_c = NodePath("HealthComponent")
@@ -74,36 +62,35 @@ healthbar = NodePath("SubViewport/ProgressBar")
 enemy_marker = NodePath("EnemyMarker")
 audio = NodePath("ShakerEmitter3D/Area3D/AudioStreamPlayer3D2")
 
-[node name="InteractComponent" type="Area3D" parent="."]
+[node name="InteractComponent" type="Area3D" parent="." unique_id=1682087912]
 script = ExtResource("1_ikgyl")
-show_text = true
 what_text = "Hit it!"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent" unique_id=1666953061]
 shape = SubResource("CapsuleShape3D_dsd4s")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1636108147]
 stream = SubResource("AudioStreamSynchronized_2g8np")
 max_distance = 74.3
 attenuation_filter_cutoff_hz = 19845.0
 doppler_tracking = 2
 script = ExtResource("6_vjlef")
 
-[node name="ShakerEmitter3D" type="Node3D" parent="."]
+[node name="ShakerEmitter3D" type="Node3D" parent="." unique_id=2097957148]
 script = ExtResource("5_y030p")
 emit = true
 fade_in = 0.0941009
 fade_out = 0.0556131
 shakerPreset = SubResource("Resource_viiwt")
 
-[node name="Area3D" type="Area3D" parent="ShakerEmitter3D"]
+[node name="Area3D" type="Area3D" parent="ShakerEmitter3D" unique_id=1125266193]
 collision_layer = 512
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ShakerEmitter3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShakerEmitter3D/Area3D" unique_id=1948675517]
 shape = SubResource("SphereShape3D_bljxg")
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="ShakerEmitter3D/Area3D"]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="ShakerEmitter3D/Area3D" unique_id=1757317531]
 stream = ExtResource("10_qpbn7")
 autoplay = true
 attenuation_filter_cutoff_hz = 8395.0
@@ -112,30 +99,30 @@ doppler_tracking = 2
 script = ExtResource("6_vjlef")
 influence = 0.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1382195709]
 shape = SubResource("CapsuleShape3D_dsd4s")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1201742820]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.368801, 0)
 light_energy = 2.326
 light_volumetric_fog_energy = 2.414
 omni_range = 31.425
 
-[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurtbox")]
+[node name="HealthComponent" type="Node" parent="." unique_id=1130201822 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("11_5u15i")
 hurtbox = NodePath("../Hurtbox")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=838738629]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 billboard = 1
 no_depth_test = true
 texture_filter = 0
 texture = SubResource("ViewportTexture_vmx31")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=454621827]
 size = Vector2i(512, 64)
 
-[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport" unique_id=691201394]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -148,28 +135,28 @@ step = 1.0
 value = 5.0
 show_percentage = false
 
-[node name="Hitbox" type="Area3D" parent="."]
+[node name="Hitbox" type="Area3D" parent="." unique_id=580914471]
 script = ExtResource("13_bbnim")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=1998226133]
 shape = SubResource("CapsuleShape3D_dsd4s")
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+[node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=510728256]
 light_color = Color(0.466667, 0, 1, 1)
 omni_range = 7.448
 
-[node name="EnemyMarker" type="Node" parent="."]
+[node name="EnemyMarker" type="Node" parent="." unique_id=70920146]
 script = ExtResource("14_xhn7x")
 
-[node name="SignalConnector" type="Node" parent="." node_paths=PackedStringArray("from", "to")]
+[node name="SignalConnector" type="Node" parent="." unique_id=354770668 node_paths=PackedStringArray("from", "to")]
 script = ExtResource("15_mjpux")
 from = NodePath("../HealthComponent")
 what = "health_changed"
 to = NodePath("..")
 method = "tween_force_mosh"
 
-[node name="Hurtbox" type="Area3D" parent="."]
+[node name="Hurtbox" type="Area3D" parent="." unique_id=1537394283]
 script = ExtResource("15_6xq2m")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" unique_id=74308944]
 shape = SubResource("CapsuleShape3D_iv7px")

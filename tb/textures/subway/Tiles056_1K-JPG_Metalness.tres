@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bo04ny0jgpa8r"]
+
+[ext_resource type="Texture2D" uid="uid://dtr02c4kphed0" path="res://tb/textures/subway/Tiles056_1K-JPG_Metalness.jpg" id="1_mhiv3"]
+
+[resource]
+albedo_texture = ExtResource("1_mhiv3")
+metallic_specular = 0.0
+normal_enabled = true
+texture_filter = 2

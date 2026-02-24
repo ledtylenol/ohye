@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" format=3 uid="uid://deprxmkqbe1v2"]
+
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_0s3ht"]
+[ext_resource type="Resource" uid="uid://wk3u88lv7j42" path="res://tb/entities/sound_tile.tres" id="1_qsbju"]
+[ext_resource type="Script" uid="uid://c1l8u6fnvuba6" path="res://components/tile/vanishable.gd" id="3_652us"]
+
+[resource]
+script = ExtResource("1_0s3ht")
+origin_type = 4
+build_occlusion = true
+script_class = ExtResource("3_652us")
+classname = "ohye_vanishable"
+base_classes = Array[Resource]([ExtResource("1_qsbju")])
+class_properties = Dictionary[String, Variant]({
+"Collidable": false,
+"Visible": false,
+"id": 0
+})
+node_class = "StaticBody3D"
+metadata/_custom_type_script = "uid://ffxvokfb4ow6"

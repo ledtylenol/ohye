@@ -1,6 +1,7 @@
 extends Node3D
 
-
+var t  := 0.0
+var tick := false
 @onready var scene_loader: SceneLoader = $SceneLoader
 @onready var song: FmodEventEmitter3D = $Song
 @onready var player: Player = $Player
@@ -13,32 +14,89 @@ extends Node3D
 
 @export var fall_areas: Array[Area3D]
 @export var fall_point: Node3D
+@onready var area_3d: Area3D = $Area3D
+
+@export var portal_teleports: Array[PortalTeleport]
+@onready var scene_loader_2: SceneLoader = $SceneLoader2
+@onready var label: Label = $CanvasLayer/Label
+
+@export var strawb: CollectibleStrawberry
 var fog = load("res://world/subway/subwayoffv1_fog.tres")
 var nofog = load("res://world/subway/subwayoffv1_nofog.tres")
 func _ready() -> void:
-	song["fmod_parameters/Charge"] = randf()
-	song.play()
+	area_3d.body_entered.connect(on_achievement_area_body)
+	Music.stop()
+	Music.set_event_name(song.event_name)
+	Music.set_parameter("Charge", Global.randf())
+	Music.play()
 	surf_area.body_entered.connect(on_surf_body.bind(nofog))
 	surf_area2.body_entered.connect(on_surf_body.bind(fog))
 	for area in fall_areas:
 		area.body_entered.connect(on_teleport)
 	surf_area_3.body_entered.connect(play)
 	surf_area_3.body_exited.connect(stop)
+	for tp in portal_teleports:
+		tp.teleported.connect(on_teleport2.bind(false))
+	Global.teleport_to_id.connect(on_tp)
 func on_surf_body(b: Node3D, env: Environment) -> void:
 	if b is Player:
 		world_environment.environment = env
-
+func on_achievement_area_body(b: Node3D) -> void:
+	tick = false
 func play(b: Node3D) -> void:
 	if b is not Player:
 		return
+	t = 0.0
+	tick = true
+	if strawb:
+		strawb.visible = true
+		strawb.set_deferred("monitoring", true)
+		strawb.set_deferred("monitorable", true)
 	song.volume = 0.0
-	bhop.play()
+	Music.stop()
+	Music.set_event_name(bhop.event_name)
+	Music.play()
 func stop(b: Node3D) -> void:
 	if b is not Player:
 		return
+	tick = false
 	song.volume = 1.0
-	bhop.stop()
+	Music.stop()
+	Music.set_event_name(song.event_name)
+	Music.play()
 func on_teleport(b: Node3D) -> void:
 	if b is Player:
 		b.global_position = fall_point.global_position
 		b.velocity = Vector3.ZERO
+
+func on_teleport2(b: Node3D, had: bool) -> void:
+	if not had:
+		scene_loader_2.request_load()
+		if scene_loader_2.scene.to_lower() != "nothing":
+			for area in portal_teleports:
+				area.teleported.disconnect(on_teleport2)
+				area.teleported.connect(on_teleport2.bind(true))
+			scene_loader_2.try_load()
+	else:
+		scene_loader_2.try_load()
+
+func on_tp(id: int) -> void:
+	print("tpd with id: %d" % id)
+	if id == 0:
+		if strawb:
+			strawb.visible = true
+			strawb.set_deferred("monitoring", true)
+			strawb.set_deferred("monitorable", true)
+		t = 0
+
+func _process(delta: float) -> void:
+	t += delta * float(tick)
+	if t > 0:
+		label.text = "TIME: %.2f" % t
+	else:
+		label.text = ""
+	
+	if t > 15 and strawb and strawb.visible:
+		strawb.visible = false
+		strawb.set_deferred("monitoring", false)
+		strawb.set_deferred("monitorable", false)

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShakerPreset3D" load_steps=7 format=3 uid="uid://yi0a6jwp8ub7"]
+[gd_resource type="Resource" script_class="ShakerPreset3D" format=3 uid="uid://yi0a6jwp8ub7"]
 
 [ext_resource type="Script" uid="uid://c063bnknmhi3d" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="1_dm2kg"]
 [ext_resource type="Script" uid="uid://3ugm1s2yymb4" path="res://addons/shaker/data/Vector3/ShakerTypeNoiseShake3D.gd" id="2_7fvbi"]
@@ -16,18 +16,8 @@ script = ExtResource("2_7fvbi")
 noise_texture = SubResource("NoiseTexture3D_b7o7b")
 amplitude = Vector3(0.285, 0.245, 0.095)
 offset = Vector3(0.19, -0.08, 0.135)
-BlendingMode = 0
-fade_in = 0.0
 fade_out = 0.611473
-start_percent = 0.0
-end_percent = 1.0
-_temp_graph = false
-bake_internal = 64
 
 [resource]
 script = ExtResource("3_ubbm5")
-PositionShake = Array[ExtResource("1_dm2kg")]([])
 RotationShake = Array[ExtResource("1_dm2kg")]([SubResource("Resource_eobbk")])
-ScaleShake = Array[ExtResource("1_dm2kg")]([])
-bake_internal = 64
-__follow_timeline = false

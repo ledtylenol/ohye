@@ -36,9 +36,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not active:
 		return
-	if randi() % 500 == 0:
+	if Global.randi() % 500 == 0:
 		velocity.x = -velocity.x
-	elif randi() % 670 <= 5:
+	elif Global.randi() % 670 <= 5:
 		velocity.z = -velocity.z
 	var dir := Vector3.ZERO
 	var player_pos = player.global_position

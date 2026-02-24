@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://5gjp7s2ip42a"]
+
+[ext_resource type="Script" uid="uid://cpw2vp3bvs2l3" path="res://special/achievement.gd" id="1_ub5dn"]
+[ext_resource type="Texture2D" uid="uid://cdwcf36wj4gcn" path="res://special/achievements/icons/jerma2!.png" id="2_14ml5"]
+
+[resource]
+script = ExtResource("1_ub5dn")
+name = "Complete Jermahop1"
+description = "[wave]WOW[shake]!!!
+[2.0]HOW EXCITING!!!"
+sprite = ExtResource("2_14ml5")
+metadata/_custom_type_script = ExtResource("1_ub5dn")

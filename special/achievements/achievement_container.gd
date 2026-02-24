@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 class_name AchievementHolder
 
 @export var texture: TextureRect
@@ -7,7 +7,6 @@ class_name AchievementHolder
 @export var playtime: RicherTextLabel
 @export var sound: FmodEventEmitter3D
 func _ready() -> void:
-	sound.play()
 	tween_pos()
 
 func tween_pos() -> void:

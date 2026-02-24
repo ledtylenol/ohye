@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4lpa2lw8g4ku"]
+
+[ext_resource type="Script" uid="uid://cna76wy4b2hch" path="res://special/intro.gd" id="1_qy1j4"]
+[ext_resource type="Script" uid="uid://bka1bqdqyu2dt" path="res://components/misc/scene_loader.gd" id="2_7w76a"]
+[ext_resource type="Resource" uid="uid://5gl1ihxtg6is" path="res://global/subway_variants.tres" id="3_up3yn"]
+
+[sub_resource type="Curve" id="Curve_up3yn"]
+_limits = [0.01, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, -2.30547, 0, 0, Vector2(1, 0.0278677), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Environment" id="Environment_5nby3"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_qy1j4")
+min_time = 1.0
+freq_curve = SubResource("Curve_up3yn")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5nby3")
+
+[node name="Type" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/Sfx3D/Type"
+event_guid = "{38dea224-4f22-4519-98ce-bcc8b2056b51}"
+
+[node name="Transition" type="FmodEventEmitter3D" parent="."]
+event_name = "event:/Sfx3D/Snap"
+event_guid = "{d540c6b7-8ea9-464e-8236-5d7678830b26}"
+auto_release = true
+
+[node name="SceneLoader" type="Node" parent="."]
+script = ExtResource("2_7w76a")
+scene_type = ExtResource("3_up3yn")
+delay = 0.0
+can_change = true
+metadata/_custom_type_script = "uid://bka1bqdqyu2dt"

@@ -31,14 +31,14 @@ func physics_tick(dt: float) -> void:
 	cooldown -= dt
 	health_component.damage_mult = 1.0 + time_looked
 	if cooldown <= 0.0:
-		if randi() % 2 == 0:
+		if Global.randi() % 2 == 0:
 			$"../Random/ProjectileSpawner".spawn_one_off(target)
 			cooldown = maxf(1.5 - shot_count / 25.0, 0.45)
 			shot_count += 1
 		else:
 			$"../Random".on_enter()
 			counter += 1
-			cooldown = randf_range(0.1, 0.8)
+			cooldown = Global.randf_range(0.1, 0.8)
 	if time_looked > 1.0:
 		$"../Random".on_enter()
 		time_looked -= 1.0

@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfvc5vohwdybp"]
+[gd_scene format=3 uid="uid://dfvc5vohwdybp"]
 
-[ext_resource type="Script" path="res://music/global_sound.gd" id="1_4vqtq"]
+[ext_resource type="Script" uid="uid://c5frbfitxycah" path="res://music/global_sound.gd" id="1_4vqtq"]
 [ext_resource type="AudioStream" uid="uid://cygqcq31ipyp7" path="res://music/amen/1.wav" id="2_m0pc3"]
 [ext_resource type="AudioStream" uid="uid://dq6fuiahr0xk8" path="res://music/amen/2.wav" id="3_0hnyg"]
 [ext_resource type="AudioStream" uid="uid://b23auxuo1ohdp" path="res://music/amen/3.wav" id="4_pxsug"]
@@ -20,9 +20,9 @@ stream_count = 1
 stream_0/stream = SubResource("AudioStreamPlaylist_3au0n")
 stream_0/volume = 0.0
 
-[node name="GlobalSound" type="Node"]
+[node name="GlobalSound" type="Node" unique_id=2089641349]
 script = ExtResource("1_4vqtq")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1580240932]
 stream = SubResource("AudioStreamSynchronized_mo62s")
 volume_db = -13.225

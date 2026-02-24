@@ -7,7 +7,7 @@ enum MODES{
 }
 var mode: = MODES.Default
 var do_r: = 0.0
-var t: = randf_range(-40.0, 40.0)
+var t: = Global.randf_range(-40.0, 40.0)
 var tween: Tween
 var target_pos: Vector2
 var time_since_interact_enter: = 0.0
@@ -46,13 +46,13 @@ func _physics_process(delta: float) -> void :
 
 
 func tween_out() -> void :
-	t = randf_range(-1, 1)
+	t = Global.randf_range(-1, 1)
 	mode = MODES.Out
 	if tween: tween.kill()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween.tween_property(self, "do_r", 0.5, 1.0)
 func tween_in() -> void :
-	t = randf_range(-1, 1)
+	t = Global.randf_range(-1, 1)
 
 	mode = MODES.In
 	if tween: tween.kill()

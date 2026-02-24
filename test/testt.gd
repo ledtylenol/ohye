@@ -1,8 +1,6 @@
 @tool
 extends Node3D
-@export var generatse: bool:
-	set(value):
-		generate()
+@export_tool_button("Generate") var g = generate
 @export var amount := 10
 @export var th := PI/6:
 	set(value):
@@ -19,8 +17,8 @@ extends Node3D
 @export var ring_total := 10
 func random_sample_point_in_cone(theta: float, north_pole: Vector3) -> Vector3:
 	#thank you my beloved stackoverflow for this answer it took me SO long
-	var z = randf_range(cos(theta), 1.0)
-	var phi = randf_range(0, TAU)
+	var z = Global.randf_range(cos(theta), 1.0)
+	var phi = Global.randf_range(0, TAU)
 	var r = sqrt(1.0 - z * z)
 	var local_sample = Vector3(r * cos(phi), r * sin(phi), z)
 

@@ -1,9 +1,9 @@
-[gd_scene load_steps=24 format=4 uid="uid://bghkqkl3ut8dn"]
+[gd_scene format=4 uid="uid://bghkqkl3ut8dn"]
 
-[ext_resource type="Script" path="res://entities/knife/knife.gd" id="1_bagbe"]
+[ext_resource type="Script" uid="uid://joow3spumjl1" path="res://entities/knife/knife.gd" id="1_bagbe"]
 [ext_resource type="Material" uid="uid://cx7m4ek0v8onl" path="res://entities/knife/blade_material.tres" id="2_lyeqv"]
 [ext_resource type="Material" uid="uid://c4v8aviffgaxk" path="res://entities/knife/handle_material.tres" id="3_1ug4v"]
-[ext_resource type="Script" path="res://components/entities/hitbox.gd" id="4_h04c6"]
+[ext_resource type="Script" uid="uid://cl7tsnjsikfcr" path="res://components/entities/hitbox.gd" id="4_h04c6"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lk37o"]
 _surfaces = [{
@@ -92,7 +92,7 @@ point_count = 2
 curve = SubResource("Curve_oryeu")
 
 [sub_resource type="Curve" id="Curve_33g8g"]
-max_value = 65.5
+_limits = [0.0, 65.5, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.247934, 20.8736), 0.0, 0.0, 0, 0, Vector2(1, 0), -105.568, 0.0, 0, 0]
 point_count = 3
 
@@ -152,7 +152,7 @@ material = SubResource("StandardMaterial3D_s2ln6")
 size = Vector2(0.1, 0.1)
 orientation = 2
 
-[node name="Knife" type="CharacterBody3D"]
+[node name="Knife" type="CharacterBody3D" unique_id=1478932473]
 collision_layer = 16
 collision_mask = 5
 script = ExtResource("1_bagbe")
@@ -161,43 +161,43 @@ substeps = 1
 speed = 100.0
 lifetime = 0.8
 
-[node name="knife" type="Node3D" parent="."]
+[node name="knife" type="Node3D" parent="." unique_id=1452679576]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="Plane" type="MeshInstance3D" parent="knife"]
+[node name="Plane" type="MeshInstance3D" parent="knife" unique_id=1342815723]
 layers = 2
 instance_shader_parameters/quant = 150.0
 instance_shader_parameters/time = 10.635
 mesh = SubResource("ArrayMesh_f64e7")
 
-[node name="Cylinder" type="MeshInstance3D" parent="knife"]
+[node name="Cylinder" type="MeshInstance3D" parent="knife" unique_id=368998480]
 layers = 2
 instance_shader_parameters/dissolve = 0.0
 instance_shader_parameters/quant2 = 156.794
 mesh = SubResource("ArrayMesh_ow845")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2008327228]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.0693191)
 shape = SubResource("CapsuleShape3D_sl6ct")
 
-[node name="Hitbox" type="Area3D" parent="."]
+[node name="Hitbox" type="Area3D" parent="." unique_id=1990525393]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("4_h04c6")
 is_enemy = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=927594512]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.0693191)
 shape = SubResource("CapsuleShape3D_sl6ct")
 
-[node name="DetectionArea" type="Area3D" parent="."]
+[node name="DetectionArea" type="Area3D" parent="." unique_id=2124669583]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=1218738312]
 shape = SubResource("SphereShape3D_quk76")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1947345640]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.220448)
 amount = 5
 lifetime = 0.5
@@ -205,21 +205,21 @@ visibility_aabb = AABB(-5, -5, -5, 10, 10, 10)
 process_material = SubResource("ParticleProcessMaterial_4vy0j")
 draw_pass_1 = SubResource("PlaneMesh_1mdae")
 
-[node name="PortalArea" type="Area3D" parent="."]
+[node name="PortalArea" type="Area3D" parent="." unique_id=257694363]
 monitoring = false
 metadata/teleportable_root = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalArea" unique_id=1450220159]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.0693191)
 shape = SubResource("CapsuleShape3D_sl6ct")
 
-[node name="Bounce" type="FmodEventEmitter3D" parent="."]
+[node name="Bounce" type="FmodEventEmitter3D" parent="." unique_id=1120255140]
 event_name = "event:/Sfx3D/Bounce"
 event_guid = "{628890fd-9d76-4eac-96bb-4dd81b352c2f}"
 allow_fadeout = false
 preload_event = false
 
-[node name="Impale" type="FmodEventEmitter3D" parent="."]
+[node name="Impale" type="FmodEventEmitter3D" parent="." unique_id=1525473962]
 event_name = "event:/Sfx3D/Impale"
 event_guid = "{38f95651-da57-4f8e-96d4-9d2465f3e7a2}"
 allow_fadeout = false

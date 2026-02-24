@@ -1,11 +1,17 @@
-extends FmodEventEmitter3D
+extends Node3D
+class_name Footsteps
 @export var player: Player
-var is_ready: = false
-func _ready() -> void :
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	is_ready = true
+
+@export var stream_map: Dictionary[String, RaytracedAudioPlayer3D]
+
 func play_thing() -> void :
-	if not is_ready or player.dead: return
-	FmodServer.play_one_shot_attached_with_params("event:/Sfx3D/Footsteps", player, {"TerrainType": player.last_ground_type})
+	if player.dead: return
+	var current = stream_map[Constants.enum_to_string(player.last_ground_type)]
+	if current:
+		for key in stream_map:
+			var stream = stream_map[key]
+			if stream == current:
+				stream.enable()
+			else:
+				stream.disable()
+	current.play()

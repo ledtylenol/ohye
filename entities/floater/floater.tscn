@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://rrg4gbjsj07e"]
+
+[ext_resource type="Script" uid="uid://bfyvgpds438yo" path="res://entities/floater/floater.gd" id="1_sfxhy"]
+[ext_resource type="Texture2D" uid="uid://crebryy3cpw5c" path="res://entities/eye/eye.png" id="2_a4a8d"]
+[ext_resource type="Script" uid="uid://dbkrufxk6ba0m" path="res://components/schizophrenia/schizophrenia.gd" id="3_a4a8d"]
+[ext_resource type="Script" uid="uid://byjxjdn662fjs" path="res://components/interact_component/interact_component.gd" id="4_w5p6u"]
+[ext_resource type="Script" uid="uid://i6dctga6u33h" path="res://components/entities/health_component.gd" id="5_trcij"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w5p6u"]
+radius = 0.91675717
+
+[node name="Floater" type="CharacterBody3D" unique_id=830683910]
+script = ExtResource("1_sfxhy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1720175794]
+shape = SubResource("SphereShape3D_w5p6u")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1046590639]
+billboard = 1
+shaded = true
+texture = ExtResource("2_a4a8d")
+
+[node name="Schizophrenia" type="VisibleOnScreenNotifier3D" parent="." unique_id=302935031 node_paths=PackedStringArray("vision_points", "parent")]
+script = ExtResource("3_a4a8d")
+vision_points = [NodePath("..")]
+parent = NodePath("../Sprite3D")
+metadata/_custom_type_script = "uid://dbkrufxk6ba0m"
+
+[node name="InteractComponent" type="Area3D" parent="." unique_id=1660713398]
+script = ExtResource("4_w5p6u")
+metadata/_custom_type_script = "uid://byjxjdn662fjs"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractComponent" unique_id=89370442]
+shape = SubResource("SphereShape3D_w5p6u")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1132851342]
+script = ExtResource("5_trcij")
+metadata/_custom_type_script = "uid://i6dctga6u33h"

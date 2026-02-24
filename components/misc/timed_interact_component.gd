@@ -10,11 +10,11 @@ enum Mode {
 @export var duration_min := 1.0:
 	set(value):
 		duration_min = value
-		duration = randf_range(duration_min, duration_max)
+		duration = Global.randf_range(duration_min, duration_max)
 @export var duration_max := 1.0:
 	set(value):
 		duration_max = value
-		duration = randf_range(duration_min, duration_max)
+		duration = Global.randf_range(duration_min, duration_max)
 @export var interval := 0.2
 @export var interact_component: InteractComponent
 @export var mode := Mode.ONE_SHOT
@@ -43,7 +43,7 @@ func _ready() -> void:
 			push_warning("no interact component found, this component needs a react component to function")
 			queue_free()
 			return
-	duration = randf_range(duration_min, duration_max)
+	duration = Global.randf_range(duration_min, duration_max)
 	interact_component.interact_start.connect(func() -> void: active = true; Global.player.circle_progress.interval = interval)
 	interact_component.interact_end.connect(func() -> void: active = false)
 	beep.connect(func() -> void: Global.player.circle_progress.interval = interval)
@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 				active = false
 			Mode.REPEATED:
 				time -= duration
-				duration = randf_range(duration_min, duration_max)
+				duration = Global.randf_range(duration_min, duration_max)
 
 func reset_times() -> void:
 	interval_time = 0.0

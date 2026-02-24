@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dq03hkcy6bm4s"]
+
+[ext_resource type="Texture2D" uid="uid://deqie3u73kc7o" path="res://tb/textures/rusted.jpg" id="1_oxei5"]
+[ext_resource type="Texture2D" uid="uid://iwr4iiig2yb0" path="res://tb/textures/rusted_height.jpg" id="2_oqvkt"]
+[ext_resource type="Texture2D" uid="uid://74ybn0imy4u3" path="res://tb/textures/rusted_metallic.jpg" id="3_vfdsu"]
+[ext_resource type="Texture2D" uid="uid://5qhsatijwhlt" path="res://tb/textures/rusted_normal.jpg" id="4_gcngc"]
+[ext_resource type="Texture2D" uid="uid://db2vff82scdmd" path="res://tb/textures/rusted_roughness.jpg" id="5_n55cl"]
+
+[resource]
+albedo_texture = ExtResource("1_oxei5")
+metallic = 1.0
+metallic_specular = 0.0
+metallic_texture = ExtResource("3_vfdsu")
+roughness_texture = ExtResource("5_n55cl")
+normal_enabled = true
+normal_texture = ExtResource("4_gcngc")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_oqvkt")
+texture_filter = 2

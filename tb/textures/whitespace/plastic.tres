@@ -1,0 +1,21 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bafpx3wjc53cq"]
+
+[ext_resource type="Texture2D" uid="uid://bhbrebhv7feyk" path="res://tb/textures/whitespace/plastic.jpg" id="1_ilcmv"]
+[ext_resource type="Texture2D" uid="uid://dmsk0yvwu6ek3" path="res://tb/textures/whitespace/plastic_displacement.jpg" id="2_53d2u"]
+[ext_resource type="Texture2D" uid="uid://bfesibbk1n3bn" path="res://tb/textures/whitespace/plastic_roughness.jpg" id="3_53d2u"]
+
+[resource]
+shading_mode = 2
+diffuse_mode = 3
+albedo_texture = ExtResource("1_ilcmv")
+metallic_specular = 0.0
+roughness_texture = ExtResource("3_53d2u")
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("2_53d2u")
+texture_filter = 2

@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://dyki8xvldby4k"
+path="res://.godot/imported/whitespace.map-39e730d2917f89ee54bad43b784a68e4.tres"
+
+[deps]
+
+source_file="res://tb/maps/whitespace.map"
+dest_files=["res://.godot/imported/whitespace.map-39e730d2917f89ee54bad43b784a68e4.tres"]
+
+[params]
+

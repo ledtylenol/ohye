@@ -1,0 +1,12 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://b0i00r05w0nl2"]
+
+[ext_resource type="AudioStream" uid="uid://cu6sl5etdyhwd" path="res://entities/player/sounds/slide/scuff1.ogg" id="1_sgapi"]
+[ext_resource type="AudioStream" uid="uid://324vhlpctt88" path="res://entities/player/sounds/slide/scuff2.ogg" id="2_7xmw6"]
+[ext_resource type="AudioStream" uid="uid://dg36d1vw7dub6" path="res://entities/player/sounds/slide/scuff3.ogg" id="3_ipyjl"]
+
+[resource]
+random_pitch = 1.2235587
+streams_count = 3
+stream_0/stream = ExtResource("1_sgapi")
+stream_1/stream = ExtResource("2_7xmw6")
+stream_2/stream = ExtResource("3_ipyjl")

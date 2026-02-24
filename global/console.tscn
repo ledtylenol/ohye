@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3sdctag0vsq5"]
+[gd_scene format=3 uid="uid://b3sdctag0vsq5"]
 
-[ext_resource type="Script" path="res://components/console.gd" id="1_4fe6b"]
-[ext_resource type="Script" path="res://global/text_edit.gd" id="2_n5jj1"]
-[ext_resource type="Script" path="res://utils/second_order_dynamics.gd" id="3_nia0m"]
+[ext_resource type="Script" uid="uid://daaxoooy0ltrm" path="res://components/console.gd" id="1_4fe6b"]
+[ext_resource type="Script" uid="uid://dfxtl0fudds0y" path="res://global/text_edit.gd" id="2_n5jj1"]
+[ext_resource type="Script" uid="uid://dw2ch5386anik" path="res://utils/second_order_dynamics.gd" id="3_nia0m"]
 
-[node name="Console" type="Control"]
+[node name="Console" type="Control" unique_id=1830245203]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4fe6b")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=970786554]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -22,10 +22,10 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VSplitContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VSplitContainer" parent="PanelContainer" unique_id=134013446]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer" unique_id=691905695]
 layout_direction = 3
 layout_mode = 2
 size_flags_vertical = 3
@@ -33,14 +33,14 @@ size_flags_stretch_ratio = 8.39
 autowrap_mode = 0
 text_direction = 2
 
-[node name="TextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer"]
+[node name="TextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer" unique_id=1626619746]
 layout_direction = 3
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "Write Some Code"
 script = ExtResource("2_n5jj1")
 
-[node name="SecondOrderDynamics" type="Node" parent="."]
+[node name="SecondOrderDynamics" type="Node" parent="." unique_id=1300106350]
 script = ExtResource("3_nia0m")
 _f = 2.0
 _z = 1.0

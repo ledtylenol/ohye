@@ -8,8 +8,12 @@ extends Control
 @onready var music_slider: HSlider = $GridContainer/HBoxContainer2/HSlider
 @onready var start_button: Button = $GridContainer/StartButton
 @onready var knock: FmodEventEmitter3D = $Knock
+@onready var initial_size := Global.window_size
+@onready var label: RicherTextLabel = $Label
+
 
 @export_multiline var texts: Array[String]
+@export var size_curve: Curve
 var markers = {
 	"Pause": func() -> void:
 		song.paused = true
@@ -24,7 +28,12 @@ var current_size := 1.0:
 		current_size = value
 var can_adv := true
 var tween: Tween
-@onready var initial_size := Global.window_size
+@onready var secret_functions: Dictionary[String, Callable] = {
+	"wakeup": func() -> void:
+		knock.play()
+		Global.force_event(Global.Event.NIGHT)
+		,
+}
 signal finished
 func get_time_str(x: M.Period) -> String:
 	match x:
@@ -35,7 +44,7 @@ func get_time_str(x: M.Period) -> String:
 		M.Period.MORNING: return "during such an [shake][rainbow]incredible[][] morning"
 		_: return "at this forbidden hour"
 func start() -> void:
-	print("A")
+	InputCounter.active = false
 	if Global.game_stats.read_start:
 		await get_tree().physics_frame
 		finished.emit()
@@ -57,19 +66,30 @@ func start() -> void:
 		rich_text_animation.set_bbcode(texts[current])
 		song.timeline_marker.connect(on_marker)
 func _ready() -> void:
+	InputCounter.active = true
+	InputCounter.text_changed.connect(on_secret_text)
 	sfx_slider.value_changed.connect(on_sfx)
 	music_slider.value_changed.connect(on_music)
 	start_button.pressed.connect(start)
 	sfx_slider.value = Global.game_settings.sfx_volume
 	music_slider.value = Global.game_settings.music_volume
+	Global.current_menu = self
+	
+
+func on_secret_text(t: String) -> void:
+	print(t)
+	label.bbcode = "[wave][font_size=%.2f]%s" % [size_curve.sample(t.length()), t]
+	if secret_functions.has(t):
+		secret_functions[t].call()
+		InputCounter.clear_buffer()
 func on_sfx(v: float) -> void:
+
 	FmodServer.get_bus("bus:/Sfx").volume = v
 
 func on_music(v: float) -> void:
 	FmodServer.get_bus("bus:/Music").volume = v
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed() and can_adv:
-		print("ADV")
 		rich_text_animation.advance()
 func on_char(_i: int) -> void:
 	click.play_one_shot()
@@ -118,3 +138,6 @@ func on_star(s: String) -> void:
 	if s == "knock":
 		knock.volume = 1
 		knock.play_one_shot()
+
+func _exit_tree() -> void:
+	InputCounter.active = false

@@ -1,0 +1,1 @@
+extends FmodEventEmitter3D

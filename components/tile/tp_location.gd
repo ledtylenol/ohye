@@ -9,7 +9,8 @@ func _func_godot_apply_properties(props: Dictionary) -> void:
 
 
 func _ready() -> void:
-	Global.teleport_to_id.connect(tp)
+	if not Engine.is_editor_hint():
+		Global.teleport_to_id.connect(tp)
 
 func tp(i: int) -> void:
 	if id == i:

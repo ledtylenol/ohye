@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://7gpkd3eqrq4t"]
+[gd_scene format=3 uid="uid://7gpkd3eqrq4t"]
 
-[ext_resource type="Script" path="res://entities/lighter/lighter.gd" id="1_s583j"]
-[ext_resource type="Script" path="res://components/interact_component/interact_component.gd" id="2_k0i2t"]
+[ext_resource type="Script" uid="uid://dpytjsmh1hc7w" path="res://entities/lighter/lighter.gd" id="1_s583j"]
+[ext_resource type="Script" uid="uid://byjxjdn662fjs" path="res://components/interact_component/interact_component.gd" id="2_k0i2t"]
 [ext_resource type="Material" uid="uid://ttnrhl4yyq3t" path="res://test/outline_test.tres" id="3_p05df"]
 [ext_resource type="AudioStream" uid="uid://dgxtxcanwyd1u" path="res://entities/lighter/in.wav" id="4_npe5m"]
 [ext_resource type="AudioStream" uid="uid://dt330yk8vjs14" path="res://entities/lighter/in2.wav" id="5_pwokv"]
@@ -27,18 +27,18 @@ random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("6_2bt0u")
 
-[node name="Toggler" type="Node3D" node_paths=PackedStringArray("interact")]
+[node name="Toggler" type="Node3D" unique_id=969430015 node_paths=PackedStringArray("interact")]
 script = ExtResource("1_s583j")
 interact = NodePath("InteractComponent")
 
-[node name="InteractComponent" type="Area3D" parent="." node_paths=PackedStringArray("mesh", "body", "text")]
+[node name="InteractComponent" type="Area3D" parent="." unique_id=1361591225 node_paths=PackedStringArray("mesh", "body", "text")]
 script = ExtResource("2_k0i2t")
 what_text = "Pick Up"
 mesh = NodePath("../MeshInstance3D")
 body = NodePath("../StaticBody3D")
 text = NodePath("Label3D")
 
-[node name="Label3D" type="Label3D" parent="InteractComponent"]
+[node name="Label3D" type="Label3D" parent="InteractComponent" unique_id=298489736]
 pixel_size = 0.001
 billboard = 1
 no_depth_test = true
@@ -46,16 +46,16 @@ texture_filter = 0
 text = "Item"
 font_size = 116
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1200563448]
 mesh = SubResource("BoxMesh_xlmlt")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1535282678]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2034221521]
 shape = SubResource("BoxShape3D_cikca")
 
-[node name="On" type="AudioStreamPlayer3D" parent="."]
+[node name="On" type="AudioStreamPlayer3D" parent="." unique_id=77679548]
 stream = SubResource("AudioStreamRandomizer_7gvbf")
 
-[node name="Off" type="AudioStreamPlayer3D" parent="."]
+[node name="Off" type="AudioStreamPlayer3D" parent="." unique_id=1985801899]
 stream = SubResource("AudioStreamRandomizer_snjbn")

@@ -14,7 +14,7 @@ func _ready() -> void:
 		pool.sort_custom(weightasc)
 		for thing in pool:
 			cap += thing.weight
-	var rand := randi() % cap
+	var rand := Global.randi() % cap
 	for thing in pool:
 		rand -= thing.weight
 		if rand < 0:
@@ -22,8 +22,8 @@ func _ready() -> void:
 				item = load(thing.thing).instantiate()
 			break
 	for i in range(3):
-		rotation_random[i] = rotation_random[i] * randf()
-		position_random[i] = position_random[i] * randf()
+		rotation_random[i] = rotation_random[i] * Global.randf()
+		position_random[i] = position_random[i] * Global.randf()
 	if item:
 		add_child(item)
 		item.position = position_random

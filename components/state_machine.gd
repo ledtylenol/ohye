@@ -4,6 +4,7 @@ class_name StateMachine
 
 var states: Dictionary
 @export var current_state: State
+
 func _ready() -> void:
 	for child: State in M.nightmare_getter(self, State):
 		states[child.name.to_lower()] = child

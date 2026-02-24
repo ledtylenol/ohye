@@ -1,0 +1,13 @@
+[gd_resource type="NoiseTexture2D" format=3 uid="uid://ida4pqrk63kv"]
+
+[sub_resource type="Gradient" id="Gradient_pvmve"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_07cuw"]
+seed = 8
+frequency = 0.0036
+domain_warp_enabled = true
+
+[resource]
+noise = SubResource("FastNoiseLite_07cuw")
+color_ramp = SubResource("Gradient_pvmve")
+seamless = true

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d1lh2gws2uii8"]
+
+[ext_resource type="Script" uid="uid://cj4s2xkbablwp" path="res://utils/input_counter.gd" id="1_xplsx"]
+
+[node name="InputCounter" type="Node" unique_id=892610315]
+script = ExtResource("1_xplsx")
+
+[node name="Type" type="FmodEventEmitter3D" parent="." unique_id=499371551]
+event_name = "event:/Sfx3D/Type"
+event_guid = "{38dea224-4f22-4519-98ce-bcc8b2056b51}"
+attached = false
+allow_fadeout = false
+preload_event = false
+
+[node name="Timer" type="Timer" parent="." unique_id=1281473782]
+one_shot = true
+
+[node name="End" type="FmodEventEmitter3D" parent="." unique_id=736468929]
+event_name = "event:/Sfx3D/ResetType"
+event_guid = "{704df19b-d950-4764-879e-d56cf38cbdaa}"
+preload_event = false

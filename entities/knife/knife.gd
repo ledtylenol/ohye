@@ -1,6 +1,6 @@
 extends Projectile
 class_name Knife
-var time := randf_range(-50.0, 50.0):
+var time := Global.randf_range(-50.0, 50.0):
 	set = set_time
 var tween: Tween
 var scale_tween: Tween

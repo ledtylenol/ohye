@@ -7,5 +7,5 @@ func _ready() -> void :
 	mat.gravity = mat.gravity.length() * ( - up_dir)
 	mat.direction = up_dir
 	get_tree().create_timer(lifetime).timeout.connect(queue_free)
-	amount_ratio = randf_range(0.1, 0.3)
+	amount_ratio = Global.randf_range(0.1, 0.3)
 	emitting = true

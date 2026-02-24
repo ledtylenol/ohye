@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cpq8lvxp5dbs1"]
+
+[ext_resource type="Texture2D" uid="uid://dfy5jsycbhb74" path="res://tb/textures/rose.png" id="1_uinhq"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+disable_ambient_light = true
+disable_fog = true
+albedo_texture = ExtResource("1_uinhq")
+texture_filter = 2

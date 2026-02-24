@@ -1,3 +1,4 @@
+@tool
 """
 	Asset: Godot Simple Portal System
 	File: portal.gd
@@ -64,6 +65,8 @@ var _exit_camera:Camera3D
 var _seconds_until_resize:float
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	if not is_inside_tree():
 		push_error("The portal \"%s\" is not inside a SceneTree." % name)
 
@@ -120,7 +123,10 @@ func _create_viewport() -> void:
 	# Create the exit camera which renders the portal surface for the viewport
 	_exit_camera = Camera3D.new()
 	_exit_camera.name = "Camera"
-	_exit_camera.environment = exit_environment
+	if exit_environment:
+		_exit_camera.environment = exit_environment
+	else:
+		_exit_camera.environment = get_world_3d().environment
 	_exit_camera.cull_mask = exit_cull_mask
 	_viewport.add_child(_exit_camera)
 
@@ -128,6 +134,7 @@ func _create_viewport() -> void:
 	_seconds_until_resize = 0
 
 func _process(delta:float) -> void:
+	if Engine.is_editor_hint():return
 	# Disable the viewport if the portal is further away than disable_viewport_distance or if the portal is invisible in the scene tree
 	var disable_viewport:bool = not is_visible_in_tree() or\
 		main_camera.global_position.distance_squared_to(global_position) > disable_viewport_distance * disable_viewport_distance
@@ -170,6 +177,9 @@ func _process(delta:float) -> void:
 				_viewport.size = Vector2i(int(vertical_viewport_resolution * aspect_ratio + 0.5), vertical_viewport_resolution)
 
 	# Move the exit camera relative to the exit portal based on the main camera's position relative to the entrance portal    
+	#var m = (global_transform * exit_portal.global_transform.affine_inverse()).rotated(Vector3.UP, PI) * main_camera.global_transform
+	#_exit_camera.global_transform = m
+
 	_exit_camera.global_transform = real_to_exit_transform(main_camera.global_transform)
 
 	# Get the four X, Y corners of the scaled entrance portal bounding box clamped to Z=0 (portal surface) relative to the exit portal.
@@ -189,6 +199,7 @@ func _process(delta:float) -> void:
 
 	# The near clip distance is the shortest distance which still contains all the corners
 	_exit_camera.near = max(_EXIT_CAMERA_NEAR_MIN, min(d_1, d_2, d_3, d_4) - exit_near_subtract)
+	#_exit_camera.near = main_camera.near
 	_exit_camera.far = main_camera.far
 	_exit_camera.fov = main_camera.fov
 	_exit_camera.keep_aspect = main_camera.keep_aspect

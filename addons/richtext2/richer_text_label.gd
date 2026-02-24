@@ -429,7 +429,7 @@ func set_font(id: String):
 
 func _update_subfonts():
 	if font_auto_setup:
-		FontHelper.set_fonts(self, font, font_bold_weight, font_italics_slant, font_italics_weight, FontHelper.ref.fonts)
+		FontHelper.set_fonts(self, font, font_bold_weight, font_italics_slant, font_italics_weight, FontHelper._get_fonts())
 
 func get_normal_font() -> Font:
 	return get_theme_font(&"normal_font")
@@ -666,10 +666,20 @@ func get_expression(ex: String, state2 := {}) -> Variant:
 	return returned
 
 func _parse_tag(tag: String):
+	# Config overrides.
+	if ProjectSettings.has_setting("richer_text_label/colors"):
+		var colors: Dictionary = ProjectSettings.get("richer_text_label/colors")
+		if tag in colors:
+			var color = colors.get(tag)
+			if typeof(color) == TYPE_COLOR:
+				_push_color(color)
+				return
+			else:
+				tag = str(color)
+	
 	# COLOR. This allows doing: "[%s]Text[]" % Color.RED
 	if is_wrapped(tag, "()"):
-		var rgba = unwrap(tag, "()").split_floats(",")
-		_push_color(Color(rgba[0], rgba[1], rgba[2], rgba[3]))
+		_push_color(to_color(tag))
 		return
 	
 	# Pipe. TODO
@@ -690,6 +700,12 @@ func _parse_tag(tag: String):
 	# Image.
 	if tag.begins_with("!"):
 		_push_image(tag)
+		return
+	
+	# Hex color.
+	if tag.begins_with("0x"):
+		var html := tag.trim_prefix("0x")
+		_push_color(to_color(html))
 		return
 	
 	var tag_name: String
@@ -1093,7 +1109,7 @@ func _get_property_list():
 	_prop(props, &"emoji_scale", TYPE_FLOAT)
 	
 	_prop_group(props, "Font", "font_")
-	var fonts := "," + ",".join(FontHelper.ref.fonts.keys())
+	var fonts := "," + ",".join(FontHelper._get_fonts().keys())
 	_prop(props, &"font", TYPE_STRING, PROPERTY_HINT_ENUM_SUGGESTION, fonts)
 	_prop(props, &"font_auto_setup", TYPE_BOOL)
 	_prop(props, &"font_size", TYPE_INT)
@@ -1234,7 +1250,10 @@ static func to_color(s: String, default: Variant = Color.WHITE) -> Variant:
 			s = unwrap(s, "()")
 		# floats?
 		var floats := s.split_floats(",")
-		return Color(floats[0], floats[1], floats[2], 1.0)
+		match len(floats):
+			4: return Color(floats[0], floats[1], floats[2], floats[3])
+			3: return Color(floats[0], floats[1], floats[2], 1.0)
+			_: push_error("Strange color given: %s." % [s])
 #	push_error("Can't convert '%s' to color." % s)
 	return default
 

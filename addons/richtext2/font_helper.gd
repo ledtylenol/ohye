@@ -16,60 +16,58 @@ const FONT_FORMATS := ["otf", "ttf", "ttc", "otc", "woff", "woff2", "pfb", "pfm"
 
 ## Scans entire project now.
 ## If you set it to res://fonts you could save a lot of time on large projects.
-const FONT_DIR := "res://"
-## 
-const FONT_HELPER_PATH := "res://font_helper.tres"
+const FONT_DIR := "res://fonts"
 
-static var _ref: FontHelper
-static var ref: FontHelper:
-	get:
-		if not _ref:
-			_ref = load(FONT_HELPER_PATH)
-			if not _ref:
-				push_warning("[RicherTextLabel] No FontHelper found. Creating one at %s." % [FONT_HELPER_PATH])
-				ResourceSaver.save(FontHelper.new(), FONT_HELPER_PATH)
-				_ref = load(FONT_HELPER_PATH)
-				update_cached_fonts()
-		return _ref
+#static var _ref: FontHelper
+#static var ref: FontHelper:
+	#get:
+		#if not _ref:
+			#_ref = load(FONT_HELPER_PATH)
+			#if not _ref:
+				#push_warning("[RicherTextLabel] No FontHelper found. Creating one at %s." % [FONT_HELPER_PATH])
+				#ResourceSaver.save(FontHelper.new(), FONT_HELPER_PATH)
+				#_ref = load(FONT_HELPER_PATH)
+				#update_cached_fonts()
+		#return _ref
 
-## Update the list of fonts.
-@export_tool_button("Update") var _debug_update_font_list: Callable = update_cached_fonts
-## Press 'Update' to update the list.
-## These will be available in RicherTextLabel font drop down.
-@export var fonts: Dictionary[StringName, String]
-
-static func _static_init() -> void:
-	if Engine.is_editor_hint():
-		var editor_interface = Engine.get_singleton("EditorInterface")
-		var sig = editor_interface.get_resource_filesystem().filesystem_changed
-		if not sig.is_connected(_filesystem_changed):
-			sig.connect(_filesystem_changed)
-
-static func _filesystem_changed():
-	update_cached_fonts()
-
-static func clear_cache():
-	ref.fonts.clear()
+#static func _static_init() -> void:
+	#if Engine.is_editor_hint():
+		#var editor_interface = Engine.get_singleton("EditorInterface")
+		#var sig = editor_interface.get_resource_filesystem().filesystem_changed
+		#if not sig.is_connected(_filesystem_changed):
+			#sig.connect(_filesystem_changed)
+#
+#static func _filesystem_changed():
+	#update_cached_fonts()
+#
+#static func clear_cache():
+	#ref.fonts.clear()
 
 ## Search the fonts folder for all fonts.
-static func update_cached_fonts():
-	clear_cache()
-	_scan_for_fonts(ref.fonts)
+static func scan_for_fonts(loud := false):
+	var fonts := {}
+	_scan_for_fonts(fonts, FONT_DIR, loud)
+	ProjectSettings.set("richer_text_label/fonts", fonts)
 
+static func _get_fonts() -> Dictionary:
+	if ProjectSettings.has_setting("richer_text_label/fonts"):
+		return ProjectSettings.get("richer_text_label/fonts")
+	return {}
+	
 static func has_font(id: StringName) -> bool:
-	return id in ref.fonts
+	return _get_fonts().has(id)
 
 static func get_font(id: StringName) -> Font:
-	return load(ref.fonts[id])
+	return load(_get_fonts().get(id))
 
 static func has_emoji_font() -> bool:
-	return &"emoji_font" in ref.fonts
+	return has_font(&"emoji_font")
 
 static func get_emoji_font() -> Font:
 	return get_font(&"emoji_font")
 
 ## Scans recursively, populating the dictionary with fonts it finds.
-static func _scan_for_fonts(dict: Dictionary, path := FONT_DIR) -> Dictionary:
+static func _scan_for_fonts(dict: Dictionary, path := FONT_DIR, loud := false) -> Dictionary:
 	if not DirAccess.dir_exists_absolute(FONT_DIR):
 		return dict
 	
@@ -79,21 +77,27 @@ static func _scan_for_fonts(dict: Dictionary, path := FONT_DIR) -> Dictionary:
 		var file_name := dir.get_next()
 		while file_name != "":
 			if dir.current_is_dir():
-				_scan_for_fonts(dict, path.path_join(file_name))
+				_scan_for_fonts(dict, path.path_join(file_name), loud)
 			else:
 				if file_name.get_extension().to_lower() in FONT_FORMATS:
 					# Ignore emoji fonts, unless it is explicitly wanted.
 					if "emoji" in file_name.get_file().to_lower():
 						if not &"emoji_font" in dict:
 							dict[&"emoji_font"] = path.path_join(file_name)
+							if loud:
+								print_rich("[FontHelper] Found emoji font.")
 					else:
 						var full_path := path.path_join(file_name)
 						var id := full_path.get_file().get_basename()
 						for pt in PATTERN_ALL:
 							id = id.replace(pt, "")
-						dict[id] = full_path
+						dict[StringName(id)] = full_path
+						if loud:
+							print_rich("[FontHelper] Found font: [b]%s." % [id])
 				elif file_name.get_file().ends_with("emoji_font.tres"):
 					dict[&"emoji_font"] = path.path_join(file_name)
+					if loud:
+						print_rich("[FontHelper] Found emoji font.")
 			
 			file_name = dir.get_next()
 	else:

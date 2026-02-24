@@ -1,5 +1,5 @@
 extends Node3D
-
+class_name Weapons
 @export var cooldown: = 0.2
 @export var player: Player
 var real_cooldown: = 0.0
@@ -18,7 +18,9 @@ func _process(delta: float) -> void :
 		var ch: = children
 		ch.shuffle()
 		for child in ch:
-			if child.heat == 0:
+			if child.heat == 0 && child.ammo > 0:
 				child.shoot()
 				real_cooldown = cooldown
+			elif child.ammo <= 0:
+				child.tweened_dissolve = 1.0
 			await get_tree().create_timer(0.5 * cooldown / children.size()).timeout

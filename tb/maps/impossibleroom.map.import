@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://bjjblqrhc3pij"
+path="res://.godot/imported/impossibleroom.map-a9f0029df84ee6c5292192b2333e69f5.tres"
+
+[deps]
+
+source_file="res://tb/maps/impossibleroom.map"
+dest_files=["res://.godot/imported/impossibleroom.map-a9f0029df84ee6c5292192b2333e69f5.tres"]
+
+[params]
+

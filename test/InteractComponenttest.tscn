@@ -1,19 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bffoxo36ea5nr"]
+[gd_scene format=3 uid="uid://bffoxo36ea5nr"]
 
-[ext_resource type="Script" path="res://components/interact_component/interact_component.gd" id="1_yjrra"]
+[ext_resource type="Script" uid="uid://byjxjdn662fjs" path="res://components/interact_component/interact_component.gd" id="1_yjrra"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cikca"]
 size = Vector3(0.34, 1, 1)
 
-[node name="InteractComponent" type="Area3D"]
+[node name="InteractComponent" type="Area3D" unique_id=860674994]
 script = ExtResource("1_yjrra")
 what_text = "Pick Up"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1822131491]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 shape = SubResource("BoxShape3D_cikca")
 
-[node name="_Label3D_5" type="Label3D" parent="."]
+[node name="_Label3D_5" type="Label3D" parent="." unique_id=155917284]
 billboard = 1
 no_depth_test = true
 modulate = Color(1, 1, 1, 0)

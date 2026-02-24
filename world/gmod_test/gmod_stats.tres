@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://dwknlwlwu66oo"]
+
+[ext_resource type="Script" uid="uid://bo7o1la75ggh7" path="res://entities/player/scripts/stats.gd" id="1_pl5ht"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_pl5ht")
+speed = 25
+ground_acceleration = 15.0
+max_floor_angle = 1.257
+jump_height = 4.0
+jump_peak_time = 0.4
+jump_descend_time = 0.44
+max_ground_pounds = 0
+ground_pound_base_height = 20.0

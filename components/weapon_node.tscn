@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://cvubdwe0x7skk"]
+[gd_scene format=4 uid="uid://cvubdwe0x7skk"]
 
-[ext_resource type="Script" path="res://entities/player/weapon_node.gd" id="1_f23ic"]
+[ext_resource type="Script" uid="uid://cr5t8ioaphr20" path="res://entities/player/weapon_node.gd" id="1_f23ic"]
 [ext_resource type="Material" uid="uid://cx7m4ek0v8onl" path="res://entities/knife/blade_material.tres" id="2_kp0wg"]
 [ext_resource type="Material" uid="uid://c4v8aviffgaxk" path="res://entities/knife/handle_material.tres" id="3_jx0ts"]
-[ext_resource type="Script" path="res://utils/second_order_dynamics.gd" id="4_jd8gs"]
+[ext_resource type="Script" uid="uid://dw2ch5386anik" path="res://utils/second_order_dynamics.gd" id="4_jd8gs"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lk37o"]
 _surfaces = [{
@@ -70,7 +70,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ixo0x")
 
-[node name="WeaponNode" type="Node3D" node_paths=PackedStringArray("knife", "kn_off")]
+[node name="WeaponNode" type="Node3D" unique_id=132800841 node_paths=PackedStringArray("knife", "kn_off")]
+physics_interpolation_mode = 1
 script = ExtResource("1_f23ic")
 relative_thres = 0.855
 knife = NodePath("knife")
@@ -79,13 +80,13 @@ offset = Vector3(-0.295, -0.2, 0.035)
 shoot_offset = Vector3(-0.5, 0, 0)
 tween_amt = 1.0
 
-[node name="knife" type="Node3D" parent="."]
+[node name="knife" type="Node3D" parent="." unique_id=710747482]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="KnifeOffset" type="Node3D" parent="knife"]
+[node name="KnifeOffset" type="Node3D" parent="knife" unique_id=681949042]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="Plane" type="MeshInstance3D" parent="knife/KnifeOffset"]
+[node name="Plane" type="MeshInstance3D" parent="knife/KnifeOffset" unique_id=1264829404]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -0.48)
 layers = 2
 instance_shader_parameters/quant = 150.0
@@ -93,7 +94,7 @@ instance_shader_parameters/time = 10.635
 mesh = SubResource("ArrayMesh_f64e7")
 skeleton = NodePath("../..")
 
-[node name="Cylinder" type="MeshInstance3D" parent="knife/KnifeOffset"]
+[node name="Cylinder" type="MeshInstance3D" parent="knife/KnifeOffset" unique_id=1710908913]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -0.48)
 layers = 2
 instance_shader_parameters/dissolve = 0.0
@@ -101,22 +102,22 @@ instance_shader_parameters/quant2 = 156.794
 mesh = SubResource("ArrayMesh_ow845")
 skeleton = NodePath("../..")
 
-[node name="SecondOrderDynamics" type="Node" parent="."]
+[node name="SecondOrderDynamics" type="Node" parent="." unique_id=1178141948]
 script = ExtResource("4_jd8gs")
 _f = 3.0
 _z = 0.5
 _r = 0.2
 
-[node name="RotOrder" type="Node" parent="."]
+[node name="RotOrder" type="Node" parent="." unique_id=1367816661]
 script = ExtResource("4_jd8gs")
 _f = 2.0
 _z = 2.0
 
-[node name="ShootDynams" type="Node" parent="."]
+[node name="ShootDynams" type="Node" parent="." unique_id=984997117]
 script = ExtResource("4_jd8gs")
 _r = 1.0
 
-[node name="Throw" type="FmodEventEmitter3D" parent="."]
+[node name="Throw" type="FmodEventEmitter3D" parent="." unique_id=1036175264]
 event_name = "event:/Sfx3D/Throw"
 event_guid = "{da5182a1-a63b-44d7-a7be-489503ada1a7}"
 preload_event = false

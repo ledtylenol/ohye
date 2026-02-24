@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://bkwj3rhrqei4a"]
+
+[ext_resource type="AudioStream" uid="uid://ca6pgka2fybh0" path="res://entities/player/sounds/walk/metal1.wav" id="1_he2ub"]
+[ext_resource type="AudioStream" uid="uid://7isn4kxd47qh" path="res://entities/player/sounds/walk/metal2.wav" id="2_hibtn"]
+[ext_resource type="AudioStream" uid="uid://dwyvoceyy3ovb" path="res://entities/player/sounds/walk/metal3.wav" id="3_i83ba"]
+[ext_resource type="AudioStream" uid="uid://q6ego6isn7bt" path="res://entities/player/sounds/walk/metal4.wav" id="4_w7rbl"]
+
+[resource]
+random_pitch = 1.199902
+streams_count = 4
+stream_0/stream = ExtResource("1_he2ub")
+stream_1/stream = ExtResource("2_hibtn")
+stream_2/stream = ExtResource("3_i83ba")
+stream_3/stream = ExtResource("4_w7rbl")

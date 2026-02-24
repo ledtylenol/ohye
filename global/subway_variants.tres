@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="RandomScenePicker" format=3 uid="uid://5gl1ihxtg6is"]
+
+[ext_resource type="Script" uid="uid://7bf2wfuue7ko" path="res://components/misc/random_scene.gd" id="1_7s5mh"]
+[ext_resource type="Script" uid="uid://pk8b1tej038a" path="res://components/misc/random_scene_picker.gd" id="2_rw3x5"]
+
+[sub_resource type="Resource" id="Resource_0w0bs"]
+script = ExtResource("1_7s5mh")
+path = "uid://c1mnw2aem68yc"
+weight = 10
+
+[sub_resource type="Resource" id="Resource_kmvpl"]
+script = ExtResource("1_7s5mh")
+path = "uid://do2wnj4msh381"
+weight = 3
+
+[sub_resource type="Resource" id="Resource_7s5mh"]
+script = ExtResource("1_7s5mh")
+path = "uid://bk1d78v5x56rs"
+metadata/_custom_type_script = "uid://7bf2wfuue7ko"
+
+[resource]
+script = ExtResource("2_rw3x5")
+scenes = Array[ExtResource("1_7s5mh")]([SubResource("Resource_0w0bs"), SubResource("Resource_kmvpl"), SubResource("Resource_7s5mh")])

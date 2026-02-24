@@ -9,7 +9,7 @@ func get_text() -> String:
 		pool.sort_custom(weightasc)
 		for thing in pool:
 			cap += thing.weight
-	var rand := randi() % cap
+	var rand := Global.randi() % cap
 	for thing: RandomTextData in pool:
 		rand -= thing.weight
 		if rand < 0:

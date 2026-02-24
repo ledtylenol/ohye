@@ -12,7 +12,7 @@ func on_enter() -> void:
 	
 	projectile_spawner.spawn_one_off(target)
 	target.change_target_random(3, 15.0)
-	target.quaternion *= Quaternion(M.rand_vec(), randf_range(-PI * 1.5, PI * 1.5))
+	target.quaternion *= Quaternion(M.rand_vec(), Global.randf_range(-PI * 1.5, PI * 1.5))
 	target.global_position = target.target
 	if small_tween: small_tween.kill()
 	small_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)

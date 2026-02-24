@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" format=3 uid="uid://ds1er4mtsfdnv"]
+
+[ext_resource type="Resource" uid="uid://b70vf4t5dc70t" path="res://addons/func_godot/fgd/func_geo.tres" id="1_gg6pq"]
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_xay20"]
+[ext_resource type="Script" uid="uid://dr1020ce5hcr6" path="res://components/misc/tb/chance_spawn.gd" id="3_21vsg"]
+
+[resource]
+script = ExtResource("1_xay20")
+origin_type = 4
+script_class = ExtResource("3_21vsg")
+classname = "ohye_chancespawn"
+description = "random chance to spawn"
+base_classes = Array[Resource]([ExtResource("1_gg6pq")])
+class_properties = Dictionary[String, Variant]({
+"chance": 100
+})
+node_class = "StaticBody3D"
+metadata/_custom_type_script = ExtResource("1_xay20")

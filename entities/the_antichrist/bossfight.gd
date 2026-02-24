@@ -83,15 +83,15 @@ func on_marker(data: Dictionary) -> void:
 func change_target_random(r_min: float, r_max: float) -> void:
 	var attempts := 0
 	var p_p := player.global_position
-	var new_dir :Vector3= p_p + M.random_sample_point_in_cone(PI/6, -player.camera.global_basis.z) * randf_range(r_min, r_max)
+	var new_dir :Vector3= p_p + M.random_sample_point_in_cone(PI/6, -player.camera.global_basis.z) * Global.randf_range(r_min, r_max)
 	while not can_go_there(new_dir) and attempts < 100:
-		new_dir = p_p + M.random_sample_point_in_cone(PI/6, -player.camera.global_basis.z) * randf_range(r_min, r_max)
+		new_dir = p_p + M.random_sample_point_in_cone(PI/6, -player.camera.global_basis.z) * Global.randf_range(r_min, r_max)
 		attempts += 1
 	if attempts == 100:
 		print('attemts')
-		new_dir = p_p - player.camera.global_basis.z * randf_range(r_min, r_max)
+		new_dir = p_p - player.camera.global_basis.z * Global.randf_range(r_min, r_max)
 	if new_dir.y < player.camera.global_position.y + 6:
-		new_dir.y += randf_range(3, 12)
+		new_dir.y += Global.randf_range(3, 12)
 	target = new_dir
 
 

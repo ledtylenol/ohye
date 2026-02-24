@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" format=3 uid="uid://br3m0rm2abeb"]
+
+[ext_resource type="Resource" uid="uid://ds1er4mtsfdnv" path="res://tb/entities/chance_spawn.tres" id="1_743kp"]
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_qfc2p"]
+[ext_resource type="Script" uid="uid://bb3rjc6cd7oim" path="res://components/misc/tb/chance_interact.gd" id="3_62jhn"]
+
+[resource]
+script = ExtResource("1_qfc2p")
+origin_type = 4
+script_class = ExtResource("3_62jhn")
+classname = "ohye_chanceinteract"
+base_classes = Array[Resource]([ExtResource("1_743kp")])
+class_properties = Dictionary[String, Variant]({
+"detach_off": false,
+"detach_on": false,
+"off_sound": "",
+"on_sound": ""
+})
+node_class = "StaticBody3D"
+metadata/_custom_type_script = "uid://ffxvokfb4ow6"

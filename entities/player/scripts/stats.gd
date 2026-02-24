@@ -2,10 +2,13 @@ extends Resource
 class_name PlayerStats
 
 @export_category("movement")
-@export var speed: = 5
-@export var air_speed := 15
+@export var speed: = 5.0
+@export var air_speed := 15.0
+@export var wall_speed := 15.0
 @export var speed_mul: float = 1.0
 @export var ground_acceleration: float = 5.0
+@export var ground_accel_modifier := 1.0
+@export var wall_fall_thres := 2.0
 @export var air_accel := 25.0
 @export var max_floor_angle := PI/6
 @export_category("jump")

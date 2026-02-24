@@ -1,0 +1,19 @@
+[gd_resource type="Theme" format=3 uid="uid://ce3sqk2rs4pcf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g11gp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g63pg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g11gp"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_g63pg"]
+color = Color(0, 0, 0, 0)
+thickness = 10
+
+[resource]
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = SubResource("StyleBoxEmpty_g11gp")
+Button/styles/pressed = SubResource("StyleBoxFlat_g63pg")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_g11gp")
+HSlider/styles/slider = SubResource("StyleBoxLine_g63pg")

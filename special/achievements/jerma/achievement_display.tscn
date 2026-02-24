@@ -1,16 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://cynlwf47lm2no"]
+[gd_scene format=3 uid="uid://cynlwf47lm2no"]
 
-[ext_resource type="Script" path="res://special/achievements/achievement_display.gd" id="1_uwq6q"]
+[ext_resource type="Script" uid="uid://e5deogq4tlqn" path="res://special/achievements/achievement_display.gd" id="1_uwq6q"]
+[ext_resource type="FontFile" uid="uid://bcv2v4cpdad63" path="res://fonts/MNVariaWIP-Semi-bold.otf" id="2_y6vx4"]
 
-[node name="AchievementDisplay" type="Node3D"]
+[node name="AchievementDisplay" type="Node3D" unique_id=1288664736]
 visible = false
 script = ExtResource("1_uwq6q")
 
-[node name="Sprite" type="Sprite3D" parent="."]
+[node name="Sprite" type="Sprite3D" parent="." unique_id=363907102]
 billboard = 1
 texture_filter = 0
 
-[node name="Time label" type="Label3D" parent="."]
+[node name="Time label" type="Label3D" parent="." unique_id=1401205472]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 offset = Vector2(0, 127.55)
 billboard = 1
+no_depth_test = true
+texture_filter = 2
+font = ExtResource("2_y6vx4")

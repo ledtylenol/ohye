@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyyds6qlsoo6b"]
+
+[ext_resource type="Shader" uid="uid://cdcb0ak1hv8dq" path="res://test/caca.gdshader" id="1_u3bfi"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_l8f2j"]
+size = Vector2(100, 100)
+orientation = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ml71"]
+render_priority = 0
+shader = ExtResource("1_u3bfi")
+shader_parameter/scale = Vector2(0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_l8f2j")
+surface_material_override/0 = SubResource("ShaderMaterial_3ml71")

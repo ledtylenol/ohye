@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://rfmt25pvcc2u"]
+
+[ext_resource type="Shader" uid="uid://di7b0hpm6roex" path="res://test/testss.gdshader" id="1_gsd2x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3pqp8"]
+shader = ExtResource("1_gsd2x")
+shader_parameter/thres = 0.95
+shader_parameter/thres2 = 0.03
+shader_parameter/thres_offset = 0.02
+shader_parameter/thres_offset2 = 0.01
+shader_parameter/linear_offset = 0.0
+
+[node name="Control" type="Control" unique_id=2137167761]
+clip_children = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1304433782]
+material = SubResource("ShaderMaterial_3pqp8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

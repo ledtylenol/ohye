@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://drglydk1ctqc"]
+[gd_scene format=3 uid="uid://drglydk1ctqc"]
 
-[ext_resource type="Script" path="res://components/portal/portal.gd" id="1_nlopc"]
-[ext_resource type="Script" path="res://components/portal/portal_teleport.gd" id="3_ck0nw"]
+[ext_resource type="Script" uid="uid://b1bs8oso00168" path="res://components/portal/portal.gd" id="1_nlopc"]
+[ext_resource type="Script" uid="uid://p6o4mmfbioh7" path="res://components/portal/portal_teleport.gd" id="3_ck0nw"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i0en5"]
 size = Vector2(10, 4)
@@ -10,8 +10,7 @@ orientation = 2
 [sub_resource type="BoxShape3D" id="BoxShape3D_imsqs"]
 size = Vector3(10, 4, 0.41)
 
-[node name="Portal" type="MeshInstance3D"]
-transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -1.93715e-07, 3.16, 1.86788)
+[node name="Portal" type="MeshInstance3D" unique_id=160625884]
 mesh = SubResource("PlaneMesh_i0en5")
 script = ExtResource("1_nlopc")
 vertical_viewport_resolution = 0
@@ -19,10 +18,10 @@ disable_viewport_distance = 51.0
 fade_out_distance_max = 50.0
 fade_out_distance_min = 40.0
 
-[node name="PortalTeleport" type="Area3D" parent="."]
+[node name="PortalTeleport" type="Area3D" parent="." unique_id=200179681]
 monitorable = false
 script = ExtResource("3_ck0nw")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalTeleport"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalTeleport" unique_id=1159830464]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.324395)
 shape = SubResource("BoxShape3D_imsqs")
