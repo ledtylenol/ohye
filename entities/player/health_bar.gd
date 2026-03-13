@@ -5,6 +5,9 @@ class_name HealthBar
 @export var duration: = 1.0
 @export var do_heat: = true
 @export var enforce_show: = false
+
+@export var ease_type: Tween.EaseType
+@export var trans_type: Tween.TransitionType
 var heat: = 0.0
 var tween: Tween
 var show_tween: Tween
@@ -26,13 +29,13 @@ func tween_hp(how_much: int) -> void :
 		show = true
 	if tween: tween.kill()
 	if not do_heat:
-		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+		tween = create_tween().set_ease(ease_type).set_trans(trans_type)
 		tween.tween_property(self, "value", relative * 100, duration)
 		return
 	if not heat:
-		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+		tween = create_tween().set_ease(ease_type).set_trans(trans_type)
 	else:
-		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+		tween = create_tween().set_ease(ease_type).set_trans(trans_type)
 	tween.tween_property(self, "value", relative * 100, duration + (0.5 * heat))
 	heat += 1.0
 func _process(delta: float) -> void :

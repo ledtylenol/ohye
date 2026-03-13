@@ -67,20 +67,16 @@ var center_shader := Vector2(0.5, 0.5)
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func randi() -> int:
-	print("updated state thru randi")
 	var i = rng.randi()
 	game_stats.rng_state = rng.state
 	return i
 
 func randf_range(minm: float, maxm: float) -> float:
-	print("updated state thru randf_range")
 	var f = rng.randf_range(minm, maxm)
 	if game_stats:
 		game_stats.rng_state = rng.state
 	return f
-
 func randf() -> float:
-	print("updated state thru randf")
 	var f = rng.randf()
 	game_stats.rng_state = rng.state
 	return f
@@ -93,6 +89,10 @@ func _notification(what: int) -> void:
 		game_settings.screen_pos = get_window().get_position_with_decorations()
 		print("new position: %s" % game_settings.screen_pos)
 func _ready() -> void:
+	var ambient_bus := AudioServer.get_bus_index(ProjectSettings.get_setting("raytraced_audio/ambient_bus"))
+	var reverb_bus := AudioServer.get_bus_index(ProjectSettings.get_setting("raytraced_audio/reverb_bus"))
+	AudioServer.set_bus_send(ambient_bus, "Sfx")
+	AudioServer.set_bus_send(reverb_bus, "Sfx")
 	print(M.check_app("obs64"))
 	get_viewport().size_changed.connect(on_size_change)
 	get_tree().auto_accept_quit = false

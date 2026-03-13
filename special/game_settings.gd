@@ -13,4 +13,5 @@ class_name Settings
 		sensitivity = maxf(0.0, v)
 @export_storage var screen_size: Vector2i
 @export_storage var screen_pos: Vector2i
+@export_storage var transition_secs := 2.0
 signal sensitivity_changed(old: float, new: float)

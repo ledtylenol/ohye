@@ -16,5 +16,5 @@ func push_achievement(a: Achievement) -> void:
 	acc.title.set_bbcode(a.name)
 	acc.playtime.set_bbcode("time of get: " + M.format_time(Global.game_stats.playtime))
 	control.add_child(acc)
-
-	acc.sound.play()
+	if acc.sound:
+		acc.sound.play()

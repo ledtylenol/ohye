@@ -19,6 +19,7 @@ func tick(_dt: float) -> void:
 	pass
 
 func physics_tick(delta: float) -> void:
+	player.last_y = player.global_position.y
 	var left := Input.is_action_pressed("left")
 	if player.grounded:
 		transitioned.emit("wall", "grounded")

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" format=3 uid="uid://b1nqiiuv4qpo2"]
+
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_nx6am"]
+[ext_resource type="Script" uid="uid://ofhptkbxkqu3" path="res://components/misc/tb/water.gd" id="2_r2opn"]
+
+[resource]
+script = ExtResource("1_nx6am")
+collision_shape_type = 0
+script_class = ExtResource("2_r2opn")
+classname = "ohye_water"
+description = "waterr"
+class_properties = Dictionary[String, Variant]({
+"gravity": 1.0
+})
+node_class = "Area3D"
+metadata/_custom_type_script = "uid://5cow84q03m6a"

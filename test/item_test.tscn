@@ -23,9 +23,9 @@
 [ext_resource type="PackedScene" uid="uid://2b4uwjunk1j8" path="res://entities/knife/knife.blend" id="17_v2n7u"]
 [ext_resource type="PackedScene" uid="uid://xj1c3a8ytpnr" path="res://entities/ring/ring.tscn" id="18_wjrdq"]
 [ext_resource type="Script" uid="uid://b2a6won0457f2" path="res://components/schizophrenia/teleport.gd" id="19_6aj80"]
-[ext_resource type="PackedScene" uid="uid://cht3nropfpogj" path="res://world/room2/room.tscn" id="22_d17ho"]
+[ext_resource type="PackedScene" path="res://world/room2/room.tscn" id="22_d17ho"]
 [ext_resource type="PackedScene" uid="uid://b105jy2d54eyt" path="res://entities/the_antichrist/the_devil.tscn" id="23_42fmq"]
-[ext_resource type="PackedScene" uid="uid://ir8ywnvtq1kb" path="res://world/portal/portal_loader.tscn" id="25_2r8lp"]
+[ext_resource type="PackedScene" uid="uid://ir8ywnvtq1kb" path="res://utils/portal/portal_loader.tscn" id="25_2r8lp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_th0dh"]
 sky_top_color = Color(1, 1, 1, 1)

@@ -113,7 +113,7 @@ var rays: Array[AudioRay] = []
 @export var muffle_enabled: bool = true
 ## The interpolation strength of the muffle
 ## [br]See [member muffle_enabled]
-@export_range(0.0, 1.0, 0.01) var muffle_interpolation: float = 0.01
+@export_range(3, 17.0, 0.1) var muffle_interpolation: float = 5.0
 @export_category("Echo")
 ## Enables updates to the reverb audio bus
 ## [br]See [code]Project Settings > Raytraced Audio > Reverb Bus[/code]
@@ -124,25 +124,25 @@ var rays: Array[AudioRay] = []
 @export var echo_room_size_multiplier: float = 2.0
 ## The interpolation strength of the echo
 ## [br]See [member echo_enabled]
-@export_range(0.0, 1.0, 0.01) var echo_interpolation: float = 0.01
+@export_range(3, 17.0, 0.1) var echo_interpolation: float = 5
 @export_category("Ambient")
 ## Enables updates to the ambient audio bus
 ## [br]See [code]Project Settings > Raytraced Audio > Ambient Bus[/code]
 @export var ambient_enabled: bool = true
 ## The interpolation strength of ambient sounds' direction (pan)
 ## [br]See [member ambient_enabled], [member ambient_pan_strength]
-@export_range(0.0, 1.0, 0.01) var ambient_pan_interpolation: float = 0.02
+@export_range(3, 17.0, 0.1) var ambient_pan_interpolation: float = 5
 ## How strong the pan between right and left ear will be
 ## Setting this to 0 disables panning completely
 ## [br]See [member ambient_enabled], [member ambient_pan_interpolation]
 @export_range(0.0, 1.0, 0.01) var ambient_pan_strength: float = 1.0
 ## The interpolation strength of ambient sounds' volume
 ## [br]See [member ambient_enabled]
-@export var ambient_volume_interpolation: float = 0.01
+@export_range(3, 17.0, 0.1) var ambient_volume_interpolation: float = 5
 ## How smoothly the ambient sounds will fade away when the [AudioListener3D] is no longer "outside"
 ## Values close to 1 will make sounds linger for longer, while values close to 0 will make them drop suddenly
 ## [br]See [member ambient_enabled]
-@export_range(0.0, 1.0, 0.001) var ambient_volume_attenuation: float = 0.998
+@export_range(0.0, 1.0, 0.01) var ambient_volume_attenuation: float = 0.998
 
 ## The size of the room based on data gathered from rays, in world units
 ## [br]Used in reverb calculation
@@ -253,12 +253,12 @@ func _process(delta: float) -> void:
 	if !auto_update:
 		set_process(false)
 		return
-	update()
+	update(delta)
 
 
 ## Updates this [RaytracedAudioListener]
 ## [br]If you are updating this node manually (i.e. [member auto_update] is [code]false[/code]), this is the method to call
-func update():
+func update(delta: float):
 	ray_casts_this_tick = 0
 	if !is_enabled:
 		return
@@ -290,46 +290,46 @@ func update():
 	escaped_dir = Vector3.ZERO if escaped_count == 0 else (escaped_dir / float(escaped_count))
 
 	if muffle_enabled:
-		_update_muffle()
+		_update_muffle(delta)
 	if echo_enabled:
-		_update_echo(echo, echo_count, bounces_this_tick)
+		_update_echo(echo, echo_count, bounces_this_tick, delta)
 	if ambient_enabled:
-		_update_ambient(escaped_strength, escaped_dir)
+		_update_ambient(escaped_strength, escaped_dir, delta)
 
 
-func _update_muffle() -> void:
+func _update_muffle(delta: float) -> void:
 	for player: RaytracedAudioPlayer3D in get_tree().get_nodes_in_group(RaytracedAudioPlayer3D.GROUP_NAME):
-		player.update(self)
+		player.update(self, delta)
 
 
-func _update_echo(echo: float, echo_count: int, bounces: int) -> void:
+func _update_echo(echo: float, echo_count: int, bounces: int, delta: float) -> void:
 	# Length -> echo delay
-	room_size = lerpf(room_size, echo, echo_interpolation)
+	room_size = M.smooth_nudgef(room_size, echo, echo_interpolation , delta)
 	var e: float = (room_size * echo_room_size_multiplier) / SPEED_OF_SOUND
 	# print("e = ", e)
-	_reverb_effect.room_size = lerpf(_reverb_effect.room_size, clampf(e, 0.0, 1.0), echo_interpolation)
-	_reverb_effect.predelay_msec = lerpf(_reverb_effect.predelay_msec, e * 1000, echo_interpolation)
-	_reverb_effect.predelay_feedback = lerpf(_reverb_effect.predelay_feedback, clampf(e, 0.0, 0.98), echo_interpolation)
+	_reverb_effect.room_size = M.smooth_nudgef(_reverb_effect.room_size, clampf(e, 0.0, 1.0), echo_interpolation, delta)
+	_reverb_effect.predelay_msec = M.smooth_nudgef(_reverb_effect.predelay_msec, e * 1000, echo_interpolation, delta)
+	_reverb_effect.predelay_feedback = M.smooth_nudgef(_reverb_effect.predelay_feedback, clampf(e, 0.0, 0.98), echo_interpolation, delta)
 
 	# More rays % -> echo strength
 	var return_ratio: float = 0.0 if bounces == 0 else float(echo_count) / float(bounces)
-	_reverb_effect.hipass = lerpf(_reverb_effect.hipass, 1.0 - return_ratio, echo_interpolation)
+	_reverb_effect.hipass = M.smooth_nudgef(_reverb_effect.hipass, 1.0 - return_ratio, echo_interpolation, delta)
 
 
-func _update_ambient(escaped_strength: float, escaped_dir: Vector3) -> void:
+func _update_ambient(escaped_strength: float, escaped_dir: Vector3, delta: float) -> void:
 	var ambience_ratio: float = float(escaped_strength) / float(rays_count)
 
 	# More rays % -> louder
 	if escaped_strength > 0:
-		ambience = lerpf(ambience, 1.0, ambience_ratio)
+		ambience = M.smooth_nudgef(ambience, lerpf(ambience, 1.0, ambience_ratio), 35.0, delta)
 	else:
 		ambience *= ambient_volume_attenuation
 	var ambient_bus_idx: int = AudioServer.get_bus_index(ProjectSettings.get_setting("raytraced_audio/ambient_bus"))
 	var volume: float = AudioServer.get_bus_volume_linear(ambient_bus_idx)
-	AudioServer.set_bus_volume_linear(ambient_bus_idx, lerpf(volume, ambience, ambient_volume_interpolation))
+	AudioServer.set_bus_volume_linear(ambient_bus_idx, M.smooth_nudgef(volume, ambience, ambient_volume_interpolation, delta))
 	
 	# Avg escape direction -> pan
-	ambient_dir = ambient_dir.lerp(escaped_dir, ambient_pan_interpolation)
+	ambient_dir = ambient_dir.slerp(escaped_dir, 1.0 - exp(-ambient_pan_interpolation * delta))
 	var target_pan: float = 0.0 if ambient_dir.is_zero_approx() else owner.transform.basis.x.dot(ambient_dir.normalized())
 	_pan_effect.pan = target_pan * ambient_pan_strength
 

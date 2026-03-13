@@ -12,10 +12,11 @@ var can_change_noise := true
 var thres := 0.0:
 	set(v):
 		thres = v
-		$ColorRect.material.set_shader_parameter("threshold", v)
+		$ColorRect.set_instance_shader_parameter("threshold", v)
 
 func _ready() -> void:
 	timer.timeout.connect(update_seed)
+	thres = 1.0
 func _process(delta: float) -> void:
 	current_cooldown -= delta
 	current_cooldown = maxf(0.0, current_cooldown)
@@ -26,8 +27,8 @@ func reset() -> void:
 	$ColorRect.material.set_shader_parameter("thres_noise", thres_noise)
 	$ColorRect.color.a = 1.0
 	if tween: tween.kill()
-	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(self, "thres", 1.0, 2.0).from(0.0)
+	tween = create_tween()
+	tween.tween_property(self, "thres", 1.1, Global.game_settings.transition_secs).from(0.0)
 	f.play()
 	tween.tween_callback(func(): can_change_noise = true)
 
@@ -67,4 +68,4 @@ func start_sub() -> void:
 func update_seed() -> void:
 	if can_change_noise:
 		thres_noise.noise.seed = (thres_noise.noise.seed + 3) % 1232 
-	
+		print("NOISE CHANGED")

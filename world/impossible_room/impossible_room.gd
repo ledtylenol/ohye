@@ -1,4 +1,5 @@
-extends Node3D
+@tool
+extends Level
 @onready var area: Area3D = $ReverbChange
 var t := 0.0
 var tick := false
@@ -29,10 +30,12 @@ var in_sight := false:
 
 var had_strawb := false
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
+	Music.stop()
 	GlobalObserver.unvanish.connect(on_unvanish)
-	area.area_entered.connect(on_enter)
+	area.body_entered.connect(on_enter)
 	area_3d.area_entered.connect(func(a): if a is SoundMonitor:GlobalObserver.unvanish.emit(2))
-	area.area_exited.connect(on_exit)
+	area.body_exited.connect(on_exit)
 	if Global.is_event_active(Global.Event.NIGHT):
 		current_phase = 1.0
 	else:
@@ -48,6 +51,7 @@ func _ready() -> void:
 		rigid_body_3d.queue_free()
 		had_strawb = true
 func _process(delta: float) -> void:
+	if Engine.is_editor_hint(): return
 	in_sight = schizophrenia.in_sight
 	if had_strawb and tick:
 		current_phase = 0.0
@@ -70,13 +74,12 @@ func _process(delta: float) -> void:
 			drop_berry()
 			area.area_entered.disconnect(on_enter)
 func on_enter(_a) -> void:
-	if _a is not SoundMonitor or not schizophrenia.in_sight: return
+	if _a is not Player or not schizophrenia.in_sight: return
 	tick = true
 	if current_phase > 0.7:
 		crickerts.set_parameter("Charge", 1.0)
-
 func on_exit(_a) -> void:
-	if _a is not SoundMonitor or not schizophrenia.in_sight: return
+	if _a is not Player or not schizophrenia.in_sight: return
 
 	tick = false
 	t = 0.0
@@ -84,7 +87,6 @@ func on_exit(_a) -> void:
 		crickerts.set_parameter("Charge", 0.0)
 
 func drop_berry() -> void:
-	print('berry dropped')
 	rigid_body_3d.visible = true
 	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).set_parallel()
 	tween.tween_property(world_environment.environment, "adjustment_contrast", 1.0, 2.0)
@@ -99,7 +101,8 @@ func on_unvanish(id: int) -> void:
 	match id:
 		1: ding_1.play()
 		2: ding_2.play()
-		3: ding_3.play()
+		3: 
+			Music.change_song(ding_3)
 
 func start_sound() -> void:
 	if tween: tween.kill()

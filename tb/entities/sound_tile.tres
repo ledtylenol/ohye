@@ -15,7 +15,8 @@ class_properties = Dictionary[String, Variant]({
 "sound": {
 "Dirt": 0,
 "Metal": 2,
-"Stone": 1
+"Stone": 1,
+"Tile": 3
 }
 })
 class_property_descriptions = Dictionary[String, Variant]({

@@ -7,12 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="3_j75t8"]
 [ext_resource type="PackedScene" uid="uid://d2h1tv4ptwblk" path="res://entities/player/player.tscn" id="4_x7bpa"]
 [ext_resource type="Script" uid="uid://dvtynf14l5uh2" path="res://components/misc/tb/death_area.gd" id="5_2sibo"]
-[ext_resource type="Material" uid="uid://wml7e1bxsisv" path="res://tb/textures/grass007.tres" id="5_bcis4"]
+[ext_resource type="Material" uid="uid://wml7e1bxsisv" path="res://tb/textures/materials/grass007.tres" id="5_bcis4"]
 [ext_resource type="Script" uid="uid://bka1bqdqyu2dt" path="res://components/misc/scene_loader.gd" id="6_acnu5"]
 [ext_resource type="Material" uid="uid://bo04ny0jgpa8r" path="res://tb/textures/subway/Tiles056_1K-JPG_Metalness.tres" id="6_m88e6"]
 [ext_resource type="Script" uid="uid://bo7o1la75ggh7" path="res://entities/player/scripts/stats.gd" id="6_r5a01"]
 [ext_resource type="Script" uid="uid://bv6e6tehgch0w" path="res://components/misc/simple_scene.gd" id="7_m88e6"]
-[ext_resource type="Material" uid="uid://dq03hkcy6bm4s" path="res://tb/textures/rusted.tres" id="10_bcis4"]
+[ext_resource type="Material" uid="uid://dq03hkcy6bm4s" path="res://tb/textures/materials/rusted.tres" id="10_bcis4"]
 [ext_resource type="Script" uid="uid://b1kkj08iwwrse" path="res://components/tile/sound_tile.gd" id="10_xlky7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xlky7"]
@@ -780,8 +780,10 @@ dof_blur_far_transition = 9.4
 dof_blur_near_distance = 0.01
 auto_exposure_min_sensitivity = 7.45
 
-[node name="GmodPlayerTest" type="Node3D" unique_id=639268137]
+[node name="GmodPlayerTest" type="Node3D" unique_id=639268137 node_paths=PackedStringArray("song")]
 script = ExtResource("1_upx2y")
+song = NodePath("Song")
+level_name = "gmod_test"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1642426338]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -1334,19 +1336,30 @@ stats = SubResource("Resource_xlky7")
 [node name="PlayerCamera" parent="Player/PanNode" parent_id_path=PackedInt32Array(2065032669, 1342641540) index="0" unique_id=2026835416]
 attributes = SubResource("CameraAttributesPractical_xlky7")
 
-[node name="PausedSong" parent="Player/CanvasLayer/Menu" parent_id_path=PackedInt32Array(2065032669, 78823897) index="1" unique_id=373779779]
+[node name="PausedSong" parent="Player/CanvasLayer/Menu/Menu" parent_id_path=PackedInt32Array(2065032669, 78823897) index="1" unique_id=373779779]
 event_name = ""
 event_guid = "{00000000-0000-0000-0000-000000000000}"
 
-[node name="Teleport" parent="Player/Sounds" parent_id_path=PackedInt32Array(2065032669, 116849562) index="5" unique_id=95458468]
-event_name = ""
-event_guid = "{00000000-0000-0000-0000-000000000000}"
+[node name="Footsteps" parent="Player/Sounds" parent_id_path=PackedInt32Array(2065032669, 116849562) index="0" unique_id=1467358019 node_paths=PackedStringArray("stream_map")]
+stream_map = {
+0: NodePath("Dirt"),
+1: NodePath("Stone"),
+2: NodePath("Metal"),
+3: NodePath("Tile")
+}
+
+[node name="Slide" parent="Player/Sounds" parent_id_path=PackedInt32Array(2065032669, 116849562) index="4" unique_id=632965224 node_paths=PackedStringArray("stream_map")]
+stream_map = {
+0: NodePath("Slide"),
+1: NodePath("Scuff"),
+2: NodePath("Scuff"),
+3: NodePath("Scuff")
+}
 
 [node name="Song" type="FmodEventEmitter3D" parent="." unique_id=1580346839]
 event_name = "event:/Music3D/Curious"
 event_guid = "{642f9e45-acba-4a71-b356-9bddf7d37f6d}"
 attached = false
-autoplay = true
 allow_fadeout = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1344996136]
@@ -1355,3 +1368,5 @@ light_energy = 2.627
 spot_range = 101.191
 
 [editable path="Player"]
+[editable path="Player/Hands/hands"]
+[editable path="Player/Hands/hands2"]

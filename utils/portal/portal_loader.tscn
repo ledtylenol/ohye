@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ir8ywnvtq1kb"]
+
+[ext_resource type="Script" uid="uid://cy6dtr7gq3c0g" path="res://utils/portal/portal_loader.gd" id="1_ose42"]
+
+[node name="PortalLoader" type="Node3D" unique_id=845648880]
+script = ExtResource("1_ose42")

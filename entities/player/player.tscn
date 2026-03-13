@@ -17,6 +17,7 @@
 [ext_resource type="Shader" uid="uid://ciakxeyamhkk" path="res://shaders/negative.gdshader" id="11"]
 [ext_resource type="Script" uid="uid://dw2ch5386anik" path="res://utils/second_order_dynamics.gd" id="12"]
 [ext_resource type="Script" uid="uid://dux2hr8yfnhae" path="res://entities/player/health_bar.gd" id="13"]
+[ext_resource type="Shader" uid="uid://bnq381kvd6rqi" path="res://entities/player/water_rect.gdshader" id="13_ix1gt"]
 [ext_resource type="Script" uid="uid://ds67ypox4r248" path="res://entities/player/circle_progress.gd" id="14"]
 [ext_resource type="Texture2D" uid="uid://s0dx16cittpc" path="res://components/circle_progress/CircularProgressBar.png" id="15"]
 [ext_resource type="Script" uid="uid://ddpxqrlk1n4t2" path="res://entities/player/boss_bar.gd" id="16"]
@@ -28,11 +29,15 @@
 [ext_resource type="Script" uid="uid://b3yuribouvqo5" path="res://entities/player/distance_based_component_footsteps.gd" id="21"]
 [ext_resource type="Theme" uid="uid://ce3sqk2rs4pcf" path="res://global/theme.tres" id="21_ttr27"]
 [ext_resource type="Script" uid="uid://q7he2t7xkjmp" path="res://components/misc/signal_connector.gd" id="22"]
+[ext_resource type="Resource" uid="uid://m8unnnlus050" path="res://special/achievements/slider master.tres" id="23_rqau1"]
 [ext_resource type="Script" uid="uid://db0qdp2dikw24" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="24"]
 [ext_resource type="Resource" uid="uid://dse4au3onquif" path="res://shakes/weak_shake.tres" id="25"]
+[ext_resource type="Script" uid="uid://cb4yijcuj8rmo" path="res://components/misc/shader_slider.gd" id="25_k3n4f"]
 [ext_resource type="Script" uid="uid://dh147ywrfjj7n" path="res://addons/shaker/src/Vector3/ShakerReceiver3D.gd" id="26"]
+[ext_resource type="Material" uid="uid://d256wf356a8s2" path="res://special/magic_slider.tres" id="26_yb4xh"]
 [ext_resource type="Resource" uid="uid://yi0a6jwp8ub7" path="res://shakes/hit_me.tres" id="27"]
 [ext_resource type="Script" uid="uid://i6dctga6u33h" path="res://components/entities/health_component.gd" id="28"]
+[ext_resource type="Shader" uid="uid://bhibphw8sfmwp" path="res://global/transition.gdshader" id="28_gmffv"]
 [ext_resource type="AudioStream" uid="uid://cl1ckcrrogp1u" path="res://entities/player/sounds/walk/dirt.tres" id="28_u37te"]
 [ext_resource type="Script" uid="uid://ctm11ks2sjgfq" path="res://components/entities/hurtbox.gd" id="29"]
 [ext_resource type="AudioStream" uid="uid://b2aics4sl46a3" path="res://entities/player/sounds/jump/jump.tres" id="29_g3pa7"]
@@ -41,14 +46,14 @@
 [ext_resource type="Script" uid="uid://2wquki7u1yoq" path="res://entities/player/scripts/detection_range.gd" id="30"]
 [ext_resource type="AudioStream" uid="uid://djm820vq7d3ct" path="res://entities/player/sounds/walk/stone.tres" id="30_rtlkk"]
 [ext_resource type="Script" uid="uid://bnv7ag7hch4rl" path="res://components/screenshot_tool.gd" id="31"]
+[ext_resource type="Script" uid="uid://dgaki3qofotqk" path="res://entities/player/debug.gd" id="31_yb4xh"]
 [ext_resource type="AudioStream" uid="uid://bd0ygh0000ljl" path="res://entities/player/sounds/land/land_dirt_1.wav" id="32_24so6"]
+[ext_resource type="AudioStream" uid="uid://w0bu8kmqjriu" path="res://entities/player/sounds/walk/tile.tres" id="33_qb5t2"]
 [ext_resource type="AudioStream" uid="uid://b256mnd5wx563" path="res://entities/player/sounds/land/land_dirt_2.wav" id="33_sk710"]
 [ext_resource type="AudioStream" uid="uid://lfa41c1qvki7" path="res://entities/player/sounds/land/land_dirt_3.wav" id="34_kbbq5"]
 [ext_resource type="AudioStream" uid="uid://drtawbbg0coat" path="res://entities/player/sounds/land/land_impact_1.wav" id="35_akixf"]
 [ext_resource type="AudioStream" uid="uid://dgxtxcanwyd1u" path="res://entities/lighter/in.wav" id="35_arp52"]
-[ext_resource type="AudioStream" uid="uid://bup1sdimgsfik" path="res://entities/player/sounds/slide/slide.tres" id="35_rtlkk"]
 [ext_resource type="AudioStream" uid="uid://b70y3p7mwqk8q" path="res://entities/player/sounds/land/land_impact_2.wav" id="36_3y563"]
-[ext_resource type="AudioStream" uid="uid://b0i00r05w0nl2" path="res://entities/player/sounds/slide/scuff.tres" id="36_a2brg"]
 [ext_resource type="AudioStream" uid="uid://dt330yk8vjs14" path="res://entities/lighter/in2.wav" id="36_jjk8f"]
 [ext_resource type="AudioStream" uid="uid://rdbrt2tmfevv" path="res://entities/player/sounds/land/land_impact_3.wav" id="37_sgfia"]
 [ext_resource type="Script" uid="uid://chs8isnkcumw4" path="res://components/state_machine.gd" id="38_13wue"]
@@ -58,8 +63,22 @@
 [ext_resource type="Script" uid="uid://dr7sd7y0mcpvw" path="res://entities/player/wall_footsteps.gd" id="42_r633c"]
 [ext_resource type="Script" uid="uid://deocn2eb7fvfp" path="res://entities/player/hands.gd" id="43_2h0qb"]
 [ext_resource type="PackedScene" uid="uid://c4awdmf14hb1c" path="res://entities/player/hands.blend" id="43_pacje"]
+[ext_resource type="AudioStream" uid="uid://b0i00r05w0nl2" path="res://entities/player/sounds/slide/scuff.tres" id="44_qb5t2"]
 [ext_resource type="Script" uid="uid://bjpmu5sklv5h8" path="res://addons/raytraced_audio/raytraced_audio_listener.gd" id="45_mmk7k"]
+[ext_resource type="AudioStream" uid="uid://bup1sdimgsfik" path="res://entities/player/sounds/slide/slide.tres" id="45_qsjf6"]
 [ext_resource type="AudioStream" uid="uid://il351im7ivbs" path="res://entities/player/sounds/kirby.ogg" id="45_sk710"]
+[ext_resource type="AudioStream" uid="uid://cwd4pk848atft" path="res://entities/player/sounds/ouch.wav" id="46_kbbq5"]
+[ext_resource type="AudioStream" uid="uid://dfgf8shrautu5" path="res://entities/player/sounds/teleport/snap1.ogg" id="47_0q7bw"]
+[ext_resource type="AudioStream" uid="uid://d2shpnnrmitj8" path="res://entities/player/sounds/teleport/snap2.ogg" id="48_qb5t2"]
+[ext_resource type="AudioStream" uid="uid://bkg10evlqwxlv" path="res://entities/player/sounds/teleport/snap3.ogg" id="49_qsjf6"]
+[ext_resource type="AudioStream" uid="uid://btn33kix3lpej" path="res://entities/player/sounds/teleport/snap5.ogg" id="50_k3n4f"]
+[ext_resource type="AudioStream" uid="uid://c0rkpxmich075" path="res://entities/player/sounds/teleport/snap6.ogg" id="51_gmffv"]
+[ext_resource type="AudioStream" uid="uid://dae2yxep2yf0p" path="res://entities/player/sounds/teleport/snap7.ogg" id="52_rqau1"]
+[ext_resource type="AudioStream" uid="uid://ven1y4vm705" path="res://entities/player/sounds/teleport/snap8.ogg" id="53_gv6fn"]
+[ext_resource type="AudioStream" uid="uid://bqtfmmeukwmup" path="res://entities/player/sounds/chime1.ogg" id="61_dnai7"]
+[ext_resource type="Script" uid="uid://c1s7oo6ekak65" path="res://entities/player/map_sound.gd" id="62_u8til"]
+[ext_resource type="Script" uid="uid://dyx2f3f4hp3xr" path="res://entities/player/gravity_area.gd" id="66_gv6fn"]
+[ext_resource type="AudioStream" uid="uid://b3em0scrb6jlw" path="res://entities/player/sounds/AmmoMax.wav" id="69_ix1gt"]
 
 [sub_resource type="Resource" id="Resource_gvtwj"]
 resource_local_to_scene = true
@@ -92,6 +111,100 @@ shader_parameter/quantize_mix = 0.0
 shader_parameter/spread = 0.2350000111625
 shader_parameter/time = 0.0
 shader_parameter/magnitude = 0.0
+
+[sub_resource type="Gradient" id="Gradient_ix1gt"]
+offsets = PackedFloat32Array(0, 0.62189054)
+colors = PackedColorArray(0, 0, 0, 0, 0.48000002, 0.6533334, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sym6v"]
+gradient = SubResource("Gradient_ix1gt")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sym6v"]
+noise_type = 2
+frequency = 0.0084
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dnai7"]
+noise = SubResource("FastNoiseLite_sym6v")
+seamless = true
+in_3d_space = true
+as_normal_map = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u8til"]
+noise_type = 2
+seed = -15
+frequency = 0.0074
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qydng"]
+noise = SubResource("FastNoiseLite_u8til")
+seamless = true
+in_3d_space = true
+as_normal_map = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1bn7s"]
+noise_type = 2
+seed = 17
+frequency = 0.0189
+offset = Vector3(0, -6, 0)
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ix1gt"]
+noise = SubResource("FastNoiseLite_1bn7s")
+seamless = true
+in_3d_space = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aerxn"]
+noise_type = 2
+seed = 11
+frequency = 0.0008
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aerxn"]
+noise = SubResource("FastNoiseLite_aerxn")
+seamless = true
+in_3d_space = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qydng"]
+noise_type = 2
+seed = -28
+frequency = 0.0029
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1bn7s"]
+noise = SubResource("FastNoiseLite_qydng")
+seamless = true
+in_3d_space = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dnai7"]
+noise_type = 2
+seed = 12
+frequency = 0.0045
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u8til"]
+noise = SubResource("FastNoiseLite_dnai7")
+seamless = true
+in_3d_space = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sym6v"]
+shader = ExtResource("13_ix1gt")
+shader_parameter/displace_noise1 = SubResource("NoiseTexture2D_dnai7")
+shader_parameter/displace_noise2 = SubResource("NoiseTexture2D_qydng")
+shader_parameter/noise1 = SubResource("NoiseTexture2D_1bn7s")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_u8til")
+shader_parameter/dissolve_noise1 = SubResource("NoiseTexture2D_ix1gt")
+shader_parameter/dissolve_noise2 = SubResource("NoiseTexture2D_aerxn")
+shader_parameter/offset = 0.02
+shader_parameter/color_gradient = SubResource("GradientTexture1D_sym6v")
+shader_parameter/alpha = 0.0
+shader_parameter/intensity = 0.1
+shader_parameter/dp_noise1_push = Vector2(-0.225, 0.39)
+shader_parameter/dp_noise2_push = Vector2(0.28, -0.265)
+shader_parameter/noise1_push = Vector2(0.175, 0.305)
+shader_parameter/noise2_push = Vector2(-0.23, -0.235)
+shader_parameter/dissolve_noise1_push = Vector2(-0.095, 0.125)
+shader_parameter/dissolve_noise2_push = Vector2(0.125, -0.11)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w0fuc"]
 shader = ExtResource("11")
@@ -131,6 +244,59 @@ shader = ExtResource("11")
 shader_parameter/alpha = 0.0
 shader_parameter/use_alpha = false
 
+[sub_resource type="Curve" id="Curve_gmffv"]
+_data = [Vector2(0, 0), 0.0, 24.118256, 0, 0, Vector2(0.120000005, 1), -0.59886074, -0.59886074, 0, 0, Vector2(0.47085205, 0.7865169), -1.2318459, -1.2318459, 0, 0, Vector2(0.735426, 0.5617978), -0.65019256, -0.65019256, 0, 0, Vector2(1, 0.43820232), -0.016208736, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_rqau1"]
+curve = SubResource("Curve_gmffv")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gv6fn"]
+noise_type = 2
+seed = 10
+frequency = 0.0205
+offset = Vector3(127.8, 0, 0)
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2vqvu"]
+noise = SubResource("FastNoiseLite_gv6fn")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 0.269
+
+[sub_resource type="Gradient" id="Gradient_yb4xh"]
+interpolation_color_space = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ix1gt"]
+seed = 8
+frequency = 0.0036
+domain_warp_enabled = true
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sym6v"]
+noise = SubResource("FastNoiseLite_ix1gt")
+color_ramp = SubResource("Gradient_yb4xh")
+seamless = true
+
+[sub_resource type="Curve" id="Curve_dnai7"]
+_data = [Vector2(0.120000005, 0), -0.59886074, 2.0711842, 0, 0, Vector2(0.30493274, 0.39325845), 1.5560166, 1.5560166, 0, 0, Vector2(0.54260087, 0.7191012), 0.8633992, 0.8633992, 0, 0, Vector2(1, 1), -0.016208736, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_u8til"]
+curve = SubResource("Curve_dnai7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qydng"]
+shader = ExtResource("28_gmffv")
+shader_parameter/distort_curve = SubResource("CurveTexture_rqau1")
+shader_parameter/threshold_curve = SubResource("CurveTexture_u8til")
+shader_parameter/noise = SubResource("NoiseTexture2D_2vqvu")
+shader_parameter/thres_noise = SubResource("NoiseTexture2D_sym6v")
+
+[sub_resource type="Curve" id="Curve_0q7bw"]
+_limits = [0.0, 1.0, 0.0, 30.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(18.646616, 0.22828186), 0.027168442, 0.027168442, 0, 0, Vector2(30, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="Curve" id="Curve_ttr27"]
 _limits = [0.0, 20.0, 0.0, 50.0]
 _data = [Vector2(17.7326, 5.22388), 0.0, 0.0, 0, 0, Vector2(50, 6.09702), 0.0, 0.0, 0, 0]
@@ -159,10 +325,32 @@ stream_1/volume = 0.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cnswy"]
 random_pitch = 1.1953363
-random_volume_offset_db = 1.15
 streams_count = 2
 stream_0/stream = ExtResource("35_arp52")
 stream_1/stream = ExtResource("36_jjk8f")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_akixf"]
+playback_mode = 1
+random_pitch = 1.1569555
+streams_count = 1
+stream_0/stream = ExtResource("46_kbbq5")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2vqvu"]
+streams_count = 7
+stream_0/stream = ExtResource("47_0q7bw")
+stream_1/stream = ExtResource("48_qb5t2")
+stream_2/stream = ExtResource("49_qsjf6")
+stream_3/stream = ExtResource("50_k3n4f")
+stream_3/weight = 0.2
+stream_4/stream = ExtResource("51_gmffv")
+stream_4/weight = 0.2
+stream_5/stream = ExtResource("52_rqau1")
+stream_6/stream = ExtResource("53_gv6fn")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_u8til"]
+random_pitch = 1.2091557
+streams_count = 1
+stream_0/stream = ExtResource("61_dnai7")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_165qn"]
 radius = 1.07827
@@ -175,6 +363,11 @@ height = 1.9
 radius = 51.387
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lohhf"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yb4xh"]
+random_pitch = 1.1110445
+streams_count = 1
+stream_0/stream = ExtResource("69_ix1gt")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r633c"]
 radius = 0.445
@@ -224,7 +417,7 @@ left_cast = NodePath("Left")
 right_cast = NodePath("Right")
 stats = SubResource("Resource_gvtwj")
 menu = NodePath("CanvasLayer/Menu")
-resume = NodePath("CanvasLayer/Menu/VBoxContainer/ResumeNode/MarginContainer/Resume")
+resume = NodePath("CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/ResumeNode/MarginContainer/Resume")
 state_machine = NodePath("StateMachine")
 
 [node name="PanNode" type="Node3D" parent="." unique_id=1342641540]
@@ -252,15 +445,19 @@ shape = SubResource("BoxShape3D_gum8l")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="PanNode/PlayerCamera" unique_id=1536534493 node_paths=PackedStringArray("sound", "parent", "interact")]
 light_energy = 0.0
+light_indirect_energy = 5.606
 light_volumetric_fog_energy = 0.0
+light_size = 0.561
+shadow_enabled = true
+shadow_normal_bias = 10.0
+shadow_transmittance_bias = 16.0
 spot_range = 9.385
-spot_attenuation = 0.05
 spot_angle = 60.45
-spot_angle_attenuation = 1.23115
 script = ExtResource("6_8q4fm")
-sound = NodePath("")
+sound = NodePath("../../../Sounds/Light")
 parent = NodePath("../../..")
 interact = NodePath("../InteractRay")
+enabled = true
 
 [node name="FallNode" type="Node3D" parent="PanNode/PlayerCamera" unique_id=1157684501 node_paths=PackedStringArray("player", "camera")]
 script = ExtResource("7_np63p")
@@ -289,7 +486,7 @@ metadata/_custom_type_script = "uid://dw2ch5386anik"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=113526080]
 shape = ExtResource("6")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=761651383 node_paths=PackedStringArray("left_rect", "right_rect", "up_rect", "down_rect", "interact_ray")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=761651383 node_paths=PackedStringArray("left_rect", "right_rect", "up_rect", "down_rect", "interact_ray", "player")]
 physics_interpolation_mode = 2
 script = ExtResource("7")
 left_rect = NodePath("Control/Control/ColorRect3")
@@ -297,6 +494,7 @@ right_rect = NodePath("Control/Control/ColorRect4")
 up_rect = NodePath("Control/Control/ColorRect")
 down_rect = NodePath("Control/Control/ColorRect2")
 interact_ray = NodePath("../PanNode/PlayerCamera/InteractRay")
+player = NodePath("..")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1328210546]
 process_mode = 3
@@ -307,6 +505,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="WaterRect" type="ColorRect" parent="CanvasLayer" unique_id=294767456]
+material = SubResource("ShaderMaterial_sym6v")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.688, 0.96, 0.29411766)
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=855051564]
 layout_mode = 3
@@ -432,7 +639,9 @@ value = 22.27
 show_percentage = false
 script = ExtResource("13")
 health_component = NodePath("../../../Components/HealthComponent")
-duration = 1.5
+duration = 2.5
+ease_type = 2
+trans_type = 8
 metadata/_edit_use_anchors_ = true
 
 [node name="HealthBar2" type="ProgressBar" parent="CanvasLayer/Control" unique_id=1994488718 node_paths=PackedStringArray("health_component")]
@@ -450,6 +659,8 @@ script = ExtResource("13")
 health_component = NodePath("../../../Components/HealthComponent")
 duration = 0.5
 do_heat = false
+ease_type = 1
+trans_type = 5
 metadata/_edit_use_anchors_ = true
 
 [node name="Hotbar" type="HBoxContainer" parent="CanvasLayer/Control" unique_id=2020518778]
@@ -613,171 +824,9 @@ offset_top = 388.0
 offset_right = 40.0
 offset_bottom = 411.0
 
-[node name="Menu" type="PanelContainer" parent="CanvasLayer" unique_id=78823897 node_paths=PackedStringArray("return_button", "resume", "player")]
+[node name="ScreenshotMenu" type="Control" parent="CanvasLayer" unique_id=491566269 node_paths=PackedStringArray("color_rect", "ss_tool", "player", "snap")]
 process_mode = 3
 visible = false
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -139.0
-offset_top = -103.5
-offset_right = 139.0
-offset_bottom = 103.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("21_ttr27")
-script = ExtResource("17")
-return_button = NodePath("VBoxContainer/ReturnNode/MarginContainer/Return Button")
-resume = NodePath("VBoxContainer/ResumeNode/MarginContainer/Resume")
-player = NodePath("../..")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Menu" unique_id=1095705993]
-layout_mode = 2
-
-[node name="ResumeNode" type="Control" parent="CanvasLayer/Menu/VBoxContainer" unique_id=31567780]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/VBoxContainer/ResumeNode" unique_id=2039194924]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="Resume" type="Button" parent="CanvasLayer/Menu/VBoxContainer/ResumeNode/MarginContainer" unique_id=347020292 node_paths=PackedStringArray("sound_on")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "Resume"
-script = ExtResource("18")
-easing_type = 1
-trans_type = 10
-easing_duration = 0.2
-enter_scale = Vector2(1.2, 1.2)
-sound_on = NodePath("../../../../../Ding")
-
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Menu/VBoxContainer" unique_id=2005651650]
-layout_mode = 2
-
-[node name="ReturnNode" type="Control" parent="CanvasLayer/Menu/VBoxContainer" unique_id=1055440672]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/VBoxContainer/ReturnNode" unique_id=1681289030]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="Return Button" type="Button" parent="CanvasLayer/Menu/VBoxContainer/ReturnNode/MarginContainer" unique_id=2030329062 node_paths=PackedStringArray("sound_on")]
-layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "Return To The Subway"
-script = ExtResource("18")
-easing_type = 1
-trans_type = 10
-easing_duration = 0.2
-enter_scale = Vector2(1.2, 1.2)
-sound_on = NodePath("../../../../../Ding")
-
-[node name="SFX Container" type="HBoxContainer" parent="CanvasLayer/Menu/VBoxContainer" unique_id=782174318]
-layout_mode = 2
-
-[node name="SFX Label" type="Label" parent="CanvasLayer/Menu/VBoxContainer/SFX Container" unique_id=708725169]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-text = "SFX: "
-
-[node name="SFX Slider" type="HSlider" parent="CanvasLayer/Menu/VBoxContainer/SFX Container" unique_id=223345762]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.001
-
-[node name="Music Container" type="HBoxContainer" parent="CanvasLayer/Menu/VBoxContainer" unique_id=1668277413]
-layout_mode = 2
-
-[node name="Music Label" type="Label" parent="CanvasLayer/Menu/VBoxContainer/Music Container" unique_id=1805537596]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 25
-text = "Music:"
-
-[node name="Music Slider" type="HSlider" parent="CanvasLayer/Menu/VBoxContainer/Music Container" unique_id=126447139]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.001
-
-[node name="Sens Container" type="HBoxContainer" parent="CanvasLayer/Menu/VBoxContainer" unique_id=682103420]
-layout_mode = 2
-
-[node name="Sens Label" type="Label" parent="CanvasLayer/Menu/VBoxContainer/Sens Container" unique_id=692178799]
-layout_mode = 2
-size_flags_horizontal = 2
-theme_override_font_sizes/font_size = 25
-text = "Sensitivity: asdasdasd"
-
-[node name="Sens Slider" type="HSlider" parent="CanvasLayer/Menu/VBoxContainer/Sens Container" unique_id=1536252554]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 12.33
-max_value = 25.0
-step = 0.001
-value = 1.0
-
-[node name="PausedSong" type="FmodEventEmitter3D" parent="CanvasLayer/Menu" unique_id=373779779]
-event_name = "event:/Music3D/MallAmbiance"
-event_guid = "{d9de1b67-4ea3-42ae-8ef4-386efd3e3506}"
-attached = false
-allow_fadeout = false
-preload_event = false
-volume = 0.0
-process_mode = 3
-
-[node name="ScreenshotMenu" type="Control" parent="CanvasLayer" unique_id=491566269 node_paths=PackedStringArray("player")]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("20_2soq1")
-player = NodePath("../..")
-
-[node name="ScreenshotTool" type="Node" parent="CanvasLayer/ScreenshotMenu" unique_id=677522081]
-script = ExtResource("31")
-
-[node name="Panel" type="Panel" parent="CanvasLayer/ScreenshotMenu" unique_id=1338400266]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DEBUG" type="Control" parent="CanvasLayer" unique_id=1988844408]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -785,18 +834,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-metadata/_edit_use_anchors_ = true
+mouse_behavior_recursive = 1
+script = ExtResource("20_2soq1")
+color_rect = NodePath("ColorRect")
+ss_tool = NodePath("ScreenshotTool")
+player = NodePath("../..")
+snap = NodePath("../../Snap")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DEBUG" unique_id=967744875]
+[node name="ScreenshotTool" type="Node" parent="CanvasLayer/ScreenshotMenu" unique_id=677522081]
+script = ExtResource("31")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ScreenshotMenu" unique_id=1626382628]
+material = SubResource("ShaderMaterial_qydng")
+instance_shader_parameters/noise_intensity = 0.1499999966472
+instance_shader_parameters/use_screen = true
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.242
-anchor_bottom = 0.242
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Cast Label" type="Label" parent="CanvasLayer/DEBUG/VBoxContainer" unique_id=724328136]
-layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Ding" type="FmodEventEmitter3D" parent="CanvasLayer" unique_id=2043773342]
 event_name = "event:/Sfx3D/Light"
@@ -806,23 +863,281 @@ preload_event = false
 fmod_parameters/Active/id = 5591441648638885785
 fmod_parameters/Active = 0.0
 fmod_parameters/Active/variant_type = 2
+fmod_parameters/Heat1/id = -5957304219643446301
+fmod_parameters/Heat1 = 0.0
+fmod_parameters/Heat1/variant_type = 3
+
+[node name="Menu" type="Control" parent="CanvasLayer" unique_id=565658008 node_paths=PackedStringArray("sfx_slider", "sfx_label", "music_slider", "music_label", "return_button", "resume", "sens_label", "sens_slider", "transtime_slider", "transtime_label", "slidersound", "paused_song", "player", "color_rect")]
+process_mode = 3
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17")
+sfx_slider = NodePath("Menu/MarginContainer/VBoxContainer/SFX Container/SFX Slider")
+sfx_label = NodePath("Menu/MarginContainer/VBoxContainer/SFX Container/MarginContainer/SFX Label")
+music_slider = NodePath("Menu/MarginContainer/VBoxContainer/Music Container/Music Slider")
+music_label = NodePath("Menu/MarginContainer/VBoxContainer/Music Container/MarginContainer/Music Label")
+return_button = NodePath("Menu/MarginContainer/VBoxContainer/ReturnNode/MarginContainer/Return Button")
+resume = NodePath("Menu/MarginContainer/VBoxContainer/ResumeNode/MarginContainer/Resume")
+sens_label = NodePath("Menu/MarginContainer/VBoxContainer/Sens Container/MarginContainer/Sens Label")
+sens_slider = NodePath("Menu/MarginContainer/VBoxContainer/Sens Container/Sens Slider")
+transtime_slider = NodePath("Menu/MarginContainer/VBoxContainer/TransTime Container/Trans Slider")
+transtime_label = NodePath("Menu/MarginContainer/VBoxContainer/TransTime Container/MarginContainer/Trans Label")
+slidersound = NodePath("../Ding")
+paused_song = NodePath("Menu/PausedSong")
+player = NodePath("../..")
+color_rect = NodePath("../ColorRect")
+slider_achievement = ExtResource("23_rqau1")
+
+[node name="DEBUG" type="Control" parent="CanvasLayer/Menu" unique_id=953825652 node_paths=PackedStringArray("lerp_label", "lerp_slider")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("31_yb4xh")
+lerp_label = NodePath("VBoxContainer/HBoxContainer/LerpLabel")
+lerp_slider = NodePath("VBoxContainer/HBoxContainer/MagicSlider")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Menu/DEBUG" unique_id=1443847715]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 38.0
+grow_horizontal = 2
+
+[node name="Cast Label" type="Label" parent="CanvasLayer/Menu/DEBUG/VBoxContainer" unique_id=185278762]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Menu/DEBUG/VBoxContainer" unique_id=1246489302]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MagicSlider" type="HSlider" parent="CanvasLayer/Menu/DEBUG/VBoxContainer/HBoxContainer" unique_id=1734128099 node_paths=PackedStringArray("sound")]
+material = ExtResource("26_yb4xh")
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.1
+script = ExtResource("25_k3n4f")
+sound = NodePath("../../../../../Ding")
+metadata/_custom_type_script = "uid://cb4yijcuj8rmo"
+
+[node name="LerpLabel" type="Label" parent="CanvasLayer/Menu/DEBUG/VBoxContainer/HBoxContainer" unique_id=1517716028]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Menu" type="PanelContainer" parent="CanvasLayer/Menu" unique_id=78823897]
+process_mode = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3315972
+anchor_top = 0.30825618
+anchor_right = 0.6684028
+anchor_bottom = 0.69174385
+offset_left = -57.5
+offset_right = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("21_ttr27")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/Menu" unique_id=105966501]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Menu/Menu/MarginContainer" unique_id=1095705993]
+layout_mode = 2
+alignment = 2
+
+[node name="ResumeNode" type="Control" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer" unique_id=31567780]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/ResumeNode" unique_id=2039194924]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/ResumeNode/MarginContainer" unique_id=347020292 node_paths=PackedStringArray("sound_on")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Resume"
+script = ExtResource("18")
+easing_type = 1
+trans_type = 10
+easing_duration = 0.2
+enter_scale = Vector2(1.2, 1.2)
+sound_on = NodePath("../../../../../../../Ding")
+
+[node name="ReturnNode" type="Control" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer" unique_id=1055440672]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/ReturnNode" unique_id=1681289030]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Return Button" type="Button" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/ReturnNode/MarginContainer" unique_id=2030329062 node_paths=PackedStringArray("sound_on")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Return To The Subway"
+script = ExtResource("18")
+easing_type = 1
+trans_type = 10
+easing_duration = 0.2
+enter_scale = Vector2(1.2, 1.2)
+sound_on = NodePath("../../../../../../../Ding")
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer" unique_id=2005651650]
+layout_mode = 2
+
+[node name="SFX Container" type="HBoxContainer" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer" unique_id=782174318]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/SFX Container" unique_id=9216649]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SFX Label" type="Label" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/SFX Container/MarginContainer" unique_id=708725169]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "SFX: "
+
+[node name="SFX Slider" type="HSlider" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/SFX Container" unique_id=223345762 node_paths=PackedStringArray("sound")]
+material = ExtResource("26_yb4xh")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.1
+script = ExtResource("25_k3n4f")
+sound = NodePath("../../../../../../Ding")
+
+[node name="Music Container" type="HBoxContainer" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer" unique_id=1668277413]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/Music Container" unique_id=1146339908]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Music Label" type="Label" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/Music Container/MarginContainer" unique_id=1805537596]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Music:"
+
+[node name="Music Slider" type="HSlider" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/Music Container" unique_id=126447139 node_paths=PackedStringArray("sound")]
+material = ExtResource("26_yb4xh")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.1
+script = ExtResource("25_k3n4f")
+sound = NodePath("../../../../../../Ding")
+
+[node name="Sens Container" type="HBoxContainer" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer" unique_id=682103420]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/Sens Container" unique_id=1424459436]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Sens Label" type="Label" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/Sens Container/MarginContainer" unique_id=692178799]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 15.16
+theme_override_font_sizes/font_size = 25
+text = "Sensitivity: asdasdasd"
+
+[node name="Sens Slider" type="HSlider" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/Sens Container" unique_id=1536252554 node_paths=PackedStringArray("sound")]
+material = ExtResource("26_yb4xh")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 25.0
+value = 3.0
+script = ExtResource("25_k3n4f")
+sound = NodePath("../../../../../../Ding")
+
+[node name="TransTime Container" type="HBoxContainer" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer" unique_id=92013083]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/TransTime Container" unique_id=1661165889]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Trans Label" type="Label" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/TransTime Container/MarginContainer" unique_id=550293231]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+text = "Transition Time:"
+
+[node name="Trans Slider" type="HSlider" parent="CanvasLayer/Menu/Menu/MarginContainer/VBoxContainer/TransTime Container" unique_id=2117084617 node_paths=PackedStringArray("sound")]
+material = ExtResource("26_yb4xh")
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.25
+max_value = 2.0
+step = 0.1
+value = 2.0
+script = ExtResource("25_k3n4f")
+sound = NodePath("../../../../../../Ding")
+
+[node name="PausedSong" type="FmodEventEmitter3D" parent="CanvasLayer/Menu/Menu" unique_id=373779779]
+event_name = "event:/Music3D/MallAmbiance"
+event_guid = "{d9de1b67-4ea3-42ae-8ef4-386efd3e3506}"
+attached = false
+allow_fadeout = false
+preload_event = false
+volume = 0.0
+process_mode = 3
 
 [node name="Sounds" type="Node3D" parent="." unique_id=116849562 node_paths=PackedStringArray("player", "land_sounds", "hit_sound", "teleport_sound", "light_sound", "foot_slide")]
 script = ExtResource("19")
 player = NodePath("..")
 land_sounds = NodePath("LandSounds")
-hit_sound = NodePath("Hit")
+hit_sound = NodePath("HitSound")
 teleport_sound = NodePath("Teleport")
 light_sound = NodePath("Light")
 foot_slide = NodePath("Slide")
+land_volume_curve = SubResource("Curve_0q7bw")
 
 [node name="Footsteps" type="Node3D" parent="Sounds" unique_id=1467358019 node_paths=PackedStringArray("player", "stream_map")]
 script = ExtResource("20")
 player = NodePath("../..")
 stream_map = {
-"Dirt": NodePath("Dirt"),
-"Metal": NodePath("Metal"),
-"Stone": NodePath("Stone")
+0: NodePath("Dirt"),
+1: NodePath("Stone"),
+2: NodePath("Metal"),
+3: NodePath("Tile")
 }
 metadata/_custom_type_script = "uid://ba0xmenpn4rki"
 
@@ -836,16 +1151,37 @@ desired_axes = 7
 
 [node name="Dirt" type="AudioStreamPlayer3D" parent="Sounds/Footsteps" unique_id=1078134834]
 stream = ExtResource("28_u37te")
+attenuation_model = 1
+volume_db = -5.199
+max_polyphony = 10
+emission_angle_enabled = true
 script = ExtResource("29_mmk7k")
 metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
 [node name="Stone" type="AudioStreamPlayer3D" parent="Sounds/Footsteps" unique_id=685106511]
 stream = ExtResource("30_rtlkk")
+attenuation_model = 1
+volume_db = -5.199
+max_polyphony = 10
+emission_angle_enabled = true
 script = ExtResource("29_mmk7k")
 metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
 [node name="Metal" type="AudioStreamPlayer3D" parent="Sounds/Footsteps" unique_id=1288887188]
 stream = ExtResource("29_ssgi7")
+attenuation_model = 1
+volume_db = -5.199
+max_polyphony = 10
+emission_angle_enabled = true
+script = ExtResource("29_mmk7k")
+metadata/_custom_type_script = "uid://dkb8ltjc6067n"
+
+[node name="Tile" type="AudioStreamPlayer3D" parent="Sounds/Footsteps" unique_id=1998410398]
+stream = ExtResource("33_qb5t2")
+attenuation_model = 1
+volume_db = -5.199
+max_polyphony = 10
+emission_angle_enabled = true
 script = ExtResource("29_mmk7k")
 metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
@@ -870,35 +1206,6 @@ what = "jump_ground"
 to = NodePath("..")
 method = "play"
 
-[node name="Hit" type="FmodEventEmitter3D" parent="Sounds" unique_id=36770634]
-event_name = "event:/Sfx3D/Ouch"
-event_guid = "{830b2ff4-960e-4fb4-99a3-710ccb8a20f2}"
-allow_fadeout = false
-preload_event = false
-fmod_parameters/Charge/id = 7949038504800399202
-fmod_parameters/Charge = 0.5
-fmod_parameters/Charge/variant_type = 3
-fmod_parameters/max_distance/id = 3057212819914003988
-fmod_parameters/max_distance = 0.0
-fmod_parameters/max_distance/variant_type = 3
-fmod_parameters/cutoff_hz/id = 2341499637275164784
-fmod_parameters/cutoff_hz = 39.98
-fmod_parameters/cutoff_hz/variant_type = 3
-process_mode = 3
-
-[node name="Teleport" type="FmodEventEmitter3D" parent="Sounds" unique_id=95458468]
-event_name = "event:/Sfx3D/Snap"
-event_guid = "{d540c6b7-8ea9-464e-8236-5d7678830b26}"
-allow_fadeout = false
-preload_event = false
-fmod_parameters/cutoff_hz/id = 2341499637275164784
-fmod_parameters/cutoff_hz = 39.98
-fmod_parameters/cutoff_hz/variant_type = 3
-fmod_parameters/max_distance/id = 3057212819914003988
-fmod_parameters/max_distance = 0.0
-fmod_parameters/max_distance/variant_type = 3
-process_mode = 3
-
 [node name="Light" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1265360013]
 process_mode = 3
 stream = SubResource("AudioStreamRandomizer_cnswy")
@@ -909,19 +1216,20 @@ metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 script = ExtResource("20")
 player = NodePath("../..")
 stream_map = {
-"Dirt": NodePath("Dirt"),
-"Metal": NodePath("Stone"),
-"Stone": NodePath("Stone")
+0: NodePath("Slide"),
+1: NodePath("Scuff"),
+2: NodePath("Scuff"),
+3: NodePath("Scuff")
 }
 metadata/_custom_type_script = "uid://ba0xmenpn4rki"
 
-[node name="Dirt" type="AudioStreamPlayer3D" parent="Sounds/Slide" unique_id=389354532]
-stream = ExtResource("35_rtlkk")
+[node name="Scuff" type="AudioStreamPlayer3D" parent="Sounds/Slide" unique_id=1652633320]
+stream = ExtResource("44_qb5t2")
 script = ExtResource("29_mmk7k")
 metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
-[node name="Stone" type="AudioStreamPlayer3D" parent="Sounds/Slide" unique_id=1371369571]
-stream = ExtResource("36_a2brg")
+[node name="Slide" type="AudioStreamPlayer3D" parent="Sounds/Slide" unique_id=776290032]
+stream = ExtResource("45_qsjf6")
 script = ExtResource("29_mmk7k")
 metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
@@ -929,6 +1237,26 @@ metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 stream = ExtResource("45_sk710")
 volume_db = -22.524
 script = ExtResource("29_mmk7k")
+metadata/_custom_type_script = "uid://dkb8ltjc6067n"
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1431839585]
+stream = SubResource("AudioStreamRandomizer_akixf")
+script = ExtResource("29_mmk7k")
+metadata/_custom_type_script = "uid://dkb8ltjc6067n"
+
+[node name="Teleport" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1524241904]
+stream = SubResource("AudioStreamRandomizer_2vqvu")
+script = ExtResource("29_mmk7k")
+metadata/_custom_type_script = "uid://dkb8ltjc6067n"
+
+[node name="Spawn" type="AudioStreamPlayer3D" parent="Sounds" unique_id=887684218]
+stream = SubResource("AudioStreamRandomizer_u8til")
+volume_db = -12.131
+pitch_scale = 1.22
+max_distance = 5.0
+max_polyphony = 30
+bus = &"RaytracedReverb"
+script = ExtResource("62_u8til")
 metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
 [node name="Components" type="Node3D" parent="." unique_id=2047969337]
@@ -966,12 +1294,12 @@ shakerPreset = ExtResource("27")
 [node name="HealthComponent" type="Node" parent="Components" unique_id=343493279 node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("28")
 hurtbox = NodePath("../Hurtbox")
-max_health = 120
-starting_health = 119
+max_health = 10
+starting_health = 10
 
 [node name="Hurtbox" type="Area3D" parent="Components" unique_id=781835631]
 visible = false
-collision_layer = 0
+collision_layer = 4
 collision_mask = 8
 script = ExtResource("29")
 
@@ -992,6 +1320,22 @@ metadata/teleportable_root = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Components/PortalArea" unique_id=561730643]
 shape = SubResource("CapsuleShape3D_lohhf")
+
+[node name="GravityArea" type="Area3D" parent="Components" unique_id=106965733 node_paths=PackedStringArray("player", "water_rect", "sound")]
+script = ExtResource("66_gv6fn")
+player = NodePath("../..")
+water_rect = NodePath("../../CanvasLayer/WaterRect")
+sound = NodePath("Water")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/GravityArea" unique_id=882185607]
+shape = ExtResource("6")
+
+[node name="Water" type="AudioStreamPlayer3D" parent="Components/GravityArea" unique_id=759542059]
+stream = SubResource("AudioStreamRandomizer_yb4xh")
+pitch_scale = 1.07
+bus = &"RaytracedReverb"
+script = ExtResource("29_mmk7k")
+metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
 [node name="ShapeGrav" type="ShapeCast3D" parent="." unique_id=27229753]
 shape = SubResource("CapsuleShape3D_r633c")
@@ -1016,13 +1360,18 @@ wall_state = NodePath("../Wall")
 target = NodePath("../..")
 metadata/_custom_type_script = "uid://cu2y6y8e42be1"
 
-[node name="Air" type="Node" parent="StateMachine" unique_id=1901195557 node_paths=PackedStringArray("ground_cast", "scream", "target")]
+[node name="Air" type="Node" parent="StateMachine" unique_id=1901195557 node_paths=PackedStringArray("ground_cast", "scream", "scream_timer", "target")]
 process_mode = 1
 script = ExtResource("40_geky7")
 ground_cast = NodePath("../../ShapeGrav2")
 scream = NodePath("../../Sounds/Scream")
+scream_timer = NodePath("ScreamTimer")
 target = NodePath("../..")
 metadata/_custom_type_script = "uid://dkc1aiqev4o7m"
+
+[node name="ScreamTimer" type="Timer" parent="StateMachine/Air" unique_id=1909330537]
+wait_time = 15.0
+one_shot = true
 
 [node name="Wall" type="Node" parent="StateMachine" unique_id=708871273 node_paths=PackedStringArray("distance_comp", "target")]
 process_mode = 1
@@ -1098,9 +1447,14 @@ metadata/_custom_type_script = "uid://dw2ch5386anik"
 [node name="RaytracedAudioListener" type="AudioListener3D" parent="." unique_id=1735379210]
 doppler_tracking = 1
 script = ExtResource("45_mmk7k")
-max_bounces = 5
-ambient_pan_strength = 0.47
+max_raycast_dist = 1029.0
+max_bounces = 10
 metadata/_custom_type_script = "uid://bjpmu5sklv5h8"
+
+[node name="Snap" type="FmodEventEmitter3D" parent="." unique_id=1044711683]
+event_name = "event:/Sfx3D/Snap"
+event_guid = "{d540c6b7-8ea9-464e-8236-5d7678830b26}"
+preload_event = false
 
 [editable path="Hands/hands"]
 [editable path="Hands/hands2"]

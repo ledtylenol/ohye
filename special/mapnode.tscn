@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dggq7soli18h0"]
+
+[ext_resource type="Script" uid="uid://c3cdx81wle42l" path="res://special/mapnode.gd" id="1_wgesp"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wgesp"]
+frequency = 0.46
+
+[node name="Node" type="Control" unique_id=1923152079]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wgesp")
+outer_radius = 17.0
+inner_radius = 6.405
+noise = SubResource("FastNoiseLite_wgesp")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1071402532]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="Label" parent="CenterContainer" unique_id=876774223]
+layout_mode = 2
+horizontal_alignment = 1

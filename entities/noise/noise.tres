@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b07k5s5xjsoh"]
+
+[ext_resource type="Shader" uid="uid://b7q8iswapljcn" path="res://entities/noise/noise.gdshader" id="1_wcmbh"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_wcmbh")
+shader_parameter/quant_factor = 64.0
+shader_parameter/vert_power = 0.30000000447036

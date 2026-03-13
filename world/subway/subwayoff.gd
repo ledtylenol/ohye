@@ -1,4 +1,5 @@
-extends Node3D
+@tool
+extends Level
 
 
 @onready var area_3d: Area3D = $Area3D
@@ -9,6 +10,7 @@ extends Node3D
 @onready var strawberry: CollectibleStrawberry = $Strawberry
 
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	print_orphan_nodes()
 	if not Global.game_stats.read_start:
 		strawberry.queue_free()
@@ -20,10 +22,10 @@ func _ready() -> void:
 			print("sound to play set from former scene, guid: %s" % Global.last_sound)
 			Global.closed_menu = true
 			song.event_guid = Global.last_sound
-		else:
-			song["fmod_parameters/Charge"] = Global.randf()
-		song.play()
-		
+		print(song.event_name)
+		Music.change_song(song)
+		if Global.last_sound.is_empty():
+			Music.set_parameter("Charge", Global.randf())
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		start.finished.connect(on_finished)

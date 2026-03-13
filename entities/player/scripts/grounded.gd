@@ -8,7 +8,6 @@ var jumped_last_frame := false
 var player: Player:
 	get: return target as Player
 func on_enter() -> void:
-	ground_sound.play()
 	player.times.grounded = 0.0
 	player.just_landed.emit()
 	player.jumps_left = player.stats.jump_count
@@ -16,6 +15,7 @@ func on_enter() -> void:
 	wall_state.last_wall = null
 func tick(delta: float) -> void:
 	player.times.grounded += delta
+	player.last_y = player.global_position.y
 func physics_tick(delta: float) -> void:
 	if not player.grounded:
 		if player.raycasts_colliding and not (ground_cast.is_colliding() and ground_cast.get_collision_normal(0).angle_to(Vector3.UP) > PI/4):

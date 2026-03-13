@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Edge" format=3 uid="uid://clfcbwuydnvnn"]
+
+[ext_resource type="Script" uid="uid://ba1cs5y3nr25i" path="res://special/edge.gd" id="1_2oq40"]
+
+[resource]
+script = ExtResource("1_2oq40")
+from = "subway"
+to = "jungle_gym"
+from = "subway"
+to = "jungle_gym"
+metadata/_custom_type_script = "uid://ba1cs5y3nr25i"

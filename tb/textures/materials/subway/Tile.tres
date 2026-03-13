@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dws6cwxy0s5p2"]
+
+[ext_resource type="Texture2D" uid="uid://bgix1mt4v1c24" path="res://tb/textures/subway/Tile.jpg" id="1_5uh7s"]
+[ext_resource type="Texture2D" uid="uid://c8nhqel2fiq0l" path="res://tb/textures/subway/Tile_normal.jpg" id="2_c11mg"]
+[ext_resource type="Texture2D" uid="uid://ejc6px86f54" path="res://tb/textures/subway/Tile_roughness.jpg" id="3_0l7t2"]
+
+[resource]
+albedo_texture = ExtResource("1_5uh7s")
+metallic_specular = 0.0
+roughness_texture = ExtResource("3_0l7t2")
+normal_enabled = true
+normal_texture = ExtResource("2_c11mg")
+texture_filter = 2

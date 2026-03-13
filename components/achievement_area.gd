@@ -9,6 +9,6 @@ func _ready() -> void:
 func on_body(b: Node3D) -> void:
 	if b is Player:
 		if Global.game_stats.has_achievement(achievement.name): return
-		print(sound)
 		AchievementManager.push_achievement(achievement)
-		sound.play()
+		if sound:
+			sound.play()

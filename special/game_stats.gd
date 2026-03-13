@@ -13,7 +13,8 @@ class_name GameStats
 @export_storage var playtime := 0.0
 @export_storage var strawberries: Dictionary = {}
 @export_storage var rng_state := 0
-
+@export_storage var levels: Dictionary = {}
+@export_storage var edges: Dictionary = {}
 func has_achievement(a: String) -> bool:
 	return achievements.has(a)
 static func from_json(d: Dictionary) -> GameStats:
@@ -31,6 +32,10 @@ static func from_json(d: Dictionary) -> GameStats:
 	s.rng_state = d.rng_state
 	s.first_played = d.first_played
 	s.last_played = d.last_played
+	if d.has("levels") and d["levels"]:
+		s.levels = d["levels"]
+	if d.has("edges") and d["edges"]:
+		s.edges = d.edges
 	return s
 
 func to_json() -> String:
@@ -47,4 +52,6 @@ func to_json() -> String:
 	d.rng_state = self.rng_state
 	d.achievements = self.achievements
 	d.strawberries = self.strawberries
+	d.levels = self.levels
+	d.edges = self.edges
 	return JSON.stringify(d, "\t", false)

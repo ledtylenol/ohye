@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dpl3ppt62bdix"]
+
+[ext_resource type="Script" uid="uid://bnvcobjqsdbjb" path="res://global/level_handler.gd" id="1_trhkh"]
+[ext_resource type="Script" uid="uid://ba1cs5y3nr25i" path="res://special/edge.gd" id="2_niha6"]
+[ext_resource type="Resource" uid="uid://clfcbwuydnvnn" path="res://special/edges/subwayoff1.tres" id="3_ahcex"]
+[ext_resource type="Resource" uid="uid://c4neamp7pdbwd" path="res://special/edges/jungle1.tres" id="4_5ymf3"]
+[ext_resource type="Resource" uid="uid://b43286kmegk11" path="res://special/edges/subwayoff2.tres" id="4_ahcex"]
+
+[node name="LevelHandler" type="Node" unique_id=387638800]
+script = ExtResource("1_trhkh")
+levels = Dictionary[String, bool]({
+"gmod_test": true,
+"impossible_room": true,
+"jungle_gym": true,
+"portal": true,
+"start": true,
+"subway": true,
+"tower": true,
+"whitespace": true
+})
+edges = Array[ExtResource("2_niha6")]([ExtResource("3_ahcex"), ExtResource("4_5ymf3"), ExtResource("4_ahcex")])
+edge_dict = Dictionary[String, ExtResource("2_niha6")]({
+"jungle1": ExtResource("4_5ymf3"),
+"subwayoff1": ExtResource("3_ahcex"),
+"subwayoff2": ExtResource("4_ahcex")
+})
+queue = Array[String](["res://special/edges/subwayoff1.tres", "res://special/edges/subwayoff1.tres"])

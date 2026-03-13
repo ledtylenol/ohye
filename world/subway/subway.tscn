@@ -8,13 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://d2h1tv4ptwblk" path="res://entities/player/player.tscn" id="4_jp4jh"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="7_ue27a"]
 [ext_resource type="Material" uid="uid://b0qqvsuplq7lc" path="res://tb/textures/house2/brick.tres" id="8_aplal"]
-[ext_resource type="Material" uid="uid://dn65bkytu20e" path="res://tb/textures/subway/Tiles056_1K-JPG_Color.tres" id="9_864qc"]
-[ext_resource type="Material" uid="uid://dpk5gl2s8ypt1" path="res://tb/textures/subway/Tile.tres" id="10_k5d65"]
-[ext_resource type="Material" uid="uid://8v4qps1nsx8j" path="res://tb/textures/subway/Tiles080_1K-JPG_Color.tres" id="11_vby1v"]
-[ext_resource type="Material" uid="uid://da0k5rjybmnvt" path="res://tb/textures/subway/jerma1.tres" id="12_8lqsq"]
-[ext_resource type="Material" uid="uid://cr5mv2rs5rrp5" path="res://tb/textures/subway/Tiles056_1K-JPG_Displacement.tres" id="13_vpxpl"]
-[ext_resource type="Material" uid="uid://dc4mjxx23pnwu" path="res://tb/textures/subway/jerma2.tres" id="14_mcqv6"]
-[ext_resource type="Material" uid="uid://bs6fc7m303xag" path="res://tb/textures/subway/jerma3.tres" id="15_a2lx1"]
+[ext_resource type="Material" uid="uid://dn65bkytu20e" path="res://tb/textures/materials/Tiles056_1K-JPG_Color.tres" id="9_864qc"]
+[ext_resource type="Material" uid="uid://dpk5gl2s8ypt1" path="res://tb/textures/materials/Tile.tres" id="10_k5d65"]
+[ext_resource type="Material" uid="uid://8v4qps1nsx8j" path="res://tb/textures/materials/Tiles080_1K-JPG_Color.tres" id="11_vby1v"]
+[ext_resource type="Material" uid="uid://da0k5rjybmnvt" path="res://tb/textures/materials/jerma1.tres" id="12_8lqsq"]
+[ext_resource type="Material" uid="uid://cr5mv2rs5rrp5" path="res://tb/textures/materials/Tiles056_1K-JPG_Displacement.tres" id="13_vpxpl"]
+[ext_resource type="Material" uid="uid://dc4mjxx23pnwu" path="res://tb/textures/materials/jerma2.tres" id="14_mcqv6"]
+[ext_resource type="Material" uid="uid://bs6fc7m303xag" path="res://tb/textures/materials/jerma3.tres" id="15_a2lx1"]
 [ext_resource type="Script" uid="uid://bipaec2njqhrs" path="res://components/achievement_area.gd" id="15_mrqci"]
 [ext_resource type="Script" uid="uid://dr1020ce5hcr6" path="res://components/misc/tb/chance_spawn.gd" id="16_4mwf6"]
 [ext_resource type="Resource" uid="uid://uco1arxx028a" path="res://special/achievements/jerma.tres" id="16_ew411"]
@@ -22,8 +22,10 @@
 [ext_resource type="PackedScene" uid="uid://cynlwf47lm2no" path="res://special/achievements/jerma/achievement_display.tscn" id="17_untku"]
 [ext_resource type="Material" uid="uid://cpq8lvxp5dbs1" path="res://tb/textures/rose.tres" id="18_nplb6"]
 [ext_resource type="Resource" uid="uid://5gjp7s2ip42a" path="res://special/achievements/jermahop1.tres" id="19_pjoow"]
+[ext_resource type="Resource" uid="uid://cb0c25kcclf7f" path="res://special/achievements/fall.tres" id="23_aplal"]
+[ext_resource type="Resource" uid="uid://m8unnnlus050" path="res://special/achievements/slider master.tres" id="24_864qc"]
 
-[sub_resource type="Resource" id="Resource_ue27a"]
+[sub_resource type="Resource" id="Resource_aplal"]
 resource_local_to_scene = true
 script = ExtResource("3_ue27a")
 ground_acceleration = 32.0
@@ -556,8 +558,8 @@ size = Vector2(0.25, 0.25)
 script = ExtResource("1_1f142")
 
 [node name="Player" parent="." unique_id=526968027 instance=ExtResource("4_jp4jh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6103, 0)
-stats = SubResource("Resource_ue27a")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2425742, 0)
+stats = SubResource("Resource_aplal")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=960370216]
 environment = ExtResource("1_n30oh")
@@ -839,33 +841,23 @@ spot_attenuation = -0.17
 spot_angle = 42.13
 spot_angle_attenuation = 4.92458
 
-[node name="SpotLight3" type="SpotLight3D" parent="." unique_id=943019536]
-transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, -10.5, 5, -2.5)
-visible = false
+[node name="AchievementDisplay3" parent="." unique_id=1288664736 instance=ExtResource("17_untku")]
+transform = Transform3D(1, 0, 0, 0, 0.25881898, 0.9659259, 0, -0.9659259, 0.25881898, 9.498873, -0.022432804, 7.266809)
+achievement = ExtResource("23_aplal")
+
+[node name="SpotLight2" type="SpotLight3D" parent="AchievementDisplay3" unique_id=746045411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85719633, 5.42929)
 spot_range = 11.589
 spot_attenuation = -0.17
 spot_angle = 42.13
 spot_angle_attenuation = 4.92458
 
-[node name="SpotLight4" type="SpotLight3D" parent="." unique_id=368249246]
-transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 9.5, 5, -2.5)
-visible = false
-spot_range = 11.589
-spot_attenuation = -0.17
-spot_angle = 42.13
-spot_angle_attenuation = 4.92458
+[node name="AchievementDisplay4" parent="." unique_id=1370370030 instance=ExtResource("17_untku")]
+transform = Transform3D(1, 0, 0, 0, 0.25881898, 0.9659259, 0, -0.9659259, 0.25881898, 9.498873, -0.022432804, 20.400877)
+achievement = ExtResource("24_864qc")
 
-[node name="SpotLight5" type="SpotLight3D" parent="." unique_id=1114849031]
-transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 9.5, 5, 9.5)
-visible = false
-spot_range = 11.589
-spot_attenuation = -0.17
-spot_angle = 42.13
-spot_angle_attenuation = 4.92458
-
-[node name="SpotLight6" type="SpotLight3D" parent="." unique_id=1638724441]
-transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 9.5, 5, 21.5)
-visible = false
+[node name="SpotLight2" type="SpotLight3D" parent="AchievementDisplay4" unique_id=531046558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85719633, 5.42929)
 spot_range = 11.589
 spot_attenuation = -0.17
 spot_angle = 42.13

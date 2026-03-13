@@ -22,7 +22,7 @@ func _process(_delta: float) -> void:
 		return
 
 func _on_area_entered(area: Area3D) -> void:
-	if area is Hitbox:
+	if area is Hitbox and area.active:
 		if area.piercing or not self in area.ignore_list:
 			hit.emit(area as Hitbox, area.damage)
 		if not area.piercing: area.ignore_list.append(self)

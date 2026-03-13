@@ -19,7 +19,7 @@ const GROUP_NAME: StringName = &"raytraced_audio_player_3d"
 ## All [b]enabled[/b] [RaytracedAudioPlayer3D]s will be in this group
 const ENABLED_GROUP_NAME: StringName = &"enabled_raytraced_audio_player_3d"
 ## The lowpass frequency when completely muffled
-const LOWPASS_MIN_HZ: float = 250.0
+const LOWPASS_MIN_HZ: float = 2500.0
 ## The lowpass frequency when completely not-muffled (?)
 const LOWPASS_MAX_HZ: float = 20000.0
 
@@ -38,7 +38,6 @@ signal disabled
 ## Emitted when the maximum audible distance for this node is changed
 ## [br]See also [member AudioStreamPlayer3D.max_distance] and [member audibility_threshold_db]
 signal audible_distance_updated(distance: float)
-
 ## The threshold (in decibels) at which sounds will be considered inaudible
 ## [br]This is used to enable / disable this node when it's not audible to save resources
 ## [br]The distance at which this node is no longer considered audible is automatically stored inside [member AudioStreamPlayer3D.max_distance]
@@ -67,7 +66,9 @@ func _ready() -> void:
 		max_distance = calculate_audible_distance_threshold()
 		audible_distance_updated.emit(max_distance)
 
-
+func play(start: float = 0.0) -> void:
+	super(start)
+	GlobalObserver.sound_played.emit(self)
 ## Enables this node
 ## [br]Note: you should almost never have to worry about enabling / disabling [RaytracedAudioPlayer3D]s manually
 ## [br]See [method update]
@@ -132,9 +133,9 @@ func is_enabled() -> bool:
 ## [br]This method will adjust the muffle of the played stream, as well as enable or disable it
 ## based on whether it's audible from the given [RaytracedAudioListener]
 ## [br]If you are updating this node manually, this is the method to call
-func update(listener: RaytracedAudioListener) -> void:
+func update(listener: RaytracedAudioListener, delta: float) -> void:
 	if _is_enabled:
-		_update(listener.rays_count, listener.muffle_interpolation)
+		_update(listener.rays_count, listener.muffle_interpolation, delta)
 
 	_lowpass_rays_count = 0
 	
@@ -146,7 +147,7 @@ func update(listener: RaytracedAudioListener) -> void:
 		enable()
 
 
-func _update(rays_count: int, interpolation: float):
+func _update(rays_count: int, interpolation: float, delta: float):
 	if bus == ProjectSettings.get_setting("raytraced_audio/reverb_bus"):
 		_disable()
 		return
@@ -163,9 +164,9 @@ func _update(rays_count: int, interpolation: float):
 		# So we scale frequencies down before lerping, then scale them back up
 		var log_t: float = lerpf(LOG_MIN_HZ, LOG_MAX_HZ, ratio)
 		var log_hz: float = log(lowpass.cutoff_hz) / LOG2 # Scale current frequency down:  log2(x) = ln(x) / ln(2)
-		log_hz = lerpf(log_hz, log_t, interpolation) # Lerp in scaled down space
+		log_hz = M.smooth_nudgef(log_hz, log_t, interpolation, delta) # Lerp in scaled down space
 		lowpass.cutoff_hz = pow(2, log_hz) # Scale back up
-
+		AudioServer.set_bus_volume_db(idx, volume_db)
 
 # Translated from the godot repo
 ## Calculates the volume (in decibels) of the audio stream from the given position

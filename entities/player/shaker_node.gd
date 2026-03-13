@@ -16,7 +16,7 @@ func do_shaker(delta: float) -> void :
 		second_preset.amplitude = M.smooth_nudgev(second_preset.amplitude, Vector3.ZERO, 10.0, delta)
 		return
 	if player.direction and player.state_machine.current_state.name == "Grounded" and not Input.is_action_pressed("slide"):
-		if not Input.is_action_pressed("sprint"):
+		if not Input.is_action_pressed("sprint") and player.velocity.dot(player.direction) > 5.0:
 			first_preset.amplitude = M.smooth_nudgev(first_preset.amplitude, Vector3(0.03, 0.01, 0.03)  * shaker_curve.sample(player.velocity.length()), 10.0, delta)
 			second_preset.amplitude = M.smooth_nudgev(second_preset.amplitude, Vector3.ZERO, 10.0, delta)
 		else:

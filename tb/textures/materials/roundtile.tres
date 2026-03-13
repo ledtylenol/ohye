@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dvdb8qoqdma2w"]
+
+[ext_resource type="Texture2D" uid="uid://dol4jge4mcv3x" path="res://tb/textures/roundtile.jpg" id="1_huj03"]
+
+[resource]
+albedo_texture = ExtResource("1_huj03")
+metallic_specular = 0.0
+normal_enabled = true
+texture_filter = 2

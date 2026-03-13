@@ -12,9 +12,11 @@
 [ext_resource type="Resource" uid="uid://br3m0rm2abeb" path="res://tb/entities/chance_interact.tres" id="9_g8a4e"]
 [ext_resource type="Resource" uid="uid://dvq7yjci5ymbi" path="res://tb/entities/teleport.tres" id="10_cecxn"]
 [ext_resource type="Resource" uid="uid://bs0ohybv3tl5a" path="res://tb/entities/death_area.tres" id="11_yhqxl"]
+[ext_resource type="Resource" uid="uid://b1nqiiuv4qpo2" path="res://tb/entities/water.tres" id="12_cg4pd"]
+[ext_resource type="Resource" uid="uid://cdt2gf4apkm8b" path="res://tb/entities/statictv.tres" id="13_2hkdg"]
 
 [resource]
 script = ExtResource("1_wiasy")
 fgd_name = "Ohye"
 base_fgd_files = Array[Resource]([ExtResource("1_inohj")])
-entity_definitions = Array[Resource]([ExtResource("2_ue6rr"), ExtResource("3_yvrsu"), ExtResource("4_p5lij"), ExtResource("5_ufda8"), ExtResource("6_sw4qs"), ExtResource("7_4vv7h"), ExtResource("8_thi6i"), ExtResource("9_g8a4e"), ExtResource("10_cecxn"), ExtResource("11_yhqxl")])
+entity_definitions = Array[Resource]([ExtResource("2_ue6rr"), ExtResource("3_yvrsu"), ExtResource("4_p5lij"), ExtResource("5_ufda8"), ExtResource("6_sw4qs"), ExtResource("7_4vv7h"), ExtResource("8_thi6i"), ExtResource("9_g8a4e"), ExtResource("10_cecxn"), ExtResource("11_yhqxl"), ExtResource("12_cg4pd"), ExtResource("13_2hkdg")])

@@ -10,3 +10,6 @@ script = ExtResource("1_dlf23")
 entity_fgd = ExtResource("2_576s4")
 base_texture_dir = "res://tb/textures"
 clip_texture = "special/clip"
+skip_texture = "special/skip"
+origin_texture = "special/origin"
+base_material_dir = "res://tb/textures/materials"

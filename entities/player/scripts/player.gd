@@ -18,7 +18,6 @@ signal teleport
 signal active_set(v: bool)
 enum STATES{AIR, GROUNDED, POUNDING, WALKING, CROUCHING, STUNNED}
 
-var last_ground_type: = Constants.Ground.STONE
 
 @export_category("Components")
 @export var camera: PlayerCamera
@@ -74,11 +73,12 @@ var active: = true:
 		active_set.emit(v)
 
 var wall_normal := Vector3.ZERO
+var last_y := 0.0
+var global_gravity_modifier := 1.0
 @export_category("Params")
 @export var auto_jump: bool = false
 @export var randomize_scale: = false
-
-
+@export var flash_active := false
 func _ready() -> void:
 
 	resume.button_up.connect(set.bind("ingame_mode", false))
@@ -93,7 +93,6 @@ func _ready() -> void:
 	if health_component:
 		health_component.died.connect(die)
 	Global.enforce_cursor = false
-
 func check_ground() -> void:
 	grounded = shape_cast.is_colliding()
 
@@ -218,13 +217,13 @@ func apply_gravity(delta: float) -> bool:
 
 
 	if down_vel.length() < 0.0:
-		velocity -= grav_dir * stats.fall_gravity * delta
+		velocity -= grav_dir * stats.fall_gravity * delta * global_gravity_modifier
 		return true
 	else:
 		if let_go_of_space and times["jump"] > stats.minimum_jump_duration:
-			velocity -= 2.0 * grav_dir * stats.fall_gravity * delta
+			velocity -= 2.0 * grav_dir * stats.fall_gravity * delta * global_gravity_modifier
 			return true
-		velocity -= grav_dir * stats.jump_gravity * delta
+		velocity -= grav_dir * stats.jump_gravity * delta * global_gravity_modifier 
 		return true
 
 func apply_wall_gravity(delta: float, n: Vector3) -> void:
@@ -232,10 +231,10 @@ func apply_wall_gravity(delta: float, n: Vector3) -> void:
 		var rem = velocity.dot(grav_dir) - 5.0
 		var dir := velocity.normalized().slide(n).slerp(-grav_dir, 0.2)
 		if velocity.slide(n).length() < stats.wall_speed:
-			velocity -= dir * (stats.fall_gravity) * delta * 0.5 * dir.dot(-camera.global_basis.z)
-		velocity -= dir * (rem) * delta * 0.5 * dir.dot(-camera.global_basis.z)
+			velocity -= dir * (stats.fall_gravity) * delta * 0.5 * dir.dot(-camera.global_basis.z) * global_gravity_modifier
+		velocity -= dir * (rem) * delta * 0.5 * dir.dot(-camera.global_basis.z) * global_gravity_modifier
 		return
-	velocity -= grav_dir * stats.fall_gravity * delta * 0.5
+	velocity -= grav_dir * stats.fall_gravity * delta * 0.5 * global_gravity_modifier
 
 
 

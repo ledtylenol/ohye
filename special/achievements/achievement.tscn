@@ -16,7 +16,7 @@ texture = NodePath("Achievement/MarginContainer/GridContainer/TextureRect")
 title = NodePath("Achievement/MarginContainer/GridContainer/PanelContainer/Title")
 description = NodePath("Achievement/MarginContainer/GridContainer/Description")
 playtime = NodePath("Achievement/MarginContainer/GridContainer/Playtime")
-sound = NodePath("Achievement/Sound")
+sound = NodePath("FmodEventEmitter3D")
 
 [node name="Achievement" type="PanelContainer" parent="." unique_id=1157196265]
 layout_mode = 1
@@ -32,19 +32,6 @@ offset_bottom = 12.256
 grow_horizontal = 0
 grow_vertical = 0
 metadata/_edit_use_anchors_ = true
-
-[node name="Sound" type="FmodEventEmitter3D" parent="Achievement" unique_id=1148532405]
-event_name = "event:/Sfx3D/ResetType"
-event_guid = "{704df19b-d950-4764-879e-d56cf38cbdaa}"
-attached = false
-allow_fadeout = false
-preload_event = false
-fmod_parameters/cutoff_hz/id = 2341499637275164784
-fmod_parameters/cutoff_hz = 39.98
-fmod_parameters/cutoff_hz/variant_type = 3
-fmod_parameters/max_distance/id = 3057212819914003988
-fmod_parameters/max_distance = 0.0
-fmod_parameters/max_distance/variant_type = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="Achievement" unique_id=475686807]
 layout_mode = 2
@@ -256,3 +243,9 @@ meta_cursor = 2
 override_bbcodeEnabled = true
 override_clipContents = false
 override_fitContent = true
+
+[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=282270586]
+event_name = "event:/Sfx3D/ResetType"
+event_guid = "{704df19b-d950-4764-879e-d56cf38cbdaa}"
+attached = false
+preload_event = false

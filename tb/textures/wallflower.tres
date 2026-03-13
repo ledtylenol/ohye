@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://ck7yd5ctrgh42"]
-
-[ext_resource type="Texture2D" uid="uid://dvx43cv67gvot" path="res://tb/textures/wallflower.jpg" id="1_fryev"]
-
-[resource]
-albedo_texture = ExtResource("1_fryev")
-metallic_specular = 0.0
-normal_enabled = true
-texture_filter = 2

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bea8g80xe4378"]
+
+[ext_resource type="Shader" uid="uid://cqqmcgfnexby" path="res://tb/textures/materials/watershader.tres" id="1_h57rb"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_h57rb")
+shader_parameter/Color = Color(0, 0.4625, 0.75, 1)
+shader_parameter/step_edge = 0.5

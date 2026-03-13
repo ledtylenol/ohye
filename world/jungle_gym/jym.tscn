@@ -5,10 +5,12 @@
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_k26ko"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="3_2rj8j"]
 [ext_resource type="Script" uid="uid://b1kkj08iwwrse" path="res://components/tile/sound_tile.gd" id="4_liqks"]
-[ext_resource type="Material" uid="uid://dq03hkcy6bm4s" path="res://tb/textures/rusted.tres" id="5_gv0hy"]
+[ext_resource type="Material" uid="uid://dq03hkcy6bm4s" path="res://tb/textures/materials/rusted.tres" id="5_gv0hy"]
 [ext_resource type="PackedScene" uid="uid://d2h1tv4ptwblk" path="res://entities/player/player.tscn" id="6_wa3ru"]
 [ext_resource type="Script" uid="uid://bo7o1la75ggh7" path="res://entities/player/scripts/stats.gd" id="7_575ic"]
-[ext_resource type="AudioStream" uid="uid://b7utr567qp48t" path="res://music/MEMODEMO × AQUASINE × METAROOM × BILLIUMMOTO - this is probably the principle of music making.ogg" id="9_gv0hy"]
+[ext_resource type="Script" uid="uid://bka1bqdqyu2dt" path="res://components/misc/scene_loader.gd" id="10_575ic"]
+[ext_resource type="PackedScene" uid="uid://dhtkwx73mti6a" path="res://entities/noise/noise.tscn" id="10_wa3ru"]
+[ext_resource type="Script" uid="uid://bv6e6tehgch0w" path="res://components/misc/simple_scene.gd" id="11_kucbl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2rj8j"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -22,6 +24,25 @@ background_mode = 2
 sky = SubResource("Sky_liqks")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="Resource" id="Resource_575ic"]
+resource_local_to_scene = true
+script = ExtResource("7_575ic")
+speed = 15
+wall_speed = 90.0
+ground_acceleration = 78.0
+max_floor_angle = 0.523599
+jump_height = 4.0
+jump_peak_time = 0.4
+jump_descend_time = 0.44
+max_ground_pounds = 0
+ground_pound_base_height = 20.0
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_575ic"]
+vertices = PackedVector3Array(90, 2, -72, 90, 2, -57.5, 109.5, 2, -57.5, 109.5, 2, -72, 1, 1, -34, 1.25, 1, -33.5, 5, 1, -33.5, 5.25, 1, -34, 10.5, 1, -55, -5, 1, -55, 10.5, 1, -33.5, -5, 1, -33.5, -1, 1, -33.5, -0.75, 1, -34, -19.25, -102.5, -12.25, -19.25, -102.5, 116, 50.5, -102.5, 116, 50.5, -102.5, -12.25, -5, 1, -3.5, -1, 1, -3.5, -1, 1, -10.5, -5, 1, -10.5, 1.25, 1, -3.5, 5, 1, -3.25, 5, 1, -10.5, 1.25, 1, -10.5, 1.25, 1, -1.75, 5.25, 1, -1.25, 7.5, 1, 4.25, 6.75, 1, -1.25, 0.75, 1, -1.25, -0.75, 1, -1.25, 10.5, 1, 4, 10.5, 1, -10.5, 7.25, 1, -10.5, 7.25, 1, -1.75, -5, 1, 11, 7.5, 1, 11, 8.5, 2.5, 5, 8.5, 2.5, 12.5, 17.5, 5, 12.5, 17.5, 5, 5, 12.357143, 5, 5, 12.357143, 5, 12.5, 40, 16.75, 13.5, 41, 16.5, 14.5, 40.5, 16.75, 13.5, 41.25, 16.5, 14.75, 42.25, 16.5, 17.25, 42.5, 16.5, 16.25, 43, 16.25, 16.25, 45.75, 13.75, 47.5, 46, 13.5, 49.5, 46.5, 13.5, 49, 46.25, 13.75, 46.75, 44.75, 13.5, 51, 44.75, 13.5, 51.5, 45.25, 13.5, 51.25, 45.25, 13.5, 50.75, 11.25, -0.5, 64.25, 9.5, -0.5, 63.5, 8, -0.5, 63.5, 7.75, -0.5, 62.75, -17, -0.5, 60, -17, -0.5, 116, 11.5, -0.5, 116, 7.5, -11.75, 60.5, 7.5, -11.75, 61.75, 8.75, -11.75, 62, 10.75, -11.75, 63, 13, -11.75, 63, 11.25, -11.5, 60.75, 11, -11.5, 92, 8.75, -11.75, 63.25, 5.5, -11.5, 63.5, -13.25, -11.5, 92, -16.25, -11.5, 60.75, -16.25, -11.5, 93.5, -13.5, -11.5, 93.75, -12.25, -11.5, 93.25, -12.25, -11.5, 99, 11, -11.5, 99, 11, -11.5, 93.25, -13.25, -11.5, 100.25, -16.25, -11.5, 115.5, 11, -11.5, 115.5, 11, -11.5, 100.25)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(7, 4, 8), PackedInt32Array(8, 4, 9), PackedInt32Array(8, 10, 7), PackedInt32Array(12, 11, 13), PackedInt32Array(13, 11, 9), PackedInt32Array(4, 13, 9), PackedInt32Array(17, 16, 14), PackedInt32Array(14, 16, 15), PackedInt32Array(21, 20, 18), PackedInt32Array(18, 20, 19), PackedInt32Array(25, 24, 22), PackedInt32Array(22, 24, 23), PackedInt32Array(22, 23, 26), PackedInt32Array(26, 23, 27), PackedInt32Array(27, 29, 28), PackedInt32Array(26, 27, 30), PackedInt32Array(30, 27, 28), PackedInt32Array(18, 19, 31), PackedInt32Array(28, 35, 32), PackedInt32Array(32, 35, 34), PackedInt32Array(32, 34, 33), PackedInt32Array(31, 28, 18), PackedInt32Array(18, 28, 37), PackedInt32Array(18, 37, 36), PackedInt32Array(31, 30, 28), PackedInt32Array(28, 29, 35), PackedInt32Array(38, 42, 39), PackedInt32Array(39, 42, 43), PackedInt32Array(43, 42, 41), PackedInt32Array(43, 41, 40), PackedInt32Array(46, 45, 44), PackedInt32Array(48, 47, 49), PackedInt32Array(49, 47, 50), PackedInt32Array(52, 51, 53), PackedInt32Array(53, 51, 54), PackedInt32Array(58, 57, 55), PackedInt32Array(55, 57, 56), PackedInt32Array(61, 60, 59), PackedInt32Array(63, 62, 61), PackedInt32Array(61, 59, 63), PackedInt32Array(63, 59, 65), PackedInt32Array(63, 65, 64), PackedInt32Array(68, 67, 66), PackedInt32Array(70, 69, 71), PackedInt32Array(71, 69, 68), PackedInt32Array(71, 68, 66), PackedInt32Array(74, 73, 72), PackedInt32Array(72, 75, 74), PackedInt32Array(74, 75, 76), PackedInt32Array(68, 69, 73), PackedInt32Array(73, 69, 72), PackedInt32Array(78, 77, 75), PackedInt32Array(75, 77, 76), PackedInt32Array(82, 81, 79), PackedInt32Array(79, 81, 80), PackedInt32Array(78, 83, 77), PackedInt32Array(77, 83, 84), PackedInt32Array(86, 85, 83), PackedInt32Array(83, 85, 84)]
+geometry_parsed_geometry_type = 1
+agent_max_slope = 54.18
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gv0hy"]
 albedo_texture = ExtResource("3_2rj8j")
@@ -860,36 +881,17 @@ indices = PackedInt32Array(0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7, 8, 9, 10, 8, 10, 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wxl2l"]
 points = PackedVector3Array(-14.750024, 0.25, 28.500008, 14.749977, 0.25, 28.500008, -14.750024, -0.25, 28.500008, 14.749977, -0.24999988, 28.500008, -14.750024, 0.25, -28.499996, 14.249976, 0.25, -24.499996, -14.750024, -0.25, -28.499996, 14.249976, -0.25, -24.499996)
 
-[sub_resource type="Resource" id="Resource_liqks"]
-resource_local_to_scene = true
-script = ExtResource("7_575ic")
-speed = 15
-wall_speed = 90.0
-ground_acceleration = 78.0
-max_floor_angle = 0.523599
-jump_height = 4.0
-jump_peak_time = 0.4
-jump_descend_time = 0.44
-max_ground_pounds = 0
-ground_pound_base_height = 20.0
+[sub_resource type="Resource" id="Resource_eo8gp"]
+script = ExtResource("11_kucbl")
+edge_name = "jungle1"
+edge_name = "jungle1"
+scene = "uid://bc5i5klw124yj"
+metadata/_custom_type_script = "uid://bv6e6tehgch0w"
 
-[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_wa3ru"]
-clip_count = 1
-clip_0/name = &"start"
-clip_0/stream = ExtResource("9_gv0hy")
-clip_0/auto_advance = 1
-clip_0/next_clip = 0
-_transitions = {
-Vector2i(0, 0): {
-"fade_beats": 1.0,
-"fade_mode": 3,
-"from_time": 3,
-"to_time": 1
-}
-}
-
-[node name="Jym" type="Node3D" unique_id=6195024]
+[node name="Jym" type="Node3D" unique_id=6195024 node_paths=PackedStringArray("noise")]
 script = ExtResource("1_liqks")
+noise = NodePath("Noise")
+level_name = "jungle_gym"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=479922123]
 environment = SubResource("Environment_gv0hy")
@@ -899,395 +901,405 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 directional_shadow_max_distance = 1.0
 
-[node name="FuncGodotMap" type="Node3D" parent="." unique_id=272740563]
+[node name="Player" parent="." unique_id=96134482 instance=ExtResource("6_wa3ru")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4779525, 0)
+stats = SubResource("Resource_575ic")
+
+[node name="Music" type="FmodEventEmitter3D" parent="." unique_id=1807146184]
+event_name = "event:/Music3D/NoiseInvestigation"
+event_guid = "{94b69a7e-5e29-451e-ac30-6b47f92dce54}"
+attached = false
+preload_event = false
+fmod_parameters/Active/id = 5591441648638885785
+fmod_parameters/Active = 1
+fmod_parameters/Active/variant_type = 2
+
+[node name="Noise" parent="." unique_id=444384490 instance=ExtResource("10_wa3ru")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9087596, -11.576382, 76.075806)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=968047989]
+navigation_mesh = SubResource("NavigationMesh_575ic")
+
+[node name="FuncGodotMap" type="Node3D" parent="NavigationRegion3D" unique_id=272740563]
 script = ExtResource("1_kcrvl")
 local_map_file = "uid://yqcutr67i63p"
 map_settings = ExtResource("2_k26ko")
 metadata/_custom_type_script = "uid://cwu5cf7a0awcd"
 
-[node name="entity_0_worldspawn" type="StaticBody3D" parent="FuncGodotMap" unique_id=2003764839]
+[node name="entity_0_worldspawn" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=2003764839]
 collision_mask = 0
 
-[node name="entity_0_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=1461116843]
+[node name="entity_0_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn" unique_id=1461116843]
 mesh = SubResource("ArrayMesh_wa3ru")
 
-[node name="entity_0_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=702999201]
+[node name="entity_0_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn" unique_id=702999201]
 shape = SubResource("ConvexPolygonShape3D_575ic")
 
-[node name="entity_0_brush_1_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=914394202]
+[node name="entity_0_brush_1_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn" unique_id=914394202]
 shape = SubResource("ConvexPolygonShape3D_kucbl")
 
-[node name="entity_0_brush_2_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=624015495]
+[node name="entity_0_brush_2_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn" unique_id=624015495]
 shape = SubResource("ConvexPolygonShape3D_inrpg")
 
-[node name="entity_0_brush_3_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=1928566305]
+[node name="entity_0_brush_3_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn" unique_id=1928566305]
 shape = SubResource("ConvexPolygonShape3D_eo8gp")
 
-[node name="entity_0_brush_4_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=211861034]
+[node name="entity_0_brush_4_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn" unique_id=211861034]
 shape = SubResource("ConvexPolygonShape3D_p6unb")
 
-[node name="entity_0_brush_5_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=1960026168]
+[node name="entity_0_brush_5_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn" unique_id=1960026168]
 shape = SubResource("ConvexPolygonShape3D_npru5")
 
-[node name="entity_0_brush_6_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=530005869]
+[node name="entity_0_brush_6_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn" unique_id=530005869]
 shape = SubResource("ConvexPolygonShape3D_wwf5p")
 
-[node name="entity_0_brush_7_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=1435042938]
+[node name="entity_0_brush_7_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn" unique_id=1435042938]
 shape = SubResource("ConvexPolygonShape3D_0j11l")
 
-[node name="entity_0_brush_8_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=285137060]
+[node name="entity_0_brush_8_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn" unique_id=285137060]
 shape = SubResource("ConvexPolygonShape3D_rk4ls")
 
-[node name="entity_0_brush_9_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn" unique_id=1255477397]
+[node name="entity_0_brush_9_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_0_worldspawn" unique_id=1255477397]
 shape = SubResource("ConvexPolygonShape3D_2axph")
 
-[node name="entity_1_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=1933526986]
+[node name="entity_1_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=1933526986]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 3, 8.75)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_1_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_1_ohye_sound" unique_id=1875309748]
+[node name="entity_1_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_1_ohye_sound" unique_id=1875309748]
 mesh = SubResource("ArrayMesh_tlnq5")
 
-[node name="entity_1_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_1_ohye_sound" unique_id=795445214]
+[node name="entity_1_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_1_ohye_sound" unique_id=795445214]
 occluder = SubResource("ArrayOccluder3D_wt0ch")
 
-[node name="entity_1_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_1_ohye_sound" unique_id=1365527426]
+[node name="entity_1_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_1_ohye_sound" unique_id=1365527426]
 shape = SubResource("ConvexPolygonShape3D_iwfow")
 
-[node name="entity_2_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=976186145]
+[node name="entity_2_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=976186145]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.25, 6.7585173, 3.935264)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_2_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_2_ohye_sound" unique_id=55342416]
+[node name="entity_2_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_2_ohye_sound" unique_id=55342416]
 mesh = SubResource("ArrayMesh_vqpbl")
 
-[node name="entity_2_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_2_ohye_sound" unique_id=1791972970]
+[node name="entity_2_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_2_ohye_sound" unique_id=1791972970]
 occluder = SubResource("ArrayOccluder3D_bmwko")
 
-[node name="entity_2_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_2_ohye_sound" unique_id=1315777073]
+[node name="entity_2_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_2_ohye_sound" unique_id=1315777073]
 shape = SubResource("ConvexPolygonShape3D_3lxq4")
 
-[node name="entity_3_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=1612907575]
+[node name="entity_3_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=1612907575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.75, 1, -64.75)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_3_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_3_ohye_sound" unique_id=843639384]
+[node name="entity_3_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_3_ohye_sound" unique_id=843639384]
 mesh = SubResource("ArrayMesh_ucm6v")
 
-[node name="entity_3_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_3_ohye_sound" unique_id=365824278]
+[node name="entity_3_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_3_ohye_sound" unique_id=365824278]
 occluder = SubResource("ArrayOccluder3D_yidm8")
 
-[node name="entity_3_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_3_ohye_sound" unique_id=280576482]
+[node name="entity_3_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_3_ohye_sound" unique_id=280576482]
 shape = SubResource("ConvexPolygonShape3D_cvhej")
 
-[node name="entity_4_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=1035728733]
+[node name="entity_4_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=1035728733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.25853, 7.1635427, 4.9238462)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_4_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_4_ohye_sound" unique_id=862389193]
+[node name="entity_4_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_4_ohye_sound" unique_id=862389193]
 mesh = SubResource("ArrayMesh_v62c7")
 
-[node name="entity_4_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_4_ohye_sound" unique_id=2126916098]
+[node name="entity_4_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_4_ohye_sound" unique_id=2126916098]
 occluder = SubResource("ArrayOccluder3D_7ut5v")
 
-[node name="entity_4_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_4_ohye_sound" unique_id=369705428]
+[node name="entity_4_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_4_ohye_sound" unique_id=369705428]
 shape = SubResource("ConvexPolygonShape3D_xldt7")
 
-[node name="entity_5_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=1523547344]
+[node name="entity_5_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=1523547344]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.283554, 6.531992, 7.280556)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_5_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_5_ohye_sound" unique_id=81508013]
+[node name="entity_5_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_5_ohye_sound" unique_id=81508013]
 mesh = SubResource("ArrayMesh_ovsrw")
 
-[node name="entity_5_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_5_ohye_sound" unique_id=2141391133]
+[node name="entity_5_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_5_ohye_sound" unique_id=2141391133]
 occluder = SubResource("ArrayOccluder3D_ctp7d")
 
-[node name="entity_5_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_5_ohye_sound" unique_id=689849204]
+[node name="entity_5_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_5_ohye_sound" unique_id=689849204]
 shape = SubResource("ConvexPolygonShape3D_6b15y")
 
-[node name="entity_6_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=2071579345]
+[node name="entity_6_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=2071579345]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.823135, 6.8041773, 11.7644415)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_6_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_6_ohye_sound" unique_id=2002102356]
+[node name="entity_6_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_6_ohye_sound" unique_id=2002102356]
 mesh = SubResource("ArrayMesh_l64jt")
 
-[node name="entity_6_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_6_ohye_sound" unique_id=149765381]
+[node name="entity_6_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_6_ohye_sound" unique_id=149765381]
 occluder = SubResource("ArrayOccluder3D_2w35a")
 
-[node name="entity_6_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_6_ohye_sound" unique_id=1445967610]
+[node name="entity_6_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_6_ohye_sound" unique_id=1445967610]
 shape = SubResource("ConvexPolygonShape3D_oqxco")
 
-[node name="entity_7_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=747342878]
+[node name="entity_7_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=747342878]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.94792, 6.7272377, 17.092857)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_7_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_7_ohye_sound" unique_id=1204798272]
+[node name="entity_7_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_7_ohye_sound" unique_id=1204798272]
 mesh = SubResource("ArrayMesh_vxsy7")
 
-[node name="entity_7_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_7_ohye_sound" unique_id=1091613549]
+[node name="entity_7_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_7_ohye_sound" unique_id=1091613549]
 occluder = SubResource("ArrayOccluder3D_o5f7d")
 
-[node name="entity_7_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_7_ohye_sound" unique_id=2021669262]
+[node name="entity_7_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_7_ohye_sound" unique_id=2021669262]
 shape = SubResource("ConvexPolygonShape3D_a7gs6")
 
-[node name="entity_8_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=588173987]
+[node name="entity_8_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=588173987]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.7426, 6.9360285, 23.727016)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_8_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_8_ohye_sound" unique_id=1287110982]
+[node name="entity_8_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_8_ohye_sound" unique_id=1287110982]
 mesh = SubResource("ArrayMesh_bu27m")
 
-[node name="entity_8_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_8_ohye_sound" unique_id=404330851]
+[node name="entity_8_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_8_ohye_sound" unique_id=404330851]
 occluder = SubResource("ArrayOccluder3D_6bf38")
 
-[node name="entity_8_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_8_ohye_sound" unique_id=62311226]
+[node name="entity_8_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_8_ohye_sound" unique_id=62311226]
 shape = SubResource("ConvexPolygonShape3D_h6fi5")
 
-[node name="entity_9_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=294141849]
+[node name="entity_9_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=294141849]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.49752, 6.737708, 30.879398)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_9_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_9_ohye_sound" unique_id=1108006363]
+[node name="entity_9_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_9_ohye_sound" unique_id=1108006363]
 mesh = SubResource("ArrayMesh_mm11p")
 
-[node name="entity_9_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_9_ohye_sound" unique_id=1941555584]
+[node name="entity_9_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_9_ohye_sound" unique_id=1941555584]
 occluder = SubResource("ArrayOccluder3D_m154b")
 
-[node name="entity_9_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_9_ohye_sound" unique_id=1967078782]
+[node name="entity_9_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_9_ohye_sound" unique_id=1967078782]
 shape = SubResource("ConvexPolygonShape3D_443q6")
 
-[node name="entity_10_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=1730892160]
+[node name="entity_10_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=1730892160]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.109375, -1.25, 63.828133)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_10_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_10_ohye_sound" unique_id=2058007681]
+[node name="entity_10_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_10_ohye_sound" unique_id=2058007681]
 mesh = SubResource("ArrayMesh_v5vwh")
 
-[node name="entity_10_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_10_ohye_sound" unique_id=313644889]
+[node name="entity_10_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_10_ohye_sound" unique_id=313644889]
 occluder = SubResource("ArrayOccluder3D_6f3hv")
 
-[node name="entity_10_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_10_ohye_sound" unique_id=2054604192]
+[node name="entity_10_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_10_ohye_sound" unique_id=2054604192]
 shape = SubResource("ConvexPolygonShape3D_1nvfi")
 
-[node name="entity_11_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=1155246354]
+[node name="entity_11_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=1155246354]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.119928, -0.25, 64.919624)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_11_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_11_ohye_sound" unique_id=31049787]
+[node name="entity_11_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_11_ohye_sound" unique_id=31049787]
 mesh = SubResource("ArrayMesh_2reji")
 
-[node name="entity_11_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_11_ohye_sound" unique_id=1543568231]
+[node name="entity_11_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_11_ohye_sound" unique_id=1543568231]
 occluder = SubResource("ArrayOccluder3D_u5n1d")
 
-[node name="entity_11_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_11_ohye_sound" unique_id=494832950]
+[node name="entity_11_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_11_ohye_sound" unique_id=494832950]
 shape = SubResource("ConvexPolygonShape3D_qnijc")
 
-[node name="entity_12_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=416520168]
+[node name="entity_12_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=416520168]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.240566, 0.75, 64.20287)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_12_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_12_ohye_sound" unique_id=1473430388]
+[node name="entity_12_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_12_ohye_sound" unique_id=1473430388]
 mesh = SubResource("ArrayMesh_csx3n")
 
-[node name="entity_12_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_12_ohye_sound" unique_id=790493328]
+[node name="entity_12_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_12_ohye_sound" unique_id=790493328]
 occluder = SubResource("ArrayOccluder3D_m5lwt")
 
-[node name="entity_12_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_12_ohye_sound" unique_id=1907182889]
+[node name="entity_12_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_12_ohye_sound" unique_id=1907182889]
 shape = SubResource("ConvexPolygonShape3D_rhirn")
 
-[node name="entity_13_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=2071788433]
+[node name="entity_13_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=2071788433]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.777744, 1.75, 61.508667)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_13_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_13_ohye_sound" unique_id=1859417881]
+[node name="entity_13_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_13_ohye_sound" unique_id=1859417881]
 mesh = SubResource("ArrayMesh_thnfa")
 
-[node name="entity_13_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_13_ohye_sound" unique_id=697742376]
+[node name="entity_13_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_13_ohye_sound" unique_id=697742376]
 occluder = SubResource("ArrayOccluder3D_5me1d")
 
-[node name="entity_13_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_13_ohye_sound" unique_id=466588574]
+[node name="entity_13_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_13_ohye_sound" unique_id=466588574]
 shape = SubResource("ConvexPolygonShape3D_2hsbx")
 
-[node name="entity_14_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=321268572]
+[node name="entity_14_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=321268572]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.176773, 2.75, 57.322937)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_14_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_14_ohye_sound" unique_id=1346907995]
+[node name="entity_14_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_14_ohye_sound" unique_id=1346907995]
 mesh = SubResource("ArrayMesh_sucp8")
 
-[node name="entity_14_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_14_ohye_sound" unique_id=1863701270]
+[node name="entity_14_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_14_ohye_sound" unique_id=1863701270]
 occluder = SubResource("ArrayOccluder3D_kmb0m")
 
-[node name="entity_14_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_14_ohye_sound" unique_id=1194498520]
+[node name="entity_14_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_14_ohye_sound" unique_id=1194498520]
 shape = SubResource("ConvexPolygonShape3D_p1xah")
 
-[node name="entity_15_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=1191956796]
+[node name="entity_15_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=1191956796]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.62491, 3.25, 51.78349)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_15_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_15_ohye_sound" unique_id=1195755396]
+[node name="entity_15_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_15_ohye_sound" unique_id=1195755396]
 mesh = SubResource("ArrayMesh_mih2x")
 
-[node name="entity_15_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_15_ohye_sound" unique_id=1259339292]
+[node name="entity_15_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_15_ohye_sound" unique_id=1259339292]
 occluder = SubResource("ArrayOccluder3D_p6lxx")
 
-[node name="entity_15_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_15_ohye_sound" unique_id=1006273667]
+[node name="entity_15_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_15_ohye_sound" unique_id=1006273667]
 shape = SubResource("ConvexPolygonShape3D_qhtp8")
 
-[node name="entity_16_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=312915707]
+[node name="entity_16_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=312915707]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.52178, 6.2509613, 37.75)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_16_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_16_ohye_sound" unique_id=289816090]
+[node name="entity_16_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_16_ohye_sound" unique_id=289816090]
 mesh = SubResource("ArrayMesh_wlvdh")
 
-[node name="entity_16_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_16_ohye_sound" unique_id=298530828]
+[node name="entity_16_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_16_ohye_sound" unique_id=298530828]
 occluder = SubResource("ArrayOccluder3D_qsnps")
 
-[node name="entity_16_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_16_ohye_sound" unique_id=33528661]
+[node name="entity_16_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_16_ohye_sound" unique_id=33528661]
 shape = SubResource("ConvexPolygonShape3D_82k5t")
 
-[node name="entity_17_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=1607169182]
+[node name="entity_17_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=1607169182]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.58603, 3.7565842, 44.758507)
 script = ExtResource("4_liqks")
 sound = 2
 
-[node name="entity_17_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_17_ohye_sound" unique_id=1005063019]
+[node name="entity_17_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_17_ohye_sound" unique_id=1005063019]
 mesh = SubResource("ArrayMesh_ma774")
 
-[node name="entity_17_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_17_ohye_sound" unique_id=1900545765]
+[node name="entity_17_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_17_ohye_sound" unique_id=1900545765]
 occluder = SubResource("ArrayOccluder3D_vjxw4")
 
-[node name="entity_17_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_17_ohye_sound" unique_id=676210771]
+[node name="entity_17_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_17_ohye_sound" unique_id=676210771]
 shape = SubResource("ConvexPolygonShape3D_y0vv6")
 
-[node name="entity_18_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=687089046]
+[node name="entity_18_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=687089046]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -12.25, 87.99999)
 script = ExtResource("4_liqks")
 
-[node name="entity_18_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_18_ohye_sound" unique_id=987380891]
+[node name="entity_18_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_18_ohye_sound" unique_id=987380891]
 mesh = SubResource("ArrayMesh_m1l43")
 
-[node name="entity_18_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_18_ohye_sound" unique_id=1135332478]
+[node name="entity_18_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_18_ohye_sound" unique_id=1135332478]
 occluder = SubResource("ArrayOccluder3D_dkki0")
 
-[node name="entity_18_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_18_ohye_sound" unique_id=1592988802]
+[node name="entity_18_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_18_ohye_sound" unique_id=1592988802]
 shape = SubResource("ConvexPolygonShape3D_h30x0")
 
-[node name="entity_18_brush_1_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_18_ohye_sound" unique_id=1851109921]
+[node name="entity_18_brush_1_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_18_ohye_sound" unique_id=1851109921]
 shape = SubResource("ConvexPolygonShape3D_oyi2o")
 
-[node name="entity_18_brush_2_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_18_ohye_sound" unique_id=350162022]
+[node name="entity_18_brush_2_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_18_ohye_sound" unique_id=350162022]
 shape = SubResource("ConvexPolygonShape3D_wi1sc")
 
-[node name="entity_19_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=1145440533]
+[node name="entity_19_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=1145440533]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -17.75)
 script = ExtResource("4_liqks")
 
-[node name="entity_19_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_19_ohye_sound" unique_id=664798257]
+[node name="entity_19_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_19_ohye_sound" unique_id=664798257]
 mesh = SubResource("ArrayMesh_w5y0o")
 
-[node name="entity_19_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_19_ohye_sound" unique_id=88647005]
+[node name="entity_19_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_19_ohye_sound" unique_id=88647005]
 occluder = SubResource("ArrayOccluder3D_kmlhk")
 
-[node name="entity_19_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_19_ohye_sound" unique_id=129274038]
+[node name="entity_19_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_19_ohye_sound" unique_id=129274038]
 shape = SubResource("ConvexPolygonShape3D_15ffg")
 
-[node name="entity_20_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=481337062]
+[node name="entity_20_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=481337062]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5.5, -17.75)
 script = ExtResource("4_liqks")
 
-[node name="entity_20_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_20_ohye_sound" unique_id=443861427]
+[node name="entity_20_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_20_ohye_sound" unique_id=443861427]
 mesh = SubResource("ArrayMesh_61sjb")
 
-[node name="entity_20_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_20_ohye_sound" unique_id=182524733]
+[node name="entity_20_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_20_ohye_sound" unique_id=182524733]
 occluder = SubResource("ArrayOccluder3D_3gvh2")
 
-[node name="entity_20_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_20_ohye_sound" unique_id=5122410]
+[node name="entity_20_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_20_ohye_sound" unique_id=5122410]
 shape = SubResource("ConvexPolygonShape3D_x6g8i")
 
-[node name="entity_21_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=383700212]
+[node name="entity_21_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=383700212]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, -103.25, 51.75)
 script = ExtResource("4_liqks")
 
-[node name="entity_21_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_21_ohye_sound" unique_id=1991625688]
+[node name="entity_21_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_21_ohye_sound" unique_id=1991625688]
 mesh = SubResource("ArrayMesh_s58sr")
 
-[node name="entity_21_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_21_ohye_sound" unique_id=1564314229]
+[node name="entity_21_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_21_ohye_sound" unique_id=1564314229]
 occluder = SubResource("ArrayOccluder3D_2xu5h")
 
-[node name="entity_21_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_21_ohye_sound" unique_id=2022914794]
+[node name="entity_21_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_21_ohye_sound" unique_id=2022914794]
 shape = SubResource("ConvexPolygonShape3D_mm4es")
 
-[node name="entity_22_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=278232826]
+[node name="entity_22_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=278232826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.25, -68, 51.75)
 script = ExtResource("4_liqks")
 
-[node name="entity_22_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_22_ohye_sound" unique_id=1877197720]
+[node name="entity_22_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_22_ohye_sound" unique_id=1877197720]
 mesh = SubResource("ArrayMesh_wbwcq")
 
-[node name="entity_22_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_22_ohye_sound" unique_id=1687489080]
+[node name="entity_22_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_22_ohye_sound" unique_id=1687489080]
 occluder = SubResource("ArrayOccluder3D_4hu02")
 
-[node name="entity_22_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_22_ohye_sound" unique_id=1999320652]
+[node name="entity_22_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_22_ohye_sound" unique_id=1999320652]
 shape = SubResource("ConvexPolygonShape3D_jyge6")
 
-[node name="entity_23_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=82617943]
+[node name="entity_23_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=82617943]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.25, -68, 51.75)
 script = ExtResource("4_liqks")
 
-[node name="entity_23_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_23_ohye_sound" unique_id=1650987571]
+[node name="entity_23_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_23_ohye_sound" unique_id=1650987571]
 mesh = SubResource("ArrayMesh_seevy")
 
-[node name="entity_23_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_23_ohye_sound" unique_id=652317607]
+[node name="entity_23_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_23_ohye_sound" unique_id=652317607]
 occluder = SubResource("ArrayOccluder3D_k7jtj")
 
-[node name="entity_23_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_23_ohye_sound" unique_id=1987646843]
+[node name="entity_23_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_23_ohye_sound" unique_id=1987646843]
 shape = SubResource("ConvexPolygonShape3D_3qwgp")
 
-[node name="entity_24_ohye_sound" type="StaticBody3D" parent="FuncGodotMap" unique_id=488285839]
+[node name="entity_24_ohye_sound" type="StaticBody3D" parent="NavigationRegion3D/FuncGodotMap" unique_id=488285839]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7499762, -1.25, 87.99999)
 script = ExtResource("4_liqks")
 
-[node name="entity_24_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_24_ohye_sound" unique_id=1796979478]
+[node name="entity_24_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_24_ohye_sound" unique_id=1796979478]
 mesh = SubResource("ArrayMesh_tymbr")
 
-[node name="entity_24_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_24_ohye_sound" unique_id=1666023611]
+[node name="entity_24_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/FuncGodotMap/entity_24_ohye_sound" unique_id=1666023611]
 occluder = SubResource("ArrayOccluder3D_6f1m4")
 
-[node name="entity_24_brush_0_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_24_ohye_sound" unique_id=1263737795]
+[node name="entity_24_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/FuncGodotMap/entity_24_ohye_sound" unique_id=1263737795]
 shape = SubResource("ConvexPolygonShape3D_wxl2l")
 
-[node name="Player" parent="." unique_id=96134482 instance=ExtResource("6_wa3ru")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4779525, 0)
-stats = SubResource("Resource_liqks")
-
-[node name="Music" type="FmodEventEmitter3D" parent="." unique_id=1807146184]
-event_name = "event:/Music3D/Lowres"
-event_guid = "{c11f7bb5-86c6-47dd-b843-088169fa1d20}"
-attached = false
-preload_event = false
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=484884830]
-stream = SubResource("AudioStreamInteractive_wa3ru")
-volume_db = -10.602
-autoplay = true
-bus = &"RaytracedAmbient"
+[node name="SceneLoader" type="Node" parent="." unique_id=975454897]
+script = ExtResource("10_575ic")
+scene_type = SubResource("Resource_eo8gp")
+delay = 0.0
+can_change = true
+metadata/_custom_type_script = "uid://bka1bqdqyu2dt"

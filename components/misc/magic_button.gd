@@ -17,15 +17,17 @@ class_name MagicButton
 var tween: Tween
 
 var mouse_on := false
-@onready var startpos := position
+var startpos := Vector2.ZERO
 
 func _ready() -> void:
 	mouse_entered.connect(on_mouse_entered)
 	mouse_exited.connect(on_mouse_exited)
 	button_down.connect(on_button_down)
 	button_up.connect(on_button_up)
-
+	await get_tree().physics_frame
+	startpos = position
 func _process(_delta: float) -> void:
+	if disabled: return
 	pivot_offset = size / 2
 	var target := Vector2.ZERO
 	if mouse_on:
@@ -34,6 +36,7 @@ func _process(_delta: float) -> void:
 		target = startpos 
 	position = M.smooth_nudge(position, target, 5.0, _delta)
 func on_mouse_exited() -> void:
+	if disabled: return
 	mouse_on = false
 	if tween: tween.kill()
 	tween = create_tween().set_ease(easing_type).set_trans(trans_type)
@@ -41,19 +44,22 @@ func on_mouse_exited() -> void:
 	if sound_off:
 		FmodServer.play_one_shot(sound_off.event_name)
 func on_mouse_entered() -> void:
+	if disabled: return
 	mouse_on = true
 	if tween: tween.kill()
 	tween = create_tween().set_ease(easing_type).set_trans(trans_type)
 	tween.tween_property(self, "scale", enter_scale, easing_duration)
 
 	if sound_on:
-		FmodServer.play_one_shot(sound_on.event_name)
+		FmodServer.play_one_shot_with_params(sound_on.event_name, {"Heat1": 0.4})
 
 func on_button_down() -> void:
+	if disabled: return
 	if tween: tween.kill()
 	tween = create_tween().set_ease(easing_type).set_trans(trans_type)
 	tween.tween_property(self, "scale", down_scale, easing_duration)
 func on_button_up() -> void:
+	if disabled: return
 	if tween: tween.kill()
 	tween = create_tween().set_ease(easing_type).set_trans(trans_type)
 	tween.tween_property(self, "scale", up_scale, easing_duration)

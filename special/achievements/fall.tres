@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://cb0c25kcclf7f"]
+
+[ext_resource type="Script" uid="uid://cpw2vp3bvs2l3" path="res://special/achievement.gd" id="1_be1eo"]
+[ext_resource type="Texture2D" uid="uid://w8c806kd8h7r" path="res://special/achievements/icons/Trollface.png" id="2_48clj"]
+
+[resource]
+script = ExtResource("1_be1eo")
+name = "Real Prank Hours"
+description = "Get [wave]PRANKED[] by redacted"
+sprite = ExtResource("2_48clj")
+metadata/_custom_type_script = "uid://cpw2vp3bvs2l3"

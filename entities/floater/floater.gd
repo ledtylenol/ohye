@@ -27,7 +27,6 @@ func _physics_process(delta: float) -> void:
 			interact_component.global_position = global_position
 	if dragging:
 		target_pos = player.global_position - player.camera.global_basis.z * max(drag_dist, 4)
-		var dist = target_pos.distance_to(global_position)
 		velocity = velocity.move_toward(global_position.direction_to(target_pos) * 300, 40 * delta)
 	else:
 		velocity = velocity.move_toward(Vector3.ZERO, 20 * delta)

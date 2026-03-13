@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_85nbv")
 origin_type = 4
+build_occlusion = true
 collision_shape_type = 0
 script_class = ExtResource("2_85nbv")
 classname = "ohye_death_area"

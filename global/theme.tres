@@ -1,19 +1,52 @@
 [gd_resource type="Theme" format=3 uid="uid://ce3sqk2rs4pcf"]
 
+[ext_resource type="FontFile" uid="uid://bcv2v4cpdad63" path="res://fonts/MNVariaWIP-Semi-bold.otf" id="1_g63pg"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g11gp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g63pg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g11gp"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 11
+border_width_top = 7
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_g63pg"]
-color = Color(0, 0, 0, 0)
-thickness = 10
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_55nrv"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qg7p"]
+bg_color = Color(1, 1, 1, 1)
+draw_center = false
+border_width_left = 209
+border_width_top = 15
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g63pg"]
 
 [resource]
+default_font = ExtResource("1_g63pg")
 Button/styles/focus = null
 Button/styles/hover = null
 Button/styles/normal = SubResource("StyleBoxEmpty_g11gp")
 Button/styles/pressed = SubResource("StyleBoxFlat_g63pg")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_g11gp")
-HSlider/styles/slider = SubResource("StyleBoxLine_g63pg")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_55nrv")
+HSlider/styles/slider = SubResource("StyleBoxFlat_8qg7p")
+MarginContainer/constants/margin_bottom = 5
+MarginContainer/constants/margin_left = 5
+MarginContainer/constants/margin_right = 5
+MarginContainer/constants/margin_top = 5
+VSeparator/styles/separator = SubResource("StyleBoxEmpty_g63pg")

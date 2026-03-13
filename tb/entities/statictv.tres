@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDModelPointClass" format=3 uid="uid://cdt2gf4apkm8b"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_ey8sq"]
+[ext_resource type="Script" uid="uid://ldfqjtq0br35" path="res://addons/func_godot/src/fgd/func_godot_fgd_model_point_class.gd" id="2_lxq01"]
+
+[resource]
+script = ExtResource("2_lxq01")
+target_map_editor = 1
+classname = "ohye_statictv"
+description = "static tv"
+metadata/_custom_type_script = "uid://ldfqjtq0br35"

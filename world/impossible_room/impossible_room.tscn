@@ -4,18 +4,18 @@
 [ext_resource type="Script" uid="uid://cmxkrs3t73vfw" path="res://world/impossible_room/impossible_room.gd" id="1_mnm4t"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_0xm65"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="3_60vi2"]
-[ext_resource type="Material" uid="uid://dfbd0v81mqn4q" path="res://tb/textures/fence.tres" id="4_bcned"]
+[ext_resource type="Material" uid="uid://dfbd0v81mqn4q" path="res://tb/textures/materials/fence.tres" id="4_bcned"]
 [ext_resource type="Script" uid="uid://b1kkj08iwwrse" path="res://components/tile/sound_tile.gd" id="5_n4lvb"]
 [ext_resource type="PackedScene" uid="uid://d2h1tv4ptwblk" path="res://entities/player/player.tscn" id="5_wreth"]
-[ext_resource type="Material" uid="uid://dn65bkytu20e" path="res://tb/textures/subway/Tiles056_1K-JPG_Color.tres" id="5_xfe8q"]
-[ext_resource type="Material" uid="uid://wml7e1bxsisv" path="res://tb/textures/grass007.tres" id="6_r3iby"]
-[ext_resource type="Material" uid="uid://8v4qps1nsx8j" path="res://tb/textures/subway/Tiles080_1K-JPG_Color.tres" id="7_xnmj1"]
+[ext_resource type="Material" uid="uid://dn65bkytu20e" path="res://tb/textures/materials/Tiles056_1K-JPG_Color.tres" id="5_xfe8q"]
+[ext_resource type="Material" uid="uid://wml7e1bxsisv" path="res://tb/textures/materials/grass007.tres" id="6_r3iby"]
+[ext_resource type="Material" uid="uid://8v4qps1nsx8j" path="res://tb/textures/materials/Tiles080_1K-JPG_Color.tres" id="7_xnmj1"]
 [ext_resource type="Script" uid="uid://b6c33n4eu31fq" path="res://components/reverb_change.gd" id="9_hrvrf"]
 [ext_resource type="Script" uid="uid://c1l8u6fnvuba6" path="res://components/tile/vanishable.gd" id="9_xnmj1"]
 [ext_resource type="Material" uid="uid://bo04ny0jgpa8r" path="res://tb/textures/subway/Tiles056_1K-JPG_Metalness.tres" id="10_e0k37"]
-[ext_resource type="Material" uid="uid://ck7yd5ctrgh42" path="res://tb/textures/wallflower.tres" id="10_psy0r"]
+[ext_resource type="Material" uid="uid://ck7yd5ctrgh42" path="res://tb/textures/materials/wallflower.tres" id="10_psy0r"]
 [ext_resource type="PackedScene" uid="uid://dji0frwpgodb0" path="res://entities/strawb/strawberry.tscn" id="11_q2sr8"]
-[ext_resource type="Material" uid="uid://dq03hkcy6bm4s" path="res://tb/textures/rusted.tres" id="11_uy7ke"]
+[ext_resource type="Material" uid="uid://dq03hkcy6bm4s" path="res://tb/textures/materials/rusted.tres" id="11_uy7ke"]
 [ext_resource type="Script" uid="uid://bo7o1la75ggh7" path="res://entities/player/scripts/stats.gd" id="14_e0k37"]
 [ext_resource type="Script" uid="uid://crgc5l08pouvo" path="res://components/misc/primary_sound.gd" id="16_psy0r"]
 [ext_resource type="Script" uid="uid://dbkrufxk6ba0m" path="res://components/schizophrenia/schizophrenia.gd" id="19_2ybk4"]
@@ -559,7 +559,7 @@ indices = PackedInt32Array(0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7, 8, 9, 10, 8, 10, 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7335m"]
 points = PackedVector3Array(-1.5, 0.125, -2, -2, -0.125, -2, 2, -0.125, -2, 2, 0.125, -2, -1.5, 0.125, 2, -2, -0.125, 2, 2, -0.125, 2, 2, 0.125, 2)
 
-[sub_resource type="Resource" id="Resource_2ybk4"]
+[sub_resource type="Resource" id="Resource_fdj0f"]
 resource_local_to_scene = true
 script = ExtResource("14_e0k37")
 speed = 15
@@ -625,6 +625,7 @@ size = Vector3(3.43457, 1, 3.96625)
 [node name="ImpossibleRoom" type="Node3D" unique_id=1919912673]
 script = ExtResource("1_mnm4t")
 time_curve = SubResource("Curve_q2sr8")
+level_name = "impossible_room"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1210519978]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8.09839, 0)
@@ -953,7 +954,7 @@ shape = SubResource("ConvexPolygonShape3D_7335m")
 
 [node name="Player" parent="." unique_id=538851516 instance=ExtResource("5_wreth")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87342, 0)
-stats = SubResource("Resource_2ybk4")
+stats = SubResource("Resource_fdj0f")
 auto_jump = true
 
 [node name="SpotLight3D" parent="Player/PanNode/PlayerCamera" parent_id_path=PackedInt32Array(538851516, 2026835416) index="1" unique_id=1536534493]
@@ -962,10 +963,27 @@ spot_range = 37.246
 spot_attenuation = 0.94
 spot_angle = 84.68
 enabled_energy = 3.805
-enabled = true
+
+[node name="Footsteps" parent="Player/Sounds" parent_id_path=PackedInt32Array(538851516, 116849562) index="0" unique_id=1467358019 node_paths=PackedStringArray("stream_map")]
+stream_map = {
+0: NodePath("Dirt"),
+1: NodePath("Stone"),
+2: NodePath("Metal"),
+3: NodePath("Tile")
+}
+
+[node name="Slide" parent="Player/Sounds" parent_id_path=PackedInt32Array(538851516, 116849562) index="4" unique_id=632965224 node_paths=PackedStringArray("stream_map")]
+stream_map = {
+0: NodePath("Slide"),
+1: NodePath("Scuff"),
+2: NodePath("Scuff"),
+3: NodePath("Scuff")
+}
 
 [node name="ReverbChange" type="Area3D" parent="." unique_id=62380573]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7577, 0, 0)
+collision_layer = 0
+collision_mask = 8
 script = ExtResource("9_hrvrf")
 snapshot = "Outdoors"
 metadata/_custom_type_script = "uid://b6c33n4eu31fq"
@@ -1130,5 +1148,7 @@ preload_event = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.2132225, 0)
 
 [editable path="Player"]
+[editable path="Player/Hands/hands"]
+[editable path="Player/Hands/hands2"]
 [editable path="RigidBody3D/Strawberry"]
 [editable path="RigidBody3D/Strawberry/StrawberryPurple"]

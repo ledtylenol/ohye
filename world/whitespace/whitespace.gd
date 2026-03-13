@@ -1,7 +1,9 @@
-extends Node3D
+@tool
+extends Level
 
 
 @onready var song: FmodEventEmitter3D = $Song
 
 func _ready() -> void:
-	song.play()
+	if Engine.is_editor_hint(): return
+	Music.change_song(song)

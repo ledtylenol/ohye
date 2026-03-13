@@ -1,0 +1,30 @@
+[gd_resource type="Environment" format=3 uid="uid://bd5hrhdinkfvo"]
+
+[ext_resource type="Texture2D" uid="uid://b20fhjrnsf6wb" path="res://world/tower/kirokaze-gameboy-1x.png" id="1_vlgc1"]
+[ext_resource type="Texture2D" uid="uid://6eofej0flc4s" path="res://world/tower/NightSkyHDRI016A_1K_TONEMAPPED.jpg" id="1_xw2q5"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vlgc1"]
+panorama = ExtResource("1_xw2q5")
+filter = false
+
+[sub_resource type="Sky" id="Sky_u72jg"]
+sky_material = SubResource("PanoramaSkyMaterial_vlgc1")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_u72jg")
+ambient_light_source = 3
+reflected_light_source = 1
+tonemap_mode = 2
+tonemap_exposure = 0.47
+ssr_enabled = true
+ssr_depth_tolerance = 0.01
+glow_enabled = true
+fog_enabled = true
+fog_height = 19.35
+fog_height_density = 1.2678
+fog_depth_end = 305.1
+volumetric_fog_ambient_inject = 1.09
+volumetric_fog_temporal_reprojection_enabled = false
+volumetric_fog_temporal_reprojection_amount = 0.99
+adjustment_color_correction = ExtResource("1_vlgc1")

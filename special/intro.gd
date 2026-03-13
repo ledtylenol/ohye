@@ -11,7 +11,6 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 @onready var transition: FmodEventEmitter3D = $Transition
 @export var scene_if_not_finished: SimpleScene
 @export var freq_curve: Curve
-const WINDOW = preload("res://special/popuptest/window.tscn")
 var w
 var status: float:
 	get:
@@ -31,12 +30,6 @@ func _ready() -> void:
 		scene_loader.rng = rng
 	scene_loader.request_load()
 	get_viewport().always_on_top = true
-	w = WINDOW.instantiate()
-	var res := Global.os_size
-	w.popo = Vector2(Global.randf_range(0, res.x), Global.randf_range(0, res.y))
-	w.t = min_time
-	add_child(w)
-
 	var time = Time.get_datetime_dict_from_system()
 	rng.seed = time["hour"] + time["second"] + time["minute"] + time["day"]
 	remove_child(transition)
@@ -75,7 +68,6 @@ func snap() -> void:
 func start() -> void:
 	transition.play()
 	Transition.start_sub()
-	w.queue_free()
 	get_tree().root.transparent = false
 	get_tree().root.transparent_bg = false
 	scene_loader.try_load()

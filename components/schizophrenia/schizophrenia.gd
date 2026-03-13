@@ -27,7 +27,7 @@ var in_sight := false:
 				child.on_hidden()
 			player_exited.emit()
 		in_sight = value
-
+@export var follow_aabb := true
 
 signal player_exited
 signal player_entered
@@ -36,7 +36,8 @@ func _ready() -> void:
 	screen_exited.connect(disable)
 	if vision_points.is_empty():
 		vision_points.append(parent)
-	aabb = parent.get_aabb()
+	if follow_aabb:
+		aabb = parent.get_aabb()
 func _physics_process(_delta: float) -> void:
 	if not enabled or not player: in_sight = false;return
 	var space := get_world_3d().direct_space_state

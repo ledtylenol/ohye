@@ -7,7 +7,7 @@ extends CanvasLayer
 @onready var crosshair: Crosshair = $Control / Control
 @onready var label: Label = $Control / Label
 @onready var fps_label: Label = $Control / FPSLabel
-
+@export var player: Player
 var time: = 0.0
 func _ready() -> void :
 	await get_tree().physics_frame
@@ -26,4 +26,6 @@ func _ready() -> void :
 func _process(delta: float) -> void :
 	time += delta
 	label.text = M.format_time(time)
+	if player.auto_jump:
+		label.text += "\nBHOP ENABLED"
 	fps_label.text = "%.2f" % Engine.get_frames_per_second()

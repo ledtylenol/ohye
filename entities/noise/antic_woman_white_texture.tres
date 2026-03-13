@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://mlnt74x2prx5"]
+
+[ext_resource type="Texture2D" uid="uid://c0ny86rpmybde" path="res://entities/noise/marble_venus_de_milo_statue_6.png" id="1_ornrk"]
+[ext_resource type="Texture2D" uid="uid://fxqck314hm0v" path="res://entities/noise/marble_venus_de_milo_statue_7.png" id="2_yont8"]
+[ext_resource type="Texture2D" uid="uid://pjwtkp5v1rqn" path="res://entities/noise/marble_venus_de_milo_statue_8.png" id="3_gqc0w"]
+
+[resource]
+resource_name = "antic_woman_white_texture"
+cull_mode = 2
+albedo_texture = ExtResource("1_ornrk")
+metallic = 1.0
+metallic_texture = ExtResource("2_yont8")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_yont8")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_gqc0w")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://m8unnnlus050"]
+
+[ext_resource type="Script" uid="uid://cpw2vp3bvs2l3" path="res://special/achievement.gd" id="1_deltw"]
+[ext_resource type="Texture2D" uid="uid://dpufc7etu7fdh" path="res://special/achievements/icons/neco.png" id="2_tcpt7"]
+
+[resource]
+script = ExtResource("1_deltw")
+name = "Slide On!"
+description = "Be 
+the slide master
+ that you always knew 
+you were!"
+sprite = ExtResource("2_tcpt7")
+metadata/_custom_type_script = "uid://cpw2vp3bvs2l3"

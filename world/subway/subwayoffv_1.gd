@@ -1,4 +1,5 @@
-extends Node3D
+@tool
+extends Level
 
 var t  := 0.0
 var tick := false
@@ -17,13 +18,13 @@ var tick := false
 @onready var area_3d: Area3D = $Area3D
 
 @export var portal_teleports: Array[PortalTeleport]
-@onready var scene_loader_2: SceneLoader = $SceneLoader2
 @onready var label: Label = $CanvasLayer/Label
 
 @export var strawb: CollectibleStrawberry
 var fog = load("res://world/subway/subwayoffv1_fog.tres")
 var nofog = load("res://world/subway/subwayoffv1_nofog.tres")
 func _ready() -> void:
+	if Engine.is_editor_hint():return
 	area_3d.body_entered.connect(on_achievement_area_body)
 	Music.stop()
 	Music.set_event_name(song.event_name)
@@ -35,8 +36,7 @@ func _ready() -> void:
 		area.body_entered.connect(on_teleport)
 	surf_area_3.body_entered.connect(play)
 	surf_area_3.body_exited.connect(stop)
-	for tp in portal_teleports:
-		tp.teleported.connect(on_teleport2.bind(false))
+
 	Global.teleport_to_id.connect(on_tp)
 func on_surf_body(b: Node3D, env: Environment) -> void:
 	if b is Player:
@@ -69,16 +69,6 @@ func on_teleport(b: Node3D) -> void:
 		b.global_position = fall_point.global_position
 		b.velocity = Vector3.ZERO
 
-func on_teleport2(b: Node3D, had: bool) -> void:
-	if not had:
-		scene_loader_2.request_load()
-		if scene_loader_2.scene.to_lower() != "nothing":
-			for area in portal_teleports:
-				area.teleported.disconnect(on_teleport2)
-				area.teleported.connect(on_teleport2.bind(true))
-			scene_loader_2.try_load()
-	else:
-		scene_loader_2.try_load()
 
 func on_tp(id: int) -> void:
 	print("tpd with id: %d" % id)
@@ -90,6 +80,7 @@ func on_tp(id: int) -> void:
 		t = 0
 
 func _process(delta: float) -> void:
+	if Engine.is_editor_hint():return
 	t += delta * float(tick)
 	if t > 0:
 		label.text = "TIME: %.2f" % t

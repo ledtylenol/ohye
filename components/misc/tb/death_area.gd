@@ -31,10 +31,19 @@ func make_area(c: MeshInstance3D) -> Area3D:
 	return area
 func _ready() -> void:
 	if  Engine.is_editor_hint(): return
-	for child: MeshInstance3D in M.nightmare_getter(self, MeshInstance3D, "MeshInstance3D"):
-		var a := make_area(child)
-		a.body_entered.connect(func(_x) -> void:
-			print("yuh")
-			sc_l.try_load()
-			)
-	sc_l.request_load()
+	if scene == "reload":
+		for child: MeshInstance3D in M.nightmare_getter(self, MeshInstance3D, "MeshInstance3D"):
+			var a := make_area(child)
+			a.body_entered.connect(reload)
+	else:
+		for child: MeshInstance3D in M.nightmare_getter(self, MeshInstance3D, "MeshInstance3D"):
+			var a := make_area(child)
+			a.body_entered.connect(load_new_scene)
+		sc_l.request_load()
+
+func load_new_scene(_x) -> void:
+	sc_l.try_load()
+
+func reload(_x) -> void:
+	print("RELOAD")
+	Transition.reload_scene()

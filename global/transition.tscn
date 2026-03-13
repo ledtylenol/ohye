@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ida4pqrk63kv" path="res://special/thres_noise.tres" id="3_07cuw"]
 
 [sub_resource type="Curve" id="Curve_pvmve"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.16428572, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 24.118256, 0, 0, Vector2(0.120000005, 1), -0.59886074, -0.59886074, 0, 0, Vector2(0.37066665, 0.40663898), -1.2318459, -1.2318459, 0, 0, Vector2(0.61866665, 0.19761413), -0.65019256, -0.65019256, 0, 0, Vector2(1, 0), -0.016208736, 0.0, 0, 0]
+point_count = 5
 
 [sub_resource type="CurveTexture" id="CurveTexture_07cuw"]
 curve = SubResource("Curve_pvmve")
@@ -27,7 +27,7 @@ as_normal_map = true
 seamless_blend_skirt = 0.269
 
 [sub_resource type="Curve" id="Curve_07cuw"]
-_data = [Vector2(0.099999994, 0), 0.0, 0.0699126, 0, 0, Vector2(0.42142856, 0.59550565), 1.8643361, 1.8643361, 0, 0, Vector2(0.85714287, 0.8651686), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.120000005, 0), -0.59886074, 2.0711842, 0, 0, Vector2(0.30666667, 0.561722), 1.5560166, 1.5560166, 0, 0, Vector2(0.5253333, 0.844917), 0.8633992, 0.8633992, 0, 0, Vector2(1, 1), -0.016208736, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_2e0o2"]
@@ -39,9 +39,6 @@ shader_parameter/distort_curve = SubResource("CurveTexture_07cuw")
 shader_parameter/threshold_curve = SubResource("CurveTexture_2e0o2")
 shader_parameter/noise = SubResource("NoiseTexture2D_07cuw")
 shader_parameter/thres_noise = ExtResource("3_07cuw")
-shader_parameter/threshold = 0.0
-shader_parameter/offset = 0.20999999530608
-shader_parameter/noise_intensity = 0.1499999966472
 
 [node name="Transition" type="CanvasLayer" unique_id=848027172]
 process_mode = 3
@@ -49,6 +46,8 @@ script = ExtResource("1_wyyvm")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1505102292]
 material = SubResource("ShaderMaterial_07cuw")
+instance_shader_parameters/noise_intensity = 0.1499999966472
+instance_shader_parameters/offset = 0.06999999843536
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -21,7 +21,7 @@ background_color = Color(0, 0, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=888977324]
 script = ExtResource("1_qy1j4")
-min_time = 0.1
+min_time = 0.0
 scene_if_not_finished = SubResource("Resource_v2dsu")
 freq_curve = SubResource("Curve_up3yn")
 
@@ -31,16 +31,17 @@ environment = SubResource("Environment_5nby3")
 [node name="Type" type="FmodEventEmitter3D" parent="." unique_id=1484355998]
 event_name = "event:/Sfx3D/Type"
 event_guid = "{38dea224-4f22-4519-98ce-bcc8b2056b51}"
+preload_event = false
 
 [node name="Transition" type="FmodEventEmitter3D" parent="." unique_id=1589329424]
 event_name = "event:/Sfx3D/Snap"
 event_guid = "{d540c6b7-8ea9-464e-8236-5d7678830b26}"
 auto_release = true
+preload_event = false
 
 [node name="SceneLoader" type="Node" parent="." unique_id=640728758]
 script = ExtResource("2_7w76a")
 scene_type = ExtResource("3_up3yn")
 delay = 0.0
-load_immediately = false
 can_change = true
 metadata/_custom_type_script = "uid://bka1bqdqyu2dt"

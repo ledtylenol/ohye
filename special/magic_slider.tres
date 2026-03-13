@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d256wf356a8s2"]
+
+[ext_resource type="Shader" uid="uid://dlbyq1jk0nunm" path="res://components/misc/shadedslider.gdshader" id="1_p5in8"]
+
+[sub_resource type="Gradient" id="Gradient_qsjf6"]
+colors = PackedColorArray(0.39999998, 1, 0.64000005, 1, 0, 0.2166667, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k3n4f"]
+gradient = SubResource("Gradient_qsjf6")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k3n4f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gmffv"]
+noise = SubResource("FastNoiseLite_k3n4f")
+seamless = true
+
+[resource]
+shader = ExtResource("1_p5in8")
+shader_parameter/noise = SubResource("NoiseTexture2D_gmffv")
+shader_parameter/gradient = SubResource("GradientTexture1D_k3n4f")
+shader_parameter/offset_speed = Vector2(1.385, 0)
+shader_parameter/uv_scale = Vector2(9.165, 84.35)
+shader_parameter/quant_factor = 220.0

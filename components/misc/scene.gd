@@ -1,6 +1,9 @@
+@tool
 extends Resource
 class_name Scene
 
-func get_level() -> String:
-	push_error("not implemented")
-	return ""
+
+@export_file("*.tscn") var scene: String
+
+func get_level() -> SimpleScene:
+	return self

@@ -25,3 +25,4 @@ func on_transition(from: String, to: String) -> void:
 	old_state.on_exit()
 	new_state.on_enter()
 	current_state = new_state
+	print("switched to %s" % new_state.name)
