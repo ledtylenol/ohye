@@ -30,7 +30,7 @@ func _process(_delta: float) -> void:
 	if disabled: return
 	pivot_offset = size / 2
 	var target := Vector2.ZERO
-	if mouse_on:
+	if mouse_on and not disabled:
 		target = startpos.lerp(get_local_mouse_position() - size / 2, mousepos_amount) 
 	else:
 		target = startpos 

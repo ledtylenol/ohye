@@ -1235,7 +1235,7 @@ metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
 [node name="Scream" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1696074077]
 stream = ExtResource("45_sk710")
-volume_db = -22.524
+volume_db = -13.285
 script = ExtResource("29_mmk7k")
 metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 

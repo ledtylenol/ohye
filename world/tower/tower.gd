@@ -6,7 +6,12 @@ extends Level
 @export var noise: NoiseEntity
 @export var achievement: Achievement
 @export var player: Player
+@export var schizo: Schizophrenia
+@export var hit_timer: Timer
+@export var hitbox: Hitbox
+@export var hit_sound: RaytracedAudioPlayer3D
 var eligible := false
+
 func _ready() -> void:
 	if Engine.is_editor_hint():return
 	#var tween := create_tween()
@@ -16,6 +21,9 @@ func _ready() -> void:
 	noise.activated.connect(on_activation)
 	noise.hitbox.hit.connect(toggle_on)
 	player.just_landed.connect(toggle_off)
+	schizo.player_entered.connect(on_player_enter)
+	schizo.player_exited.connect(on_player_exit)
+	hit_timer.timeout.connect(on_timeout)
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():return
 	if player.position.y < 55 and eligible and not Global.game_stats.has_achievement(achievement.name):
@@ -27,6 +35,7 @@ func _process(_delta: float) -> void:
 		Transition.reload_scene()
 
 
+
 func on_activation() -> void:
 	Music.volume = 0.0
 
@@ -34,3 +43,19 @@ func toggle_off() -> void:
 	eligible = false
 func toggle_on() -> void:
 	eligible = true
+
+func on_player_enter() -> void:
+	hit_timer.start()
+
+func on_player_exit() -> void:
+	hit_timer.stop()
+
+func on_timeout() -> void:
+	Music.volume = 0.0
+	hitbox.set_deferred("monitoring", true)
+	hitbox.set_deferred("monitorable", true)
+	hit_sound.play()
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	hitbox.set_deferred("monitoring", false)
+	hitbox.set_deferred("monitorable", false)

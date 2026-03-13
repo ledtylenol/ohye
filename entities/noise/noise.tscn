@@ -170,7 +170,6 @@ metadata/_custom_type_script = "uid://ba0xmenpn4rki"
 
 [node name="Stone" type="AudioStreamPlayer3D" parent="Footsteps" unique_id=734472929]
 stream = ExtResource("6_yp7lv")
-attenuation_model = 1
 volume_db = 2.0
 pitch_scale = 0.65
 script = ExtResource("6_5t4vf")
@@ -178,7 +177,6 @@ metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
 [node name="Dirt" type="AudioStreamPlayer3D" parent="Footsteps" unique_id=496723988]
 stream = ExtResource("7_6m1cj")
-attenuation_model = 1
 volume_db = 2.0
 pitch_scale = 0.65
 script = ExtResource("6_5t4vf")
@@ -186,7 +184,6 @@ metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
 [node name="Metal" type="AudioStreamPlayer3D" parent="Footsteps" unique_id=567915072]
 stream = ExtResource("8_qw5ry")
-attenuation_model = 1
 volume_db = 2.0
 pitch_scale = 0.65
 script = ExtResource("6_5t4vf")
@@ -194,7 +191,6 @@ metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
 [node name="Tile" type="AudioStreamPlayer3D" parent="Footsteps" unique_id=1526145472]
 stream = ExtResource("9_clksu")
-attenuation_model = 1
 volume_db = 2.0
 pitch_scale = 0.65
 script = ExtResource("6_5t4vf")

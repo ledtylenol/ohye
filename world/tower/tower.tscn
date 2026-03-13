@@ -22,6 +22,10 @@
 [ext_resource type="PackedScene" uid="uid://dhtkwx73mti6a" path="res://entities/noise/noise.tscn" id="15_kwgjq"]
 [ext_resource type="Material" uid="uid://b8ybhix2puj3y" path="res://tb/textures/materials/subway/Tiles056_1K-JPG_Color.tres" id="15_pgko3"]
 [ext_resource type="Texture2D" uid="uid://dol4jge4mcv3x" path="res://tb/textures/roundtile.jpg" id="16_pgko3"]
+[ext_resource type="PackedScene" uid="uid://wk5oio7u5ws7" path="res://world/tower/MarkPainting2.glb" id="23_pgko3"]
+[ext_resource type="Script" uid="uid://dbkrufxk6ba0m" path="res://components/schizophrenia/schizophrenia.gd" id="24_ytu1c"]
+[ext_resource type="Script" uid="uid://cl7tsnjsikfcr" path="res://components/entities/hitbox.gd" id="25_srl33"]
+[ext_resource type="AudioStream" uid="uid://cgo0lc1tqr4rc" path="res://world/tower/Hello everybody, my name is Markiplier and I am a fish.ogg" id="25_sw8dh"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ych7m"]
 vertices = PackedVector3Array(-414.5, 1, -238.5, -11.25, 1, -10.25, -10.25, 1, -11.25, -11.25, 1, 10.5, -10.75, 1, 11.25, -414.5, 1, 270.5, 414.5, 1, -238.5, 11.5, 1, 10.25, 10.25, 1, 11.5, 414.5, 1, 270.5, 11, 1, -11, 11.5, 1, -10.25, -8.75, 160.5, -6.25, -9, 160.5, 2.75, 2.75, 160.5, 2.75, 2.75, 160.5, -6.25, -22.25, 160.5, -7.25, -9.75, 160.5, -7.25, -44.5, 160.5, -40.5, 3.25, 160.5, -7, -23.25, 160.5, -6.25, -36.75, 160.5, -4.75, -36.5, 160.5, 4.25, -23.25, 160.5, 6.25, 17.25, 160.5, -6.25, 17, 160.5, 2.75, 28.75, 160.5, 2.75, 28.75, 160.5, -6.25, 40.75, 160.5, 40.75, 40.75, 160.5, 7.25, -22.25, 160.5, 7.25, -46.5, 160.5, 40.75, 29.25, 160.5, -7, 16.25, 160.5, -7.25, -37.75, 160.5, 5.5, 40.75, 160.5, -7.25, 40.75, 160.5, -40.5, -44.5, 160.5, -5.25, -37.5, 160.5, -5.25, -46.5, 160.5, 5.5, -44.5, 182.5, 40.75, 26.5, 182.5, 40.75, 26.5, 182.5, 36, 27.75, 182.5, 34.75, 40.75, 182.5, -40.5, -44.5, 182.5, -40.5, 40.75, 182.5, 34.75, -44.5, 180.5, -10.75, -44.5, 180.5, 11, -39, 180.5, 10.75, -39, 180.5, -10.75, -18.75, 180.5, 5, -12.5, 180.5, 5, -13, 180.5, 4.25, -18.75, 180.5, -10.75, -13, 180.5, -10.75, 6.75, 180.5, 4.75, 13.5, 180.5, 5, 13, 180.5, 4.25, 7.25, 180.5, 4.25, 12.75, 180.5, -10.75, 7.25, 180.5, -10.75, 33.25, 180.5, 4.25, 32.75, 180.5, 4.75, 40.75, 180.5, 5, 40.75, 180.5, -10.75, 33.25, 180.5, -10.75, -8.75, 158.5, -8.75, -8.75, 158.5, 9, 9, 158.5, 9, 9, 158.5, -8.75, -8.5, 1, -8.5, -8.5, 1, 8.75, 8.75, 1, 8.75, 8.75, 1, -8.5, -19.75, 160.5, -3.75, -19.75, 160.5, 2.75, -12.25, 160.5, 2.75, -12.25, 160.5, -3.75, 6.25, 160.5, -3.75, 6.25, 160.5, 2.75, 13.75, 160.5, 2.75, 13.75, 160.5, -3.75, 32.25, 160.5, -3.75, 32.25, 160.5, 2.75, 40.75, 160.5, 2.75, 40.75, 160.5, -3.75, -44.5, 160.5, -2.5, -44.5, 160.5, 2.75, -39.25, 160.5, 2.75, -39.25, 160.5, -2.5, -18.5, 164.5, -2.5, -18.5, 164.5, 2.75, -13.25, 164.5, 2.75, -13.25, 164.5, -2.5, 7.5, 164.5, -2.5, 7.5, 164.5, 2.75, 12.75, 164.5, 2.75, 12.75, 164.5, -2.5, 33.5, 164.5, -2.5, 33.5, 164.5, 2.75, 40.75, 164.5, 2.75, 40.75, 164.5, -2.5, -42.5, 178.5, 5.5, -42.5, 178.5, 9.25, -39.25, 178.5, 9.25, -39.25, 178.5, 5.5)
@@ -721,7 +725,7 @@ indices = PackedInt32Array(0, 1, 2, 3, 4, 5, 3, 5, 6, 7, 8, 9, 7, 9, 10, 11, 12,
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_opdc6"]
 points = PackedVector3Array(6.7499046, -1.5000153, 3.25, -6.7500687, 1.4999847, 3.25, -6.7500687, -1.5000153, 3.25, 6.7499046, -1.5000153, -3.25, -6.7500687, 1.4999847, -3.25, -6.7500687, -1.5000153, -3.25)
 
-[sub_resource type="Resource" id="Resource_0dlar"]
+[sub_resource type="Resource" id="Resource_sw8dh"]
 resource_local_to_scene = true
 script = ExtResource("5_k2aik")
 speed = 25.0
@@ -734,13 +738,26 @@ jump_descend_time = 0.44
 max_ground_pounds = 0
 ground_pound_base_height = 20.0
 
-[node name="Tower" type="Node3D" unique_id=439766656 node_paths=PackedStringArray("wind", "music", "noise", "player")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_srl33"]
+playback_mode = 1
+random_pitch = 2.0671837
+streams_count = 1
+stream_0/stream = ExtResource("25_sw8dh")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sw8dh"]
+size = Vector3(92.37, 50, 96.47)
+
+[node name="Tower" type="Node3D" unique_id=439766656 node_paths=PackedStringArray("wind", "music", "noise", "player", "schizo", "hit_timer", "hitbox", "hit_sound")]
 script = ExtResource("1_k2aik")
 wind = NodePath("Wind")
 music = NodePath("Music")
 noise = NodePath("Noise")
 achievement = ExtResource("2_6twsp")
 player = NodePath("Player")
+schizo = NodePath("MarkPainting2/Schizophrenia")
+hit_timer = NodePath("Timer")
+hitbox = NodePath("Hitbox")
+hit_sound = NodePath("MarkPainting2/RaytracedAudioPlayer3D")
 level_name = "tower"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=913614419]
@@ -1158,7 +1175,7 @@ metadata/_custom_type_script = "uid://dkb8ltjc6067n"
 
 [node name="Player" parent="." unique_id=96134482 instance=ExtResource("4_u72jg")]
 transform = Transform3D(0.023524811, 0, 0.99972326, 0, 1, 0, -0.99972326, 0, 0.023524811, 34.4815, 161.07375, -31.671078)
-stats = SubResource("Resource_0dlar")
+stats = SubResource("Resource_sw8dh")
 
 [node name="Wind" type="AudioStreamPlayer" parent="." unique_id=244140135]
 stream = ExtResource("6_u72jg")
@@ -1192,3 +1209,43 @@ spot_range = 28.619675
 
 [node name="Noise" parent="." unique_id=444384490 instance=ExtResource("15_kwgjq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.893927, 160, 29.424524)
+
+[node name="MarkPainting2" parent="." unique_id=2055080859 instance=ExtResource("23_pgko3")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -44, 199, 0)
+
+[node name="Painting" parent="MarkPainting2" index="0" unique_id=1838351413]
+transform = Transform3D(28.536009, 0, 0, 0, 7.1340013, 0, 0, 0, 11.890003, 0, 0, 0)
+
+[node name="RaytracedAudioPlayer3D" type="AudioStreamPlayer3D" parent="MarkPainting2" unique_id=2034768989]
+stream = SubResource("AudioStreamRandomizer_srl33")
+unit_size = 25.87
+max_polyphony = 48
+script = ExtResource("13_6twsp")
+metadata/_custom_type_script = "uid://dkb8ltjc6067n"
+
+[node name="Schizophrenia" type="VisibleOnScreenNotifier3D" parent="MarkPainting2" unique_id=2010105456 node_paths=PackedStringArray("vision_points", "parent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+aabb = AABB(-8, -1, -1, 16, 2, 2)
+script = ExtResource("24_ytu1c")
+vision_points = [NodePath("Marker3D")]
+parent = NodePath("../Painting")
+follow_aabb = false
+metadata/_custom_type_script = "uid://dbkrufxk6ba0m"
+
+[node name="Marker3D" type="Marker3D" parent="MarkPainting2/Schizophrenia" unique_id=723789976]
+
+[node name="Timer" type="Timer" parent="." unique_id=903186787]
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=359215200]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 192.10541, 3.7005875)
+monitoring = false
+monitorable = false
+script = ExtResource("25_srl33")
+piercing = true
+metadata/_custom_type_script = "uid://cl7tsnjsikfcr"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=431017542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 14.287506, 2.0000002)
+shape = SubResource("BoxShape3D_sw8dh")
+
+[editable path="MarkPainting2"]
